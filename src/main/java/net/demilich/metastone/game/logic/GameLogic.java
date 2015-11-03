@@ -138,7 +138,9 @@ public class GameLogic implements Cloneable {
 
 		player.getHero().modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
+		
 		if (card.getCardType() == CardType.SPELL && !card.hasAttribute(Attribute.COUNTERED)) {
+			checkForDeadEntities();
 			context.fireGameEvent(new AfterSpellCastedEvent(context, playerId, card));
 		}
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
@@ -291,7 +293,7 @@ public class GameLogic implements Cloneable {
 		player.setHero(hero);
 		refreshAttacksPerRound(hero);
 	}
-
+	
 	public void checkForDeadEntities() {
 		for (Player player : context.getPlayers()) {
 			List<Minion> minionList = new ArrayList<Minion>(player.getMinions());
@@ -337,6 +339,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	public int damage(Player player, Actor target, int baseDamage, Entity source, boolean ignoreSpellPower) {
+		// sanity check to prevent StackOverFlowError with Mistress of Pain + Auchenai Soulpriest
+		if (target.getHp() < -100) {
+			return 0;
+		}
 		int damage = baseDamage;
 		Card sourceCard = source != null && source.getEntityType() == EntityType.CARD ? (Card) source : null;
 		if (!ignoreSpellPower && sourceCard != null) {
@@ -368,10 +374,6 @@ public class GameLogic implements Cloneable {
 				context.fireGameEvent(fatalDamageEvent);
 			}
 			damageDealt = damageHero((Hero) target, damage);
-			// if target is hero and is dead, do not fire any more damage events
-			if (target.isDestroyed()) {
-				return damageDealt;
-			}
 			break;
 		default:
 			break;
@@ -552,11 +554,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleFrozen(Actor actor) {
-		if (actor.hasAttribute(Attribute.FROZEN)) {
+		if (!actor.hasAttribute(Attribute.FROZEN)) {
 			return;
 		}
-		int maxAttacks = actor.getMaxNumberOfAttacks() - 1;
-		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) > maxAttacks) {
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
 			removeAttribute(actor, Attribute.FROZEN);
 		}
 	}
@@ -1386,15 +1387,15 @@ public class GameLogic implements Cloneable {
 		checkForDeadEntities();
 	}
 
-	public void summon(int playerId, Minion minion) {
-		summon(playerId, minion, null, -1, false);
+	public boolean summon(int playerId, Minion minion) {
+		return summon(playerId, minion, null, -1, false);
 	}
 
-	public void summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
+	public boolean summon(int playerId, Minion minion, Card source, int index, boolean resolveBattlecry) {
 		Player player = context.getPlayer(playerId);
 		if (!canSummonMoreMinions(player)) {
 			log("{} cannot summon any more minions, {} is destroyed", player.getName(), minion);
-			return;
+			return false;
 		}
 		minion.setId(idFactory.generateId());
 
@@ -1438,6 +1439,7 @@ public class GameLogic implements Cloneable {
 
 		context.getSummonStack().pop();
 		context.fireGameEvent(new BoardChangedEvent(context));
+		return true;
 	}
 
 	public void useHeroPower(int playerId) {
