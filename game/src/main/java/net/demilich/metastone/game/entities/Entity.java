@@ -1,30 +1,72 @@
 package net.demilich.metastone.game.entities;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.Buff;
 import net.demilich.metastone.game.logic.CustomCloneable;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 
 public abstract class Entity extends CustomCloneable {
 
 	private String name;
-	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
+	protected List<Buff> buffs = new ArrayList<Buff>();
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 
 	public Object getAttribute(Attribute attribute) {
-		return attributes.get(attribute);
+		Object obj = null;
+		for (Buff buff : buffs) {
+			if (buff == null) {
+				continue;
+			}
+			if (obj instanceof List) {
+				
+			} else {
+				obj = buff.evaluate(attribute, obj);
+			}
+		}
+		return obj;
+	}
+
+	public Object getAttribute(Attribute attribute, Object obj) {
+		for (Buff buff : buffs) {
+			if (obj instanceof List) {
+				
+			} else {
+				obj = buff.evaluate(attribute, obj);
+			}
+		}
+		return obj;
 	}
 
 	public Map<Attribute, Object> getAttributes() {
+		Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
+		for (Attribute attribute : Attribute.values()) {
+			if (hasAttribute(attribute)) {
+				attributes.put(attribute, getAttribute(attribute));
+			}
+		}
 		return attributes;
 	}
 
 	public int getAttributeValue(Attribute attribute) {
-		return attributes.containsKey(attribute) ? (int) attributes.get(attribute) : 0;
+		if (hasAttribute(attribute)) {
+			return (int) getAttribute(attribute);
+		}
+		return 0;
+	}
+
+	public int getAttributeValue(Attribute attribute, int value) {
+		if (hasAttribute(attribute)) {
+			return (int) getAttribute(attribute, value);
+		}
+		return value;
 	}
 
 	public abstract EntityType getEntityType();
@@ -46,12 +88,12 @@ public abstract class Entity extends CustomCloneable {
 	}
 
 	public boolean hasAttribute(Attribute attribute) {
-		Object value = attributes.get(attribute);
-		if (value == null) {
+		Object obj = getAttribute(attribute);
+		if (obj == null) {
 			return false;
 		}
-		if (value instanceof Integer) {
-			return ((int) value) != 0;
+		if (obj instanceof Integer) {
+			return ((int) obj) != 0;
 		}
 		return true;
 	}
@@ -61,10 +103,7 @@ public abstract class Entity extends CustomCloneable {
 	}
 
 	public void modifyAttribute(Attribute attribute, int value) {
-		if (!attributes.containsKey(attribute)) {
-			setAttribute(attribute, 0);
-		}
-		setAttribute(attribute, getAttributeValue(attribute) + value);
+		buffs.add(new Buff(attribute, value, AlgebraicOperation.ADD));
 	}
 	
 	public void modifyHpBonus(int value) {
@@ -72,19 +111,27 @@ public abstract class Entity extends CustomCloneable {
 	}
 
 	public void removeAttribute(Attribute attribute) {
-		attributes.remove(attribute);
+		List<Buff> buffsCopy = new ArrayList<Buff>();
+		buffsCopy.addAll(buffs);
+		for (Buff buff : buffsCopy) {
+			if (buff.isAttribute(attribute)) {
+				buffs.remove(buff);
+			}
+		}
+	}
+
+	public void setAttributes(Map<Attribute, Object> attributes) {
+		for (Attribute attribute : attributes.keySet()) {
+			setAttribute(attribute, attributes.get(attribute));
+		}
 	}
 
 	public void setAttribute(Attribute attribute) {
-		attributes.put(attribute, 1);
-	}
-
-	public void setAttribute(Attribute attribute, int value) {
-		attributes.put(attribute, value);
+		buffs.add(new Buff(attribute, 1, AlgebraicOperation.SET));
 	}
 
 	public void setAttribute(Attribute attribute, Object value) {
-		attributes.put(attribute, value);
+		buffs.add(new Buff(attribute, value, AlgebraicOperation.SET));
 	}
 
 	public void setId(int id) {

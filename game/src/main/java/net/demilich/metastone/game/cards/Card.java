@@ -41,7 +41,7 @@ public abstract class Card extends Entity {
 
 		setAttribute(Attribute.BASE_MANA_COST, desc.baseManaCost);
 		if (desc.attributes != null) {
-			attributes.putAll(desc.attributes);
+			setAttributes(desc.attributes);
 		}
 
 		if (desc.manaCostModifier != null) {
@@ -49,18 +49,18 @@ public abstract class Card extends Entity {
 		}
 
 		if (desc.passiveTrigger != null) {
-			attributes.put(Attribute.PASSIVE_TRIGGER, desc.passiveTrigger);
+			setAttribute(Attribute.PASSIVE_TRIGGER, desc.passiveTrigger);
 		}
 
 		if (desc.deckTrigger != null) {
-			attributes.put(Attribute.DECK_TRIGGER, desc.deckTrigger);
+			setAttribute(Attribute.DECK_TRIGGER, desc.passiveTrigger);
 		}
 	}
 
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
+		clone.setAttributes(new EnumMap<>(getAttributes()));
 		return clone;
 	}
 
@@ -116,7 +116,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getManaCost(GameContext context, Player player) {
-		int actualManaCost = getBaseManaCost();
+		int actualManaCost = getAttributeValue(Attribute.MANA_COST_MODIFIER, getBaseManaCost());
 		if (manaCostModifier != null) {
 			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
 		}

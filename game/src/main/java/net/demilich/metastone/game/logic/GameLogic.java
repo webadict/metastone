@@ -792,9 +792,6 @@ public class GameLogic implements Cloneable {
 				minValue = costModifier.getMinValue();
 			}
 		}
-		if (card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
-			manaCost += card.getAttributeValue(Attribute.MANA_COST_MODIFIER);
-		}
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
 	}

@@ -47,7 +47,7 @@ public abstract class Actor extends Entity {
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
+		clone.setAttributes(new EnumMap<>(getAttributes()));
 		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
 		if (hasAttribute(Attribute.DEATHRATTLES)) {
 			clone.removeAttribute(Attribute.DEATHRATTLES);

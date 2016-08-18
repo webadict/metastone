@@ -42,7 +42,7 @@ public class PutMiniCopyInHandSpell extends Spell {
 			copyCard.setAttribute(Attribute.ATTACK, 1);
 			copyCard.setAttribute(Attribute.HP, 1);
 			copyCard.setAttribute(Attribute.MAX_HP, 1);
-			copyCard.setAttribute(Attribute.MANA_COST_MODIFIER, 1 - copyCard.getBaseManaCost());
+			copyCard.setAttribute(Attribute.MANA_COST_MODIFIER, 1);
 		}
 	}
 

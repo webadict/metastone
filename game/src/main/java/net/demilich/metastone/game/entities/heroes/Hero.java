@@ -55,11 +55,14 @@ public class Hero extends Actor {
 
 	public Map<Attribute, Object> getAttributesCopy() {
 		Map<Attribute, Object> copy = new EnumMap<>(Attribute.class);
-		for (Attribute attribute : attributes.keySet()) {
+		for (Attribute attribute : Attribute.values()) {
+			if (!hasAttribute(attribute)) {
+				continue;
+			}
 			if (attribute != Attribute.COMBO) {
 				continue;
 			}
-			copy.put(attribute, attributes.get(attribute));
+			copy.put(attribute, getAttribute(attribute));
 		}
 		return copy;
 	}
