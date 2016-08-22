@@ -1,7 +1,6 @@
 package net.demilich.metastone.game.entities;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 
 import net.demilich.metastone.game.Attribute;
@@ -47,7 +46,6 @@ public abstract class Actor extends Entity {
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.setAttributes(new EnumMap<>(getAttributes()));
 		clone.spellTrigger = spellTrigger != null ? spellTrigger.clone() : null;
 		if (hasAttribute(Attribute.DEATHRATTLES)) {
 			clone.removeAttribute(Attribute.DEATHRATTLES);

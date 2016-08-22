@@ -19,6 +19,27 @@ public abstract class Entity extends CustomCloneable {
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 
+	public void addBuff(Buff buff) {
+		buffs.add(buff);
+	}
+
+	public void addBuff(Attribute attribute, Object value, AlgebraicOperation operation) {
+		buffs.add(new Buff(attribute, value, operation));
+	}
+	
+	@Override
+	public Entity clone() {
+		Entity clone = (Entity) super.clone();
+		clone.name = name;
+		clone.id = id;
+		clone.ownerIndex = ownerIndex;
+		clone.buffs = new ArrayList<Buff>();
+		for (Buff buff : buffs) {
+			clone.addBuff(buff.clone());
+		}
+		return clone;
+	}
+
 	public Object getAttribute(Attribute attribute) {
 		Object obj = null;
 		for (Buff buff : buffs) {
