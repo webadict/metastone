@@ -29,6 +29,7 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.EntityReference;
+import net.demilich.metastone.game.targeting.TargetSelection;
 import net.demilich.metastone.game.targeting.TargetType;
 
 public class ParseUtils {
@@ -57,6 +58,8 @@ public class ParseUtils {
 			}
 			return array;
 		}
+		case TARGET_SELECTION:
+			return Enum.valueOf(TargetSelection.class, entry.getAsString());
 		case TARGET_REFERENCE:
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:

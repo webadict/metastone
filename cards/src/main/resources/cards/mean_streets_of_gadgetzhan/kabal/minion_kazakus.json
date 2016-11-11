@@ -20,6 +20,7 @@
 				{
 					"class": "CreateCardSpell",
 					"name": "Lesser Potion",
+					"secondaryName": "Kazakus Potion",
 					"description": "Create a 1-Cost Spell.",
 					"cardType": "SPELL",
 					"mana": 1,
@@ -67,6 +68,7 @@
 				{
 					"class": "CreateCardSpell",
 					"name": "Greater Potion",
+					"secondaryName": "Kazakus Potion",
 					"description": "Create a 5-Cost Spell.",
 					"cardType": "SPELL",
 					"mana": 5,
@@ -74,7 +76,7 @@
 						{
 							"class": "DrawCardSpell",
 							"name": "Kingsblood",
-							"description": "Draw 2 cards."
+							"description": "Draw 2 cards.",
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"value": 2
@@ -103,6 +105,7 @@
 				{
 					"class": "CreateCardSpell",
 					"name": "Superior Potion",
+					"secondaryName": "Kazakus Potion",
 					"description": "Create a 10-Cost Spell.",
 					"cardType": "SPELL",
 					"mana": 10,
@@ -140,7 +143,7 @@
 						{
 							"class": "DamageSpell",
 							"name": "Felbloom",
-							"description": "Deal 6 damage to all minions."
+							"description": "Deal 6 damage to all minions.",
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"target": "ALL_MINIONS",
@@ -149,7 +152,7 @@
 						{
 							"class": "DrawCardSpell",
 							"name": "Kingsblood",
-							"description": "Draw 3 cards."
+							"description": "Draw 3 cards.",
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"value": 3
@@ -157,7 +160,7 @@
 						{
 							"class": "SummonSpell",
 							"name": "Netherbloom",
-							"description": "Summon an 8/8 Demon."
+							"description": "Summon an 8/8 Demon.",
 							"targetSelection": "NONE",
 							"cardDescType": "SPELL",
 							"card": "token_superior_demon"
@@ -191,7 +194,7 @@
 						}
 					],
 					"exclusive": true
-				},
+				}
 			]
 		}
 	},

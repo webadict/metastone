@@ -63,6 +63,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.RANDOM_TARGET, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
 		parseArgument(SpellArg.SECOND_REVERT_TRIGGER, jsonData, spellArgs, ParseValueType.EVENT_TRIGGER);
+		parseArgument(SpellArg.SECONDARY_NAME, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.SECONDARY_TARGET, jsonData, spellArgs, ParseValueType.TARGET_REFERENCE);
 		parseArgument(SpellArg.SECONDARY_VALUE, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.SPELL, jsonData, spellArgs, ParseValueType.SPELL);
@@ -71,6 +72,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.SPELLS, jsonData, spellArgs, ParseValueType.SPELL_ARRAY);
 		parseArgument(SpellArg.TARGET, jsonData, spellArgs, ParseValueType.TARGET_REFERENCE);
 		parseArgument(SpellArg.TARGET_PLAYER, jsonData, spellArgs, ParseValueType.TARGET_PLAYER);
+		parseArgument(SpellArg.TARGET_SELECTION, jsonData, spellArgs, ParseValueType.TARGET_SELECTION);
 		parseArgument(SpellArg.TRIGGER, jsonData, spellArgs, ParseValueType.TRIGGER);
 		parseArgument(SpellArg.VALUE, jsonData, spellArgs, ParseValueType.VALUE);
 		return new SpellDesc(spellArgs);
