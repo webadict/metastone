@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
+import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -102,6 +103,8 @@ public class ParseUtils {
 			return Enum.valueOf(ActionType.class, entry.getAsString());
 		case TARGET_TYPE:
 			return Enum.valueOf(TargetType.class, entry.getAsString());
+		case CARD_DESC_TYPE:
+			return Enum.valueOf(CardDescType.class, entry.getAsString());
 		case ALGEBRAIC_OPERATION:
 			return Enum.valueOf(AlgebraicOperation.class, entry.getAsString());
 		case VALUE:
