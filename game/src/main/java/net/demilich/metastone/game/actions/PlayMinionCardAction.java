@@ -37,7 +37,7 @@ public class PlayMinionCardAction extends PlayCardAction {
 			minion.setBattlecry(battlecry);
 		}
 		Player player = context.getPlayer(playerId);
-		int index = player.getMinions().indexOf(nextTo);
+		int index = player.getSummons().indexOf(nextTo);
 		context.getLogic().summon(playerId, minion, minionCard, index, true);
 	}
 

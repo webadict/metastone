@@ -1,4 +1,4 @@
-package net.demilich.metastone.game.spells.custom;
+package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.TurnStartTrigger;
 
-public class ShifterZerusSpell extends Spell {
+public class TransformInHandSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
