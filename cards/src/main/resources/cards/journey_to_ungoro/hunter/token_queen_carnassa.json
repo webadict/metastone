@@ -11,9 +11,10 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "SetHeroHpSpell",
-			"target": "FIRNEDLY_HERO",
-			"value": 40
+			"class": "ShuffleToDeckSpell",
+			"targetPlayer": "SELF",
+			"card": "minion_carnassas_brood",
+			"howMany": 15
 		}
 	},
 	"attributes": {

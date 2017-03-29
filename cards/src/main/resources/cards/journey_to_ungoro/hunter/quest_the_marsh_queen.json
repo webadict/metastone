@@ -16,7 +16,7 @@
 				"playerAttribute": "LAST_MANA_COST"
 			},
 			"value2": 1,
-			"operation": "EQUALS"
+			"operation": "EQUAL"
 		},
 		"value": 7
 	},

@@ -1543,6 +1543,12 @@ public class GameLogic implements Cloneable {
 		player.getGraveyard().add(card);
 	}
 
+	public void removeAllCards(int playerId) {
+		for (Card card : context.getPlayer(playerId).getHand().toList()) {
+			removeCard(playerId, card);
+		}
+	}
+
 	public void removeCardFromDeck(int playerID, Card card) {
 		Player player = context.getPlayer(playerID);
 		log("Card {} has been moved from the DECK to the GRAVEYARD", card);

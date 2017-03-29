@@ -77,7 +77,7 @@ public abstract class GameEventTrigger extends CustomCloneable {
 		if (condition != null && !condition.isFulfilled(event.getGameContext(), owner, event.getEventSource(), event.getEventTarget())) {
 			return false;
 		}
-		return true;	
+		return fire(event, host);
 	}
 
 	public int getOwner() {
