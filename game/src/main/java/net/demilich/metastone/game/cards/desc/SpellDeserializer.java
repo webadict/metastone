@@ -51,6 +51,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.EXCLUSIVE, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.FILTER, jsonData, spellArgs, ParseValueType.ENTITY_FILTER);
 		parseArgument(SpellArg.FULL_MANA_CRYSTALS, jsonData, spellArgs, ParseValueType.BOOLEAN);
+		parseArgument(SpellArg.GROUP, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.HOW_MANY, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.HP_BONUS, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.IGNORE_SPELL_DAMAGE, jsonData, spellArgs, ParseValueType.BOOLEAN);
