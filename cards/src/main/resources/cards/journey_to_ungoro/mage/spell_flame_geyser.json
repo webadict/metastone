@@ -16,7 +16,7 @@
 			{
 				"class": "ReceiveCardSpell",
 				"targetPlayer": "SELF",
-				"card": "token_mage_elemental"
+				"card": "token_elemental"
 			}
 		]
 	},

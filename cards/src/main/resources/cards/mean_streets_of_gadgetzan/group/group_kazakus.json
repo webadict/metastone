@@ -1,0 +1,89 @@
+{
+	"name": "Adapt",
+	"type": "GROUP",
+	"group": [
+		{
+			"name": "Crackling Shield",
+			"description": "Divine Shield",
+			"spell": {
+				"class": "AddAttributeSpell",
+				"attribute": "DIVINE_SHIELD"
+			}
+		},
+		{
+			"name": "Flaming Claws",
+			"description": "+3 Attack",
+			"spell": {
+				"class": "BuffSpell",
+				"attackBonus": 3
+			}
+		},
+		{
+			"name": "Lightning Speed",
+			"description": "Windfury",
+			"spell": {
+				"class": "AddAttributeSpell",
+				"attribute": "WINDFURY"
+			}
+		},
+		{
+			"name": "Liquid Membrane",
+			"description": "Can't be targeted by spells or Hero Powers.",
+			"spell": {
+				"class": "AddAttributeSpell",
+				"attribute": "UNTARGETABLE_BY_SPELLS"
+			}
+		},
+		{
+			"name": "Living Spores",
+			"description": "Deathrattle: Summon two 1/1 Plants.",
+			"spell": {
+				"class": "AddDeathrattleSpell",
+				"attribute": "DIVINE_SHIELD"
+			}
+		},
+		{
+			"name": "Massive",
+			"description": "Taunt",
+			"spell": {
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			}
+		},
+		{
+			"name": "Poison Spit",
+			"description": "Poisonous",
+			"spell": {
+				"class": "AddSpellTriggerSpell",
+				"attribute": "DIVINE_SHIELD"
+			}
+		},
+		{
+			"name": "Rocky Carapace",
+			"description": "+3 Health",
+			"spell": {
+				"class": "BuffSpell",
+				"hpBonus": 3
+			}
+		},
+		{
+			"name": "Shrouding Mist",
+			"description": "Stealth until your next turn.",
+			"spell": {
+				"class": "AddAttributeSpell",
+				"attribute": "STEALTH"
+			}
+		},
+		{
+			"name": "Volcanic Might",
+			"description": "+1/+1",
+			"spell": {
+				"class": "BuffSpell",
+				"value": 1
+			}
+		}
+	],
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}
