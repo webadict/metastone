@@ -42,7 +42,7 @@ public abstract class Actor extends Entity {
 		if (hasAttribute(Attribute.FROZEN)) {
 			return false;
 		}
-		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE)) {
+		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE) && !hasAttribute(Attribute.RUSH)) {
 			return false;
 		}
 		return getAttack() > 0 && ((getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0 || hasAttribute(Attribute.UNLIMITED_ATTACKS));
