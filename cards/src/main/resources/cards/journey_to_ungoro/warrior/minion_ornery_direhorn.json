@@ -1,0 +1,27 @@
+{
+	"name": "Ornery Direhorn",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Taunt. Battlecry: Adapt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AdaptSpell",
+			"target": "SELF",
+			"group": "group_adapt"
+		}
+	},
+	"attributes": {
+		"ADAPT": true,
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

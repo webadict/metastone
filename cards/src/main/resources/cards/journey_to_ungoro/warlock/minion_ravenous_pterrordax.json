@@ -1,0 +1,35 @@
+{
+	"name": "Ravenous Pterrordax",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"heroClass": "WARLOCK",	
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Battlecry: Destroy a friendly minion to Adapt twice.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DestroySpell"
+				},
+				{
+					"class": "AdaptSpell",
+					"value": 2,
+					"target": "SELF",
+					"group": "group_adapt"
+				}
+			]
+		}
+	},
+	"attributes": {
+		"ADAPT": true,
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

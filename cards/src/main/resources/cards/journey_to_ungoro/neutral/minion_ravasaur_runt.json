@@ -1,0 +1,32 @@
+{
+	"name": "Ravasaur Runt",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "Battlecry: If you control at least 2 other minions, Adapt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AdaptSpell",
+			"target": "SELF",
+			"group": "group_adapt"
+		},
+		"condition": {
+			"class": "MinionCountCondition",
+			"targetPlayer": "SELF",
+			"operation": "GREATER_OR_EQUAL",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"ADAPT": true,
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}
