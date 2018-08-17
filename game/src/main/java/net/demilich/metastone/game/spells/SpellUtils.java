@@ -20,7 +20,6 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.entities.minions.RelativeToSource;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -264,14 +263,14 @@ public class SpellUtils {
 		return count;
 	}
 	
-	public static int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source) {
+	public static int getBoardPosition(GameContext context, Player player, SpellDesc desc, Entity source, int count) {
 		final int UNDEFINED = -1;
 		int boardPosition = desc.getInt(SpellArg.BOARD_POSITION_ABSOLUTE, UNDEFINED);
 		if (boardPosition != UNDEFINED) {
 			return boardPosition;
 		}
-		RelativeToSource relativeBoardPosition = (RelativeToSource) desc.get(SpellArg.BOARD_POSITION_RELATIVE);
-		if (relativeBoardPosition == null) {
+		boolean relativeBoardPosition = desc.getBool(SpellArg.BOARD_POSITION_RELATIVE);
+		if (!relativeBoardPosition) {
 			return UNDEFINED;
 		}
 
@@ -279,14 +278,10 @@ public class SpellUtils {
 		if (sourcePosition == UNDEFINED) {
 			return UNDEFINED;
 		}
-		switch (relativeBoardPosition) {
-		case LEFT:
-			return sourcePosition;
-		case RIGHT:
-			return sourcePosition + 1;
-		default:
-			return UNDEFINED;
+		if (relativeBoardPosition) {
+			return sourcePosition + ((count + 1) % 2);
 		}
+		return UNDEFINED;
 	}
 
 	private SpellUtils() {

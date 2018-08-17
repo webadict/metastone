@@ -15,7 +15,7 @@
 				"class": "DeckSource",
 				"targetPlayer": "SELF"
 			},
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

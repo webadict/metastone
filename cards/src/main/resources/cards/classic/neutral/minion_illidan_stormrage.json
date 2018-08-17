@@ -16,7 +16,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_flame_of_azzinoth",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"collectible": true,

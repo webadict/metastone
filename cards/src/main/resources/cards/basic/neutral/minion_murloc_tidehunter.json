@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_murloc_scout",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

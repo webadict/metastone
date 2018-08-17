@@ -9,19 +9,10 @@
 	"description": "Battlecry: Summon two 1/1 Boom Bots. WARNING: Bots may explode.",
 	"battlecry": {
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "SummonSpell",
-					"card": "token_boom_bot",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_boom_bot",
-					"boardPositionRelative": "LEFT"
-				}
-			]
+			"class": "SummonSpell",
+			"card": "token_boom_bot",
+			"value": 2,
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

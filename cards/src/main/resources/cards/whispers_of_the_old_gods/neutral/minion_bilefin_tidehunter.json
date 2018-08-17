@@ -13,7 +13,7 @@
 			"class": "SummonSpell",
 			"targetPlayer": "SELF",
 			"card": "token_ooze",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

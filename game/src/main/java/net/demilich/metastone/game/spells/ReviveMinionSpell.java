@@ -30,7 +30,7 @@ public class ReviveMinionSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int hpAdjustment = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		Actor targetActor = (Actor) target;
-		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
+		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, 0);
 		MinionCard minionCard = (MinionCard) targetActor.getSourceCard();
 		Minion minion = minionCard.summon();
 		if (hpAdjustment != 0) {

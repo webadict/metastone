@@ -43,11 +43,11 @@ public class CreateSummonSpell extends Spell {
 		MinionCard newCard = (MinionCard) minionCardDesc.createInstance();
 		context.addTempCard(newCard);
 		
-		int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source);
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
 		SpellDesc successfulSummonSpell = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		for (int i = 0; i < count; i++) {
+			int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 			MinionCard minionCard = (MinionCard) newCard.clone();
 			Minion minion = minionCard.summon();
 			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false) && successfulSummonSpell != null) {

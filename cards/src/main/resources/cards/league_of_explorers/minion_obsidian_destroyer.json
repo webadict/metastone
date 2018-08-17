@@ -15,7 +15,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_scarab",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"collectible": true,

@@ -13,7 +13,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_cellar_spider",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

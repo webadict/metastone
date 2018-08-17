@@ -11,7 +11,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_mechanical_dragonling",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

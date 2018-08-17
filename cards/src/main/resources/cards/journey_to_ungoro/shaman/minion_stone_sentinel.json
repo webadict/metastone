@@ -11,19 +11,10 @@
 	"battlecry": {
 		"targetSelection": "ANY",
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "SummonSpell",
-					"card": "token_rock_elemental",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_rock_elemental",
-					"boardPositionRelative": "LEFT"
-				}
-			]
+			"class": "SummonSpell",
+			"card": "token_rock_elemental",
+			"value": 2,
+			"boardPositionRelative": true
 		},
 		"condition": {
 			"class": "PlayedLastTurnCondition",

@@ -12,7 +12,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_animated_shield",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

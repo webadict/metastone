@@ -14,7 +14,7 @@
 				"class": "SummonSpell",
 				"targetPlayer": "SELF",
 				"card": "token_tauren_slime",
-				"boardPositionRelative": "RIGHT"
+				"boardPositionRelative": true
 			}
 		},
 		{
@@ -35,7 +35,7 @@
 					"class": "SummonSpell",
 					"targetPlayer": "SELF",
 					"card": "token_tauren_slime",
-					"boardPositionRelative": "RIGHT"
+					"boardPositionRelative": true
 				},
 				{
 					"class": "ModifyMaxManaSpell",

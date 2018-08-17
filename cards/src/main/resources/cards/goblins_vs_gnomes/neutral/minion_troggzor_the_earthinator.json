@@ -15,7 +15,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "minion_burly_rockjaw_trogg",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"collectible": true,

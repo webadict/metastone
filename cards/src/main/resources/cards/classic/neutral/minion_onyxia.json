@@ -10,39 +10,10 @@
 	"description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.",
 	"battlecry": {
 		"spell": {
-			"class": "MetaSpell",
-			"spells": [
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "LEFT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "LEFT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_whelp",
-					"boardPositionRelative": "LEFT"
-				}
-			]
+			"class": "SummonSpell",
+			"card": "token_whelp",
+			"value": 7,
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

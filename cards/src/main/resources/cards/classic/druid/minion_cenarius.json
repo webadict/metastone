@@ -20,19 +20,10 @@
 		{
 			"description": "2 Treants",
 			"spell": {
-				"class": "MetaSpell",
-				"spells": [
-					{
-						"class": "SummonSpell",
-						"card": "token_treant_taunt",
-						"boardPositionRelative": "RIGHT"
-					},
-					{
-						"class": "SummonSpell",
-						"card": "token_treant_taunt",
-						"boardPositionRelative": "LEFT"
-					}
-				]
+				"class": "SummonSpell",
+				"card": "token_treant_taunt",
+				"value": 2,	
+				"boardPositionRelative": true
 			}
 		}
 	],
@@ -44,12 +35,8 @@
 				{
 					"class": "SummonSpell",
 					"card": "token_treant_taunt",
-					"boardPositionRelative": "RIGHT"
-				},
-				{
-					"class": "SummonSpell",
-					"card": "token_treant_taunt",
-					"boardPositionRelative": "LEFT"
+					"value": 2,	
+					"boardPositionRelative": true
 				},
 				{
 					"class": "BuffSpell",

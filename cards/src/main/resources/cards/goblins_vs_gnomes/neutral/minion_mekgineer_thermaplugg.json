@@ -16,7 +16,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "minion_leper_gnome",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"collectible": true,

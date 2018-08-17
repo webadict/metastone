@@ -10,7 +10,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomMinionFilteredSpell",
-			"boardPositionRelative": "RIGHT",
+			"boardPositionRelative": true,
 			"cardFilter": {
 				"class": "CardFilter",
 				"manaCost": 3

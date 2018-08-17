@@ -11,7 +11,7 @@
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_boar",
-			"boardPositionRelative": "RIGHT"
+			"boardPositionRelative": true
 		}
 	},
 	"attributes": {

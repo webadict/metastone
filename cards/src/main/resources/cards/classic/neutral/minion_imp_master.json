@@ -23,7 +23,7 @@
 				{
 					"class": "SummonSpell",
 					"card": "token_imp",
-					"boardPositionRelative": "RIGHT"
+					"boardPositionRelative": true
 				}
 			]
 		}

@@ -10,7 +10,7 @@
 	"battlecry": {
 		"spell": {
 			"class": "SummonRandomSpell",
-			"boardPositionRelative": "RIGHT",
+			"boardPositionRelative": true,
 			"cards": [
 				"token_searing_totem",
 				"token_healing_totem",
