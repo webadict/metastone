@@ -22,6 +22,7 @@ import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
 import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
 import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
+import net.demilich.metastone.game.cards.desc.GroupCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
@@ -72,32 +73,6 @@ public class CardParser {
 		if (!jsonData.getAsJsonObject().has("type")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'type' attribute!");
 		}
-		if (!jsonData.getAsJsonObject().has("heroClass")) {
-			throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-		} else {
-			boolean check = false;
-			for (HeroClass heroClass : HeroClass.values()) {
-				if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-					check = true;
-				}
-			}
-			if (!check) {
-				throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-			}
-		}
-		if (!jsonData.getAsJsonObject().has("rarity")) {
-			throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-		} else {
-			boolean check = false;
-			for (Rarity rarity : Rarity.values()) {
-				if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-					check = true;
-				}
-			}
-			if (!check) {
-				throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-			}
-		}
 		if (!jsonData.getAsJsonObject().has("collectible")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'collectible' attribute!");
 		}
@@ -107,6 +82,32 @@ public class CardParser {
 		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
 		switch (type) {
 		case SPELL:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
 			}
@@ -127,6 +128,32 @@ public class CardParser {
 				return gson.fromJson(jsonData, SpellCardDesc.class);
 			}
 		case CHOOSE_ONE:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
 			}
@@ -141,6 +168,32 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
 			}
@@ -162,6 +215,32 @@ public class CardParser {
 				return gson.fromJson(jsonData, MinionCardDesc.class);
 			}
 		case PERMANENT:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
 					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
 					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
@@ -170,6 +249,32 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, PermanentCardDesc.class);
 		case WEAPON:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
 			}
@@ -188,6 +293,32 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		case HERO_POWER:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
 			}
@@ -202,7 +333,35 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, HeroPowerCardDesc.class);	
 		case HERO:
+			if (!jsonData.getAsJsonObject().has("heroClass")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
+			} else {
+				boolean check = false;
+				for (HeroClass heroClass : HeroClass.values()) {
+					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
+				}
+			}
+			if (!jsonData.getAsJsonObject().has("rarity")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
+			} else {
+				boolean check = false;
+				for (Rarity rarity : Rarity.values()) {
+					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+						check = true;
+					}
+				}
+				if (!check) {
+					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
+				}
+			}
 			return gson.fromJson(jsonData, HeroCardDesc.class);
+		case GROUP:
+			return gson.fromJson(jsonData, GroupCardDesc.class);
 		default:
 			logger.error("Unknown cardType: " + type);
 			break;

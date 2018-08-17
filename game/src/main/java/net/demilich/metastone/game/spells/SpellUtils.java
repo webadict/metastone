@@ -14,6 +14,7 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.GroupCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
@@ -112,6 +113,16 @@ public class SpellUtils {
 		} else {
 			return (DiscoverAction) player.getBehaviour().requestAction(context, player, discoverActions);
 		}
+	}
+	
+	public static SpellDesc[] getGroup(GameContext context, SpellDesc spell) {
+		String groupCardId = (String) spell.get(SpellArg.GROUP);
+		Card card = context.getCardById(groupCardId);
+		if (card instanceof GroupCard) {
+			GroupCard groupCard = (GroupCard) card;
+			return groupCard.getGroup();
+		}
+		return new SpellDesc[0];
 	}
 
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {

@@ -1293,7 +1293,7 @@ public class GameLogic implements Cloneable {
 		int maxMana = MathUtils.clamp(player.getMaxMana() + delta, 0, GameLogic.MAX_MANA);
 		player.setMaxMana(maxMana);
 		if (delta < 0 && player.getMana() > player.getMaxMana()) {
-			modifyCurrentMana(player.getId(), delta);
+			player.setMana(player.getMaxMana());
 		}
 	}
 

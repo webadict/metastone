@@ -36,6 +36,7 @@ public class GameTagUtils {
 		case CANNOT_REDUCE_HP_BELOW_1:
 		case CHARGE:
 		case COUNTERED:
+		case DISCOVER:
 		case DIVINE_SHIELD:
 		case DOUBLE_DEATHRATTLES:
 		case DOUBLE_BATTLECRIES:
