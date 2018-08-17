@@ -1,0 +1,16 @@
+{
+	"name": "Iron Hide",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Gain 5 Armor.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "BuffHeroSpell",
+		"armorBonus": 5
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

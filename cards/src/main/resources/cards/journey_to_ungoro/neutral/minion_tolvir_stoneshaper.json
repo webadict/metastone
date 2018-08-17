@@ -1,0 +1,29 @@
+{
+	"name": "Ultrasaur",
+	"baseManaCost": 10,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 14,
+	"heroClass": "ANY",
+	"rarity": "COMMON",
+	"race": "BEAST",
+	"description": "",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AdaptSpell",
+			"target": "SELF",
+			"group": "group_adapt"
+		},
+		"condition": {
+			"class": "PlayedLastTurnCondition",
+			"filter": {
+				"class": "CardFilter",
+				"race": "ELEMENTAL"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}
