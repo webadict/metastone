@@ -521,6 +521,9 @@ public class GameLogic implements Cloneable {
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion((Actor) target, damage);
+			if (damageDealt > 0 && source != null && source.hasAttribute(Attribute.POISONOUS)) {
+				markAsDestroyed(target);
+			}
 			break;
 		case HERO:
 			damageDealt = damageHero((Hero) target, damage);

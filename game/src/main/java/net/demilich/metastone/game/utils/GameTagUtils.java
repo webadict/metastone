@@ -47,6 +47,7 @@ public class GameTagUtils {
 		case IMMUNE_WHILE_ATTACKING:
 		case INVERT_HEALING:
 		case QUEST:
+		case POISONOUS:
 		case RUSH:
 		case SECRET:
 		case STEALTH:

@@ -6,19 +6,9 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "EPIC",
-	"description": "Stealth. Destroy any minion damaged by this minion.",
-	"trigger": {
-		"eventTrigger": {
-			"class": "DamageCausedTrigger",
-			"targetEntityType": "MINION",
-			"hostTargetType": "IGNORE_OTHER_SOURCES"
-		},
-		"spell": {
-			"class": "DestroySpell",
-			"target": "EVENT_TARGET"
-		}
-	},
+	"description": "Stealth. Poisonous.",
 	"attributes": {
+		"POISONOUS": true,
 		"STEALTH": true
 	},
 	"collectible": true,
