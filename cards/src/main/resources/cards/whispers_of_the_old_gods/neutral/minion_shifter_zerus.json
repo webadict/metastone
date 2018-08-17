@@ -13,7 +13,7 @@
 			"targetPlayer": "SELF"
 		},
 		"spell": {
-			"class": "custom.ShifterZerusSpell",
+			"class": "TransformInHandSpell",
 			"target": "SELF",
 			"cardFilter": {
 				"class": "CardFilter",
@@ -22,6 +22,6 @@
 		}
 	},
 	"collectible": true,
-	"set": "THE_OLD_GODS",
+	"set": "WHISPERS_OF_THE_OLD_GODS",
 	"fileFormatVersion": 1
 }
