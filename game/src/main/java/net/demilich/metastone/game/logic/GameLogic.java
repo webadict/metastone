@@ -1245,6 +1245,37 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	public boolean mergeSummons(Summon existingSummon, Summon summonToMerge) {
+		Player player = context.getPlayer(existingSummon.getOwner());
+
+		log("{} merges {} with {}", player.getName(), existingSummon, summonToMerge);
+
+		context.fireGameEvent(new BoardChangedEvent(context));
+
+		if (summonToMerge.hasSpellTrigger()) {
+			for (SpellTrigger trigger : summonToMerge.getSpellTriggers()) {
+				addGameEventListener(player, trigger, existingSummon);
+			}
+		}
+
+		if (summonToMerge.getCardCostModifier() != null) {
+			addManaModifier(player, summonToMerge.getCardCostModifier(), existingSummon);
+		}
+
+		if (summonToMerge instanceof Minion
+				&& existingSummon instanceof Minion) {
+			Minion existingMinion = (Minion) existingSummon;
+			Minion minionToMerge = (Minion) summonToMerge;
+			if (existingMinion != null) {
+				existingMinion.modifyAttribute(Attribute.ATTACK, minionToMerge.getAttack());
+				existingMinion.modifyHpBonus(minionToMerge.getHp());
+			}
+			handleEnrage(existingSummon);
+		}
+		context.fireGameEvent(new BoardChangedEvent(context));
+		return true;
+	}
+
 	public void mindControl(Player player, Summon summon) {
 		log("{} mind controls {}", player.getName(), summon);
 		Player opponent = context.getOpponent(player);
@@ -1854,6 +1885,20 @@ public class GameLogic implements Cloneable {
 			log("{} cannot summon any more summons, {} is destroyed", player.getName(), summon);
 			return false;
 		}
+
+		List<Summon> summonList = player.getSummons();
+
+		if (resolveBattlecry
+				&& summon.hasAttribute(Attribute.MAGNETIC)
+				&& (index >= 0 &&  index < summonList.size())) {
+			Summon rightSummon = summonList.get(index);
+			if (rightSummon instanceof Minion
+					&& summon.getRace() == rightSummon.getRace()) {
+				mergeSummons(rightSummon, summon);
+				return false;
+			}
+		}
+
 		summon.setId(idFactory.generateId());
 		summon.setOwner(player.getId());
 
@@ -1861,10 +1906,10 @@ public class GameLogic implements Cloneable {
 
 		log("{} summons {}", player.getName(), summon);
 
-		if (index < 0 || index >= player.getSummons().size()) {
-			player.getSummons().add(summon);
+		if (index < 0 || index >= summonList.size()) {
+			summonList.add(summon);
 		} else {
-			player.getSummons().add(index, summon);
+			summonList.add(index, summon);
 		}
 		if (summon instanceof Minion) {
 			Minion minion = (Minion) summon;
@@ -1941,10 +1986,10 @@ public class GameLogic implements Cloneable {
 	/**
 	 * Transforms a Minion into a new Minion.
 	 * 
-	 * @param minion
-	 *            The original minion in play
-	 * @param newMinion
-	 *            The new minion to transform into
+	 * @param summon
+	 *            The original summon in play
+	 * @param newSummon
+	 *            The new summon to transform into
 	 */
 	public void transformMinion(Summon summon, Summon newSummon) {
 		// Remove any spell triggers associated with the old minion.

@@ -41,6 +41,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.HERO_POWER_USAGES, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.IMMUNE_HERO, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.INVERT_HEALING, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.MAGNETIC, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MEGA_WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.OPPONENT_SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
@@ -64,7 +65,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		}
 		Object value = ParseUtils.parse(argName, jsonData, valueType);
 		Boolean bool = value instanceof Boolean ? (Boolean) value : null;
-		if (bool != null && bool == true) {
+		if (bool != null && bool) {
 			value = 1;
 		}
 		map.put(attribute, value);
