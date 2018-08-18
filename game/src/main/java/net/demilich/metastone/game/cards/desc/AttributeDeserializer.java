@@ -41,6 +41,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.HERO_POWER_USAGES, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.IMMUNE_HERO, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.INVERT_HEALING, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.LIFESTEAL, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MAGNETIC, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.MEGA_WINDFURY, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.OPPONENT_SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);

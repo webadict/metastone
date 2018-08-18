@@ -537,6 +537,10 @@ public class GameLogic implements Cloneable {
 			DamageEvent damageEvent = new DamageEvent(context, target, source, damageDealt);
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damageDealt);
+
+			if (source != null && source.hasAttribute(Attribute.LIFESTEAL)) {
+				heal(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, source);
+            }
 		}
 
 		return damageDealt;
