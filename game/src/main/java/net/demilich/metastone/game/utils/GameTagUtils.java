@@ -41,8 +41,10 @@ public class GameTagUtils {
 		case DOUBLE_DEATHRATTLES:
 		case DOUBLE_BATTLECRIES:
 		case BOTH_CHOOSE_ONE_OPTIONS:
+        case ECHO:
 		case ENRAGED:
 		case FROZEN:
+		case GHOSTLY:
 		case IMMUNE:
 		case IMMUNE_WHILE_ATTACKING:
 		case INVERT_HEALING:

@@ -1,0 +1,38 @@
+{
+	"name": "Unstable Evolution",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "Transform a friendly minion into one that costs (1) more. Repeatable this turn.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "TransformToRandomMinionSpell",
+				"target": "FRIENDLY_MINIONS",
+				"cardFilter": {
+					"class": "CardFilter",
+					"manaCost": {
+						"class": "AttributeValueProvider",
+						"target": "SPELL_TARGET",
+						"attribute": "BASE_MANA_COST",
+						"offset": 1
+					}
+				}
+			},
+			{
+				"class": "ReceiveCardAndDoSomethingSpell",
+				"card": "spell_unstable_evolution",
+				"spell": {
+					"class": "AddAttributeSpell",
+					"attribute": "GHOSTLY"
+				}
+			}
+		]
+	},
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

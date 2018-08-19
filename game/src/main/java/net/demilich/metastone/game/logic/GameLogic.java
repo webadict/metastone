@@ -162,6 +162,12 @@ public class GameLogic implements Cloneable {
 		Card card = context.resolveCardReference(cardReference);
 		
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
+
+		if (card.hasAttribute(Attribute.ECHO)) {
+			Card echoCard = card.getCopy();
+			echoCard.setAttribute(Attribute.GHOSTLY);
+			receiveCard(playerId, echoCard);
+		}
 	}
 
 	public int applyAmplify(Player player, int baseValue, Attribute attribute) {
@@ -699,6 +705,10 @@ public class GameLogic implements Cloneable {
 		player.getSetAsideZone().add(card);
 	}
 
+	public void echoCard(Card card) {
+	    card.clone();
+    }
+
 	public void endTurn(int playerId) {
 		Player player = context.getPlayer(playerId);
 
@@ -721,6 +731,7 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		checkForDeadEntities();
+		removeGhosts(playerId);
 	}
 
 	public void equipWeapon(int playerId, Weapon weapon) {
@@ -1594,6 +1605,16 @@ public class GameLogic implements Cloneable {
 		removeSpellTriggers(card);
 		player.getDeck().remove(card);
 		player.getGraveyard().add(card);
+	}
+
+	public void removeGhosts(int playerId) {
+		Player player = context.getPlayer(playerId);
+		List<Card> cardList = new ArrayList<Card>(player.getHand().toList());
+		for (Card card : cardList) {
+			if (card.hasAttribute(Attribute.GHOSTLY)) {
+				discardCard(player, card);
+			}
+		}
 	}
 
 	public void removeQuests(Player player) {
