@@ -35,6 +35,7 @@ public class SpellDeserializer implements JsonDeserializer<SpellDesc> {
 		parseArgument(SpellArg.ATTRIBUTE, jsonData, spellArgs, ParseValueType.ATTRIBUTE);
 		parseArgument(SpellArg.ARMOR_BONUS, jsonData, spellArgs, ParseValueType.VALUE);
 		parseArgument(SpellArg.BOARD_POSITION_RELATIVE, jsonData, spellArgs, ParseValueType.BOOLEAN);
+		parseArgument(SpellArg.BUFF, jsonData, spellArgs, ParseValueType.BUFF);
 		parseArgument(SpellArg.CANNOT_RECEIVE_OWNED, jsonData, spellArgs, ParseValueType.BOOLEAN);
 		parseArgument(SpellArg.CARD, jsonData, spellArgs, ParseValueType.STRING);
 		parseArgument(SpellArg.CARD_COST_MODIFIER, jsonData, spellArgs, ParseValueType.CARD_COST_MODIFIER);

@@ -25,11 +25,11 @@ public class Weapon extends Actor {
 	}
 
 	public int getBaseDurability() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 	public int getDurability() {
-		return getAttributeValue(Attribute.HP);
+		return getBaseAttributeValue(Attribute.HP);
 	}
 
 	@Override
@@ -37,12 +37,12 @@ public class Weapon extends Actor {
 		return EntityType.WEAPON;
 	}
 
-	public int getMaxDurability() {
-		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS);
+	public int getMaxDurability(GameContext context, Player player) {
+		return getAttributeValue(context, Attribute.MAX_HP);
 	}
 
-	public int getWeaponDamage() {
-		return Math.max(0, getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS)) + getAttributeValue(Attribute.ATTACK_BONUS);
+	public int getWeaponDamage(GameContext context) {
+		return Math.max(0, getAttributeValue(context, Attribute.ATTACK));
 	}
 
 	public boolean isActive() {
@@ -85,7 +85,7 @@ public class Weapon extends Actor {
 	@Override
 	public String toString() {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
-		result += getWeaponDamage() + "/" + getDurability();
+		result += getBaseAttack() + "/" + getDurability();
 		String prefix = " ";
 		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {

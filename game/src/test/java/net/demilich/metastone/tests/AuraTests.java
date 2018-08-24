@@ -38,10 +38,10 @@ public class AuraTests extends BasicTests {
 		minionCard = new TestMinionCard(5, 5);
 		Minion testMinion3 = playMinionCard(context, player, minionCard);
 
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion1.getAttack(), 2);
-		Assert.assertEquals(testMinion2.getAttack(), 6);
-		Assert.assertEquals(testMinion3.getAttack(), 5);
+		Assert.assertEquals(direWolf.getAttack(context), 2);
+		Assert.assertEquals(testMinion1.getAttack(context), 2);
+		Assert.assertEquals(testMinion2.getAttack(context), 6);
+		Assert.assertEquals(testMinion3.getAttack(context), 5);
 
 		SpellCard destroyCard = new TestSpellCard(DestroySpell.create());
 		destroyCard.setTargetRequirement(TargetSelection.ANY);
@@ -49,13 +49,13 @@ public class AuraTests extends BasicTests {
 		GameAction destroyAction = destroyCard.play();
 		destroyAction.setTarget(testMinion2);
 		context.getLogic().performGameAction(player.getId(), destroyAction);
-		Assert.assertEquals(testMinion1.getAttack(), 2);
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion3.getAttack(), 6);
+		Assert.assertEquals(testMinion1.getAttack(context), 2);
+		Assert.assertEquals(direWolf.getAttack(context), 2);
+		Assert.assertEquals(testMinion3.getAttack(context), 6);
 
 		playCard(context, player, CardCatalogue.getCardById("spell_hellfire"));
-		Assert.assertEquals(direWolf.getAttack(), 2);
-		Assert.assertEquals(testMinion3.getAttack(), 5);
+		Assert.assertEquals(direWolf.getAttack(context), 2);
+		Assert.assertEquals(testMinion3.getAttack(context), 5);
 	}
 
 	@Test
@@ -69,31 +69,31 @@ public class AuraTests extends BasicTests {
 		playCard(context, player, minionCard);
 
 		Actor minion1 = getSingleMinion(player.getMinions());
-		Assert.assertEquals(minion1.getAttack(), 1);
+		Assert.assertEquals(minion1.getAttack(context), 1);
 
 		minionCard = new TestMinionCard(1, 1);
 		minionCard.getMinion().addSpellTrigger(new BuffAura(1, 1, EntityReference.OTHER_FRIENDLY_MINIONS, null));
 		Actor minion2 = playMinionCard(context, player, minionCard);
 
 		Assert.assertNotEquals(minion1, minion2);
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
+		Assert.assertEquals(minion1.getAttack(context), 2);
+		Assert.assertEquals(minion2.getAttack(context), 2);
 
 		TestMinionCard minionCardOpponent = new TestMinionCard(3, 3);
 		Actor enemyMinion = playMinionCard(context, opponent, minionCardOpponent);
-		Assert.assertEquals(enemyMinion.getAttack(), 3);
+		Assert.assertEquals(enemyMinion.getAttack(context), 3);
 
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(minion2.getAttack(), 2);
+		Assert.assertEquals(minion1.getAttack(context), 2);
+		Assert.assertEquals(minion2.getAttack(context), 2);
 		PhysicalAttackAction attackAction = new PhysicalAttackAction(enemyMinion.getReference());
 		attackAction.setTarget(minion2);
 		context.getLogic().performGameAction(opponent.getId(), attackAction);
-		Assert.assertEquals(minion1.getAttack(), 1);
+		Assert.assertEquals(minion1.getAttack(context), 1);
 
 		minionCard = new TestMinionCard(1, 1);
 		minion2 = playMinionCard(context, player, minionCard);
-		Assert.assertEquals(minion1.getAttack(), 1);
-		Assert.assertEquals(minion2.getAttack(), 2);
+		Assert.assertEquals(minion1.getAttack(context), 1);
+		Assert.assertEquals(minion2.getAttack(context), 2);
 	}
 
 	@Test
@@ -102,13 +102,13 @@ public class AuraTests extends BasicTests {
 		Player player = context.getPlayer1();
 
 		Minion murloc = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_bluegill_warrior"));
-		Assert.assertEquals(murloc.getAttack(), 2);
+		Assert.assertEquals(murloc.getAttack(context), 2);
 		Assert.assertEquals(murloc.getHp(), 1);
 
 		Minion warleader = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_murloc_warleader"));
-		Assert.assertEquals(murloc.getAttack(), 4);
+		Assert.assertEquals(murloc.getAttack(context), 4);
 		Assert.assertEquals(murloc.getHp(), 2);
-		Assert.assertEquals(warleader.getAttack(), 3);
+		Assert.assertEquals(warleader.getAttack(context), 3);
 		Assert.assertEquals(warleader.getHp(), 3);
 
 		TestBehaviour behaviour = (TestBehaviour) player.getBehaviour();
@@ -119,7 +119,7 @@ public class AuraTests extends BasicTests {
 		GameAction action = facelessCard.play();
 		action.setTarget(warleader);
 		context.getLogic().performGameAction(player.getId(), action);
-		Assert.assertEquals(murloc.getAttack(), 6);
+		Assert.assertEquals(murloc.getAttack(context), 6);
 		Assert.assertEquals(murloc.getHp(), 3);
 	}
 
@@ -135,12 +135,12 @@ public class AuraTests extends BasicTests {
 		minionCard.getMinion().addSpellTrigger(new BuffAura(1, 1, EntityReference.FRIENDLY_MINIONS, null));
 		Minion auraMinion = playMinionCard(context, opponent, minionCard);
 		Minion opponentMinion = playMinionCard(context, opponent, new TestMinionCard(1, 1));
-		Assert.assertEquals(opponentMinion.getAttack(), 2);
+		Assert.assertEquals(opponentMinion.getAttack(context), 2);
 		context.getLogic().endTurn(opponent.getId());
 
 		minionCard = new TestMinionCard(1, 1);
 		Actor minion1 = playMinionCard(context, player, minionCard);
-		Assert.assertEquals(minion1.getAttack(), 1);
+		Assert.assertEquals(minion1.getAttack(context), 1);
 
 		Card mindControlCard = CardCatalogue.getCardById("spell_mind_control");
 		context.getLogic().receiveCard(player.getId(), mindControlCard);
@@ -149,8 +149,8 @@ public class AuraTests extends BasicTests {
 		context.getLogic().performGameAction(player.getId(), mindControl);
 
 		Assert.assertEquals(auraMinion.getOwner(), player.getId());
-		Assert.assertEquals(minion1.getAttack(), 2);
-		Assert.assertEquals(opponentMinion.getAttack(), 1);
+		Assert.assertEquals(minion1.getAttack(context), 2);
+		Assert.assertEquals(opponentMinion.getAttack(context), 1);
 	}
 	
 	@Test
@@ -160,11 +160,11 @@ public class AuraTests extends BasicTests {
 		Player opponent = context.getPlayer2();
 
 		Minion wolf = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dire_wolf_alpha"));
-		Assert.assertEquals(wolf.getAttack(), 2);
+		Assert.assertEquals(wolf.getAttack(context), 2);
 		Assert.assertEquals(wolf.getHp(), 2);
 
 		Minion dummy = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_target_dummy"));
-		Assert.assertEquals(dummy.getAttack(), 1);
+		Assert.assertEquals(dummy.getAttack(context), 1);
 		Assert.assertEquals(dummy.getHp(), 2);
 		Assert.assertEquals(dummy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
 		
@@ -184,7 +184,7 @@ public class AuraTests extends BasicTests {
 		
 		Minion facelessCopy = getSummonedMinion(opponent.getMinions());
 		Assert.assertEquals(facelessCopy.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS), false);
-		Assert.assertEquals(facelessCopy.getAttack(), 0);
+		Assert.assertEquals(facelessCopy.getAttack(context), 0);
 	}
 
 }

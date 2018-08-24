@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
@@ -17,16 +19,14 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 public class MinionCard extends SummonCard {
 
 	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
-					Attribute.BASE_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
+			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.ATTACK,
+					Attribute.MAX_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
 
 	private final MinionCardDesc desc;
 
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
-		setAttribute(Attribute.BASE_ATTACK, desc.baseAttack);
 		setAttribute(Attribute.ATTACK, desc.baseAttack);
-		setAttribute(Attribute.BASE_HP, desc.baseHp);
 		setAttribute(Attribute.HP, desc.baseHp);
 		setAttribute(Attribute.MAX_HP, desc.baseHp);
 		if (desc.race != null) {
@@ -43,9 +43,7 @@ public class MinionCard extends SummonCard {
 			}
 		}
 		minion.setBaseAttack(getBaseAttack());
-		minion.setAttack(getAttack());
 		minion.setHp(getHp());
-		minion.setMaxHp(getHp());
 		minion.setBaseHp(getBaseHp());
 		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
@@ -75,32 +73,25 @@ public class MinionCard extends SummonCard {
 		if (desc.cardCostModifier != null) {
 			minion.setCardCostModifier(desc.cardCostModifier.create());
 		}
-		minion.setHp(minion.getMaxHp());
+		// TODO: Check if this is needed???
+		//minion.setHp(minion.getMaxHp());
 		return minion;
 	}
 
-	public int getAttack() {
-		return getAttributeValue(Attribute.ATTACK);
-	}
-	
-	public int getBonusAttack() {
-		return getAttributeValue(Attribute.ATTACK_BONUS);
+	public int getAttack(GameContext context, Player player) {
+		return getAttributeValue(context, Attribute.ATTACK);
 	}
 
 	public int getHp() {
-		return getAttributeValue(Attribute.HP);
-	}
-	
-	public int getBonusHp() {
-		return getAttributeValue(Attribute.HP_BONUS);
+		return getBaseAttributeValue(Attribute.HP);
 	}
 
 	public int getBaseAttack() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseHp() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 	@Override

@@ -78,17 +78,17 @@ public class HeroToken extends GameToken {
 
 	public void setHero(Player player) {
 		Hero hero = player.getHero();
-		setScoreValue(attackAnchor, hero.getAttack());
+		setScoreValue(attackAnchor, hero.getCachedAttack());
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getHeroClass()));
 		portrait.setImage(portraitImage);
-		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
+		setScoreValue(hpAnchor, hero.getHp(), hero.getBaseHp(), hero.getCachedMaxHp());
 		if (!player.getDeck().isEmpty()) {
 			cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
 		} else {
-			cardsLabel.setText("Fatigue: " + player.getAttributeValue(Attribute.FATIGUE));
+			cardsLabel.setText("Fatigue: " + player.getBaseAttributeValue(Attribute.FATIGUE));
 		}
-		if (player.getAttributeValue(Attribute.OVERLOAD) > 0) {
-			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getAttributeValue(Attribute.OVERLOAD));
+		if (player.getBaseAttributeValue(Attribute.OVERLOAD) > 0) {
+			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana() + "\nOver: " + player.getBaseAttributeValue(Attribute.OVERLOAD));
 		} else {
 			manaLabel.setText("Mana: " + player.getMana() + "/" + player.getMaxMana());
 		}
@@ -153,8 +153,8 @@ public class HeroToken extends GameToken {
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getBaseAttack());
-			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), weapon.getMaxDurability());
+			setScoreValue(weaponAttackAnchor, weapon.getCachedAttack(), weapon.getBaseAttack());
+			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), weapon.getCachedMaxHp());
 			Tooltip tooltip = new Tooltip();
 			CardTooltip tooltipContent = new CardTooltip();
 			tooltipContent.setCard(weapon.getSourceCard());

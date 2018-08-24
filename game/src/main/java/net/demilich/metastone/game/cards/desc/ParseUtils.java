@@ -11,6 +11,7 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.buff.Buff;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
@@ -18,6 +19,7 @@ import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
+import net.demilich.metastone.game.spells.desc.buff.BuffDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.FilterDesc;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
@@ -42,6 +44,7 @@ public class ParseUtils {
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
 	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
+	private static BuffDeserializer buffParser = new BuffDeserializer();
 
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
@@ -124,6 +127,19 @@ public class ParseUtils {
 		case ENTITY_FILTER: {
 			FilterDesc filterDesc = filterParser.deserialize(entry, FilterDesc.class, null);
 			return filterDesc.create();
+		}
+		case BUFF: {
+			BuffDesc buffDesc = buffParser.deserialize(entry, BuffDesc.class, null);
+			return buffDesc.create();
+		}
+		case BUFF_ARRAY: {
+			JsonArray jsonArray = entry.getAsJsonArray();
+			Buff[] array = new Buff[jsonArray.size()];
+			for (int i = 0; i < array.length; i++) {
+				BuffDesc buffDesc = buffParser.deserialize(jsonArray.get(i), BuffDesc.class, null);
+				array[i] = buffDesc.create();
+			}
+			return array;
 		}
 		case CARD_SOURCE: {
 			SourceDesc sourceDesc = sourceParser.deserialize(entry, SourceDesc.class, null);

@@ -141,9 +141,6 @@ public class EntityEditor extends SandboxEditor {
 			addTagIfMissing(entity, Attribute.DIVINE_SHIELD, 0);
 			addTagIfMissing(entity, Attribute.WINDFURY, 0);
 			addTagIfMissing(entity, Attribute.FROZEN, 0);
-			addTagIfMissing(entity, Attribute.TEMPORARY_ATTACK_BONUS, 0);
-			addTagIfMissing(entity, Attribute.HP_BONUS, 0);
-			addTagIfMissing(entity, Attribute.ATTACK_BONUS, 0);
 			addTagIfMissing(entity, Attribute.CHARGE, 0);
 			addTagIfMissing(entity, Attribute.STEALTH, 0);
 			addTagIfMissing(entity, Attribute.TAUNT, 0);

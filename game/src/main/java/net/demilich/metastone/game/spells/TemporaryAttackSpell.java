@@ -14,6 +14,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+/*
+@deprecated As of v2.0, use BuffSpell instead.
+ */
+@Deprecated
 public class TemporaryAttackSpell extends Spell {
 
 	private static Logger logger = LoggerFactory.getLogger(TemporaryAttackSpell.class);
@@ -38,7 +42,7 @@ public class TemporaryAttackSpell extends Spell {
 		Actor targetActor = (Actor) target;
 
 		if (attackBonus != 0) {
-			targetActor.modifyAttribute(Attribute.TEMPORARY_ATTACK_BONUS, +attackBonus);
+			targetActor.modifyAttribute(Attribute.ATTACK, +attackBonus);
 		}
 	}
 

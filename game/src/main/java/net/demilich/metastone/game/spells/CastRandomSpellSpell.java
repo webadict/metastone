@@ -111,7 +111,7 @@ public class CastRandomSpellSpell extends Spell {
 				context.getLogic().performGameAction(player.getId(), battlecryAction);
 				// If the card has Overload, then start overloading...
 				if (spellCard.hasAttribute(Attribute.OVERLOAD)) {
-					player.modifyAttribute(Attribute.OVERLOAD, spellCard.getAttributeValue(Attribute.OVERLOAD));
+					player.modifyAttribute(Attribute.OVERLOAD, spellCard.getBaseAttributeValue(Attribute.OVERLOAD));
 					context.fireGameEvent(new OverloadEvent(context, player.getId(), spellCard));
 				}
 			}

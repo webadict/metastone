@@ -31,18 +31,18 @@ public class TheOldGodsTests extends TestBase {
 		Player opponent = context.getOpponent(player);
 
 		Minion darkshireCouncilman = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_darkshire_councilman"));
-		Assert.assertEquals(darkshireCouncilman.getAttack(), darkshireCouncilman.getBaseAttack());
+		Assert.assertEquals(darkshireCouncilman.getAttack(context), darkshireCouncilman.getBaseAttack());
 
 		Minion darkshireCouncilman2 = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_darkshire_councilman"));
-		Assert.assertEquals(darkshireCouncilman.getAttack(), darkshireCouncilman.getBaseAttack() + 1);
-		Assert.assertEquals(darkshireCouncilman2.getAttack(), darkshireCouncilman2.getBaseAttack());
+		Assert.assertEquals(darkshireCouncilman.getAttack(context), darkshireCouncilman.getBaseAttack() + 1);
+		Assert.assertEquals(darkshireCouncilman2.getAttack(context), darkshireCouncilman2.getBaseAttack());
 
 		context.getLogic().endTurn(player.getId());
 		Minion opponentMinion = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_darkshire_councilman"));
 
-		Assert.assertEquals(darkshireCouncilman.getAttack(), darkshireCouncilman.getBaseAttack() + 1);
-		Assert.assertEquals(darkshireCouncilman2.getAttack(), darkshireCouncilman2.getBaseAttack());
-		Assert.assertEquals(opponentMinion.getAttack(), opponentMinion.getBaseAttack());
+		Assert.assertEquals(darkshireCouncilman.getAttack(context), darkshireCouncilman.getBaseAttack() + 1);
+		Assert.assertEquals(darkshireCouncilman2.getAttack(context), darkshireCouncilman2.getBaseAttack());
+		Assert.assertEquals(opponentMinion.getAttack(context), opponentMinion.getBaseAttack());
 	}
 
 }

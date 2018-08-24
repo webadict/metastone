@@ -88,7 +88,7 @@ public class CardFilter extends EntityFilter {
 			}
 	
 			int targetValue = desc.getInt(FilterArg.VALUE);
-			int actualValue = card.getAttributeValue(attribute);
+			int actualValue = card.getAttributeValue(context, attribute);
 	
 			return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
 		}

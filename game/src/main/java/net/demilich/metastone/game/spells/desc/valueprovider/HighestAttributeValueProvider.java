@@ -39,25 +39,7 @@ public class HighestAttributeValueProvider extends ValueProvider {
 			if (filter != null && !filter.matches(context, player, entity)) {
 				continue;
 			}
-			if (entity instanceof Card) {
-				Card card = (Card) entity;
-				if (attribute == Attribute.ATTACK) {
-					value = Math.max(card.getAttributeValue(Attribute.ATTACK) + card.getAttributeValue(Attribute.ATTACK_BONUS), value);
-				} else if (attribute == Attribute.MAX_HP) {
-					value = Math.max(card.getAttributeValue(Attribute.MAX_HP) + card.getAttributeValue(Attribute.HP_BONUS), value);
-				} else {
-					value = Math.max(card.getAttributeValue(attribute), value);
-				}
-			} else {
-				Actor source = (Actor) entity;
-				if (attribute == Attribute.ATTACK) {
-					value = Math.max(source.getAttack(), value);
-				} else if (attribute == Attribute.MAX_HP) {
-					value = Math.max(source.getMaxHp(), value);
-				} else {
-					value = Math.max(source.getAttributeValue(attribute), value);
-				}
-			}
+			value = Math.max(entity.getAttributeValue(context, attribute), value);
 		}
 
 		return value;

@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayWeaponCardAction;
@@ -16,16 +18,14 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 public class WeaponCard extends Card {
 
 	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
-					Attribute.BASE_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
+			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.ATTACK,
+					Attribute.MAX_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
 	
 	private final WeaponCardDesc desc;
 
 	public WeaponCard(WeaponCardDesc desc) {
 		super(desc);
-		setAttribute(Attribute.BASE_ATTACK, desc.damage);
 		setAttribute(Attribute.ATTACK, desc.damage);
-		setAttribute(Attribute.BASE_HP, desc.durability);
 		setAttribute(Attribute.HP, desc.durability);
 		setAttribute(Attribute.MAX_HP, desc.durability);
 		this.desc = desc;
@@ -39,11 +39,10 @@ public class WeaponCard extends Card {
 				weapon.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
-		weapon.setAttack(getDamage());
 		weapon.setBaseAttack(getBaseDamage());
-		weapon.setMaxHp(getDurability());
-		weapon.setHp(weapon.getMaxDurability());
 		weapon.setBaseHp(getBaseDurability());
+		// TODO: Check if this is needed after update.
+		//weapon.setHp(weapon.getMaxDurability());
 		BattlecryDesc battlecry = desc.battlecry;
 		if (battlecry != null) {
 			BattlecryAction battlecryAction = BattlecryAction.createBattlecry(battlecry.spell, battlecry.getTargetSelection());
@@ -83,28 +82,20 @@ public class WeaponCard extends Card {
 		return new PlayWeaponCardAction(getCardReference());
 	}
 
-	public int getDamage() {
-		return getAttributeValue(Attribute.ATTACK);
-	}
-	
-	public int getBonusDamage() {
-		return getAttributeValue(Attribute.ATTACK_BONUS);
+	public int getDamage(GameContext context, Player player) {
+		return getAttributeValue(context, Attribute.ATTACK);
 	}
 
 	public int getDurability() {
-		return getAttributeValue(Attribute.HP);
-	}
-	
-	public int getBonusDurability() {
-		return getAttributeValue(Attribute.HP_BONUS);
+		return getBaseAttributeValue(Attribute.HP);
 	}
 
 	public int getBaseDamage() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseDurability() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.HP);
 	}
 
 }

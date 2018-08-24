@@ -60,12 +60,13 @@ public abstract class Card extends Entity {
 		if (desc.deckTrigger != null) {
 			attributes.put(Attribute.DECK_TRIGGER, desc.deckTrigger);
 		}
+
+		cachedAttributes.putAll(attributes);
 	}
 
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
 		return clone;
 	}
 
@@ -88,7 +89,7 @@ public abstract class Card extends Entity {
 	}
 
 	public int getBaseManaCost() {
-		return getAttributeValue(Attribute.BASE_MANA_COST);
+		return getBaseAttributeValue(Attribute.BASE_MANA_COST);
 	}
 
 	public BattlecryDesc getBattlecry() {
@@ -123,8 +124,6 @@ public abstract class Card extends Entity {
 		Card copy = clone();
 		copy.setId(IdFactory.UNASSIGNED);
 		copy.setLocation(CardLocation.PENDING);
-		copy.removeAttribute(Attribute.ATTACK_BONUS);
-		copy.removeAttribute(Attribute.HP_BONUS);
 		copy.removeAttribute(Attribute.MANA_COST_MODIFIER);
 		return copy;
 	}
@@ -207,12 +206,12 @@ public abstract class Card extends Entity {
 					evaluateExpression(operator, getBaseManaCost(), value)) {
 				return true;
 			}
-			if (split[0].contains("attack") && hasAttribute(Attribute.BASE_ATTACK) &&
-					evaluateExpression(operator, getAttributeValue(Attribute.BASE_ATTACK), value)) {
+			if (split[0].contains("attack") && hasAttribute(Attribute.ATTACK) &&
+					evaluateExpression(operator, getBaseAttributeValue(Attribute.ATTACK), value)) {
 				return true;
 			}
-			if ((split[0].contains("health") || split[0].contains("hp")) && hasAttribute(Attribute.BASE_HP) &&
-					evaluateExpression(operator, getAttributeValue(Attribute.BASE_HP), value)) {
+			if ((split[0].contains("health") || split[0].contains("hp")) && hasAttribute(Attribute.MAX_HP) &&
+					evaluateExpression(operator, getBaseAttributeValue(Attribute.MAX_HP), value)) {
 				return true;
 			}
 		}

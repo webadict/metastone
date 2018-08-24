@@ -56,9 +56,10 @@ public class SummonOneOneCopySpell extends Spell {
 		if (minionCard != null) {
 			Minion minion = minionCard.summon();
 			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false)) {
-				minion.setAttack(1);
+				// TODO: Fix this
+				//minion.setAttack(1);
 				minion.setHp(1);
-				minion.setMaxHp(1);
+				//minion.setMaxHp(1);
 			}
 		}
 	}

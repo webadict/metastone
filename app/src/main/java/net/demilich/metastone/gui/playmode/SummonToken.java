@@ -56,8 +56,9 @@ public class SummonToken extends GameToken {
 		if (summon instanceof Minion) {
 			attackAnchor.setVisible(true);
 			hpAnchor.setVisible(true);
-			setScoreValue(attackAnchor, summon.getAttack(), summon.getAttributeValue(Attribute.BASE_ATTACK));
-			setScoreValue(hpAnchor, summon.getHp(), summon.getBaseHp(), summon.getMaxHp());
+			// TODO: Verify color consistency with buff changes.
+			setScoreValue(attackAnchor, summon.getCachedAttack(), summon.getBaseAttributeValue(Attribute.ATTACK));
+			setScoreValue(hpAnchor, summon.getHp(), summon.getBaseHp(), summon.getCachedAttributeValue(Attribute.MAX_HP));
 		} else if (summon instanceof Permanent) {
 			attackAnchor.setVisible(false);
 			hpAnchor.setVisible(false);

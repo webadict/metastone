@@ -1,0 +1,51 @@
+{
+	"name": "Tending Tauren",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Give your other minions +1/+1; or Summon two 2/2 Treants.",
+	"options": [
+		{
+			"description": "+1/1",
+			"spell": {
+				"class": "BuffSpell",
+				"target": "OTHER_FRIENDLY_MINIONS",
+				"value": 1
+			}
+		},
+		{
+			"description": "2 Treants",
+			"spell": {
+				"class": "SummonSpell",
+				"card": "token_treant_taunt",
+				"value": 2,
+				"boardPositionRelative": true
+			}
+		}
+	],
+	"bothOptions": {
+		"description": "2 Treants and +1/+1",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "SummonSpell",
+					"card": "token_treant_taunt",
+					"value": 2,
+					"boardPositionRelative": true
+				},
+				{
+					"class": "BuffSpell",
+					"target": "OTHER_FRIENDLY_MINIONS",
+					"value": 1
+				}
+			]
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

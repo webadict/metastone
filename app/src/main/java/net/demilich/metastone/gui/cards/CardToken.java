@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -86,12 +87,12 @@ public class CardToken extends BorderPane {
 		hpIcon.setVisible(isMinionOrWeaponCard);
 		if (card.getCardType().isCardType(CardType.MINION)) {
 			MinionCard minionCard = (MinionCard) card;
-			setScoreValue(attackAnchor, minionCard.getAttack() + minionCard.getBonusAttack(), minionCard.getBaseAttack());
-			setScoreValue(hpAnchor, minionCard.getHp() + minionCard.getBonusHp(), minionCard.getBaseHp());
+			setScoreValue(attackAnchor, minionCard.getCachedAttributeValue(Attribute.ATTACK), minionCard.getBaseAttack());
+			setScoreValue(hpAnchor, minionCard.getCachedAttributeValue(Attribute.MAX_HP), minionCard.getBaseHp());
 		} else if (card.getCardType().isCardType(CardType.WEAPON)) {
 			WeaponCard weaponCard = (WeaponCard) card;
-			setScoreValue(attackAnchor, weaponCard.getDamage() + weaponCard.getBonusDamage(), weaponCard.getBaseDamage());
-			setScoreValue(hpAnchor, weaponCard.getDurability() + weaponCard.getBonusDurability(), weaponCard.getBaseDurability());
+			setScoreValue(attackAnchor, weaponCard.getCachedAttributeValue(Attribute.ATTACK), weaponCard.getBaseDamage());
+			setScoreValue(hpAnchor, weaponCard.getCachedAttributeValue(Attribute.MAX_HP), weaponCard.getBaseDurability());
 		}
 	}
 

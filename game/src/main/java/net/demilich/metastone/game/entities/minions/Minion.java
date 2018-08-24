@@ -1,6 +1,8 @@
 package net.demilich.metastone.game.entities.minions;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.EntityType;
 
@@ -19,11 +21,19 @@ public class Minion extends Summon {
 	}
 
 	@Override
-	public int getAttack() {
+	public int getAttack(GameContext context) {
 		if (hasAttribute(Attribute.ATTACK_EQUALS_HP)) {
 			return getHp();
 		}
-		return super.getAttack();
+		return super.getAttack(context);
+	}
+
+	@Override
+	public int getCachedAttack() {
+		if (hasAttribute(Attribute.ATTACK_EQUALS_HP)) {
+			return getHp();
+		}
+		return super.getCachedAttack();
 	}
 
 	@Override

@@ -254,7 +254,7 @@ public class SpellUtils {
 					continue;
 				}
 
-				if (deadEntity.getAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
+				if (deadEntity.getBaseAttributeValue(Attribute.DIED_ON_TURN) == currentTurn) {
 					count++;
 				}
 

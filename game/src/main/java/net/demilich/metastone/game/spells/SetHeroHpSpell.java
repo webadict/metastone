@@ -12,6 +12,10 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
+/*
+@deprecated As of v2.0, now uses BuffSpell.
+ */
+@Deprecated
 public class SetHeroHpSpell extends Spell {
 
 	private static final Logger logger = LoggerFactory.getLogger(SetHeroHpSpell.class);
@@ -26,9 +30,9 @@ public class SetHeroHpSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Actor actor = (Actor) target;
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		if (actor.getMaxHp() < value) {
-			actor.setMaxHp(value);
-			logger.debug("{}'s Max Hp have been set to {}", actor, actor.getMaxHp());
+		if (actor.getMaxHp(context) < value) {
+			//actor.setMaxHp(value);
+			logger.debug("{}'s Max Hp have been set to {}", actor, actor.getMaxHp(context));
 		}
 		actor.setHp(value);
 		logger.debug("{}'s Hp have been set to {}", actor, actor.getHp());

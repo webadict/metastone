@@ -4,6 +4,8 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
@@ -41,14 +43,14 @@ public class Hero extends Actor {
 	}
 
 	public int getArmor() {
-		return getAttributeValue(Attribute.ARMOR);
+		return getBaseAttributeValue(Attribute.ARMOR);
 	}
 
 	@Override
-	public int getAttack() {
-		int attack = super.getAttack();
+	public int getAttack(GameContext context) {
+		int attack = super.getAttack(context);
 		if (weapon != null && weapon.isActive()) {
-			attack += weapon.getWeaponDamage();
+			attack += weapon.getWeaponDamage(context);
 		}
 		return attack;
 	}

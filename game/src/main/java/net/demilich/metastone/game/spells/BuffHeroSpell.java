@@ -36,10 +36,7 @@ public class BuffHeroSpell extends Spell {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		int armorBonus = desc.getValue(SpellArg.ARMOR_BONUS, context, player, target, source, 0);
 
-		if (attackBonus != 0) {
-			logger.debug("{} gains {} attack", hero, attackBonus);
-			hero.modifyAttribute(Attribute.TEMPORARY_ATTACK_BONUS, attackBonus);
-		}
+		// TODO: Fix hero attack.
 		if (armorBonus != 0) {
 			context.getLogic().gainArmor(player, armorBonus);
 		}

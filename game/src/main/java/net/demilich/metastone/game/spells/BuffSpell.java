@@ -2,6 +2,11 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.buff.Buff;
+import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.spells.desc.buff.BuffArg;
+import net.demilich.metastone.game.spells.desc.buff.BuffDesc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,17 +42,28 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		int hpBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		
+
 		if (value != 0) {
 			attackBonus = hpBonus = value;
 		}
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 
 		if (attackBonus != 0) {
-			target.modifyAttribute(Attribute.ATTACK_BONUS, attackBonus);
+			BuffDesc buffDesc = new BuffDesc(BuffDesc.build(Buff.class));
+			buffDesc = buffDesc.addArg(BuffArg.VALUE, attackBonus);
+			buffDesc = buffDesc.addArg(BuffArg.ATTRIBUTE, Attribute.ATTACK);
+			if (source instanceof Card) {
+				target.addBuff(new Buff(buffDesc, (Card) source));
+			} else if (source instanceof Actor) {
+				target.addBuff(new Buff(buffDesc));
+			}
 		}
 		if (hpBonus != 0) {
-			target.modifyHpBonus(hpBonus);
+			BuffDesc buffDesc = new BuffDesc(BuffDesc.build(Buff.class));
+			buffDesc = buffDesc.addArg(BuffArg.VALUE, hpBonus);
+			buffDesc = buffDesc.addArg(BuffArg.ATTRIBUTE, Attribute.MAX_HP);
+			target.modifyHpBonus(context, player, hpBonus);
+			target.addBuff(new Buff(buffDesc));
 		}
 	}
 

@@ -11,6 +11,10 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+/*
+@deprecated As of v2.0, use BuffSpell instead.
+ */
+@Deprecated
 public class ConditionalAttackBonusSpell extends Spell {
 
 	public static SpellDesc create(EntityReference target, ValueProvider valueProvider) {
@@ -27,6 +31,6 @@ public class ConditionalAttackBonusSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, attackBonus);
+		target.setAttribute(Attribute.ATTACK, attackBonus);
 	}
 }

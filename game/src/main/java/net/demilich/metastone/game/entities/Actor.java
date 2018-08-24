@@ -5,6 +5,8 @@ import java.util.EnumMap;
 import java.util.List;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
@@ -12,6 +14,7 @@ import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
+import org.w3c.dom.Attr;
 
 public abstract class Actor extends Entity {
 
@@ -35,7 +38,7 @@ public abstract class Actor extends Entity {
 		spellTriggers.add(spellTrigger);
 	}
 
-	public boolean canAttackThisTurn() {
+	public boolean canAttackThisTurn(GameContext context, Player player) {
 		if (hasAttribute(Attribute.CANNOT_ATTACK)) {
 			return false;
 		}
@@ -45,7 +48,9 @@ public abstract class Actor extends Entity {
 		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE) && !hasAttribute(Attribute.RUSH)) {
 			return false;
 		}
-		return getAttack() > 0 && ((getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0 || hasAttribute(Attribute.UNLIMITED_ATTACKS));
+		return getAttack(context) > 0 &&
+				((getBaseAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(context, Attribute.EXTRA_ATTACKS)) > 0 ||
+				hasAttribute(Attribute.UNLIMITED_ATTACKS));
 	}
 
 	public void clearSpellTriggers() {
@@ -55,7 +60,6 @@ public abstract class Actor extends Entity {
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
 		clone.clearSpellTriggers();
 		for (SpellTrigger trigger : getSpellTriggers()) {
 			clone.spellTriggers.add(trigger.clone());
@@ -77,23 +81,30 @@ public abstract class Actor extends Entity {
 				|| tag == Attribute.MEGA_WINDFURY;
 	}
 
-	public int getAttack() {
-		int attack = getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.ATTACK_BONUS)
-				+ getAttributeValue(Attribute.AURA_ATTACK_BONUS) + getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS)
-				+ getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
+	public int getAttack(GameContext context) {
+		int attack = getAttributeValue(context, Attribute.ATTACK);
 		return Math.max(0, attack);
 	}
 
 	public int getBaseAttack() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseHp() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 	public BattlecryAction getBattlecry() {
 		return (BattlecryAction) getAttribute(Attribute.BATTLECRY);
+	}
+
+	public int getCachedAttack() {
+		int attack = getCachedAttributeValue(Attribute.ATTACK);
+		return Math.max(0, attack);
+	}
+
+	public int getCachedMaxHp() {
+		return getCachedAttributeValue(Attribute.MAX_HP);
 	}
 
 	public CardCostModifier getCardCostModifier() {
@@ -106,12 +117,11 @@ public abstract class Actor extends Entity {
 	}
 
 	public int getHp() {
-		return getAttributeValue(Attribute.HP);
+		return getBaseAttributeValue(Attribute.HP);
 	}
 
-	public int getMaxHp() {
-		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS)
-				+ getAttributeValue(Attribute.AURA_HP_BONUS);
+	public int getMaxHp(GameContext context) {
+		return getAttributeValue(context, Attribute.MAX_HP);
 	}
 
 	public Race getRace() {
@@ -144,42 +154,26 @@ public abstract class Actor extends Entity {
 		return getHp() < 1 || super.isDestroyed();
 	}
 
-	public boolean isWounded() {
-		return getHp() != getMaxHp();
+	public boolean isWounded(GameContext context) {
+		return getHp() != getMaxHp(context);
 	}
 
-	public void modifyAuraHpBonus(int value) {
-		modifyAttribute(Attribute.AURA_HP_BONUS, value);
+	public void modifyHpBonus(GameContext context, Player player, int value) {
 		if (value > 0) {
 			modifyAttribute(Attribute.HP, value);
 		}
-		if (getHp() > getMaxHp()) {
-			setHp(getMaxHp());
-		}
-	}
-
-	@Override
-	public void modifyHpBonus(int value) {
-		modifyAttribute(Attribute.HP_BONUS, value);
-		if (value > 0) {
-			modifyAttribute(Attribute.HP, value);
-		}
-		if (getHp() > getMaxHp()) {
-			setHp(getMaxHp());
+		if (getHp() > getMaxHp(context)) {
+			setHp(getMaxHp(context));
 		}
 			
 	}
 
-	public void setAttack(int value) {
+	public void setBaseAttack(int value) {
 		setAttribute(Attribute.ATTACK, value);
 	}
 
-	public void setBaseAttack(int value) {
-		setAttribute(Attribute.BASE_ATTACK, value);
-	}
-
 	public void setBaseHp(int value) {
-		setAttribute(Attribute.BASE_HP, value);
+		setAttribute(Attribute.MAX_HP, value);
 	}
 
 	public void setBattlecry(BattlecryAction battlecry) {
@@ -192,10 +186,6 @@ public abstract class Actor extends Entity {
 
 	public void setHp(int value) {
 		setAttribute(Attribute.HP, value);
-	}
-
-	public void setMaxHp(int value) {
-		setAttribute(Attribute.MAX_HP, value);
 	}
 
 	@Override
@@ -213,7 +203,7 @@ public abstract class Actor extends Entity {
 	@Override
 	public String toString() {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
-		result += getAttack() + "/" + getHp();
+		result += getBaseAttack() + "/" + getHp();
 		String prefix = " ";
 		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {

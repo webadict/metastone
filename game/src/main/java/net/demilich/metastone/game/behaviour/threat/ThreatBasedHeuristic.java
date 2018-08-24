@@ -39,7 +39,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
 		for (Minion minion : opponent.getMinions()) {
-			damageOnBoard += minion.getAttack() * minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
+			damageOnBoard += minion.getCachedAttack() * minion.getBaseAttributeValue(Attribute.NUMBER_OF_ATTACKS);
 		}
 		damageOnBoard += getHeroDamage(opponent.getHero());
 
@@ -65,7 +65,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			heroDamage += 1;
 		}
 		if (hero.getWeapon() != null) {
-			heroDamage += hero.getWeapon().getWeaponDamage();
+			heroDamage += hero.getWeapon().getCachedAttack();
 		}
 		return heroDamage;
 	}
@@ -86,7 +86,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		}
 		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
 		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR)
-				* (minion.getAttack() - minion.getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS));
+				* (minion.getCachedAttack());
 		minionScore += weights.get(WeightedFeature.MINION_HP_FACTOR) * minion.getHp();
 
 		if (minion.hasAttribute(Attribute.TAUNT)) {
@@ -113,7 +113,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}
 		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
-			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
+			minionScore += minion.getCachedAttributeValue(Attribute.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
 
 		if (minion.hasAttribute(Attribute.STEALTH)) {

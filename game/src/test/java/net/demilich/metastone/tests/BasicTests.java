@@ -45,7 +45,7 @@ public class BasicTests extends TestBase {
 		context.getLogic().receiveCard(mage.getId(), devMonster);
 		context.getLogic().performGameAction(mage.getId(), devMonster.play());
 
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp(context) - 3);
 	}
 
 	@Test
@@ -69,8 +69,8 @@ public class BasicTests extends TestBase {
 		minionAttackAction.setTarget(druid.getHero());
 		context.getLogic().performGameAction(mage.getId(), minionAttackAction);
 		// monster attacked; it should not be damaged by the hero
-		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - damage);
-		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp());
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp(context) - damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp(context));
 		context.getLogic().endTurn(mage.getId());
 
 		context.getLogic().castSpell(druid.getId(), heroBuffSpell, druid.getHero().getReference(), null, false);
@@ -78,8 +78,8 @@ public class BasicTests extends TestBase {
 		heroAttackAction.setTarget(devMonster);
 		context.getLogic().performGameAction(mage.getId(), heroAttackAction);
 		// hero attacked; both entities should be damaged
-		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp() - 2 * damage);
-		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp() - damage);
+		Assert.assertEquals(druid.getHero().getHp(), druid.getHero().getMaxHp(context) - 2 * damage);
+		Assert.assertEquals(devMonster.getHp(), devMonster.getMaxHp(context) - damage);
 	}
 
 	@Test
@@ -108,8 +108,8 @@ public class BasicTests extends TestBase {
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
+		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp(context) - defender.getAttack(context));
+		Assert.assertEquals(defender.getHp(), defender.getMaxHp(context) - attacker.getAttack(context));
 		Assert.assertEquals(defender.isDestroyed(), true);
 
 		Assert.assertEquals(mage.getMinions().size(), 1);
@@ -130,7 +130,7 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(mage.getHand().isEmpty(), true);
 		Actor minion = getSingleMinion(mage.getMinions());
 		Assert.assertEquals(minion.getName(), devMonster.getName());
-		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(minion.getAttack(context), 1);
 		Assert.assertEquals(minion.getHp(), 1);
 		Assert.assertEquals(minion.isDestroyed(), false);
 
@@ -143,8 +143,8 @@ public class BasicTests extends TestBase {
 		Assert.assertEquals(mage.getMinions().size(), 2);
 		Actor left = mage.getMinions().get(0);
 		Actor right = mage.getMinions().get(1);
-		Assert.assertEquals(left.getAttack(), 2);
-		Assert.assertEquals(right.getAttack(), 1);
+		Assert.assertEquals(left.getAttack(context), 2);
+		Assert.assertEquals(right.getAttack(context), 1);
 	}
 
 	@Test

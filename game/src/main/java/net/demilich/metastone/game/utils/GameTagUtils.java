@@ -12,12 +12,7 @@ public class GameTagUtils {
 		switch (tag) {
 		case ARMOR:
 		case ATTACK:
-		case ATTACK_BONUS:
-		case TEMPORARY_ATTACK_BONUS:
-		case AURA_ATTACK_BONUS:
-		case AURA_HP_BONUS:
 		case HP:
-		case HP_BONUS:
 		case COMBO:
 		case DIED_ON_TURN:
 		case EXTRA_ATTACKS:
@@ -62,8 +57,6 @@ public class GameTagUtils {
 		case AURA_UNTARGETABLE_BY_SPELLS:
 		case WINDFURY:
 			return TagValueType.BOOLEAN;
-		case BASE_ATTACK:
-		case BASE_HP:
 		case BATTLECRY:
 		case DEATHRATTLES:
 		case DEBUG:

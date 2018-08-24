@@ -15,10 +15,9 @@
 			"targetEntityType": "MINION"
 		},
 		"spell": {
-			"class": "BuffWeaponSpell",
+			"class": "HealSpell",
 			"target": "FRIENDLY_WEAPON",
-			"attackBonus": -1,
-			"hpBonus": 1
+			"value": 1
 		}
 	},
 	"collectible": true,

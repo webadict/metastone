@@ -39,17 +39,7 @@ public class AttributeCondition extends Condition {
 
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
-		int actualValue;
-		if (attribute == Attribute.ATTACK) {
-			if (entity instanceof Actor) {
-				actualValue = ((Actor)entity).getAttack();	
-			} else {
-				actualValue = entity.getAttributeValue(attribute);
-			}
-			
-		} else {
-			actualValue = entity.getAttributeValue(attribute);
-		}
+		int actualValue = entity.getAttributeValue(context, attribute);
 
 		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);
 	}

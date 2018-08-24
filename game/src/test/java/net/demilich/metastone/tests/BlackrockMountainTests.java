@@ -28,8 +28,8 @@ public class BlackrockMountainTests extends BasicTests {
 		
 		SpellCard damageCard = new TestSpellCard(DamageSpell.create(EntityReference.ENEMY_CHARACTERS, 1));
 		playCard(context, opponent, damageCard);
-		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp() - 1);
-		Assert.assertEquals(opponent.getHero().getHp(), opponent.getHero().getMaxHp() - 4);
+		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp(context) - 1);
+		Assert.assertEquals(opponent.getHero().getHp(), opponent.getHero().getMaxHp(context) - 4);
 	}
 	
 	@Test
@@ -42,11 +42,11 @@ public class BlackrockMountainTests extends BasicTests {
 		behaviour.setTargetPreference(player.getHero().getReference());
 		
 		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_blackwing_corruptor"));
-		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp());
+		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp(context));
 		
 		context.getLogic().receiveCard(player.getId(), CardCatalogue.getCardById("minion_azure_drake"));
 		playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_blackwing_corruptor"));
-		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp() - 3);
+		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp(context) - 3);
 	}
 	
 	@Test
@@ -57,12 +57,12 @@ public class BlackrockMountainTests extends BasicTests {
 		
 		Minion blackwingTechnician = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_blackwing_technician"));
 		Assert.assertEquals(blackwingTechnician.getHp(), blackwingTechnician.getBaseHp());
-		Assert.assertEquals(blackwingTechnician.getAttack(), blackwingTechnician.getBaseAttack());
+		Assert.assertEquals(blackwingTechnician.getAttack(context), blackwingTechnician.getBaseAttack());
 		
 		context.getLogic().receiveCard(player.getId(), CardCatalogue.getCardById("minion_azure_drake"));
 		blackwingTechnician = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_blackwing_technician"));
 		Assert.assertEquals(blackwingTechnician.getHp(), blackwingTechnician.getBaseHp() + 1);
-		Assert.assertEquals(blackwingTechnician.getAttack(), blackwingTechnician.getBaseAttack() + 1);
+		Assert.assertEquals(blackwingTechnician.getAttack(context), blackwingTechnician.getBaseAttack() + 1);
 	}
 	
 	@Test
@@ -93,13 +93,13 @@ public class BlackrockMountainTests extends BasicTests {
 		player.getHand().removeAll();
 		
 		Minion coreRager = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_core_rager"));
-		Assert.assertEquals(coreRager.getAttack(), coreRager.getBaseAttack() + 3);
+		Assert.assertEquals(coreRager.getAttack(context), coreRager.getBaseAttack() + 3);
 		Assert.assertEquals(coreRager.getHp(), coreRager.getBaseHp() + 3);
 		
 		context.getLogic().drawCard(player.getId(), player.getHero());
 		
 		coreRager = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_core_rager"));
-		Assert.assertEquals(coreRager.getAttack(), coreRager.getBaseAttack());
+		Assert.assertEquals(coreRager.getAttack(context), coreRager.getBaseAttack());
 		Assert.assertEquals(coreRager.getHp(), coreRager.getBaseHp());
 	}
 	
@@ -112,26 +112,26 @@ public class BlackrockMountainTests extends BasicTests {
 		Minion testMinion1 = playMinionCard(context, player, new TestMinionCard(3, 3, 0));
 		Minion injuredBlademaster = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_injured_blademaster"));
 		Minion testMinion2 = playMinionCard(context, player, new TestMinionCard(3, 3, 0));
-		Assert.assertEquals(testMinion1.getHp(), testMinion1.getMaxHp());
-		Assert.assertEquals(injuredBlademaster.getHp(), injuredBlademaster.getMaxHp() - 4);
-		Assert.assertEquals(testMinion2.getHp(), testMinion2.getMaxHp());
+		Assert.assertEquals(testMinion1.getHp(), testMinion1.getMaxHp(context));
+		Assert.assertEquals(injuredBlademaster.getHp(), injuredBlademaster.getMaxHp(context) - 4);
+		Assert.assertEquals(testMinion2.getHp(), testMinion2.getMaxHp(context));
 		
 		context.getLogic().endTurn(player.getId());
 		
 		Minion testMinionOpponent = playMinionCard(context, opponent, new TestMinionCard(3, 3, 0));
 		Minion injuredBlademasterOpponent = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_injured_blademaster"));
-		Assert.assertEquals(testMinionOpponent.getHp(), testMinionOpponent.getMaxHp());
-		Assert.assertEquals(injuredBlademasterOpponent.getHp(), injuredBlademasterOpponent.getMaxHp() - 4);
+		Assert.assertEquals(testMinionOpponent.getHp(), testMinionOpponent.getMaxHp(context));
+		Assert.assertEquals(injuredBlademasterOpponent.getHp(), injuredBlademasterOpponent.getMaxHp(context) - 4);
 		
 		Minion darkIronSkulker = playMinionCard(context, opponent, (MinionCard) CardCatalogue.getCardById("minion_dark_iron_skulker"));
-		Assert.assertEquals(darkIronSkulker.getHp(), darkIronSkulker.getMaxHp());
+		Assert.assertEquals(darkIronSkulker.getHp(), darkIronSkulker.getMaxHp(context));
 		
-		Assert.assertEquals(testMinionOpponent.getHp(), testMinionOpponent.getMaxHp());
-		Assert.assertEquals(injuredBlademasterOpponent.getHp(), injuredBlademasterOpponent.getMaxHp() - 4);
+		Assert.assertEquals(testMinionOpponent.getHp(), testMinionOpponent.getMaxHp(context));
+		Assert.assertEquals(injuredBlademasterOpponent.getHp(), injuredBlademasterOpponent.getMaxHp(context) - 4);
 		
-		Assert.assertEquals(testMinion1.getHp(), testMinion1.getMaxHp() - 2);
-		Assert.assertEquals(injuredBlademaster.getHp(), injuredBlademaster.getMaxHp() - 4);
-		Assert.assertEquals(testMinion2.getHp(), testMinion2.getMaxHp() - 2);
+		Assert.assertEquals(testMinion1.getHp(), testMinion1.getMaxHp(context) - 2);
+		Assert.assertEquals(injuredBlademaster.getHp(), injuredBlademaster.getMaxHp(context) - 4);
+		Assert.assertEquals(testMinion2.getHp(), testMinion2.getMaxHp(context) - 2);
 	}
 	
 	@Test
@@ -174,11 +174,11 @@ public class BlackrockMountainTests extends BasicTests {
 		
 		Minion dragonkin1 = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragonkin_sorcerer"));
 		Minion dragonkin2 = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_dragonkin_sorcerer"));
-		Assert.assertEquals(dragonkin1.getAttack(), dragonkin2.getAttack());
+		Assert.assertEquals(dragonkin1.getAttack(context), dragonkin2.getAttack(context));
 		Assert.assertEquals(dragonkin1.getHp(), dragonkin2.getHp());
 		
 		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_gang_up"), dragonkin1);
-		Assert.assertEquals(dragonkin1.getAttack(), dragonkin2.getAttack() + ATTACK_BONUS);
+		Assert.assertEquals(dragonkin1.getAttack(context), dragonkin2.getAttack(context) + ATTACK_BONUS);
 		Assert.assertEquals(dragonkin1.getHp(), dragonkin2.getHp() + HP_BONUS);
 	}
 	
@@ -192,13 +192,13 @@ public class BlackrockMountainTests extends BasicTests {
 		final int HP_BONUS = 3;
 		
 		Minion drakonid = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_drakonid_crusher"));
-		Assert.assertEquals(drakonid.getAttack(), drakonid.getBaseAttack());
+		Assert.assertEquals(drakonid.getAttack(context), drakonid.getBaseAttack());
 		Assert.assertEquals(drakonid.getHp(), drakonid.getBaseHp());
 		
 		opponent.getHero().setHp(15);
 		
 		drakonid = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_drakonid_crusher"));
-		Assert.assertEquals(drakonid.getAttack(), drakonid.getBaseAttack() + ATTACK_BONUS);
+		Assert.assertEquals(drakonid.getAttack(context), drakonid.getBaseAttack() + ATTACK_BONUS);
 		Assert.assertEquals(drakonid.getHp(), drakonid.getBaseHp() + HP_BONUS);
 	}
 }

@@ -32,7 +32,7 @@ public class ActionLogic {
 	private List<GameAction> getHeroAttackActions(GameContext context, Player player) {
 		List<GameAction> heroAttackActions = new ArrayList<GameAction>();
 		Hero hero = player.getHero();
-		if (!hero.canAttackThisTurn()) {
+		if (!hero.canAttackThisTurn(context, player)) {
 			return heroAttackActions;
 		}
 		rollout(new PhysicalAttackAction(hero.getReference()), context, player, heroAttackActions);
@@ -66,7 +66,7 @@ public class ActionLogic {
 		physicalAttackActions.addAll(getHeroAttackActions(context, player));
 
 		for (Minion minion : player.getMinions()) {
-			if (!minion.canAttackThisTurn()) {
+			if (!minion.canAttackThisTurn(context, player)) {
 				continue;
 			}
 

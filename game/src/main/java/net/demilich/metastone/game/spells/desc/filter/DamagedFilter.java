@@ -14,7 +14,7 @@ public class DamagedFilter extends EntityFilter {
 	@Override
 	protected boolean test(GameContext context, Player player, Entity entity) {
 		if (entity instanceof Actor) {
-			return ((Actor) entity).isWounded();
+			return ((Actor) entity).isWounded(context);
 		}
 		return false;
 	}

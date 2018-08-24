@@ -15,7 +15,7 @@
 		"spell": {
 			"class": "ModifyAttributeSpell",
 			"target": "SELF",
-			"attribute": "ATTACK_BONUS",
+			"attribute": "ATTACK",
 			"value": 1
 		}
 	},

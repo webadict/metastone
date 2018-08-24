@@ -27,12 +27,12 @@ public class AttributeFilter extends EntityFilter {
 		int actualValue = -1;
 		if (attribute == Attribute.ATTACK) {
 			if (entity instanceof Weapon) {
-				actualValue = ((Weapon) entity).getWeaponDamage();
+				actualValue = ((Weapon) entity).getWeaponDamage(context);
 			} else {
-				actualValue = ((Actor) entity).getAttack();
+				actualValue = ((Actor) entity).getAttack(context);
 			}
 		} else {
-			actualValue = entity.getAttributeValue(attribute);
+			actualValue = entity.getAttributeValue(context, attribute);
 		}
 
 		return SpellUtils.evaluateOperation(operation, actualValue, targetValue);

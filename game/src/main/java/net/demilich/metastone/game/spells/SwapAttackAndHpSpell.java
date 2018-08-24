@@ -26,13 +26,10 @@ public class SwapAttackAndHpSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		Minion minion = (Minion) target;
-		int attack = minion.getAttack();
+		int attack = minion.getAttack(context);
 		int hp = minion.getHp();
-		minion.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-		minion.removeAttribute(Attribute.ATTACK_BONUS);
-		minion.removeAttribute(Attribute.HP_BONUS);
-		minion.setAttack(hp);
-		context.getLogic().modifyMaxHp(minion, attack);
+		minion.setAttribute(Attribute.ATTACK, hp);
+		context.getLogic().modifyMaxHp(player, minion, attack);
 	}
 
 }

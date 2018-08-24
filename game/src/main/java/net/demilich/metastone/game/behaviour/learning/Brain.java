@@ -67,13 +67,13 @@ public class Brain implements IBrain {
 		int totalMinionHp = 0;
 		for (int i = 0; i < 7; i++) {
 			Minion minion = i < minions.size() ? player.getMinions().get(i) : null;
-			totalMinionAttack += minion != null ? minion.getAttack() : 0;
+			totalMinionAttack += minion != null ? minion.getCachedAttack() : 0;
 			totalMinionHp += minion != null ? minion.getHp() : 0;
 		}
 		data[offset++] = minions.size() / 7.0;
 		data[offset++] = MathUtils.clamp01(totalMinionAttack / 40.0);
 		data[offset++] = MathUtils.clamp01(totalMinionHp / 40.0);
-		data[offset++] = MathUtils.clamp01(player.getHero().getAttack() / 10.0);
+		data[offset++] = MathUtils.clamp01(player.getHero().getCachedAttack() / 10.0);
 		data[offset++] = MathUtils.clamp01((player.getHero().getHp() + player.getHero().getArmor()) / 40.0);
 		data[offset++] = player.getHand().getCount() / 10.0;
 		data[offset++] = MathUtils.clamp01(player.getDeck().getCount() / 30.0);

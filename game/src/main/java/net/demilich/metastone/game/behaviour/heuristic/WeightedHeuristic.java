@@ -8,7 +8,7 @@ import net.demilich.metastone.game.entities.minions.Minion;
 public class WeightedHeuristic implements IGameStateHeuristic {
 
 	private float calculateMinionScore(Minion minion) {
-		float minionScore = minion.getAttack() + minion.getHp();
+		float minionScore = minion.getCachedAttack() + minion.getHp();
 		float baseScore = minionScore;
 		if (minion.hasAttribute(Attribute.FROZEN)) {
 			return minion.getHp();
@@ -17,13 +17,13 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 			minionScore += 2;
 		}
 		if (minion.hasAttribute(Attribute.WINDFURY)) {
-			minionScore += minion.getAttack() * 0.5f;
+			minionScore += minion.getCachedAttack() * 0.5f;
 		}
 		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
 			minionScore += 1.5f * baseScore;
 		}
 		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
-			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE);
+			minionScore += minion.getCachedAttributeValue(Attribute.SPELL_DAMAGE);
 		}
 		if (minion.hasAttribute(Attribute.ENRAGED)) {
 			minionScore += 1;

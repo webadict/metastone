@@ -20,21 +20,21 @@ public class HighestAttributeFilter extends EntityFilter {
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		EntityReference targetReference = (EntityReference) desc.get(FilterArg.TARGET);
 		List<Entity> entities = context.resolveTarget(player, entity, targetReference);
-		int highest = getHighestInList(entities, attribute);
-		return getAttributeValue(entity, attribute) >= highest;
+		int highest = getHighestInList(context, entities, attribute);
+		return getAttributeValue(context, entity, attribute) >= highest;
 	}
 
-	private static int getAttributeValue(Entity entity, Attribute attribute) {
+	private static int getAttributeValue(GameContext context, Entity entity, Attribute attribute) {
 		if (attribute == Attribute.ATTACK) {
-			return ((Actor) entity).getAttack();
+			return ((Actor) entity).getAttack(context);
 		}
-		return entity.getAttributeValue(attribute);
+		return entity.getAttributeValue(context, attribute);
 	}
 
-	private static int getHighestInList(List<Entity> entities, Attribute attribute) {
+	private static int getHighestInList(GameContext context, List<Entity> entities, Attribute attribute) {
 		int highest = Integer.MIN_VALUE;
 		for (Entity entity : entities) {
-			int attributeValue = getAttributeValue(entity, attribute);
+			int attributeValue = getAttributeValue(context, entity, attribute);
 			if (attributeValue > highest) {
 				highest = attributeValue;
 			}
