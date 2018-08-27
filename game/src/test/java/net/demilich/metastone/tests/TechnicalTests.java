@@ -66,7 +66,7 @@ public class TechnicalTests extends TestBase {
 		Assert.assertEquals(copyOfMinionList.size(), 3);
 		// three pyromancers summoned, all should be at max HP
 		for (Minion minion : copyOfMinionList) {
-			Assert.assertEquals(minion.getHp(), minion.getMaxHp());
+			Assert.assertEquals(minion.getHp(), context.getLogic().getEntityMaxHp(minion));
 		}
 
 		playCard(context, player1, new TestSpellCard(DamageSpell.create(EntityReference.ENEMY_HERO, 1)));

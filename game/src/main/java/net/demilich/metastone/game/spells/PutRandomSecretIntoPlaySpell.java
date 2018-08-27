@@ -16,7 +16,7 @@ public class PutRandomSecretIntoPlaySpell extends Spell {
 	private CardCollection findSecretCards(CardCollection cardCollection) {
 		CardCollection secretCards = new CardCollection();
 		for (Card card : cardCollection) {
-			if (card.hasAttribute(Attribute.SECRET)) {
+			if (card.hasBaseAttribute(Attribute.SECRET)) {
 				secretCards.add(card);
 			}
 		}

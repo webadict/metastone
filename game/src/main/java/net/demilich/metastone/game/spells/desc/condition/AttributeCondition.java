@@ -5,7 +5,6 @@ import java.util.List;
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.SpellUtils;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
@@ -34,19 +33,14 @@ public class AttributeCondition extends Condition {
 		Attribute attribute = (Attribute) desc.get(ConditionArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(ConditionArg.OPERATION);
 		if (operation == null || operation == Operation.HAS) {
-			return entity.hasAttribute(attribute);
+			return context.getLogic().hasEntityAttribute(entity, attribute);
 		}
 
 		int targetValue = desc.getInt(ConditionArg.VALUE);
 
 		int actualValue;
 		if (attribute == Attribute.ATTACK) {
-			if (entity instanceof Actor) {
-				actualValue = ((Actor)entity).getAttack();	
-			} else {
-				actualValue = entity.getAttributeValue(attribute);
-			}
-			
+			actualValue = context.getLogic().getEntityAttack(entity);
 		} else {
 			actualValue = entity.getAttributeValue(attribute);
 		}

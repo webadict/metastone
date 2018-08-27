@@ -15,17 +15,15 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
 public class WeaponCard extends Card {
 
-	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
-					Attribute.BASE_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
+	private static final Set<Attribute> ignoredAttributes = new HashSet<>(
+			Arrays.asList(Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.ATTACK,
+					Attribute.MAX_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO));
 	
 	private final WeaponCardDesc desc;
 
 	public WeaponCard(WeaponCardDesc desc) {
 		super(desc);
-		setAttribute(Attribute.BASE_ATTACK, desc.damage);
 		setAttribute(Attribute.ATTACK, desc.damage);
-		setAttribute(Attribute.BASE_HP, desc.durability);
 		setAttribute(Attribute.HP, desc.durability);
 		setAttribute(Attribute.MAX_HP, desc.durability);
 		this.desc = desc;
@@ -100,11 +98,11 @@ public class WeaponCard extends Card {
 	}
 
 	public int getBaseDamage() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseDurability() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 }

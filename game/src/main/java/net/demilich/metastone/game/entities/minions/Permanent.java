@@ -21,10 +21,5 @@ public class Permanent extends Summon {
 	public EntityType getEntityType() {
 		return EntityType.PERMANENT;
 	}
-
-	@Override
-	public boolean isDestroyed() {
-		return hasAttribute(Attribute.DESTROYED);
-	}
 	
 }

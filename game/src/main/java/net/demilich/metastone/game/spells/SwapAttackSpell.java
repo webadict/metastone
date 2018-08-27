@@ -26,8 +26,8 @@ public class SwapAttackSpell extends Spell {
 		}
 		Minion sourceMinion = (Minion) context.resolveSingleTarget(context.getSummonReferenceStack().peek());
 		Actor targetActor = (Actor) target;
-		int sourceAttack = sourceMinion.getAttack();
-		int targetAttack = targetActor.getAttack();
+		int sourceAttack = context.getLogic().getEntityAttack(sourceMinion);
+		int targetAttack = context.getLogic().getEntityAttack(targetActor);
 		source.setAttribute(Attribute.ATTACK, targetAttack);
 		sourceMinion.setAttribute(Attribute.ATTACK_BONUS, 0);
 		sourceMinion.setAttribute(Attribute.TEMPORARY_ATTACK_BONUS, 0);

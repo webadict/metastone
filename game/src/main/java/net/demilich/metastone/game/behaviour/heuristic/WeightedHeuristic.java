@@ -7,31 +7,31 @@ import net.demilich.metastone.game.entities.minions.Minion;
 
 public class WeightedHeuristic implements IGameStateHeuristic {
 
-	private float calculateMinionScore(Minion minion) {
-		float minionScore = minion.getAttack() + minion.getHp();
+	private float calculateMinionScore(GameContext context, Minion minion) {
+		float minionScore = context.getLogic().getEntityAttack(minion) + minion.getHp();
 		float baseScore = minionScore;
-		if (minion.hasAttribute(Attribute.FROZEN)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.FROZEN)) {
 			return minion.getHp();
 		}
-		if (minion.hasAttribute(Attribute.TAUNT)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.TAUNT)) {
 			minionScore += 2;
 		}
-		if (minion.hasAttribute(Attribute.WINDFURY)) {
-			minionScore += minion.getAttack() * 0.5f;
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.WINDFURY)) {
+			minionScore += context.getLogic().getEntityAttack(minion) * 0.5f;
 		}
-		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.DIVINE_SHIELD)) {
 			minionScore += 1.5f * baseScore;
 		}
-		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.SPELL_DAMAGE)) {
 			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE);
 		}
-		if (minion.hasAttribute(Attribute.ENRAGED)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.ENRAGED)) {
 			minionScore += 1;
 		}
-		if (minion.hasAttribute(Attribute.STEALTH)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH)) {
 			minionScore += 1;
 		}
-		if (minion.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += 1.5f * baseScore;
 		}
 
@@ -49,8 +49,8 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		if (opponent.getHero().isDestroyed()) {
 			return Float.POSITIVE_INFINITY;
 		}
-		int ownHp = player.getHero().getHp() + player.getHero().getArmor();
-		int opponentHp = opponent.getHero().getHp() + opponent.getHero().getArmor();
+		int ownHp = player.getHero().getEffectiveHp();
+		int opponentHp = opponent.getHero().getEffectiveHp();
 		score += ownHp - opponentHp;
 
 		score += player.getHand().getCount() * 3;
@@ -58,10 +58,10 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		score += player.getMinions().size() * 2;
 		score -= opponent.getMinions().size() * 2;
 		for (Minion minion : player.getMinions()) {
-			score += calculateMinionScore(minion);
+			score += calculateMinionScore(context, minion);
 		}
 		for (Minion minion : opponent.getMinions()) {
-			score -= calculateMinionScore(minion);
+			score -= calculateMinionScore(context, minion);
 		}
 
 		return score;

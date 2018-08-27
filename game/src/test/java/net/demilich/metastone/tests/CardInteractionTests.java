@@ -33,44 +33,44 @@ public class CardInteractionTests extends TestBase {
 		// summon Ghaz'rilla
 		MinionCard gahzrillaCard = (MinionCard) CardCatalogue.getCardById("minion_gahzrilla");
 		Minion gahzrilla = playMinionCard(context, hunter, gahzrillaCard);
-		Assert.assertEquals(gahzrilla.getAttack(), 6);
+		Assert.assertEquals(context.getLogic().getEntityAttack(gahzrilla), 6);
 		Assert.assertEquals(gahzrilla.getHp(), 9);
 
-		// buff it with 'Abusive Sergeant' spell
+		// enchantment it with 'Abusive Sergeant' spell
 		// This temporary Attack boost should be doubled and removed after the turn
 		Card abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
 		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
 		GameAction action = abusiveSergeant.play();
 		action.setTarget(gahzrilla);
 		context.getLogic().performGameAction(hunter.getId(), action);
-		Assert.assertEquals(gahzrilla.getAttack(), 8);
+		Assert.assertEquals(context.getLogic().getEntityAttack(gahzrilla), 8);
 		Assert.assertEquals(gahzrilla.getHp(), 9);
 
 		context.getLogic().destroy((Actor) find(context, "minion_abusive_sergeant"));
 
-		// buff it with 'Cruel Taskmaster' spell
+		// enchantment it with 'Cruel Taskmaster' spell
 		Card cruelTaskmasterCard = CardCatalogue.getCardById("minion_cruel_taskmaster");
 		context.getLogic().receiveCard(hunter.getId(), cruelTaskmasterCard);
 		action = cruelTaskmasterCard.play();
 		action.setTarget(gahzrilla);
 		context.getLogic().performGameAction(hunter.getId(), action);
-		Assert.assertEquals(gahzrilla.getAttack(), 20);
+		Assert.assertEquals(context.getLogic().getEntityAttack(gahzrilla), 20);
 		Assert.assertEquals(gahzrilla.getHp(), 8);
 
 		context.getLogic().destroy((Actor) find(context, "minion_cruel_taskmaster"));
 
-		// buff it again with 'Abusive Sergeant' spell
+		// enchantment it again with 'Abusive Sergeant' spell
 		abusiveSergeant = CardCatalogue.getCardById("minion_abusive_sergeant");
 		context.getLogic().receiveCard(hunter.getId(), abusiveSergeant);
 		action = abusiveSergeant.play();
 		action.setTarget(gahzrilla);
 		context.getLogic().performGameAction(hunter.getId(), action);
-		Assert.assertEquals(gahzrilla.getAttack(), 22);
+		Assert.assertEquals(context.getLogic().getEntityAttack(gahzrilla), 22);
 		Assert.assertEquals(gahzrilla.getHp(), 8);
 
 		context.endTurn();
 		context.endTurn();
-		Assert.assertEquals(gahzrilla.getAttack(), 16);
+		Assert.assertEquals(context.getLogic().getEntityAttack(gahzrilla), 16);
 		Assert.assertEquals(gahzrilla.getHp(), 8);
 	}
 
@@ -82,11 +82,11 @@ public class CardInteractionTests extends TestBase {
 		Minion knifeJuggler = playMinionCard(context, player, (MinionCard) CardCatalogue.getCardById("minion_knife_juggler"));
 		playCard(context, player, CardCatalogue.getCardById("spell_conceal"));
 		// knife juggler should be stealthed
-		Assert.assertTrue(knifeJuggler.hasAttribute(Attribute.STEALTH));
+		Assert.assertTrue(context.getLogic().hasEntityAttribute(knifeJuggler, Attribute.STEALTH));
 		// knife juggler should be unstealthed as soon as another minion is
 		// played and his trigger fires
 		playCard(context, player, new TestMinionCard(1, 1));
-		Assert.assertFalse(knifeJuggler.hasAttribute(Attribute.STEALTH));
+		Assert.assertFalse(context.getLogic().hasEntityAttribute(knifeJuggler, Attribute.STEALTH));
 	}
 
 	@Test
@@ -107,19 +107,19 @@ public class CardInteractionTests extends TestBase {
 
 		Actor minion = getSingleMinion(player.getMinions());
 
-		// buff test minion
+		// enchantment test minion
 		SpellCard buffSpellCard = (SpellCard) CardCatalogue.getCardById("spell_bananas");
 		context.getLogic().receiveCard(player.getId(), buffSpellCard);
 		GameAction action = buffSpellCard.play();
 		action.setTarget(minion);
 		context.getLogic().performGameAction(player.getId(), action);
 
-		Assert.assertEquals(minion.getAttack(), 7);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 7);
 		Assert.assertEquals(minion.getHp(), 7);
 
 		// attack target to get test minion wounded
 		attack(context, player, minion, getSingleMinion(opponent.getMinions()));
-		Assert.assertEquals(minion.getAttack(), 7);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 7);
 		Assert.assertEquals(minion.getHp(), 3);
 
 		// swap hp and attack of wounded test minion
@@ -127,7 +127,7 @@ public class CardInteractionTests extends TestBase {
 		SpellCard swapSpellCard = new TestSpellCard(swapHpAttackSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, swapSpellCard);
-		Assert.assertEquals(minion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 3);
 		Assert.assertEquals(minion.getHp(), 7);
 
 		// silence minion and check if it regains original stats
@@ -135,7 +135,7 @@ public class CardInteractionTests extends TestBase {
 		SpellCard silenceSpellCard = new TestSpellCard(silenceSpell);
 		silenceSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, silenceSpellCard);
-		Assert.assertEquals(minion.getAttack(), 6);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 6);
 		Assert.assertEquals(minion.getHp(), 6);
 	}
 
@@ -149,14 +149,14 @@ public class CardInteractionTests extends TestBase {
 		TestMinionCard minionCard = new TestMinionCard(1, 3, 0);
 		playCard(context, player, minionCard);
 
-		// buff test minion with temporary buff
+		// enchantment test minion with temporary enchantment
 		SpellDesc buffSpell = TemporaryAttackSpell.create(EntityReference.FRIENDLY_MINIONS, +4);
 		SpellCard buffSpellCard = new TestSpellCard(buffSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, buffSpellCard);
 
 		Actor minion = getSingleMinion(player.getMinions());
-		Assert.assertEquals(minion.getAttack(), 5);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 5);
 		Assert.assertEquals(minion.getHp(), 3);
 
 		// swap hp and attack of wounded test minion
@@ -164,13 +164,13 @@ public class CardInteractionTests extends TestBase {
 		SpellCard swapSpellCard = new TestSpellCard(swapHpAttackSpell);
 		buffSpellCard.setTargetRequirement(TargetSelection.NONE);
 		playCard(context, player, swapSpellCard);
-		Assert.assertEquals(minion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 3);
 		Assert.assertEquals(minion.getHp(), 5);
 
-		// end turn; temporary buff wears off, but stats should still be the
+		// end turn; temporary enchantment wears off, but stats should still be the
 		// same
 		context.endTurn();
-		Assert.assertEquals(minion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 3);
 		Assert.assertEquals(minion.getHp(), 5);
 	}
 
@@ -184,7 +184,7 @@ public class CardInteractionTests extends TestBase {
 		playCard(context, warrior, new TestMinionCard(2, 1, 0));
 
 		Minion bloodsailRaider = playMinionCard(context, warrior, (MinionCard) CardCatalogue.getCardById("minion_bloodsail_raider"));
-		Assert.assertEquals(bloodsailRaider.getAttack(), 7);
+		Assert.assertEquals(context.getLogic().getEntityAttack(bloodsailRaider), 7);
 	}
 
 	@Test
@@ -360,11 +360,11 @@ public class CardInteractionTests extends TestBase {
 		for (int i = 0; i < opponent.getMinions().size(); i++) {
 			Minion minion = opponent.getMinions().get(i);
 			if (i == HARVEST_GOLEM) {
-				Assert.assertEquals(minion.getAttack(), 2);
+				Assert.assertEquals(context.getLogic().getEntityAttack(minion), 2);
 				Assert.assertEquals(minion.getHp(), 1);
 				Assert.assertEquals(minion.getRace(), Race.MECH);
 			} else {
-				Assert.assertEquals(minion.getAttack(), 1);
+				Assert.assertEquals(context.getLogic().getEntityAttack(minion), 1);
 				Assert.assertEquals(minion.getHp(), 1);
 			}
 		}
@@ -385,9 +385,9 @@ public class CardInteractionTests extends TestBase {
 		
 		playCardWithTarget(context, player, CardCatalogue.getCardById("spell_cone_of_cold"), impGangBoss);
 		Assert.assertEquals(opponent.getMinions().size(), 4);
-		Assert.assertTrue(firstYeti.hasAttribute(Attribute.FROZEN));
-		Assert.assertTrue(impGangBoss.hasAttribute(Attribute.FROZEN));
-		Assert.assertFalse(secondYeti.hasAttribute(Attribute.FROZEN));
+		Assert.assertTrue(context.getLogic().hasEntityAttribute(firstYeti, Attribute.FROZEN));
+		Assert.assertTrue(context.getLogic().hasEntityAttribute(impGangBoss, Attribute.FROZEN));
+		Assert.assertFalse(context.getLogic().hasEntityAttribute(secondYeti, Attribute.FROZEN));
 	}
 	
 	@Test

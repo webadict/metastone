@@ -19,18 +19,14 @@ public class AttributeFilter extends EntityFilter {
 		Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 		Operation operation = (Operation) desc.get(FilterArg.OPERATION);
 		if (operation == Operation.HAS) {
-			return entity.hasAttribute(attribute);
+			return context.getLogic().hasEntityAttribute(entity, attribute);
 		}
 
 		int targetValue = desc.getInt(FilterArg.VALUE);
 		
 		int actualValue = -1;
 		if (attribute == Attribute.ATTACK) {
-			if (entity instanceof Weapon) {
-				actualValue = ((Weapon) entity).getWeaponDamage();
-			} else {
-				actualValue = ((Actor) entity).getAttack();
-			}
+			context.getLogic().getEntityAttack(entity);
 		} else {
 			actualValue = entity.getAttributeValue(attribute);
 		}

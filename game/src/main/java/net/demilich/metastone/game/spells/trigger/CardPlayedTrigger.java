@@ -25,7 +25,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		}
 		
 		Race race = (Race) desc.get(EventTriggerArg.RACE);
-		if (race != null && cardPlayedEvent.getCard().getAttribute(Attribute.RACE) != race) {
+		if (race != null && cardPlayedEvent.getCard().getRace() != race) {
 			return false;
 		}
 		

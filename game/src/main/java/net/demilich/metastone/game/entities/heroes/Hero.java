@@ -44,15 +44,6 @@ public class Hero extends Actor {
 		return getAttributeValue(Attribute.ARMOR);
 	}
 
-	@Override
-	public int getAttack() {
-		int attack = super.getAttack();
-		if (weapon != null && weapon.isActive()) {
-			attack += weapon.getWeaponDamage();
-		}
-		return attack;
-	}
-
 	public Map<Attribute, Object> getAttributesCopy() {
 		Map<Attribute, Object> copy = new EnumMap<>(Attribute.class);
 		for (Attribute attribute : attributes.keySet()) {

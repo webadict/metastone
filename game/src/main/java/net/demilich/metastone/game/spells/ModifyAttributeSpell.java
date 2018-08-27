@@ -7,6 +7,10 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
+/**
+ * @deprecated As of v2.0, use AddAttributeSpell
+ */
+@Deprecated
 public class ModifyAttributeSpell extends Spell {
 
 	@Override

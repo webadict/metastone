@@ -238,7 +238,7 @@ public class SpellUtils {
 
 	public static boolean holdsMinionOfRace(Player player, Race race) {
 		for (Card card : player.getHand()) {
-			if (card.getAttribute(Attribute.RACE) == race) {
+			if (card.getRace() == race) {
 				return true;
 			}
 		}

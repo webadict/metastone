@@ -1,5 +1,6 @@
 package net.demilich.metastone.gui.playmode;
 
+import net.demilich.metastone.game.GameContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,39 +52,39 @@ public class SummonToken extends GameToken {
 		frozen.getStrokeDashArray().add(16.0);
 	}
 
-	public void setSummon(Summon summon) {
+	public void setSummon(GameContext context, Summon summon) {
 		name.setText(summon.getName());
 		if (summon instanceof Minion) {
 			attackAnchor.setVisible(true);
 			hpAnchor.setVisible(true);
-			setScoreValue(attackAnchor, summon.getAttack(), summon.getAttributeValue(Attribute.BASE_ATTACK));
-			setScoreValue(hpAnchor, summon.getHp(), summon.getBaseHp(), summon.getMaxHp());
+			setScoreValue(attackAnchor, context.getLogic().getEntityAttack(summon), summon.getBaseAttributeValue(Attribute.ATTACK));
+			setScoreValue(hpAnchor, summon.getHp(), summon.getBaseHp(), context.getLogic().getEntityMaxHp(summon));
 		} else if (summon instanceof Permanent) {
 			attackAnchor.setVisible(false);
 			hpAnchor.setVisible(false);
 		}
-		visualizeStatus(summon);
+		visualizeStatus(context, summon);
 		cardTooltip.setCard(summon.getSourceCard());
 	}
 
-	private void visualizeStatus(Summon summon) {
-		taunt.setVisible(summon.hasAttribute(Attribute.TAUNT));
-		defaultToken.setVisible(!summon.hasAttribute(Attribute.TAUNT));
-		divineShield.setVisible(summon.hasAttribute(Attribute.DIVINE_SHIELD));
-		windfury.setVisible(summon.hasAttribute(Attribute.WINDFURY) || summon.hasAttribute(Attribute.MEGA_WINDFURY));
-		if(summon.hasAttribute(Attribute.MEGA_WINDFURY)) {
+	private void visualizeStatus(GameContext context, Summon summon) {
+		taunt.setVisible(context.getLogic().hasEntityAttribute(summon, Attribute.TAUNT));
+		defaultToken.setVisible(!context.getLogic().hasEntityAttribute(summon, Attribute.TAUNT));
+		divineShield.setVisible(context.getLogic().hasEntityAttribute(summon, Attribute.DIVINE_SHIELD));
+		windfury.setVisible(context.getLogic().hasEntityAttribute(summon, Attribute.WINDFURY) || context.getLogic().hasEntityAttribute(summon, Attribute.MEGA_WINDFURY));
+		if (context.getLogic().hasEntityAttribute(summon, Attribute.MEGA_WINDFURY)) {
 			windfury.setText("x4");
 		} else {
 			windfury.setText("x2");
 		}
-		deathrattle.setVisible(summon.hasAttribute(Attribute.DEATHRATTLES));
-		frozen.setVisible(summon.hasAttribute(Attribute.FROZEN));
-		visualizeStealth(summon);
+		deathrattle.setVisible(context.getLogic().hasEntityAttribute(summon, Attribute.DEATHRATTLES));
+		frozen.setVisible(context.getLogic().hasEntityAttribute(summon, Attribute.FROZEN));
+		visualizeStealth(context, summon);
 	}
 
-	private void visualizeStealth(Summon summon) {
-		Node token = summon.hasAttribute(Attribute.TAUNT) ? taunt : defaultToken;
-		token.setOpacity(summon.hasAttribute(Attribute.STEALTH) ? 0.5 : 1);
+	private void visualizeStealth(GameContext context, Summon summon) {
+		Node token = context.getLogic().hasEntityAttribute(summon, Attribute.TAUNT) ? taunt : defaultToken;
+		token.setOpacity(context.getLogic().hasEntityAttribute(summon, Attribute.STEALTH) ? 0.5 : 1);
 	}
 
 }

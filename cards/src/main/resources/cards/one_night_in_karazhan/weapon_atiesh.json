@@ -32,8 +32,8 @@
 					}
 				},
 				{
-					"class": "BuffWeaponSpell",
-					"target": "FRIENDLY_WEAPON",
+					"class": "ModifyDurabilitySpell",
+					"targetPlayer": "SELF",
 					"hpBonus": -1
 				}
 			]

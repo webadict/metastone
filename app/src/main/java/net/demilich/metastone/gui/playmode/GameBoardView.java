@@ -226,11 +226,11 @@ public class GameBoardView extends BorderPane {
 
 	public void updateGameState(GameContext context) {
 		entityTokenMap.clear();
-		p1Hero.setHero(context.getPlayer1());
+		p1Hero.setHero(context, context.getPlayer1());
 		p1Hero.updateHeroPowerCost(context, context.getPlayer1());
 		p1Hero.highlight(context.getActivePlayer() == context.getPlayer1());
 		entityTokenMap.put(context.getPlayer1().getHero(), p1Hero);
-		p2Hero.setHero(context.getPlayer2());
+		p2Hero.setHero(context, context.getPlayer2());
 		p2Hero.updateHeroPowerCost(context, context.getPlayer2());
 		p2Hero.highlight(context.getActivePlayer() == context.getPlayer2());
 		entityTokenMap.put(context.getPlayer2().getHero(), p2Hero);
@@ -238,8 +238,8 @@ public class GameBoardView extends BorderPane {
 		updateHandCards(context, context.getPlayer1(), p1Cards);
 		updateHandCards(context, context.getPlayer2(), p2Cards);
 
-		updateSummonTokens(context.getPlayer1(), p1Minions);
-		updateSummonTokens(context.getPlayer2(), p2Minions);
+		updateSummonTokens(context, context.getPlayer1(), p1Minions);
+		updateSummonTokens(context, context.getPlayer2(), p2Minions);
 
 		checkForWinner(context);
 	}
@@ -259,12 +259,12 @@ public class GameBoardView extends BorderPane {
 		}
 	}
 
-	private void updateSummonTokens(Player player, SummonToken[] summonTokens) {
+	private void updateSummonTokens(GameContext context, Player player, SummonToken[] summonTokens) {
 		List<Summon> summons = player.getSummons();
 		for (int i = 0; i < summonTokens.length; i++) {
 			if (i < summons.size()) {
 				Summon summon = summons.get(i);
-				summonTokens[i].setSummon(summon);
+				summonTokens[i].setSummon(context, summon);
 				summonTokens[i].setManaged(true);
 				summonTokens[i].setVisible(true);
 				entityTokenMap.put(summon, summonTokens[i]);

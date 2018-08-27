@@ -39,7 +39,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
 		for (Minion minion : opponent.getMinions()) {
-			damageOnBoard += minion.getAttack() * minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
+			damageOnBoard += context.getLogic().getEntityAttack(minion) * minion.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
 		}
 		damageOnBoard += getHeroDamage(opponent.getHero());
 
@@ -80,16 +80,16 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		this.weights = vector;
 	}
 
-	private double calculateMinionScore(Minion minion, ThreatLevel threatLevel) {
-		if (minion.hasAttribute(Attribute.MARKED_FOR_DEATH)) {
+	private double calculateMinionScore(GameContext context, Minion minion, ThreatLevel threatLevel) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.MARKED_FOR_DEATH)) {
 			return 0;
 		}
 		double minionScore = weights.get(WeightedFeature.MINION_INTRINSIC_VALUE);
 		minionScore += weights.get(WeightedFeature.MINION_ATTACK_FACTOR)
-				* (minion.getAttack() - minion.getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS));
+				* (context.getLogic().getEntityAttack(minion) - minion.getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS));
 		minionScore += weights.get(WeightedFeature.MINION_HP_FACTOR) * minion.getHp();
 
-		if (minion.hasAttribute(Attribute.TAUNT)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.TAUNT)) {
 			switch (threatLevel) {
 			case RED:
 				minionScore += weights.get(WeightedFeature.MINION_RED_TAUNT_MODIFIER);
@@ -103,23 +103,23 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			}
 		}
 
-		if (minion.hasAttribute(Attribute.WINDFURY)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.WINDFURY)) {
 			minionScore += weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
-		} else if (minion.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (context.getLogic().hasEntityAttribute(minion, Attribute.MEGA_WINDFURY)) {
 			minionScore += 2 * weights.get(WeightedFeature.MINION_WINDFURY_MODIFIER);
 		}
 
-		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.DIVINE_SHIELD)) {
 			minionScore += weights.get(WeightedFeature.MINION_DIVINE_SHIELD_MODIFIER);
 		}
-		if (minion.hasAttribute(Attribute.SPELL_DAMAGE)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.SPELL_DAMAGE)) {
 			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
 
-		if (minion.hasAttribute(Attribute.STEALTH)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH)) {
 			minionScore += weights.get(WeightedFeature.MINION_STEALTHED_MODIFIER);
 		}
-		if (minion.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.UNTARGETABLE_BY_SPELLS)) {
 			minionScore += weights.get(WeightedFeature.MINION_UNTARGETABLE_BY_SPELLS_MODIFIER);
 		}
 
@@ -161,11 +161,11 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 		score += opponent.getHand().getCount() * weights.get(WeightedFeature.OPPONENT_CARD_COUNT);
 
 		for (Minion minion : player.getMinions()) {
-			score += calculateMinionScore(minion, threatLevel);
+			score += calculateMinionScore(context, minion, threatLevel);
 		}
 
 		for (Minion minion : opponent.getMinions()) {
-			score -= calculateMinionScore(minion, threatLevel);
+			score -= calculateMinionScore(context, minion, threatLevel);
 		}
 
 		return score;

@@ -24,7 +24,7 @@ public class AfterMinionSummonedTrigger extends GameEventTrigger {
 		}
 
 		Attribute requiredAttribute = (Attribute) desc.get(EventTriggerArg.REQUIRED_ATTRIBUTE);
-		if (requiredAttribute != null && !summonEvent.getMinion().hasAttribute(requiredAttribute)) {
+		if (requiredAttribute != null && !event.getGameContext().getLogic().hasEntityAttribute(summonEvent.getMinion(), requiredAttribute)) {
 			return false;
 		}
 		

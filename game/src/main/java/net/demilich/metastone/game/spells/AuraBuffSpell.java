@@ -47,7 +47,7 @@ public class AuraBuffSpell extends Spell {
 			targetActor.modifyAttribute(Attribute.AURA_ATTACK_BONUS, attackBonus);
 		}
 		if (hpBonus != 0) {
-			targetActor.modifyAuraHpBonus(hpBonus);
+			targetActor.modifyAuraHpBonus(hpBonus, context.getLogic().getEntityMaxHp(targetActor));
 		}
 
 	}

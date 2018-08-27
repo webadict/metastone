@@ -16,7 +16,7 @@ import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 public abstract class Actor extends Entity {
 
 	private Card sourceCard;
-	private List<SpellTrigger> spellTriggers = new ArrayList<SpellTrigger>();
+	private List<SpellTrigger> spellTriggers = new ArrayList<>();
 	private CardCostModifier cardCostModifier;
 
 	public Actor(Card sourceCard) {
@@ -35,21 +35,8 @@ public abstract class Actor extends Entity {
 		spellTriggers.add(spellTrigger);
 	}
 
-	public boolean canAttackThisTurn() {
-		if (hasAttribute(Attribute.CANNOT_ATTACK)) {
-			return false;
-		}
-		if (hasAttribute(Attribute.FROZEN)) {
-			return false;
-		}
-		if (hasAttribute(Attribute.SUMMONING_SICKNESS) && !hasAttribute(Attribute.CHARGE) && !hasAttribute(Attribute.RUSH)) {
-			return false;
-		}
-		return getAttack() > 0 && ((getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0 || hasAttribute(Attribute.UNLIMITED_ATTACKS));
-	}
-
 	public void clearSpellTriggers() {
-		this.spellTriggers = new ArrayList<SpellTrigger>();
+		this.spellTriggers = new ArrayList<>();
 	}
 
 	@Override
@@ -77,19 +64,12 @@ public abstract class Actor extends Entity {
 				|| tag == Attribute.MEGA_WINDFURY;
 	}
 
-	public int getAttack() {
-		int attack = getAttributeValue(Attribute.ATTACK) + getAttributeValue(Attribute.ATTACK_BONUS)
-				+ getAttributeValue(Attribute.AURA_ATTACK_BONUS) + getAttributeValue(Attribute.TEMPORARY_ATTACK_BONUS)
-				+ getAttributeValue(Attribute.CONDITIONAL_ATTACK_BONUS);
-		return Math.max(0, attack);
-	}
-
 	public int getBaseAttack() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseHp() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 	public BattlecryAction getBattlecry() {
@@ -109,13 +89,10 @@ public abstract class Actor extends Entity {
 		return getAttributeValue(Attribute.HP);
 	}
 
+	@Deprecated
 	public int getMaxHp() {
 		return getAttributeValue(Attribute.MAX_HP) + getAttributeValue(Attribute.HP_BONUS)
 				+ getAttributeValue(Attribute.AURA_HP_BONUS);
-	}
-
-	public Race getRace() {
-		return (Race) getAttribute(Attribute.RACE);
 	}
 
 	public Card getSourceCard() {
@@ -123,20 +100,11 @@ public abstract class Actor extends Entity {
 	}
 
 	public List<SpellTrigger> getSpellTriggers() {
-		return new ArrayList<SpellTrigger>(spellTriggers);
+		return new ArrayList<>(spellTriggers);
 	}
 
 	public boolean hasSpellTrigger() {
 		return spellTriggers.size() != 0;
-	}
-	
-	public int getMaxNumberOfAttacks() {
-		if (hasAttribute(Attribute.MEGA_WINDFURY)) {
-			return GameLogic.MEGA_WINDFURY_ATTACKS;
-		} else if (hasAttribute(Attribute.WINDFURY)) {
-			return GameLogic.WINDFURY_ATTACKS;
-		}
-		return 1;
 	}
 
 	@Override
@@ -144,42 +112,17 @@ public abstract class Actor extends Entity {
 		return getHp() < 1 || super.isDestroyed();
 	}
 
-	public boolean isWounded() {
-		return getHp() != getMaxHp();
-	}
-
-	public void modifyAuraHpBonus(int value) {
-		modifyAttribute(Attribute.AURA_HP_BONUS, value);
-		if (value > 0) {
-			modifyAttribute(Attribute.HP, value);
-		}
-		if (getHp() > getMaxHp()) {
-			setHp(getMaxHp());
-		}
-	}
-
-	@Override
-	public void modifyHpBonus(int value) {
-		modifyAttribute(Attribute.HP_BONUS, value);
-		if (value > 0) {
-			modifyAttribute(Attribute.HP, value);
-		}
-		if (getHp() > getMaxHp()) {
-			setHp(getMaxHp());
-		}
-			
-	}
-
+	@Deprecated
 	public void setAttack(int value) {
 		setAttribute(Attribute.ATTACK, value);
 	}
 
 	public void setBaseAttack(int value) {
-		setAttribute(Attribute.BASE_ATTACK, value);
+		setAttribute(Attribute.ATTACK, value);
 	}
 
 	public void setBaseHp(int value) {
-		setAttribute(Attribute.BASE_HP, value);
+		setAttribute(Attribute.MAX_HP, value);
 	}
 
 	public void setBattlecry(BattlecryAction battlecry) {
@@ -194,6 +137,7 @@ public abstract class Actor extends Entity {
 		setAttribute(Attribute.HP, value);
 	}
 
+	@Deprecated
 	public void setMaxHp(int value) {
 		setAttribute(Attribute.MAX_HP, value);
 	}
@@ -206,14 +150,10 @@ public abstract class Actor extends Entity {
 		}
 	}
 
-	public void setRace(Race race) {
-		setAttribute(Attribute.RACE, race);
-	}
-
 	@Override
 	public String toString() {
 		String result = "[" + getEntityType() + " '" + getName() + "'id:" + getId() + " ";
-		result += getAttack() + "/" + getHp();
+		result += getBaseAttack() + "/" + getHp();
 		String prefix = " ";
 		for (Attribute tag : getAttributes().keySet()) {
 			if (displayGameTag(tag)) {

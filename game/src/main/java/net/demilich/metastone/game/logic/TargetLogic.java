@@ -31,9 +31,11 @@ public class TargetLogic {
 		return list;
 	}
 
-	private boolean containsTaunters(List<Minion> minions) {
+	private boolean containsTaunters(GameContext context, List<Minion> minions) {
 		for (Entity entity : minions) {
-			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH) && !entity.hasAttribute(Attribute.IMMUNE)) {
+			if (context.getLogic().hasEntityAttribute(entity, Attribute.TAUNT)
+					&& !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+					&& !context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE)) {
 				return true;
 			}
 		}
@@ -50,12 +52,16 @@ public class TargetLogic {
 				validTargets.add(entity);
 				continue;
 			}
-			if ((action.getActionType() == ActionType.SPELL || action.getActionType() == ActionType.HERO_POWER)
-					&& (entity.hasAttribute(Attribute.UNTARGETABLE_BY_SPELLS) || (entity.hasAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS)))) {
+			if ((action.getActionType() == ActionType.SPELL
+					|| action.getActionType() == ActionType.HERO_POWER)
+					&& (context.getLogic().hasEntityAttribute(entity, Attribute.UNTARGETABLE_BY_SPELLS)
+					|| (context.getLogic().hasEntityAttribute(entity, Attribute.AURA_UNTARGETABLE_BY_SPELLS)))) {
 				continue;
 			}
 
-			if (entity.getOwner() != player.getId() && (entity.hasAttribute(Attribute.STEALTH) || entity.hasAttribute(Attribute.IMMUNE))) {
+			if (entity.getOwner() != player.getId()
+					&& (context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+					|| context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE))) {
 				continue;
 			}
 			if (entity.getOwner() != player.getId() && entity instanceof Hero && context.getLogic().hasAttribute(context.getPlayer(entity.getOwner()), Attribute.IMMUNE_HERO)) {
@@ -163,7 +169,7 @@ public class TargetLogic {
 		}
 		List<Entity> destroyedEntities = new ArrayList<Entity>();
 		for (Entity entity : entities) {
-			if (entity != null && entity.hasAttribute(Attribute.PENDING_DESTROY)) {
+			if (entity != null && context.getLogic().hasEntityAttribute(entity, Attribute.PENDING_DESTROY)) {
 				destroyedEntities.add(entity);
 			}
 		}
@@ -171,10 +177,12 @@ public class TargetLogic {
 		return entities;
 	}
 
-	private List<Entity> getTaunters(List<Minion> entities) {
+	private List<Entity> getTaunters(GameContext context, List<Minion> entities) {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
-			if (entity.hasAttribute(Attribute.TAUNT) && !entity.hasAttribute(Attribute.STEALTH) && !entity.hasAttribute(Attribute.IMMUNE)) {
+			if (context.getLogic().hasEntityAttribute(entity, Attribute.TAUNT)
+					&& !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+					&& !context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE)) {
 				taunters.add(entity);
 			}
 		}
@@ -190,8 +198,8 @@ public class TargetLogic {
 		// attack only allow corresponding minions as targets
 		if (actionType == ActionType.PHYSICAL_ATTACK
 				&& (targetRequirement == TargetSelection.ENEMY_CHARACTERS || targetRequirement == TargetSelection.ENEMY_MINIONS)
-				&& containsTaunters(opponent.getMinions())) {
-			return getTaunters(opponent.getMinions());
+				&& containsTaunters(context, opponent.getMinions())) {
+			return getTaunters(context, opponent.getMinions());
 		}
 		if (actionType == ActionType.SUMMON) {
 			// you can summon next to any friendly minion or provide no target

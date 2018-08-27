@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -21,6 +22,7 @@ public abstract class Entity extends CustomCloneable {
 		return clone;
 	}
 
+	@Deprecated
 	public Object getAttribute(Attribute attribute) {
 		return attributes.get(attribute);
 	}
@@ -29,7 +31,12 @@ public abstract class Entity extends CustomCloneable {
 		return attributes;
 	}
 
+	@Deprecated
 	public int getAttributeValue(Attribute attribute) {
+		return attributes.containsKey(attribute) ? (int) attributes.get(attribute) : 0;
+	}
+
+	public int getBaseAttributeValue(Attribute attribute) {
 		return attributes.containsKey(attribute) ? (int) attributes.get(attribute) : 0;
 	}
 
@@ -47,11 +54,26 @@ public abstract class Entity extends CustomCloneable {
 		return ownerIndex;
 	}
 
+	public Race getRace() {
+		return hasAttribute(Attribute.RACE) ? (Race) getAttribute(Attribute.RACE) : Race.NONE;
+	}
+
 	public EntityReference getReference() {
 		return EntityReference.pointTo(this);
 	}
 
+	@Deprecated
 	public boolean hasAttribute(Attribute attribute) {
+		Object value = attributes.get(attribute);
+		if (value == null) {
+			return false;
+		}
+		if (value instanceof Integer) {
+			return ((int) value) != 0;
+		}
+		return true;
+	}
+	public boolean hasBaseAttribute(Attribute attribute) {
 		Object value = attributes.get(attribute);
 		if (value == null) {
 			return false;
@@ -63,7 +85,7 @@ public abstract class Entity extends CustomCloneable {
 	}
 
 	public boolean isDestroyed() {
-		return hasAttribute(Attribute.DESTROYED);
+		return hasBaseAttribute(Attribute.DESTROYED);
 	}
 
 	public void modifyAttribute(Attribute attribute, int value) {
@@ -73,8 +95,19 @@ public abstract class Entity extends CustomCloneable {
 		setAttribute(attribute, getAttributeValue(attribute) + value);
 	}
 	
-	public void modifyHpBonus(int value) {
-		modifyAttribute(Attribute.HP_BONUS, value);
+	public void modifyHpBonus(int value, int maxHp) {
+		if (value > 0) {
+			modifyAttribute(Attribute.HP, value);
+		}
+		if (getAttributeValue(Attribute.HP) > maxHp) {
+			setAttribute(Attribute.HP, maxHp);
+		}
+	}
+
+	@Deprecated
+	public void modifyAuraHpBonus(int value, int maxHp) {
+		modifyAttribute(Attribute.AURA_HP_BONUS, value);
+		modifyHpBonus(value, maxHp);
 	}
 
 	public void removeAttribute(Attribute attribute) {
@@ -93,6 +126,18 @@ public abstract class Entity extends CustomCloneable {
 		attributes.put(attribute, value);
 	}
 
+	public void setBaseAttribute(Attribute attribute) {
+		attributes.put(attribute, 1);
+	}
+
+	public void setBaseAttribute(Attribute attribute, int value) {
+		attributes.put(attribute, value);
+	}
+
+	public void setBaseAttribute(Attribute attribute, Object value) {
+		attributes.put(attribute, value);
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -103,6 +148,10 @@ public abstract class Entity extends CustomCloneable {
 
 	public void setOwner(int ownerIndex) {
 		this.ownerIndex = ownerIndex;
+	}
+
+	public void setRace(Race race) {
+		setAttribute(Attribute.RACE, race);
 	}
 
 }

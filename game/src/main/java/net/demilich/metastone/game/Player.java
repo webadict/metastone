@@ -88,6 +88,13 @@ public class Player extends Entity {
 		return characters;
 	}
 
+	public CardCollection getCards() {
+		CardCollection allCards = new CardCollection();
+		allCards.addAll(getDeck());
+		allCards.addAll(getHand());
+		return allCards;
+	}
+
 	public CardCollection getDeck() {
 		return deck;
 	}

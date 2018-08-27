@@ -30,7 +30,7 @@ public class HasAttackedCondition extends Condition {
 		}
 		if (entity != null && entity instanceof Actor) {
 			Actor actor = (Actor) entity;
-			return actor.getMaxNumberOfAttacks() > actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
+			return context.getLogic().getMaxNumberOfAttacks(actor) > actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS);
 		}
 		return false;
 	}

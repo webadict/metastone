@@ -100,13 +100,13 @@ public class AdvancedMechanicTests extends BasicTests {
 		attackAction.setTarget(defender);
 
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp());
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
+		Assert.assertEquals(attacker.getHp(), context.getLogic().getEntityMaxHp(attacker));
+		Assert.assertEquals(defender.getHp(), context.getLogic().getEntityMaxHp(defender) - context.getLogic().getEntityAttack(attacker));
 		Assert.assertEquals(attacker.isDestroyed(), false);
 
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - defender.getAttack());
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack() * 2);
+		Assert.assertEquals(attacker.getHp(), context.getLogic().getEntityMaxHp(attacker) - context.getLogic().getEntityAttack(defender));
+		Assert.assertEquals(defender.getHp(), context.getLogic().getEntityMaxHp(defender) - context.getLogic().getEntityAttack(attacker) * 2);
 		Assert.assertEquals(attacker.isDestroyed(), true);
 	}
 
@@ -127,35 +127,35 @@ public class AdvancedMechanicTests extends BasicTests {
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Actor defender = getSingleMinion(priest.getMinions());
 
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
-		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.ENRAGED), false);
 
 		// attack once, should apply the enrage attack bonus
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
-		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.ENRAGED), true);
 		// attack second time, enrage bonus should not increase
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
 
 		// heal - enrage attack bonus should be gone
 		GameAction healAction = priest.getHero().getHeroPower().play();
 		healAction.setTarget(defender);
 		context.getLogic().performGameAction(priest.getId(), healAction);
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
-		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), false);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.ENRAGED), false);
 		
 		// attack once more - should enrage again
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
-		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK + ENRAGE_ATTACK_BONUS);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.ENRAGED), true);
 		
 		// attack should be set to 1
 		playCardWithTarget(context, mage, CardCatalogue.getCardById("spell_humility"), defender);
-		Assert.assertEquals(defender.getAttack(), 1);
-		Assert.assertEquals(defender.hasAttribute(Attribute.ENRAGED), true);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), 1);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.ENRAGED), true);
 	}
 
 	@Test
@@ -205,7 +205,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		playSpellCard.setTarget(minion);
 		context.getLogic().performGameAction(player.getId(), playSpellCard);
 		Assert.assertEquals(minion.getHp(), modifiedHp);
-		Assert.assertEquals(minion.getMaxHp(), modifiedHp);
+		Assert.assertEquals(context.getLogic().getEntityMaxHp(minion), modifiedHp);
 
 		// silence the creature - hp should be back to original value
 		SpellDesc silenceSpell = SilenceSpell.create();
@@ -248,12 +248,12 @@ public class AdvancedMechanicTests extends BasicTests {
 
 		playCard(context, mage, new TestMinionCard(baseAttack, 1));
 		Actor testSubject = getSingleMinion(mage.getMinions());
-		Assert.assertEquals(testSubject.getAttack(), baseAttack);
+		Assert.assertEquals(context.getLogic().getEntityAttack(testSubject), baseAttack);
 
 		playCard(context, mage, CardCatalogue.getCardById("minion_abusive_sergeant"));
-		Assert.assertEquals(testSubject.getAttack(), baseAttack + 2);
+		Assert.assertEquals(context.getLogic().getEntityAttack(testSubject), baseAttack + 2);
 		context.getLogic().endTurn(mage.getId());
-		Assert.assertEquals(testSubject.getAttack(), baseAttack);
+		Assert.assertEquals(context.getLogic().getEntityAttack(testSubject), baseAttack);
 	}
 
 	@Test
@@ -264,13 +264,13 @@ public class AdvancedMechanicTests extends BasicTests {
 		Player warrior = context.getPlayer2();
 		warrior.setMana(10);
 
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp());
+		Assert.assertEquals(warrior.getHero().getHp(), context.getLogic().getEntityMaxHp(warrior.getHero()));
 		Card damageSpell = CardCatalogue.getCardById("spell_mind_blast");
 		int mindBlastDamage = 5;
 		context.getLogic().receiveCard(mage.getId(), damageSpell);
 
 		context.getLogic().performGameAction(mage.getId(), damageSpell.play());
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - mindBlastDamage);
+		Assert.assertEquals(warrior.getHero().getHp(), context.getLogic().getEntityMaxHp(warrior.getHero()) - mindBlastDamage);
 
 		MinionCard spellPowerMinionCard = (MinionCard) CardCatalogue.getCardById("minion_kobold_geomancer");
 		context.getLogic().receiveCard(mage.getId(), spellPowerMinionCard);
@@ -278,7 +278,7 @@ public class AdvancedMechanicTests extends BasicTests {
 		context.getLogic().receiveCard(mage.getId(), damageSpell);
 		context.getLogic().performGameAction(mage.getId(), damageSpell.play());
 		int spellPower = getSingleMinion(mage.getMinions()).getAttributeValue(Attribute.SPELL_DAMAGE);
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 2 * mindBlastDamage - spellPower);
+		Assert.assertEquals(warrior.getHero().getHp(), context.getLogic().getEntityMaxHp(warrior.getHero()) - 2 * mindBlastDamage - spellPower);
 		
 		int opponentHp = warrior.getHero().getHp();
 		GameAction useHeroPower = mage.getHero().getHeroPower().play();

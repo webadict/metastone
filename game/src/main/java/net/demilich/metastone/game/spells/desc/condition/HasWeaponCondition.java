@@ -14,7 +14,7 @@ public class HasWeaponCondition extends Condition {
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		Weapon weapon = player.getHero().getWeapon();
-		if (weapon == null || weapon.isBroken()) {
+		if (weapon == null || weapon.isDestroyed()) {
 			return false;
 		}
 		String cardId = (String) desc.get(ConditionArg.CARD_ID);

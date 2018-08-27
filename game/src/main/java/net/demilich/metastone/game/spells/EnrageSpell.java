@@ -10,6 +10,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+/**
+ * @deprecated As of v2.0, uses BuffSpell with IsDamagedCondition.
+ */
+@Deprecated
 public class EnrageSpell extends Spell {
 
 	public static SpellDesc create(int attackBonus) {
@@ -28,7 +32,7 @@ public class EnrageSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		boolean enraged = target.hasAttribute(Attribute.ENRAGED);
-		target.setAttribute(Attribute.CONDITIONAL_ATTACK_BONUS, enraged ? attackBonus : 0);
+		target.setAttribute(Attribute.ATTACK, enraged ? attackBonus : 0);
 		Attribute tag = (Attribute) desc.get(SpellArg.ATTRIBUTE);
 		if (tag != null) {
 			if (enraged) {

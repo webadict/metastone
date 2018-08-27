@@ -1,7 +1,13 @@
 package net.demilich.metastone.game.spells;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
+import net.demilich.metastone.game.spells.desc.condition.Condition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,17 +43,38 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		int hpBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
-		
+
 		if (value != 0) {
 			attackBonus = hpBonus = value;
 		}
 		logger.debug("{} gains ({})", target, attackBonus + "/" + hpBonus);
 
+		List<Integer> target_ids = new ArrayList<>();
+		target_ids.add(target.getId());
+
+		Condition condition = (Condition) desc.get(SpellArg.CONDITION);
 		if (attackBonus != 0) {
-			target.modifyAttribute(Attribute.ATTACK_BONUS, attackBonus);
+			Map<EnchantmentArg, Object> enchantmentMap = EnchantmentDesc.build(Enchantment.class);
+			enchantmentMap.put(EnchantmentArg.CARD_IDS, target_ids);
+			enchantmentMap.put(EnchantmentArg.VALUE, attackBonus);
+			enchantmentMap.put(EnchantmentArg.ATTRIBUTE, Attribute.ATTACK);
+			if (condition != null) {
+				enchantmentMap.put(EnchantmentArg.CONDITION, condition);
+			}
+			Enchantment enchantment = new Enchantment(new EnchantmentDesc(enchantmentMap));
+			context.getEnchantments().add(enchantment);
 		}
 		if (hpBonus != 0) {
-			target.modifyHpBonus(hpBonus);
+			Map<EnchantmentArg, Object> enchantmentMap = EnchantmentDesc.build(Enchantment.class);
+			enchantmentMap.put(EnchantmentArg.CARD_IDS, target_ids);
+			enchantmentMap.put(EnchantmentArg.VALUE, hpBonus);
+			enchantmentMap.put(EnchantmentArg.ATTRIBUTE, Attribute.MAX_HP);
+			if (condition != null) {
+				enchantmentMap.put(EnchantmentArg.CONDITION, condition);
+			}
+			Enchantment enchantment = new Enchantment(new EnchantmentDesc(enchantmentMap));
+			context.getEnchantments().add(enchantment);
+			target.modifyHpBonus(hpBonus, context.getLogic().getEntityMaxHp(target));
 		}
 	}
 

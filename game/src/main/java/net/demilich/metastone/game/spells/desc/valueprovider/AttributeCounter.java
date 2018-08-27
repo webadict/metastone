@@ -21,7 +21,7 @@ public class AttributeCounter extends ValueProvider {
 		int count = 0;
 		Attribute attribute = (Attribute) desc.get(ValueProviderArg.ATTRIBUTE);
 		for (Entity entity : relevantEntities) {
-			if (entity.hasAttribute(attribute)) {
+			if (context.getLogic().hasEntityAttribute(entity, attribute)) {
 				count++;
 			}
 		}

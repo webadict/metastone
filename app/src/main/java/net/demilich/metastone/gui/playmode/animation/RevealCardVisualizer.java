@@ -12,7 +12,7 @@ public class RevealCardVisualizer implements IGameEventVisualizer {
 	public void visualizeEvent(GameContext gameContext, GameEvent event, GameBoardView boardView) {
 		CardRevealedEvent cardRevealedEvent = (CardRevealedEvent) event;
 
-		if (cardRevealedEvent.getCard().hasAttribute(Attribute.SECRET)) {
+		if (cardRevealedEvent.getCard().hasBaseAttribute(Attribute.SECRET)) {
 			return;
 		}
 

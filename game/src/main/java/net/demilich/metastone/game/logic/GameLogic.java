@@ -1,14 +1,12 @@
 package net.demilich.metastone.game.logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
+import net.demilich.metastone.game.utils.GameTagUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -114,8 +112,7 @@ public class GameLogic implements Cloneable {
 	private static final int INFINITE = -1;
 
 	private static boolean hasPlayerLost(Player player) {
-		return player.getHero().getHp() < 1 || player.getHero().hasAttribute(Attribute.DESTROYED)
-				|| player.hasAttribute(Attribute.DESTROYED);
+		return player.getHero().isDestroyed() || player.isDestroyed();
 	}
 
 	private final TargetLogic targetLogic = new TargetLogic();
@@ -136,6 +133,11 @@ public class GameLogic implements Cloneable {
 
 	private GameLogic(IdFactory idFactory) {
 		this.idFactory = idFactory;
+	}
+
+	public void addEnchantment(Player player, Enchantment enchantment, Entity target) {
+		context.getEnchantments().add(enchantment);
+		addGameEventListener(player, enchantment, target);
 	}
 
 	public void addGameEventListener(Player player, IGameEventListener gameEventListener, Entity target) {
@@ -163,7 +165,7 @@ public class GameLogic implements Cloneable {
 		
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 
-		if (card.hasAttribute(Attribute.ECHO)) {
+		if (hasEntityAttribute(card, Attribute.ECHO)) {
 			Card echoCard = card.getCopy();
 			echoCard.setAttribute(Attribute.GHOSTLY);
 			receiveCard(playerId, echoCard);
@@ -176,15 +178,28 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void applyAttribute(Entity entity, Attribute attr) {
-		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY
+				&& hasEntityAttribute(entity, Attribute.WINDFURY)
+				&& !hasEntityAttribute(entity, Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - WINDFURY_ATTACKS);
-		} else
-			if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (attr == Attribute.WINDFURY
+				&& !hasEntityAttribute(entity, Attribute.WINDFURY)
+				&& !hasEntityAttribute(entity, Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - 1);
-		} else if (attr == Attribute.MEGA_WINDFURY && !entity.hasAttribute(Attribute.WINDFURY) && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		} else if (attr == Attribute.MEGA_WINDFURY
+				&& !hasEntityAttribute(entity, Attribute.WINDFURY)
+				&& !hasEntityAttribute(entity, Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, MEGA_WINDFURY_ATTACKS - 1);
 		}
-		entity.setAttribute(attr);
+		Map<EnchantmentArg, Object> enchantmentMap = EnchantmentDesc.build(Enchantment.class);
+		enchantmentMap.put(EnchantmentArg.ATTRIBUTE, attr);
+		List<Integer> target_ids = new ArrayList<>();
+		target_ids.add(entity.getId());
+		enchantmentMap.put(EnchantmentArg.CARD_IDS, target_ids);
+		enchantmentMap.put(EnchantmentArg.VALUE, true);
+		Enchantment enchantment = new Enchantment(new EnchantmentDesc(enchantmentMap));
+		context.getEnchantments().add(enchantment);
+
 		log("Applying attr {} to {}", attr, entity);
 	}
 
@@ -216,7 +231,7 @@ public class GameLogic implements Cloneable {
 	public int applySpellpower(Player player, Entity source, int baseValue) {
 		int spellpower = getTotalAttributeValue(player, Attribute.SPELL_DAMAGE)
 				+ getTotalAttributeValue(context.getOpponent(player), Attribute.OPPONENT_SPELL_DAMAGE);
-		if (source.hasAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER)) {
+		if (hasEntityAttribute(source, Attribute.SPELL_DAMAGE_MULTIPLIER)) {
 			spellpower *= source.getAttributeValue(Attribute.SPELL_DAMAGE_MULTIPLIER);
 		}
 		return baseValue + spellpower;
@@ -236,11 +251,11 @@ public class GameLogic implements Cloneable {
 
 	public boolean attributeExists(Attribute attr) {
 		for (Player player : context.getPlayers()) {
-			if (player.getHero().hasAttribute(attr)) {
+			if (hasEntityAttribute(player.getHero(), attr)) {
 				return true;
 			}
 			for (Entity summon : player.getSummons()) {
-				if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
+				if (hasEntityAttribute(summon, attr) && !hasEntityAttribute(summon, Attribute.PENDING_DESTROY)) {
 					return true;
 				}
 			}
@@ -249,24 +264,41 @@ public class GameLogic implements Cloneable {
 		return false;
 	}
 
+	public boolean canAttackThisTurn(Actor actor) {
+		if (hasEntityAttribute(actor, Attribute.CANNOT_ATTACK)) {
+			return false;
+		}
+		if (hasEntityAttribute(actor, Attribute.FROZEN)) {
+			return false;
+		}
+		if (hasEntityAttribute(actor, Attribute.SUMMONING_SICKNESS)
+				&& !(hasEntityAttribute(actor, Attribute.CHARGE)
+				|| hasEntityAttribute(actor, Attribute.RUSH))) {
+			return false;
+		}
+		return getEntityAttack(actor) > 0
+				&& ((actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) + actor.getAttributeValue(Attribute.EXTRA_ATTACKS)) > 0
+				|| hasEntityAttribute(actor, Attribute.UNLIMITED_ATTACKS));
+	}
+
 	public boolean canPlayCard(int playerId, CardReference cardReference) {
 		Player player = context.getPlayer(playerId);
 		Card card = context.resolveCardReference(cardReference);
 		int manaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)
+				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (card.getCardType().isCardType(CardType.MINION)
-				&& (Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
-				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)
+				&& card.getRace() == Race.MURLOC
+				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (player.getMana() < manaCost && manaCost != 0
 				&& !((card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH))
-				|| ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
-				&& player.hasAttribute(Attribute.MURLOCS_COST_HEALTH)))) {
+				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH))
+				|| (card.getRace() == Race.MURLOC
+				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)))) {
 			return false;
 		}
 		if (card.getCardType().isCardType(CardType.HERO_POWER)) {
@@ -456,7 +488,7 @@ public class GameLogic implements Cloneable {
 		List<Actor> destroyList = new ArrayList<>();
 		for (Player player : context.getPlayers()) {
 
-			if (player.getHero().isDestroyed() || player.hasAttribute(Attribute.DESTROYED)) {
+			if (player.getHero().isDestroyed()) {
 				destroyList.add(player.getHero());
 			}
 
@@ -515,7 +547,7 @@ public class GameLogic implements Cloneable {
 			}
 		}
 		int damageDealt = 0;
-		if (target.hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+		if (hasEntityAttribute(target, Attribute.TAKE_DOUBLE_DAMAGE)) {
 			damage *= 2;
 		}
 		context.getDamageStack().push(damage);
@@ -527,7 +559,7 @@ public class GameLogic implements Cloneable {
 		switch (target.getEntityType()) {
 		case MINION:
 			damageDealt = damageMinion((Actor) target, damage);
-			if (damageDealt > 0 && source != null && source.hasAttribute(Attribute.POISONOUS)) {
+			if (damageDealt > 0 && source != null && hasEntityAttribute(source, Attribute.POISONOUS)) {
 				markAsDestroyed(target);
 			}
 			break;
@@ -544,7 +576,7 @@ public class GameLogic implements Cloneable {
 			context.fireGameEvent(damageEvent);
 			player.getStatistics().damageDealt(damageDealt);
 
-			if (source != null && source.hasAttribute(Attribute.LIFESTEAL)) {
+			if (source != null && hasEntityAttribute(source, Attribute.LIFESTEAL)) {
 				heal(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, source);
             }
 		}
@@ -553,11 +585,11 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageHero(Hero hero, int damage) {
-		if (hero.hasAttribute(Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO)) {
+		if (hasEntityAttribute(hero, Attribute.IMMUNE) || hasAttribute(context.getPlayer(hero.getOwner()), Attribute.IMMUNE_HERO)) {
 			log("{} is IMMUNE and does not take damage", hero);
 			return 0;
 		}
-		int effectiveHp = hero.getHp() + hero.getArmor();
+		int effectiveHp = hero.getEffectiveHp();
 		hero.modifyArmor(-damage);
 		int newHp = Math.min(hero.getHp(), effectiveHp - damage);
 		hero.setHp(newHp);
@@ -566,16 +598,16 @@ public class GameLogic implements Cloneable {
 	}
 
 	private int damageMinion(Actor minion, int damage) {
-		if (minion.hasAttribute(Attribute.DIVINE_SHIELD)) {
+		if (hasEntityAttribute(minion, Attribute.DIVINE_SHIELD)) {
 			removeAttribute(minion, Attribute.DIVINE_SHIELD);
 			log("{}'s DIVINE SHIELD absorbs the damage", minion);
 			return 0;
 		}
-		if (minion.hasAttribute(Attribute.IMMUNE)) {
+		if (hasEntityAttribute(minion, Attribute.IMMUNE)) {
 			log("{} is IMMUNE and does not take damage", minion);
 			return 0;
 		}
-		if (damage >= minion.getHp() && minion.hasAttribute(Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
+		if (damage >= minion.getHp() && hasEntityAttribute(minion, Attribute.CANNOT_REDUCE_HP_BELOW_1)) {
 			damage = minion.getHp() - 1;
 		}
 
@@ -642,8 +674,8 @@ public class GameLogic implements Cloneable {
 		context.fireGameEvent(killEvent);
 		context.getEnvironment().remove(Environment.KILLED_MINION);
 
-		minion.setAttribute(Attribute.DESTROYED);
-		minion.setAttribute(Attribute.DIED_ON_TURN, context.getTurn());
+		applyAttribute(minion, Attribute.DESTROYED);
+		minion.setBaseAttribute(Attribute.DIED_ON_TURN, context.getTurn());
 	}
 
 	private void destroyWeapon(Weapon weapon) {
@@ -675,7 +707,7 @@ public class GameLogic implements Cloneable {
 		CardCollection deck = player.getDeck();
 		if (deck.isEmpty()) {
 			Hero hero = player.getHero();
-			int fatigue = player.hasAttribute(Attribute.FATIGUE) ? player.getAttributeValue(Attribute.FATIGUE) : 0;
+			int fatigue = hasEntityAttribute(player, Attribute.FATIGUE) ? player.getAttributeValue(Attribute.FATIGUE) : 0;
 			fatigue++;
 			player.setAttribute(Attribute.FATIGUE, fatigue);
 			damage(player, hero, fatigue, hero);
@@ -727,6 +759,12 @@ public class GameLogic implements Cloneable {
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.isExpired()) {
+				iterator.remove();
+			}
+		}
+		for (Iterator<Enchantment> iterator = context.getEnchantments().iterator(); iterator.hasNext();) {
+			Enchantment enchantment = iterator.next();
+			if (enchantment.isExpired()) {
 				iterator.remove();
 			}
 		}
@@ -801,14 +839,14 @@ public class GameLogic implements Cloneable {
 			log("Target of attack was changed! New Target: {}", target);
 		}
 
-		if (attacker.hasAttribute(Attribute.IMMUNE_WHILE_ATTACKING)) {
+		if (hasEntityAttribute(attacker, Attribute.IMMUNE_WHILE_ATTACKING)) {
 			applyAttribute(attacker, Attribute.IMMUNE);
 		}
 
 		removeAttribute(attacker, Attribute.STEALTH);
 
-		int attackerDamage = attacker.getAttack();
-		int defenderDamage = target.getAttack();
+		int attackerDamage = getEntityAttack(attacker);
+		int defenderDamage = getEntityAttack(target);
 		context.fireGameEvent(new PhysicalAttackEvent(context, attacker, target, attackerDamage));
 		// secret may have killed attacker ADDENDUM: or defender
 		if (attacker.isDestroyed() || target.isDestroyed()) {
@@ -825,7 +863,7 @@ public class GameLogic implements Cloneable {
 		if (defenderDamage > 0) {
 			damage(player, attacker, defenderDamage, target);
 		}
-		if (attacker.hasAttribute(Attribute.IMMUNE_WHILE_ATTACKING)) {
+		if (hasEntityAttribute(attacker, Attribute.IMMUNE_WHILE_ATTACKING)) {
 			attacker.removeAttribute(Attribute.IMMUNE);
 		}
 
@@ -870,6 +908,63 @@ public class GameLogic implements Cloneable {
 	}
 
 	/**
+	 * Gets the {@link Attribute} object of the {@link Entity} after {@link Enchantment}s.
+	 *
+	 * @param entity
+	 * @param attribute
+	 * @return
+	 */
+	public Object getEntityAttribute(Entity entity, Attribute attribute) {
+		switch (attribute) {
+			case ATTACK:
+				return getEntityAttack(entity);
+			case HP:
+				return entity.getBaseAttributeValue(Attribute.HP);
+			case MAX_HP:
+				return getEntityMaxHp(entity);
+		}
+		switch (GameTagUtils.getTagValueType(attribute)){
+			case INTEGER:
+				return getModifiedAttributeValue(entity, attribute);
+			case BOOLEAN:
+				return getModifiedAttributeBool(entity, attribute);
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the {@link Entity}'s Attack {@link Attribute} after {@link Enchantment}s.
+	 *
+	 * @param entity
+	 * @return
+	 */
+	public int getEntityAttack(Entity entity) {
+		if (entity instanceof Actor && hasEntityAttribute(entity, Attribute.ATTACK_EQUALS_HP)) {
+			return ((Actor) entity).getHp();
+		}
+		int attack = getModifiedAttributeValue(entity, Attribute.ATTACK)
+				+ getModifiedAttributeValue(entity, Attribute.AURA_ATTACK_BONUS)
+				+ getModifiedAttributeValue(entity, Attribute.TEMPORARY_ATTACK_BONUS);
+		if (entity instanceof Hero) {
+			Hero hero = (Hero) entity;
+			attack += getEntityAttack(hero.getWeapon());
+		}
+		return Math.max(0, attack);
+	}
+
+	/**
+	 * Gets the {@link Entity}'s Max HP {@link Attribute} after {@link Enchantment}s.
+	 *
+	 * @param entity
+	 * @return
+	 */
+	public int getEntityMaxHp(Entity entity) {
+		int maxHp = getModifiedAttributeValue(entity, Attribute.MAX_HP)
+				+ getModifiedAttributeValue(entity, Attribute.AURA_HP_BONUS);
+		return Math.max(0, maxHp);
+	}
+
+	/**
 	 * Returns the first value of the attribute encountered. This method should
 	 * be used with caution, as the result is random if there are different
 	 * values of the same attribute in play.
@@ -883,7 +978,7 @@ public class GameLogic implements Cloneable {
 	 */
 	public int getAttributeValue(Player player, Attribute attr, int defaultValue) {
 		for (Summon summon : player.getSummons()) {
-			if (summon.hasAttribute(attr)) {
+			if (hasEntityAttribute(summon, attr)) {
 				return summon.getAttributeValue(attr);
 			}
 		}
@@ -912,7 +1007,7 @@ public class GameLogic implements Cloneable {
 			return greatest;
 		}
 		for (Summon summon : player.getSummons()) {
-			if (summon.hasAttribute(attr)) {
+			if (hasEntityAttribute(summon, attr)) {
 				if (summon.getAttributeValue(attr) > greatest) {
 					greatest = summon.getAttributeValue(attr);
 				}
@@ -935,6 +1030,15 @@ public class GameLogic implements Cloneable {
 		return MatchResult.RUNNING;
 	}
 
+	public int getMaxNumberOfAttacks(Actor actor) {
+		if (hasEntityAttribute(actor, Attribute.MEGA_WINDFURY)) {
+			return MEGA_WINDFURY_ATTACKS;
+		} else if (hasEntityAttribute(actor, Attribute.WINDFURY)) {
+			return WINDFURY_ATTACKS;
+		}
+		return 1;
+	}
+
 	public int getModifiedManaCost(Player player, Card card) {
 		int manaCost = card.getManaCost(context, player);
 		int minValue = 0;
@@ -947,11 +1051,41 @@ public class GameLogic implements Cloneable {
 				minValue = costModifier.getMinValue();
 			}
 		}
-		if (card.hasAttribute(Attribute.MANA_COST_MODIFIER)) {
+		if (hasEntityAttribute(card, Attribute.MANA_COST_MODIFIER)) {
 			manaCost += card.getAttributeValue(Attribute.MANA_COST_MODIFIER);
 		}
 		manaCost = MathUtils.clamp(manaCost, minValue, Integer.MAX_VALUE);
 		return manaCost;
+	}
+
+	public int getModifiedAttributeValue(Entity entity, Attribute attribute) {
+		if (entity == null) {
+			return 0;
+		}
+		int attributeValue = entity.getAttributeValue(attribute);
+		for (Enchantment enchantment : context.getEnchantments()) {
+			if (enchantment.getAttribute() != attribute || !enchantment.appliesTo(entity)) {
+				continue;
+			}
+			attributeValue = enchantment.process(attributeValue);
+			// TODO: Set min value for Enchantment stuffs
+			if (enchantment.getMinValue() > 0) {
+				int minValue = enchantment.getMinValue();
+				attributeValue = MathUtils.clamp(attributeValue, minValue, Integer.MAX_VALUE);
+			}
+		}
+		return attributeValue;
+	}
+
+	public boolean getModifiedAttributeBool(Entity entity, Attribute attribute) {
+		boolean attributeBool = entity.hasBaseAttribute(attribute);
+		for (Enchantment enchantment : context.getEnchantments()) {
+			if (enchantment.getAttribute() != attribute || !enchantment.appliesTo(entity)) {
+				continue;
+			}
+			attributeBool = enchantment.process(attributeBool);
+		}
+		return attributeBool;
 	}
 
 	public List<IGameEventListener> getQuests(Player player) {
@@ -987,7 +1121,7 @@ public class GameLogic implements Cloneable {
 	public int getTotalAttributeValue(Player player, Attribute attr) {
 		int total = player.getHero().getAttributeValue(attr);
 		for (Summon summon : player.getSummons()) {
-			if (!summon.hasAttribute(attr)) {
+			if (!hasEntityAttribute(summon, attr)) {
 				continue;
 			}
 
@@ -998,11 +1132,11 @@ public class GameLogic implements Cloneable {
 
 	public int getTotalAttributeMultiplier(Player player, Attribute attribute) {
 		int total = 1;
-		if (player.getHero().hasAttribute(attribute)) {
+		if (hasEntityAttribute(player.getHero(), attribute)) {
 			player.getHero().getAttributeValue(attribute);
 		}
 		for (Summon summon : player.getSummons()) {
-			if (summon.hasAttribute(attribute)) {
+			if (hasEntityAttribute(summon, attribute)) {
 				total *= summon.getAttributeValue(attribute);
 			}
 		}
@@ -1033,12 +1167,12 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleEnrage(Actor entity) {
-		if (!entity.hasAttribute(Attribute.ENRAGABLE)) {
+		if (!hasEntityAttribute(entity, Attribute.ENRAGABLE)) {
 			return;
 		}
-		boolean enraged = entity.getHp() < entity.getMaxHp();
+		boolean enraged = entity.getHp() < getEntityMaxHp(entity);
 		// enrage state has not changed; do nothing
-		if (entity.hasAttribute(Attribute.ENRAGED) == enraged) {
+		if (hasEntityAttribute(entity, Attribute.ENRAGED) == enraged) {
 			return;
 		}
 
@@ -1054,22 +1188,33 @@ public class GameLogic implements Cloneable {
 	}
 
 	private void handleFrozen(Actor actor) {
-		if (!actor.hasAttribute(Attribute.FROZEN)) {
+		if (!hasEntityAttribute(actor, Attribute.FROZEN)) {
 			return;
 		}
-		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= actor.getMaxNumberOfAttacks()) {
+		if (actor.getAttributeValue(Attribute.NUMBER_OF_ATTACKS) >= getMaxNumberOfAttacks(actor)) {
 			removeAttribute(actor, Attribute.FROZEN);
 		}
 	}
 
 	public boolean hasAttribute(Player player, Attribute attr) {
-		if (player.getHero().hasAttribute(attr)) {
+		if (hasEntityAttribute(player.getHero(), attr)) {
 			return true;
 		}
 		for (Summon summon : player.getSummons()) {
-			if (summon.hasAttribute(attr) && !summon.hasAttribute(Attribute.PENDING_DESTROY)) {
+			if (hasEntityAttribute(summon, attr) && !hasEntityAttribute(summon, Attribute.PENDING_DESTROY)) {
 				return true;
 			}
+		}
+
+		return false;
+	}
+
+	public boolean hasEntityAttribute(Entity entity, Attribute attribute) {
+		switch (GameTagUtils.getTagValueType(attribute)){
+			case INTEGER:
+				return getModifiedAttributeValue(entity, attribute) != 0;
+			case BOOLEAN:
+				return getModifiedAttributeBool(entity, attribute);
 		}
 
 		return false;
@@ -1122,10 +1267,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private boolean healHero(Hero hero, int healing) {
-		int newHp = Math.min(hero.getMaxHp(), hero.getHp() + healing);
+		int newHp = Math.min(getEntityMaxHp(hero), hero.getHp() + healing);
 		int oldHp = hero.getHp();
 		if (logger.isDebugEnabled()) {
-			log(hero + " is healed for " + healing + ", hp now: " + newHp / hero.getMaxHp());
+			log(hero + " is healed for " + healing + ", hp now: " + newHp / getEntityMaxHp(hero));
 		}
 
 		hero.setHp(newHp);
@@ -1133,10 +1278,10 @@ public class GameLogic implements Cloneable {
 	}
 
 	private boolean healMinion(Actor minion, int healing) {
-		int newHp = Math.min(minion.getMaxHp(), minion.getHp() + healing);
+		int newHp = Math.min(getEntityMaxHp(minion), minion.getHp() + healing);
 		int oldHp = minion.getHp();
 		if (logger.isDebugEnabled()) {
-			log(minion + " is healed for " + healing + ", hp now: " + newHp + "/" + minion.getMaxHp());
+			log(minion + " is healed for " + healing + ", hp now: " + newHp + "/" + getEntityMaxHp(minion));
 		}
 
 		minion.setHp(newHp);
@@ -1148,12 +1293,16 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		player.getHero().setId(idFactory.generateId());
 		player.getHero().setOwner(player.getId());
-		player.getHero().setMaxHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
-		player.getHero().setHp(player.getHero().getAttributeValue(Attribute.BASE_HP));
+		player.getHero().setMaxHp(player.getHero().getBaseAttributeValue(Attribute.MAX_HP));
+		player.getHero().setHp(player.getHero().getBaseAttributeValue(Attribute.MAX_HP));
 
 		player.getHero().getHeroPower().setId(idFactory.generateId());
 		assignCardIds(player.getDeck());
 		assignCardIds(player.getHand());
+
+		for (Card card : player.getCards()) {
+			card.setBaseAttribute(Attribute.STARTED_IN_DECK);
+		}
 
 		log("Setting hero hp to {} for {}", player.getHero().getHp(), player.getName());
 
@@ -1161,13 +1310,7 @@ public class GameLogic implements Cloneable {
 
 		mulligan(player, begins);
 
-		for (Card card : player.getDeck()) {
-			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
-				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
-				addGameEventListener(player, triggerDesc.create(), card);
-			}
-		}
-		for (Card card : player.getHand()) {
+		for (Card card : player.getCards()) {
 			if (card.getAttribute(Attribute.DECK_TRIGGER) != null) {
 				TriggerDesc triggerDesc = (TriggerDesc) card.getAttribute(Attribute.DECK_TRIGGER);
 				addGameEventListener(player, triggerDesc.create(), card);
@@ -1180,6 +1323,10 @@ public class GameLogic implements Cloneable {
 
 	public boolean isLoggingEnabled() {
 		return loggingEnabled;
+	}
+
+	public boolean isWounded(Actor actor) {
+		return getEntityMaxHp(actor) > actor.getHp();
 	}
 
 	public JoustEvent joust(Player player) {
@@ -1256,7 +1403,7 @@ public class GameLogic implements Cloneable {
 
 	public void markAsDestroyed(Actor target) {
 		if (target != null) {
-			target.setAttribute(Attribute.DESTROYED);
+			applyAttribute(target, Attribute.DESTROYED);
 		}
 	}
 
@@ -1282,8 +1429,8 @@ public class GameLogic implements Cloneable {
 			Minion existingMinion = (Minion) existingSummon;
 			Minion minionToMerge = (Minion) summonToMerge;
 			if (existingMinion != null) {
-				existingMinion.modifyAttribute(Attribute.ATTACK, minionToMerge.getAttack());
-				existingMinion.modifyHpBonus(minionToMerge.getHp());
+				existingMinion.modifyAttribute(Attribute.ATTACK, getEntityAttack(minionToMerge));
+				existingMinion.modifyHpBonus(minionToMerge.getHp(), getEntityMaxHp(existingMinion));
 			}
 			handleEnrage(existingSummon);
 		}
@@ -1331,6 +1478,7 @@ public class GameLogic implements Cloneable {
 		}
 	}
 
+	@Deprecated
 	public void modifyMaxHp(Actor actor, int value) {
 		actor.setMaxHp(value);
 		actor.setHp(value);
@@ -1427,11 +1575,11 @@ public class GameLogic implements Cloneable {
 
 		int modifiedManaCost = getModifiedManaCost(player, card);
 		if (card.getCardType().isCardType(CardType.SPELL)
-				&& player.hasAttribute(Attribute.SPELLS_COST_HEALTH)) {
+				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
-		} else if ((Race) card.getAttribute(Attribute.RACE) == Race.MURLOC
-				&& player.getHero().hasAttribute(Attribute.MURLOCS_COST_HEALTH)) {
+		} else if (card.getRace() == Race.MURLOC
+				&& hasEntityAttribute(player.getHero(), Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
 		} else {
@@ -1445,7 +1593,7 @@ public class GameLogic implements Cloneable {
 		CardPlayedEvent cardPlayedEvent = new CardPlayedEvent(context, playerId, card);
 		context.fireGameEvent(cardPlayedEvent);
 
-		if (card.hasAttribute(Attribute.OVERLOAD)) {
+		if (hasEntityAttribute(card, Attribute.OVERLOAD)) {
 			context.fireGameEvent(new OverloadEvent(context, playerId, card));
 		}
 
@@ -1454,13 +1602,13 @@ public class GameLogic implements Cloneable {
 		if ((card.getCardType().isCardType(CardType.SPELL))) {
 			GameEvent spellCastedEvent = new SpellCastedEvent(context, playerId, card);
 			context.fireGameEvent(spellCastedEvent);
-			if (card.hasAttribute(Attribute.COUNTERED)) {
+			if (hasEntityAttribute(card, Attribute.COUNTERED)) {
 				log("{} was countered!", card.getName());
 				return;
 			}
 		}
 
-		if (card.hasAttribute(Attribute.OVERLOAD)) {
+		if (hasEntityAttribute(card, Attribute.OVERLOAD)) {
 			player.modifyAttribute(Attribute.OVERLOAD, card.getAttributeValue(Attribute.OVERLOAD));
 		}
 	}
@@ -1559,22 +1707,22 @@ public class GameLogic implements Cloneable {
 
 	public void refreshAttacksPerRound(Entity entity) {
 		int attacks = 1;
-		if (entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (hasEntityAttribute(entity, Attribute.MEGA_WINDFURY)) {
 			attacks = MEGA_WINDFURY_ATTACKS;
-		} else if (entity.hasAttribute(Attribute.WINDFURY)) {
+		} else if (hasEntityAttribute(entity, Attribute.WINDFURY)) {
 			attacks = WINDFURY_ATTACKS;
 		}
 		entity.setAttribute(Attribute.NUMBER_OF_ATTACKS, attacks);
 	}
 
 	public void removeAttribute(Entity entity, Attribute attr) {
-		if (!entity.hasAttribute(attr)) {
+		if (!hasEntityAttribute(entity, attr)) {
 			return;
 		}
-		if (attr == Attribute.MEGA_WINDFURY && entity.hasAttribute(Attribute.WINDFURY)) {
+		if (attr == Attribute.MEGA_WINDFURY && hasEntityAttribute(entity, Attribute.WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, WINDFURY_ATTACKS - MEGA_WINDFURY_ATTACKS);
 		}
-		if (attr == Attribute.WINDFURY && !entity.hasAttribute(Attribute.MEGA_WINDFURY)) {
+		if (attr == Attribute.WINDFURY && !hasEntityAttribute(entity, Attribute.MEGA_WINDFURY)) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - WINDFURY_ATTACKS);
 		} else if (attr == Attribute.MEGA_WINDFURY) {
 			entity.modifyAttribute(Attribute.NUMBER_OF_ATTACKS, 1 - MEGA_WINDFURY_ATTACKS);
@@ -1611,7 +1759,7 @@ public class GameLogic implements Cloneable {
 		Player player = context.getPlayer(playerId);
 		List<Card> cardList = new ArrayList<Card>(player.getHand().toList());
 		for (Card card : cardList) {
-			if (card.hasAttribute(Attribute.GHOSTLY)) {
+			if (hasEntityAttribute(card, Attribute.GHOSTLY)) {
 				discardCard(player, card);
 			}
 		}
@@ -1633,7 +1781,7 @@ public class GameLogic implements Cloneable {
 
 		log("{} was removed", summon);
 
-		summon.setAttribute(Attribute.DESTROYED);
+		applyAttribute(summon, Attribute.DESTROYED);
 
 		Player owner = context.getPlayer(summon.getOwner());
 		owner.getSummons().remove(summon);
@@ -1674,6 +1822,12 @@ public class GameLogic implements Cloneable {
 		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
 			CardCostModifier cardCostModifier = iterator.next();
 			if (cardCostModifier.getHostReference().equals(entityReference)) {
+				iterator.remove();
+			}
+		}
+		for (Iterator<Enchantment> iterator = context.getEnchantments().iterator(); iterator.hasNext();) {
+			Enchantment enchantment = iterator.next();
+			if (enchantment.getHostReference() != null && enchantment.getHostReference().equals(entityReference)) {
 				iterator.remove();
 			}
 		}
@@ -1775,7 +1929,7 @@ public class GameLogic implements Cloneable {
 	}
 
 	public void resolveDeathrattles(Player player, Actor actor, int boardPosition) {
-		if (!actor.hasAttribute(Attribute.DEATHRATTLES)) {
+		if (!hasEntityAttribute(actor, Attribute.DEATHRATTLES)) {
 			return;
 		}
 		if (boardPosition == -1) {
@@ -1836,8 +1990,7 @@ public class GameLogic implements Cloneable {
 		final HashSet<Attribute> immuneToSilence = new HashSet<Attribute>();
 		immuneToSilence.add(Attribute.HP);
 		immuneToSilence.add(Attribute.MAX_HP);
-		immuneToSilence.add(Attribute.BASE_HP);
-		immuneToSilence.add(Attribute.BASE_ATTACK);
+		immuneToSilence.add(Attribute.ATTACK);
 		immuneToSilence.add(Attribute.SUMMONING_SICKNESS);
 		immuneToSilence.add(Attribute.AURA_ATTACK_BONUS);
 		immuneToSilence.add(Attribute.AURA_HP_BONUS);
@@ -1855,13 +2008,12 @@ public class GameLogic implements Cloneable {
 		}
 		removeSpellTriggers(target);
 
-		int oldMaxHp = target.getMaxHp();
-		target.setMaxHp(target.getAttributeValue(Attribute.BASE_HP));
-		target.setAttack(target.getAttributeValue(Attribute.BASE_ATTACK));
-		if (target.getHp() > target.getMaxHp()) {
-			target.setHp(target.getMaxHp());
-		} else if (oldMaxHp < target.getMaxHp()) {
-			target.setHp(target.getHp() + target.getMaxHp() - oldMaxHp);
+		int oldMaxHp = getEntityMaxHp(target);
+		// TODO: Get Enchantments that are attached and remove them.
+		if (target.getHp() > getEntityMaxHp(target)) {
+			target.setHp(getEntityMaxHp(target));
+		} else if (oldMaxHp < getEntityMaxHp(target)) {
+			target.setHp(target.getHp() + getEntityMaxHp(target) - oldMaxHp);
 		}
 
 		log("{} was silenced", target);
@@ -1914,7 +2066,7 @@ public class GameLogic implements Cloneable {
 		List<Summon> summonList = player.getSummons();
 
 		if (resolveBattlecry
-				&& summon.hasAttribute(Attribute.MAGNETIC)
+				&& hasEntityAttribute(summon, Attribute.MAGNETIC)
 				&& (index >= 0 &&  index < summonList.size())) {
 			Summon rightSummon = summonList.get(index);
 			if (rightSummon instanceof Minion
@@ -1991,11 +2143,9 @@ public class GameLogic implements Cloneable {
 		if (summon instanceof Minion) {
 			Minion minion = (Minion) summon;
 			if (source != null) {
-				source.setAttribute(Attribute.ATTACK, source.getAttributeValue(Attribute.BASE_ATTACK));
-				source.setAttribute(Attribute.ATTACK_BONUS, 0);
-				source.setAttribute(Attribute.MAX_HP, source.getAttributeValue(Attribute.BASE_HP));
-				source.setAttribute(Attribute.HP, source.getAttributeValue(Attribute.BASE_HP));
-				source.setAttribute(Attribute.HP_BONUS, 0);
+				source.setAttribute(Attribute.ATTACK, source.getBaseAttributeValue(Attribute.ATTACK));
+				source.setAttribute(Attribute.MAX_HP, source.getBaseAttributeValue(Attribute.MAX_HP));
+				source.setAttribute(Attribute.HP, source.getBaseAttributeValue(Attribute.MAX_HP));
 			}
 			handleEnrage(minion);
 

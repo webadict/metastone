@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,7 @@ public class GameContext implements Cloneable, IDisposable {
 	private TriggerManager triggerManager = new TriggerManager();
 	private final HashMap<Environment, Object> environment = new HashMap<>();
 	private final List<CardCostModifier> cardCostModifiers = new ArrayList<>();
+	private final List<Enchantment> enchantmentList = new ArrayList<>();
 
 	protected int activePlayer = -1;
 	private Player winner;
@@ -72,6 +74,10 @@ public class GameContext implements Cloneable, IDisposable {
 		getCardCostModifiers().add(cardCostModifier);
 	}
 
+	public void addEnchantment(Enchantment enchantment) {
+		getEnchantments().add(enchantment);
+	}
+
 	public void addTempCard(Card card) {
 		tempCards.add(card);
 	}
@@ -100,6 +106,10 @@ public class GameContext implements Cloneable, IDisposable {
 		for (CardCostModifier cardCostModifier : cardCostModifiers) {
 			clone.cardCostModifiers.add(cardCostModifier.clone());
 		}
+		clone.enchantmentList.clear();
+		for (Enchantment enchantment : enchantmentList) {
+			clone.enchantmentList.add(enchantment.clone());
+		}
 		
 		Stack<Integer> damageStack = new Stack<Integer>();
 		damageStack.addAll(getDamageStack());
@@ -126,6 +136,7 @@ public class GameContext implements Cloneable, IDisposable {
 			players[i] = null;
 		}
 		getCardCostModifiers().clear();
+		getEnchantments().clear();
 		triggerManager.dispose();
 		environment.clear();
 	}
@@ -253,6 +264,10 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public DeckFormat getDeckFormat() {
 		return deckFormat;
+	}
+
+	public List<Enchantment> getEnchantments() {
+		return enchantmentList;
 	}
 
 	public HashMap<Environment, Object> getEnvironment() {

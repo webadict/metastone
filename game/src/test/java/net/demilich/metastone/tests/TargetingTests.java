@@ -35,7 +35,7 @@ public class TargetingTests extends TestBase {
 
 		Entity attacker = getSingleMinion(mage.getMinions());
 		Entity defender = getSingleMinion(victim.getMinions());
-		Assert.assertEquals(defender.hasAttribute(Attribute.TAUNT), true);
+		Assert.assertEquals(context.getLogic().hasEntityAttribute(defender, Attribute.TAUNT), true);
 
 		List<Entity> validTargets;
 

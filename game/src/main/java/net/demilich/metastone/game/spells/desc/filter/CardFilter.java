@@ -49,7 +49,7 @@ public class CardFilter extends EntityFilter {
 			return false;
 		}
 		Race race = (Race) desc.get(FilterArg.RACE);
-		if (race != null && race != card.getAttribute(Attribute.RACE)) {
+		if (race != null && race != card.getRace()) {
 			return false;
 		}
 		
@@ -84,7 +84,7 @@ public class CardFilter extends EntityFilter {
 			Attribute attribute = (Attribute) desc.get(FilterArg.ATTRIBUTE);
 			Operation operation = (Operation) desc.get(FilterArg.OPERATION);
 			if (operation == Operation.HAS || operation == null) {
-				return card.hasAttribute(attribute);
+				return context.getLogic().hasEntityAttribute(card, attribute);
 			}
 	
 			int targetValue = desc.getInt(FilterArg.VALUE);

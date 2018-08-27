@@ -86,8 +86,13 @@ public class CardToken extends BorderPane {
 		hpIcon.setVisible(isMinionOrWeaponCard);
 		if (card.getCardType().isCardType(CardType.MINION)) {
 			MinionCard minionCard = (MinionCard) card;
-			setScoreValue(attackAnchor, minionCard.getAttack() + minionCard.getBonusAttack(), minionCard.getBaseAttack());
-			setScoreValue(hpAnchor, minionCard.getHp() + minionCard.getBonusHp(), minionCard.getBaseHp());
+			if (context == null) {
+				setScoreValue(attackAnchor, minionCard.getBaseAttack(), minionCard.getBaseAttack());
+				setScoreValue(hpAnchor, minionCard.getBaseHp(), minionCard.getBaseHp());
+			} else {
+				setScoreValue(attackAnchor, context.getLogic().getEntityAttack(minionCard), minionCard.getBaseAttack());
+				setScoreValue(hpAnchor, minionCard.getHp() + minionCard.getBonusHp(), minionCard.getBaseHp());
+			}
 		} else if (card.getCardType().isCardType(CardType.WEAPON)) {
 			WeaponCard weaponCard = (WeaponCard) card;
 			setScoreValue(attackAnchor, weaponCard.getDamage() + weaponCard.getBonusDamage(), weaponCard.getBaseDamage());

@@ -20,26 +20,27 @@ public class ModifyDamageSpell extends Spell {
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(SpellArg.OPERATION);
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
 		int minDamage = desc.getInt(SpellArg.MIN_DAMAGE, 0);
+		Entity eventTarget = context.resolveSingleTarget(context.getEventTargetStack().peek());
 		switch(operation) {
 		case ADD:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage += value;
 			break;
 		case SUBTRACT:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage -= value;
 			damage = Math.max(minDamage, damage);
 			break;
 		case MODULO:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				damage /= 2;
 			}
 			damage %= value;
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				damage *= 2;
 			}
 			break;
@@ -54,13 +55,13 @@ public class ModifyDamageSpell extends Spell {
 			damage = -damage;
 			break;
 		case SET:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			damage = value;
 			break;
 		case MINIMUM:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			if (damage < value) {
@@ -68,7 +69,7 @@ public class ModifyDamageSpell extends Spell {
 			}
 			break;
 		case MAXIMUM:
-			if ((context.resolveSingleTarget(context.getEventTargetStack().peek())).hasAttribute(Attribute.TAKE_DOUBLE_DAMAGE)) {
+			if (context.getLogic().hasEntityAttribute(eventTarget, Attribute.TAKE_DOUBLE_DAMAGE)) {
 				value *= 2;
 			}
 			if (damage > value) {

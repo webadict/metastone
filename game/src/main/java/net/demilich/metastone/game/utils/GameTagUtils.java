@@ -62,8 +62,6 @@ public class GameTagUtils {
 		case AURA_UNTARGETABLE_BY_SPELLS:
 		case WINDFURY:
 			return TagValueType.BOOLEAN;
-		case BASE_ATTACK:
-		case BASE_HP:
 		case BATTLECRY:
 		case DEATHRATTLES:
 		case DEBUG:

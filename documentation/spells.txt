@@ -192,7 +192,7 @@ Examples: Wild Growth(Excess Mana),Ice Lance, Upgrade!
 
 
 EnrageSpell
-Gives a minion a buff when damage is first dealt to it.
+Gives a minion a enchantment when damage is first dealt to it.
 Examples: Amani Berserker, Raging Worgen, Angry Chicken
 "attackBonus": Attack to gain when enraged.
 "attribute": Attribute to gain when enraged.

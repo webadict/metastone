@@ -17,16 +17,14 @@ import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 public class MinionCard extends SummonCard {
 
 	private static final Set<Attribute> ignoredAttributes = new HashSet<Attribute>(
-			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.BASE_ATTACK,
-					Attribute.BASE_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
+			Arrays.asList(new Attribute[] { Attribute.PASSIVE_TRIGGER, Attribute.DECK_TRIGGER, Attribute.MANA_COST_MODIFIER, Attribute.ATTACK,
+					Attribute.MAX_HP, Attribute.SECRET, Attribute.QUEST, Attribute.CHOOSE_ONE, Attribute.BATTLECRY, Attribute.COMBO }));
 
 	private final MinionCardDesc desc;
 
 	public MinionCard(MinionCardDesc desc) {
 		super(desc);
-		setAttribute(Attribute.BASE_ATTACK, desc.baseAttack);
 		setAttribute(Attribute.ATTACK, desc.baseAttack);
-		setAttribute(Attribute.BASE_HP, desc.baseHp);
 		setAttribute(Attribute.HP, desc.baseHp);
 		setAttribute(Attribute.MAX_HP, desc.baseHp);
 		if (desc.race != null) {
@@ -43,7 +41,7 @@ public class MinionCard extends SummonCard {
 			}
 		}
 		minion.setBaseAttack(getBaseAttack());
-		minion.setAttack(getAttack());
+		minion.setAttack(getBaseAttack());
 		minion.setHp(getHp());
 		minion.setMaxHp(getHp());
 		minion.setBaseHp(getBaseHp());
@@ -75,16 +73,9 @@ public class MinionCard extends SummonCard {
 		if (desc.cardCostModifier != null) {
 			minion.setCardCostModifier(desc.cardCostModifier.create());
 		}
-		minion.setHp(minion.getMaxHp());
+		// TODO: Check if necessary. Probs not.
+		//minion.setHp(minion.getMaxHp());
 		return minion;
-	}
-
-	public int getAttack() {
-		return getAttributeValue(Attribute.ATTACK);
-	}
-	
-	public int getBonusAttack() {
-		return getAttributeValue(Attribute.ATTACK_BONUS);
 	}
 
 	public int getHp() {
@@ -96,20 +87,16 @@ public class MinionCard extends SummonCard {
 	}
 
 	public int getBaseAttack() {
-		return getAttributeValue(Attribute.BASE_ATTACK);
+		return getBaseAttributeValue(Attribute.ATTACK);
 	}
 
 	public int getBaseHp() {
-		return getAttributeValue(Attribute.BASE_HP);
+		return getBaseAttributeValue(Attribute.MAX_HP);
 	}
 
 	@Override
 	public PlayCardAction play() {
 		return new PlayMinionCardAction(getCardReference());
-	}
-
-	public void setRace(Race race) {
-		setAttribute(Attribute.RACE, race);
 	}
 
 	public Minion summon() {

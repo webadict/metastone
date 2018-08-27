@@ -33,13 +33,13 @@ public class SecretTest extends TestBase {
 		context.setActivePlayer(warrior.getId());
 		Actor minion = getSingleMinion(warrior.getMinions());
 		attack(context, warrior, minion, mage.getHero());
-		Assert.assertEquals(mage.getHero().getHp(), mage.getHero().getMaxHp() - minion.getAttack());
-		Assert.assertEquals(minion.getHp(), minion.getMaxHp() - SECRET_DAMAGE);
+		Assert.assertEquals(mage.getHero().getHp(), context.getLogic().getEntityMaxHp(mage.getHero()) - context.getLogic().getEntityAttack(minion));
+		Assert.assertEquals(minion.getHp(), context.getLogic().getEntityMaxHp(minion) - SECRET_DAMAGE);
 
 		playCard(context, mage, new TestSecretCard(SECRET_DAMAGE));
 		attack(context, warrior, minion, mage.getHero());
 		Assert.assertTrue(minion.isDestroyed());
-		Assert.assertEquals(mage.getHero().getHp(), mage.getHero().getMaxHp() - minion.getAttack());
+		Assert.assertEquals(mage.getHero().getHp(), context.getLogic().getEntityMaxHp(mage.getHero()) - context.getLogic().getEntityAttack(minion));
 	}
 
 	@Test

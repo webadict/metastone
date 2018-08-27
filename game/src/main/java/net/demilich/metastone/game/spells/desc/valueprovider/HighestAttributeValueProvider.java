@@ -51,9 +51,9 @@ public class HighestAttributeValueProvider extends ValueProvider {
 			} else {
 				Actor source = (Actor) entity;
 				if (attribute == Attribute.ATTACK) {
-					value = Math.max(source.getAttack(), value);
+					value = Math.max(context.getLogic().getEntityAttack(source), value);
 				} else if (attribute == Attribute.MAX_HP) {
-					value = Math.max(source.getMaxHp(), value);
+					value = Math.max(context.getLogic().getEntityMaxHp(source), value);
 				} else {
 					value = Math.max(source.getAttributeValue(attribute), value);
 				}

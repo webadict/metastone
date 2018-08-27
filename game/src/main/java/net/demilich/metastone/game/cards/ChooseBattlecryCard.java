@@ -16,7 +16,7 @@ public class ChooseBattlecryCard extends MinionCard implements IChooseOneCard {
 		super(desc);
 		this.battlecryOptions = desc.options;
 		this.battlecryBothOptions = desc.bothOptions;
-		setAttribute(Attribute.CHOOSE_ONE);
+		setBaseAttribute(Attribute.CHOOSE_ONE);
 	}
 
 	public boolean hasBothOptions() {

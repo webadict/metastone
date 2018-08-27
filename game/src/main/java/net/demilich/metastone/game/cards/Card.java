@@ -154,10 +154,6 @@ public abstract class Card extends Entity {
 		return rarity;
 	}
 
-	public Race getRace() {
-		return hasAttribute(Attribute.RACE) ? (Race) getAttribute(Attribute.RACE) : Race.NONE;
-	}
-
 	public boolean hasBattlecry() {
 		return this.battlecry != null;
 	}
@@ -207,12 +203,12 @@ public abstract class Card extends Entity {
 					evaluateExpression(operator, getBaseManaCost(), value)) {
 				return true;
 			}
-			if (split[0].contains("attack") && hasAttribute(Attribute.BASE_ATTACK) &&
-					evaluateExpression(operator, getAttributeValue(Attribute.BASE_ATTACK), value)) {
+			if (split[0].contains("attack") && hasBaseAttribute(Attribute.ATTACK) &&
+					evaluateExpression(operator, getBaseAttributeValue(Attribute.ATTACK), value)) {
 				return true;
 			}
-			if ((split[0].contains("health") || split[0].contains("hp")) && hasAttribute(Attribute.BASE_HP) &&
-					evaluateExpression(operator, getAttributeValue(Attribute.BASE_HP), value)) {
+			if ((split[0].contains("health") || split[0].contains("hp")) && hasBaseAttribute(Attribute.MAX_HP) &&
+					evaluateExpression(operator, getBaseAttributeValue(Attribute.MAX_HP), value)) {
 				return true;
 			}
 		}

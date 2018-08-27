@@ -21,10 +21,10 @@ public class CardTooltip extends CardToken {
 	public void setCard(GameContext context, Card card, Player player) {
 		super.setCard(context, card, player);
 		descriptionLabel.setText(card.getDescription());
-		if (!card.hasAttribute(Attribute.RACE) || card.getAttribute(Attribute.RACE) == Race.NONE) {
+		if (card.getRace() == Race.NONE) {
 			raceLabel.setVisible(false);
 		} else {
-			raceLabel.setText(card.getAttribute(Attribute.RACE).toString());
+			raceLabel.setText(card.getRace().toString());
 			raceLabel.setVisible(true);
 		}
 	}

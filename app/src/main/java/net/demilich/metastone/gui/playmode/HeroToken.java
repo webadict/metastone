@@ -76,12 +76,12 @@ public class HeroToken extends GameToken {
 		target.setStyle(cssBorder);
 	}
 
-	public void setHero(Player player) {
+	public void setHero(GameContext context, Player player) {
 		Hero hero = player.getHero();
-		setScoreValue(attackAnchor, hero.getAttack());
+		setScoreValue(attackAnchor, context.getLogic().getEntityAttack(hero));
 		Image portraitImage = new Image(IconFactory.getHeroIconUrl(hero.getHeroClass()));
 		portrait.setImage(portraitImage);
-		setScoreValue(hpAnchor, hero.getHp(), hero.getAttributeValue(Attribute.BASE_HP), hero.getMaxHp());
+		setScoreValue(hpAnchor, hero.getHp(), hero.getBaseAttributeValue(Attribute.MAX_HP), context.getLogic().getEntityMaxHp(hero));
 		if (!player.getDeck().isEmpty()) {
 			cardsLabel.setText("Cards in deck: " + player.getDeck().getCount());
 		} else {
@@ -94,9 +94,9 @@ public class HeroToken extends GameToken {
 		}
 		updateArmor(hero.getArmor());
 		updateHeroPower(hero);
-		updateWeapon(hero.getWeapon());
+		updateWeapon(context, hero.getWeapon());
 		updateSecrets(player);
-		updateStatus(hero);
+		updateStatus(context, hero);
 	}
 
 	private void updateArmor(int armor) {
@@ -144,17 +144,17 @@ public class HeroToken extends GameToken {
 		}
 	}
 
-	private void updateStatus(Hero hero) {
-		frozen.setVisible(hero.hasAttribute(Attribute.FROZEN));
+	private void updateStatus(GameContext context, Hero hero) {
+		frozen.setVisible(context.getLogic().hasEntityAttribute(hero, Attribute.FROZEN));
 	}
 
-	private void updateWeapon(Weapon weapon) {
+	private void updateWeapon(GameContext context, Weapon weapon) {
 		boolean hasWeapon = weapon != null;
 		weaponPane.setVisible(hasWeapon);
 		if (hasWeapon) {
 			weaponNameLabel.setText(weapon.getName());
-			setScoreValue(weaponAttackAnchor, weapon.getWeaponDamage(), weapon.getBaseAttack());
-			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), weapon.getMaxDurability());
+			setScoreValue(weaponAttackAnchor, context.getLogic().getEntityAttack(weapon), weapon.getBaseAttack());
+			setScoreValue(weaponDurabilityAnchor, weapon.getDurability(), weapon.getBaseDurability(), context.getLogic().getEntityMaxHp(weapon));
 			Tooltip tooltip = new Tooltip();
 			CardTooltip tooltipContent = new CardTooltip();
 			tooltipContent.setCard(weapon.getSourceCard());

@@ -8,7 +8,7 @@ public class Minion extends Summon {
 
 	public Minion(MinionCard sourceCard) {
 		super(sourceCard);
-		Race race = sourceCard.hasAttribute(Attribute.RACE) ? (Race) sourceCard.getAttribute(Attribute.RACE) : Race.NONE;
+		Race race = getRace();
 		setRace(race);
 	}
 
@@ -16,14 +16,6 @@ public class Minion extends Summon {
 	public Minion clone() {
 		Minion clone = (Minion) super.clone();
 		return clone;
-	}
-
-	@Override
-	public int getAttack() {
-		if (hasAttribute(Attribute.ATTACK_EQUALS_HP)) {
-			return getHp();
-		}
-		return super.getAttack();
 	}
 
 	@Override

@@ -86,22 +86,22 @@ public class SpecialCardTests extends TestBase {
 		Actor defender = getSingleMinion(warrior.getMinions());
 
 		// Gurubashi Berserker should start with just his base attack
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK);
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK);
 
 		// first attack, Gurubashi Berserker should have increased attack
 		GameAction attackAction = new PhysicalAttackAction(attacker.getReference());
 		attackAction.setTarget(defender);
 		context.getLogic().performGameAction(mage.getId(), attackAction);
 
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - BASE_ATTACK);
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + ATTACK_BONUS);
+		Assert.assertEquals(attacker.getHp(), context.getLogic().getEntityMaxHp(attacker) - BASE_ATTACK);
+		Assert.assertEquals(defender.getHp(), context.getLogic().getEntityMaxHp(defender) - context.getLogic().getEntityAttack(attacker));
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK + ATTACK_BONUS);
 
 		// second attack, Gurubashi Berserker should become even stronger
 		context.getLogic().performGameAction(mage.getId(), attackAction);
-		Assert.assertEquals(attacker.getHp(), attacker.getMaxHp() - 2 * BASE_ATTACK - ATTACK_BONUS);
-		Assert.assertEquals(defender.getHp(), defender.getMaxHp() - 2 * attacker.getAttack());
-		Assert.assertEquals(defender.getAttack(), BASE_ATTACK + 2 * ATTACK_BONUS);
+		Assert.assertEquals(attacker.getHp(), context.getLogic().getEntityMaxHp(attacker) - 2 * BASE_ATTACK - ATTACK_BONUS);
+		Assert.assertEquals(defender.getHp(), context.getLogic().getEntityMaxHp(defender) - 2 * context.getLogic().getEntityAttack(attacker));
+		Assert.assertEquals(context.getLogic().getEntityAttack(defender), BASE_ATTACK + 2 * ATTACK_BONUS);
 	}
 
 	@Test
@@ -121,22 +121,22 @@ public class SpecialCardTests extends TestBase {
 		Actor minion = getSingleMinion(player.getMinions());
 
 		context.getLogic().performGameAction(player.getId(), druid.getHeroPower().play());
-		Assert.assertEquals(druid.getAttack(), 1);
-		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(context.getLogic().getEntityAttack(druid), 1);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 1);
 
 		Card savageRoar = CardCatalogue.getCardById("spell_savage_roar");
 		context.getLogic().receiveCard(player.getId(), savageRoar);
 		context.getLogic().performGameAction(player.getId(), savageRoar.play());
-		Assert.assertEquals(druid.getAttack(), 3);
-		Assert.assertEquals(minion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(druid), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 3);
 
 		context.getLogic().endTurn(player.getId());
-		Assert.assertEquals(druid.getAttack(), 0);
-		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(context.getLogic().getEntityAttack(druid), 0);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 1);
 
 		context.getLogic().endTurn(player.getId());
-		Assert.assertEquals(druid.getAttack(), 0);
-		Assert.assertEquals(minion.getAttack(), 1);
+		Assert.assertEquals(context.getLogic().getEntityAttack(druid), 0);
+		Assert.assertEquals(context.getLogic().getEntityAttack(minion), 1);
 	}
 
 	@Test
@@ -149,13 +149,13 @@ public class SpecialCardTests extends TestBase {
 		playCard(context, player, fieryWarAxe);
 
 		Assert.assertTrue(player.getHero().getWeapon() != null);
-		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(player.getHero().getWeapon()), 3);
 
 		MinionCard spitefulSmithCard = (MinionCard) CardCatalogue.getCardById("minion_spiteful_smith");
 		Minion spitefulSmith = playMinionCard(context, player, spitefulSmithCard);
 		// Smith has been played, but is not enraged yet, so weapon damage
 		// should still be unaltered
-		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(player.getHero().getWeapon()), 3);
 
 		SpellCard damageSpell = new TestSpellCard(DamageSpell.create(1));
 		damageSpell.setTargetRequirement(TargetSelection.ANY);
@@ -165,12 +165,12 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(player.getId(), spellAction);
 
 		// Smith is damaged now, so weapon should be buffed
-		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
+		Assert.assertEquals(context.getLogic().getEntityAttack(player.getHero().getWeapon()), 5);
 
 		// equip a new weapon; this one should get buffed too
 		fieryWarAxe = CardCatalogue.getCardById("weapon_fiery_war_axe");
 		playCard(context, player, fieryWarAxe);
-		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 5);
+		Assert.assertEquals(context.getLogic().getEntityAttack(player.getHero().getWeapon()), 5);
 
 		// wipe everything
 		SpellDesc wipeSpell = DestroySpell.create(EntityReference.ALL_MINIONS);
@@ -178,7 +178,7 @@ public class SpecialCardTests extends TestBase {
 		playCard(context, player, wipe);
 
 		// Smith is destroyed, weapon power should be back to normal
-		Assert.assertEquals(player.getHero().getWeapon().getWeaponDamage(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(player.getHero().getWeapon()), 3);
 	}
 
 	@Test
@@ -260,7 +260,7 @@ public class SpecialCardTests extends TestBase {
 		GameAction action = betrayal.play();
 		action.setTarget(targetMinion);
 		context.getLogic().performGameAction(rogue.getId(), action);
-		Assert.assertEquals(targetMinion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(targetMinion), 3);
 		Assert.assertEquals(targetMinion.getHp(), 1);
 
 		Assert.assertEquals(adjacentMinion1.getHp(), 2);
@@ -296,7 +296,7 @@ public class SpecialCardTests extends TestBase {
 		GameAction action = betrayal.play();
 		action.setTarget(targetMinion);
 		context.getLogic().performGameAction(rogue.getId(), action);
-		Assert.assertEquals(targetMinion.getAttack(), 3);
+		Assert.assertEquals(context.getLogic().getEntityAttack(targetMinion), 3);
 		Assert.assertEquals(targetMinion.getHp(), 1);
 
 		Assert.assertEquals(adjacentMinion1.getHp(), 2);
@@ -349,7 +349,7 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(priest.getId(), spellAction);
 
 		// priest casted a spell on Eydis - warrior should be wounded
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+		Assert.assertEquals(warrior.getHero().getHp(), context.getLogic().getEntityMaxHp(warrior.getHero()) - 3);
 
 		testSpellCard = CardCatalogue.getCardById("spell_shield_slam");
 		context.getLogic().receiveCard(warrior.getId(), testSpellCard);
@@ -358,7 +358,7 @@ public class SpecialCardTests extends TestBase {
 		context.getLogic().performGameAction(warrior.getId(), spellAction);
 
 		// warrior casted a spell on Eydis - nothing should happen
-		Assert.assertEquals(warrior.getHero().getHp(), warrior.getHero().getMaxHp() - 3);
+		Assert.assertEquals(warrior.getHero().getHp(), context.getLogic().getEntityMaxHp(warrior.getHero()) - 3);
 	}
 
 	@Test
@@ -397,12 +397,12 @@ public class SpecialCardTests extends TestBase {
 		Player player = context.getPlayer1();
 		MinionCard argentSquireCard = (MinionCard) CardCatalogue.getCardById("minion_argent_squire");
 		Minion argentSquire = playMinionCard(context, player, argentSquireCard);
-		Assert.assertEquals(argentSquire.getAttack(), 1);
+		Assert.assertEquals(context.getLogic().getEntityAttack(argentSquire), 1);
 		Assert.assertEquals(argentSquire.getHp(), 1);
 
 		Card rallyingBladeCard = CardCatalogue.getCardById("weapon_rallying_blade");
 		playCard(context, player, rallyingBladeCard);
-		Assert.assertEquals(argentSquire.getAttack(), 2);
+		Assert.assertEquals(context.getLogic().getEntityAttack(argentSquire), 2);
 		Assert.assertEquals(argentSquire.getHp(), 2);
 	}
 
@@ -423,7 +423,7 @@ public class SpecialCardTests extends TestBase {
 		final int CURSE_OF_RAFAAM_DAMAGE = 2;
 		// first player should take exactly 2 damage (NOT 3, because the spell
 		// damage should not be applied)
-		Assert.assertEquals(player.getHero().getHp(), player.getHero().getMaxHp() - CURSE_OF_RAFAAM_DAMAGE);
+		Assert.assertEquals(player.getHero().getHp(), context.getLogic().getEntityMaxHp(player.getHero()) - CURSE_OF_RAFAAM_DAMAGE);
 
 	}
 

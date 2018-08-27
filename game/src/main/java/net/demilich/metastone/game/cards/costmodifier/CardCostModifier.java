@@ -51,7 +51,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 
-		if (getRequiredRace() != null && card.getAttribute(Attribute.RACE) != getRequiredRace()) {
+		if (getRequiredRace() != null && card.getRace() != getRequiredRace()) {
 			return false;
 		}
 
@@ -124,7 +124,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 	@SuppressWarnings("unchecked")
 	protected List<Integer> getRequiredCardIds() {
 		if (!desc.contains(CardCostModifierArg.CARD_IDS)) {
-			return new ArrayList<Integer>();
+			return new ArrayList<>();
 		}
 		return (List<Integer>) desc.get(CardCostModifierArg.CARD_IDS);
 	}

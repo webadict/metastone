@@ -61,19 +61,19 @@ public class Brain implements IBrain {
 		}
 	}
 
-	private void encodePlayer(Player player, double[] data, int offset) {
+	private void encodePlayer(GameContext context, Player player, double[] data, int offset) {
 		List<Minion> minions = player.getMinions();
 		int totalMinionAttack = 0;
 		int totalMinionHp = 0;
 		for (int i = 0; i < 7; i++) {
 			Minion minion = i < minions.size() ? player.getMinions().get(i) : null;
-			totalMinionAttack += minion != null ? minion.getAttack() : 0;
+			totalMinionAttack += minion != null ? context.getLogic().getEntityAttack(minion) : 0;
 			totalMinionHp += minion != null ? minion.getHp() : 0;
 		}
 		data[offset++] = minions.size() / 7.0;
 		data[offset++] = MathUtils.clamp01(totalMinionAttack / 40.0);
 		data[offset++] = MathUtils.clamp01(totalMinionHp / 40.0);
-		data[offset++] = MathUtils.clamp01(player.getHero().getAttack() / 10.0);
+		data[offset++] = MathUtils.clamp01(context.getLogic().getEntityAttack(player.getHero()) / 10.0);
 		data[offset++] = MathUtils.clamp01((player.getHero().getHp() + player.getHero().getArmor()) / 40.0);
 		data[offset++] = player.getHand().getCount() / 10.0;
 		data[offset++] = MathUtils.clamp01(player.getDeck().getCount() / 30.0);
@@ -83,8 +83,8 @@ public class Brain implements IBrain {
 		double[] input = new double[INPUTS];
 		Player player = context.getPlayer(playerId);
 		Player opponent = context.getOpponent(player);
-		encodePlayer(player, input, 0);
-		encodePlayer(opponent, input, INPUTS / 2);
+		encodePlayer(context, player, input, 0);
+		encodePlayer(context, opponent, input, INPUTS / 2);
 		input[INPUTS - 1] = MathUtils.clamp01(context.getTurn() / 10.0);
 		return input;
 	}

@@ -23,7 +23,6 @@ public class SetAttackSpell extends Spell {
 		target.setAttribute(Attribute.ATTACK, value);
 		target.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
 		target.removeAttribute(Attribute.ATTACK_BONUS);
-		target.removeAttribute(Attribute.CONDITIONAL_ATTACK_BONUS);
 	}
 
 }

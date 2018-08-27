@@ -26,7 +26,7 @@ public class ClassicMageCards extends TestBase {
 		
 		playCard(context, player, CardCatalogue.getCardById("spell_blizzard"));
 		
-		Assert.assertEquals(impGangBoss.getHp(), impGangBoss.getMaxHp() - 2);
+		Assert.assertEquals(impGangBoss.getHp(), context.getLogic().getEntityMaxHp(impGangBoss) - 2);
 		for (Minion minion : opponent.getMinions()) {
 			Assert.assertEquals(minion.hasAttribute(Attribute.FROZEN), true);	
 		}

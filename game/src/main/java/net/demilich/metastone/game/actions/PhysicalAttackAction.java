@@ -28,10 +28,10 @@ public class PhysicalAttackAction extends GameAction {
 			return true;
 		}
 		Actor attacker = (Actor) context.resolveSingleTarget(attackerReference);
-		if (attacker.hasAttribute(Attribute.CANNOT_ATTACK_HEROES) ||
-				((attacker.hasAttribute(Attribute.CANNOT_ATTACK_HERO_ON_SUMMON) 
-						|| attacker.hasAttribute(Attribute.RUSH))
-						&& attacker.hasAttribute(Attribute.SUMMONING_SICKNESS))) {
+		if (context.getLogic().hasEntityAttribute(attacker, Attribute.CANNOT_ATTACK_HEROES)
+				|| ((context.getLogic().hasEntityAttribute(attacker, Attribute.CANNOT_ATTACK_HERO_ON_SUMMON)
+				|| context.getLogic().hasEntityAttribute(attacker, Attribute.RUSH))
+				&& context.getLogic().hasEntityAttribute(attacker, Attribute.SUMMONING_SICKNESS))) {
 			return false;
 		}
 		return true;
