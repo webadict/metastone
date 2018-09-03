@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 9,
 	"baseHp": 7,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Deathrattle: Replace your hero with Ragnaros, the Firelord.",
 	"deathrattle": {

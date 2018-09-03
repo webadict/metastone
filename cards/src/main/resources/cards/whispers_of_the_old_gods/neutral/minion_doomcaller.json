@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 9,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "RARE",
 	"description": "Battlecry: Give your C'Thun +2/+2 (wherever it is). If it's dead, shuffle it into your deck.",
 	"battlecry": {

@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 5,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "EPIC",
 	"description": "Your cards cost (5).",
 	"cardCostModifier": {

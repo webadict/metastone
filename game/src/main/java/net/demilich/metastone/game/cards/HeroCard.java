@@ -1,14 +1,15 @@
 package net.demilich.metastone.game.cards;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
+import net.demilich.metastone.game.actions.PlayHeroCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HeroCard extends Card {
 
@@ -36,7 +37,7 @@ public class HeroCard extends Card {
 
 	@Override
 	public PlayCardAction play() {
-		throw new UnsupportedOperationException("Hero cards cannot be played");
+		return new PlayHeroCardAction(getCardReference());
 	}
 
 }

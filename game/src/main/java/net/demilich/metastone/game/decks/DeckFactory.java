@@ -1,10 +1,11 @@
 package net.demilich.metastone.game.decks;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class DeckFactory {
 
@@ -14,13 +15,13 @@ public class DeckFactory {
 			int randomIndex = ThreadLocalRandom.current().nextInt(cards.length);
 			cardCollection.add(cards[randomIndex].clone());
 		}
-		Deck deck = new Deck(HeroClass.ANY);
+		Deck deck = new Deck(NonHeroClass.NEUTRAL);
 		deck.setName("[Debug deck]");
 		deck.getCards().addAll(cardCollection);
 		return deck;
 	}
 
-	public static Deck getRandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
+	public static Deck getRandomDeck(HeroClassImplementation heroClass, DeckFormat deckFormat) {
 		return new RandomDeck(heroClass, deckFormat);
 	}
 

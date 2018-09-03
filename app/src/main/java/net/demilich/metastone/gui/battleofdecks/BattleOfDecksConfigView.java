@@ -22,7 +22,7 @@ import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.gui.common.BehaviourStringConverter;
 import net.demilich.metastone.gui.common.DeckStringConverter;
 

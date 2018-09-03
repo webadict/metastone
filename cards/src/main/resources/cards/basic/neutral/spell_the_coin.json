@@ -2,7 +2,7 @@
 	"name": "The Coin",
 	"baseManaCost": 0,
 	"type": "SPELL",
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Gain 1 Mana Crystals this turn only.",
 	"targetSelection": "NONE",

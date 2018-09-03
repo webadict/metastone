@@ -1,0 +1,11 @@
+{
+	"name": "Poison Spit",
+	"type": "ENCHANTMENT",
+	"description": "Poisonous",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "POISONOUS"
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

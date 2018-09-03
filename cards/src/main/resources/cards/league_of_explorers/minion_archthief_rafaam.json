@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 8,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Discover a powerful Artifact.",
 	"battlecry": {

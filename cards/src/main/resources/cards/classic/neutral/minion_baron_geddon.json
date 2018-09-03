@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 7,
 	"baseHp": 5,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "At the end of your turn, deal 2 damage to ALL other characters.",
 	"trigger": {

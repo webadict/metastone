@@ -6,12 +6,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -32,7 +31,7 @@ public class TempostormImporter implements IDeckImporter{
             List<Card> cards = new ArrayList<Card>();
             String deckName = root.get("name").getAsString();
             String hero = root.get("playerClass").getAsString();
-            HeroClass heroClass = HeroClass.valueOf(hero.toUpperCase());
+            HeroClassImplementation heroClass = HeroClassImplementation.valueOf(hero.toUpperCase());
             JsonElement cardsEl = root.get("cards");
             JsonArray cardsArray = cardsEl.getAsJsonArray();
 

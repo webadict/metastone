@@ -2,7 +2,7 @@
 	"name": "Ysera Awakens",
 	"baseManaCost": 2,
 	"type": "SPELL",
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Deal 5 damage to all characters except Ysera.",
 	"targetSelection": "NONE",

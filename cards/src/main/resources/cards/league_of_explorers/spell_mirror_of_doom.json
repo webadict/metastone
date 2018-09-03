@@ -2,7 +2,7 @@
 	"name": "Mirror of Doom",
 	"baseManaCost": 10,
 	"type": "SPELL",
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Fill your board with 3/3 Mummy Zombies.",
 	"targetSelection": "NONE",

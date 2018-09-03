@@ -1,15 +1,15 @@
 package net.demilich.metastone.game.cards;
 
-import java.util.EnumMap;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
@@ -17,14 +17,16 @@ import net.demilich.metastone.game.targeting.CardLocation;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.IdFactory;
 
+import java.util.EnumMap;
+
 public abstract class Card extends Entity {
 
 	private String description = "";
 	private final CardType cardType;
-	private final CardSet cardSet;
+	private final CardSetImplementation cardSet;
 	private final Rarity rarity;
-	private HeroClass heroClass;
-	private HeroClass[] heroClasses;
+	private HeroClassImplementation heroClass;
+	private HeroClassImplementation[] heroClasses;
 	private boolean collectible = true;
 	private CardLocation location;
 	private BattlecryDesc battlecry;
@@ -103,7 +105,7 @@ public abstract class Card extends Entity {
 		return new CardReference(getOwner(), getLocation(), getId(), getName());
 	}
 
-	public CardSet getCardSet() {
+	public CardSetImplementation getCardSet() {
 		return cardSet;
 	}
 
@@ -111,11 +113,11 @@ public abstract class Card extends Entity {
 		return cardType;
 	}
 
-	public HeroClass getHeroClass() {
+	public HeroClassImplementation getHeroClass() {
 		return heroClass;
 	}
 
-	public HeroClass[] getHeroClasses() {
+	public HeroClassImplementation[] getHeroClasses() {
 		return heroClasses;
 	}
 
@@ -158,9 +160,9 @@ public abstract class Card extends Entity {
 		return this.battlecry != null;
 	}
 
-	public boolean hasHeroClass(HeroClass heroClass) {
+	public boolean hasHeroClass(HeroClassImplementation heroClass) {
 		if (getHeroClasses() != null) {
-			for (HeroClass h : getHeroClasses()) {
+			for (HeroClassImplementation h : getHeroClasses()) {
 				if (heroClass.equals(h)) {
 					return true;
 				}
@@ -222,9 +224,8 @@ public abstract class Card extends Entity {
 		if (cardType.toLowerCase().contains(filter)) {
 			return true;
 		}
-		if ((getHeroClass() == HeroClass.ANY && "neutral".contains(filter))
-				|| (getHeroClass() != HeroClass.ANY && (getHeroClass().toString().toLowerCase().contains(filter)
-				|| "class".contains(filter)))) {
+		if (getHeroClass().toString().toLowerCase().contains(filter)
+				|| "class".contains(filter)) {
 			return true;
 		}
 		String lowerCaseName = getName().toLowerCase();

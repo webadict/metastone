@@ -6,19 +6,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardDescType;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -75,9 +74,9 @@ public class CreateCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		HeroClass heroClass = HeroClass.ANY;
+		HeroClassImplementation heroClass = NonHeroClass.NEUTRAL;
 		Rarity rarity = Rarity.FREE;
-		CardSet cardSet = CardSet.BASIC;
+		CardSetImplementation cardSet = BaseCardSet.BASIC;
 		SpellDesc[] spells = discoverCardParts(context, player, desc, source, target);
 		switch (source.getEntityType()) {
 		case ANY:

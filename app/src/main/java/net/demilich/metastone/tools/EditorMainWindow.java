@@ -1,6 +1,33 @@
 package net.demilich.metastone.tools;
 
-import java.awt.Desktop;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.desc.CardDesc;
+import net.demilich.metastone.game.cards.desc.ParseUtils;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
+import org.apache.commons.lang3.StringUtils;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,36 +37,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.FileChooser;
-import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.cards.desc.CardDesc;
-import net.demilich.metastone.game.cards.desc.ParseUtils;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 
 class EditorMainWindow extends BorderPane {
 
@@ -94,10 +91,10 @@ class EditorMainWindow extends BorderPane {
 	private ComboBox<Rarity> rarityBox;
 
 	@FXML
-	private ComboBox<HeroClass> heroClassBox;
+	private ComboBox<HeroClassImplementation> heroClassBox;
 
 	@FXML
-	private ComboBox<CardSet> cardSetBox;
+	private ComboBox<CardSetImplementation> cardSetBox;
 
 	@FXML
 	private TextField manaCostField;
@@ -146,8 +143,8 @@ class EditorMainWindow extends BorderPane {
 		descriptionField.textProperty().addListener(this::onDescriptionChanged);
 
 		rarityBox.setItems(FXCollections.observableArrayList(Rarity.values()));
-		heroClassBox.setItems(FXCollections.observableArrayList(HeroClass.values()));
-		cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
+		heroClassBox.setItems(FXCollections.observableArrayList(HeroClassImplementation.values()));
+		cardSetBox.setItems(FXCollections.observableArrayList(CardSetImplementation.values()));
 
 		setCardEditor(new MinionCardPanel());
 
@@ -205,7 +202,7 @@ class EditorMainWindow extends BorderPane {
 		}
 	}
 
-	private void onCardSetChanged(ObservableValue<? extends CardSet> ov, CardSet oldCardSet, CardSet newCardSet) {
+	private void onCardSetChanged(ObservableValue<? extends CardSetImplementation> ov, CardSetImplementation oldCardSet, CardSetImplementation newCardSet) {
 		card.set = newCardSet;
 	}
 
@@ -217,7 +214,7 @@ class EditorMainWindow extends BorderPane {
 		card.description = newValue;
 	}
 
-	private void onHeroClassChanged(ObservableValue<? extends HeroClass> ov, HeroClass oldHeroClass, HeroClass newHeroClass) {
+	private void onHeroClassChanged(ObservableValue<? extends HeroClassImplementation> ov, HeroClassImplementation oldHeroClass, HeroClassImplementation newHeroClass) {
 		card.heroClass = newHeroClass;
 	}
 
@@ -280,8 +277,8 @@ class EditorMainWindow extends BorderPane {
 		} else {
 			newCard.name = "";
 			newCard.rarity = Rarity.FREE;
-			newCard.heroClass = HeroClass.ANY;
-			newCard.set = CardSet.CUSTOM;
+			newCard.heroClass = NonHeroClass.NEUTRAL;
+			newCard.set = BaseCardSet.CUSTOM;
 			newCard.baseManaCost = 0;
 			newCard.collectible = true;
 		}
@@ -318,7 +315,7 @@ class EditorMainWindow extends BorderPane {
 			});
 			comboBox.setItems(items);
 			comboBox.valueProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());
-			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<Attribute>(comboBox));
+			comboBox.setOnKeyReleased(new ComboBoxKeyHandler<>(comboBox));
 		}
 		for (TextField attributeField : attributeFields) {
 			attributeField.textProperty().addListener((ov, oldValue, newValue) -> onAttributesChanged());

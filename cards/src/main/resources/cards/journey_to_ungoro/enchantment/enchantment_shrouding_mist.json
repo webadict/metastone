@@ -1,0 +1,15 @@
+{
+	"name": "Shrouding Mist",
+	"type": "ENCHANTMENT",
+	"description": "Stealth until your next Turn",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "Stealth",
+		"revertTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		}
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

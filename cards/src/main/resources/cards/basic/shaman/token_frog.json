@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 0,
 	"baseHp": 1,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"race": "BEAST",
 	"description": "Taunt",

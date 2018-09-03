@@ -13,7 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.gui.common.CardSetStringConverter;
 import net.demilich.metastone.gui.common.DeckFormatStringConverter;
@@ -24,7 +25,7 @@ public class CardFilterView extends HBox {
 	private TextField searchField;
 
 	@FXML
-	private ComboBox<CardSet> cardSetBox;
+	private ComboBox<CardSetImplementation> cardSetBox;
 
 	@FXML
 	private ComboBox<DeckFormat> deckFormatBox;
@@ -53,7 +54,7 @@ public class CardFilterView extends HBox {
 		deckFormatBox.valueProperty().addListener(this::formatChanged);
 
 		cardSetBox.setConverter(new CardSetStringConverter());
-		cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
+		cardSetBox.setItems(FXCollections.observableArrayList(CardSetImplementation.values()));
 		cardSetBox.getSelectionModel().selectFirst();
 		cardSetBox.valueProperty().addListener(this::setChanged);
 	}
@@ -68,15 +69,15 @@ public class CardFilterView extends HBox {
 	}
 
 	private void formatChanged(ObservableValue<? extends DeckFormat> observable, DeckFormat oldValue, DeckFormat newValue) {
-		CardSet set = cardSetBox.getSelectionModel().getSelectedItem();
+		CardSetImplementation set = cardSetBox.getSelectionModel().getSelectedItem();
 		if (deckFormatBox.getSelectionModel().isSelected(0)) {
-			cardSetBox.setItems(FXCollections.observableArrayList(CardSet.values()));
+			cardSetBox.setItems(FXCollections.observableArrayList(CardSetImplementation.values()));
 		} else {
-			List<CardSet> sets = newValue.getCardSets();
-			sets.add(0, CardSet.ANY);
+			List<CardSetImplementation> sets = newValue.getCardSets();
+			sets.add(0, BaseCardSet.ANY);
 			cardSetBox.setItems(FXCollections.observableArrayList(sets));
 		}
-		if (!deckFormatBox.getSelectionModel().isSelected(0) && !set.equals(CardSet.ANY) && !newValue.isInFormat(set)) {
+		if (!deckFormatBox.getSelectionModel().isSelected(0) && !set.equals(BaseCardSet.ANY) && !newValue.isInFormat(set)) {
 			cardSetBox.getSelectionModel().selectFirst();
 		} else {
 			cardSetBox.getSelectionModel().select(set);
@@ -88,7 +89,7 @@ public class CardFilterView extends HBox {
 		this.deckFormats.addAll(deckFormats);
 	}
 
-	private void setChanged(ObservableValue<? extends CardSet> observable, CardSet oldValue, CardSet newValue) {
+	private void setChanged(ObservableValue<? extends CardSetImplementation> observable, CardSetImplementation oldValue, CardSetImplementation newValue) {
 		filterChanged();
 	}
 

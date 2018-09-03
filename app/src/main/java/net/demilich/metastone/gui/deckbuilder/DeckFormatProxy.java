@@ -21,7 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.nittygrittymvc.Proxy;
 
@@ -88,7 +88,7 @@ public class DeckFormatProxy extends Proxy<GameNotification> {
 		@SuppressWarnings("unchecked")
 		List<String> setIds = (List<String>) map.get("sets");
 		for (String setId : setIds) {
-			for (CardSet set : CardSet.values()) {
+			for (BaseCardSet set : BaseCardSet.values()) {
 				if (set.toString().equalsIgnoreCase(setId)) {
 					deckFormat.addSet(set);
 				}

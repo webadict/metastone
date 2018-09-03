@@ -1,21 +1,21 @@
 package net.demilich.metastone.game.decks;
 
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class MetaDeck extends Deck {
 
 	private final List<Deck> decks;
 
 	public MetaDeck() {
-		this(new ArrayList<Deck>());
+		this(new ArrayList<>());
 	}
 
 	public MetaDeck(List<Deck> decks) {
-		super(HeroClass.DECK_COLLECTION);
+		super(NonHeroClass.DECK_COLLECTION);
 		this.decks = decks;
 	}
 

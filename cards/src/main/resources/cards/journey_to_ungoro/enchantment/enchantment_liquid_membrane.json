@@ -1,0 +1,11 @@
+{
+	"name": "Liquid Membrane",
+	"type": "ENCHANTMENT",
+	"description": "Can't be targeted by spells or Hero Powers",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "UNTARGETABLE_BY_SPELLS"
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

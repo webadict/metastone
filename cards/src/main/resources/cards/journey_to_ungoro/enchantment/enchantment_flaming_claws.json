@@ -1,0 +1,12 @@
+{
+	"name": "Flaming Claws",
+	"type": "ENCHANTMENT",
+	"description": "+3 Attack",
+	"enchantment": {
+		"class": "BuffEnchantment",
+		"attribute": "ATTACK",
+		"value": 3
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

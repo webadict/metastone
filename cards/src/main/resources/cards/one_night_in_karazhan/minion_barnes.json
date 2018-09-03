@@ -10,10 +10,15 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "SummonOneOneCopySpell",
+			"class": "SummonAndDoSomethingSpell",
 			"cardSource": {
 				"class": "DeckSource",
 				"targetPlayer": "SELF"
+			},
+			"spell": {
+				"class": "BuffSpell",
+				"value": 1,
+				"operation": "SET"
 			},
 			"boardPositionRelative": true
 		}

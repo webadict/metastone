@@ -6,9 +6,10 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.SpellUtils;
 
@@ -18,10 +19,10 @@ public class CardFilter extends EntityFilter {
 		super(desc);
 	}
 	
-	private boolean heroClassTest(GameContext context, Player player, Card card, HeroClass heroClass) {
-		if (heroClass == HeroClass.OPPONENT) {
+	private boolean heroClassTest(GameContext context, Player player, Card card, HeroClassImplementation heroClass) {
+		if (heroClass == NonHeroClass.OPPONENT) {
 			heroClass = context.getOpponent(player).getHero().getHeroClass();
-		} else if (heroClass == HeroClass.SELF) {
+		} else if (heroClass == NonHeroClass.SELF) {
 			heroClass = player.getHero().getHeroClass();
 		}
 		
@@ -53,10 +54,10 @@ public class CardFilter extends EntityFilter {
 			return false;
 		}
 		
-		HeroClass[] heroClasses = (HeroClass[]) desc.get(FilterArg.HERO_CLASSES);
+		HeroClassImplementation[] heroClasses = (HeroClassImplementation[]) desc.get(FilterArg.HERO_CLASSES);
 		if (heroClasses != null && heroClasses.length > 0) {
 			boolean test = false;
-			for (HeroClass heroClass : heroClasses) {
+			for (HeroClassImplementation heroClass : heroClasses) {
 				test |= !heroClassTest(context, player, card, heroClass);
 			}
 			if (!test) {
@@ -64,7 +65,7 @@ public class CardFilter extends EntityFilter {
 			}
 		}
 		
-		HeroClass heroClass = (HeroClass) desc.get(FilterArg.HERO_CLASS);
+		HeroClassImplementation heroClass = (HeroClassImplementation) desc.get(FilterArg.HERO_CLASS);
 		if (heroClass != null && heroClassTest(context, player, card, heroClass)) {
 			return false;
 		}

@@ -1,0 +1,12 @@
+{
+	"name": "Rocky Carapace",
+	"type": "ENCHANTMENT",
+	"description": "+3 Health",
+	"enchantment": {
+		"class": "BuffEnchantment",
+		"attribute": "HP",
+		"value": 3
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

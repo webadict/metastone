@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 6,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "EPIC",
 	"description": "After you target another friendly minion with a spell, cast it on this one.",
 	"trigger": {

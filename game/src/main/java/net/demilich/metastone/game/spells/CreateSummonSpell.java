@@ -1,21 +1,20 @@
 package net.demilich.metastone.game.spells;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.cards.CardSet;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CreateSummonSpell extends Spell {
 	
@@ -29,7 +28,7 @@ public class CreateSummonSpell extends Spell {
 		minionCardDesc.name = desc.getString(SpellArg.NAME);
 		minionCardDesc.baseAttack = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		minionCardDesc.baseHp = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
-		minionCardDesc.heroClass = HeroClass.ANY;
+		minionCardDesc.heroClass = NonHeroClass.NEUTRAL;
 		minionCardDesc.type = CardType.MINION;
 		minionCardDesc.rarity = Rarity.FREE;
 		minionCardDesc.description = description;
@@ -37,7 +36,7 @@ public class CreateSummonSpell extends Spell {
 		if (attribute != null) {
 			minionCardDesc.attributes.put(attribute, true);
 		}
-		minionCardDesc.set = CardSet.BASIC;
+		minionCardDesc.set = BaseCardSet.BASIC;
 		minionCardDesc.collectible = false;
 		minionCardDesc.baseManaCost = desc.getValue(SpellArg.MANA, context, player, target, source, 0);
 		MinionCard newCard = (MinionCard) minionCardDesc.createInstance();
@@ -50,7 +49,7 @@ public class CreateSummonSpell extends Spell {
 			int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 			MinionCard minionCard = (MinionCard) newCard.clone();
 			Minion minion = minionCard.summon();
-			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false) && successfulSummonSpell != null) {
+			if (context.getLogic().newSummon(player.getId(), minion, null, boardPosition, false) != null && successfulSummonSpell != null) {
 				SpellUtils.castChildSpell(context, player, successfulSummonSpell, source, minion);
 			}
 			SpellUtils.castChildSpell(context, player, spell, source, target);

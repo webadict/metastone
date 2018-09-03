@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 6,
 	"baseHp": 10,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"description": "",
 	"collectible": true,

@@ -1,9 +1,10 @@
 package net.demilich.metastone.gui.deckbuilder.importer;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.decks.Deck;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.config.RequestConfig;
@@ -15,10 +16,9 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HearthPwnImporter implements IDeckImporter {
 
@@ -77,7 +77,7 @@ public class HearthPwnImporter implements IDeckImporter {
 
 	private Deck parse(String htmlContent) {
 		List<Card> cards = new ArrayList<Card>();
-		HeroClass heroClass = HeroClass.ANY;
+		HeroClassImplementation heroClass = NonHeroClass.NEUTRAL;
 		// remove html tags
 		htmlContent = htmlContent.replaceAll("\\<.+?\\>", "");
 		// remove BBCode tags
@@ -98,7 +98,7 @@ public class HearthPwnImporter implements IDeckImporter {
 				Card card = CardCatalogue.getCardByName(cardName);
 				if (card != null) {
 					cards.add(card);
-					if (card.getHeroClass() != HeroClass.ANY) {
+					if (card.getHeroClass() != NonHeroClass.NEUTRAL) {
 						heroClass = card.getHeroClass();
 					}
 				} else {

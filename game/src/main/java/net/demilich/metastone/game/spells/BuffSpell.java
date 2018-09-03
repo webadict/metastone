@@ -8,6 +8,7 @@ import net.demilich.metastone.game.cards.enchantment.Enchantment;
 import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
 import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
+import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +44,10 @@ public class BuffSpell extends Spell {
 		int attackBonus = desc.getValue(SpellArg.ATTACK_BONUS, context, player, target, source, 0);
 		int hpBonus = desc.getValue(SpellArg.HP_BONUS, context, player, target, source, 0);
 		int value = desc.getValue(SpellArg.VALUE, context, player, target, source, 0);
+		AlgebraicOperation operation = (AlgebraicOperation) desc.get(SpellArg.OPERATION);
+		if (operation == null) {
+			operation = AlgebraicOperation.ADD;
+		}
 
 		if (value != 0) {
 			attackBonus = hpBonus = value;
@@ -61,6 +66,7 @@ public class BuffSpell extends Spell {
 			if (condition != null) {
 				enchantmentMap.put(EnchantmentArg.CONDITION, condition);
 			}
+			enchantmentMap.put(EnchantmentArg.OPERATION, operation);
 			Enchantment enchantment = new Enchantment(new EnchantmentDesc(enchantmentMap));
 			context.getEnchantments().add(enchantment);
 		}
@@ -72,6 +78,7 @@ public class BuffSpell extends Spell {
 			if (condition != null) {
 				enchantmentMap.put(EnchantmentArg.CONDITION, condition);
 			}
+			enchantmentMap.put(EnchantmentArg.OPERATION, operation);
 			Enchantment enchantment = new Enchantment(new EnchantmentDesc(enchantmentMap));
 			context.getEnchantments().add(enchantment);
 			target.modifyHpBonus(hpBonus, context.getLogic().getEntityMaxHp(target));

@@ -9,7 +9,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 
 public class ThreatBasedHeuristic implements IGameStateHeuristic {

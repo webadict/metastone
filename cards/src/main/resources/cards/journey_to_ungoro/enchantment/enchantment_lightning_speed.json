@@ -1,0 +1,11 @@
+{
+	"name": "Lightning Speed",
+	"type": "ENCHANTMENT",
+	"description": "Windfury",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "WINDFURY"
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

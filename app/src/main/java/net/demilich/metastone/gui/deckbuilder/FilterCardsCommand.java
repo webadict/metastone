@@ -2,13 +2,14 @@ package net.demilich.metastone.gui.deckbuilder;
 
 import java.util.List;
 
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import org.apache.commons.lang3.StringUtils;
 
 import net.demilich.nittygrittymvc.SimpleCommand;
 import net.demilich.nittygrittymvc.interfaces.INotification;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 
 public class FilterCardsCommand extends SimpleCommand<GameNotification> {
@@ -22,8 +23,8 @@ public class FilterCardsCommand extends SimpleCommand<GameNotification> {
 		return collection;
 	}
 
-	private static List<Card> filterBySet(List<Card> collection, CardSet set) {
-		if (set == CardSet.ANY) {
+	private static List<Card> filterBySet(List<Card> collection, CardSetImplementation set) {
+		if (set == BaseCardSet.ANY) {
 			return collection;
 		}
 		collection.removeIf(card -> card.getCardSet() != set);

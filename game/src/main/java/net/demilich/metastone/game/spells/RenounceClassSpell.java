@@ -1,14 +1,12 @@
 package net.demilich.metastone.game.spells;
 
-import java.util.Map;
-
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -23,14 +21,16 @@ import net.demilich.metastone.game.spells.desc.valueprovider.AlgebraicOperation;
 import net.demilich.metastone.game.spells.trigger.CardDrawnTrigger;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+import java.util.Map;
+
 public class RenounceClassSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		
-		HeroClass renouncedClass = (HeroClass) cardFilter.getArg(FilterArg.HERO_CLASS);
-		HeroClass rebornClass = SpellUtils.getRandomHeroClassExcept(renouncedClass);
+		HeroClassImplementation renouncedClass = (HeroClassImplementation) cardFilter.getArg(FilterArg.HERO_CLASS);
+		HeroClassImplementation rebornClass = SpellUtils.getRandomHeroClassExcept(renouncedClass);
 		CardCollection cards = CardCatalogue.query(context.getDeckFormat());
 		CardCollection result = new CardCollection();
 		for (Card card : cards) {

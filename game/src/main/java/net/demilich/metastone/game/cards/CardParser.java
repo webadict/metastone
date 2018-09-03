@@ -1,39 +1,14 @@
 package net.demilich.metastone.game.cards;
 
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.util.Map;
-
-import net.demilich.metastone.utils.ResourceInputStream;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-
 import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.cards.desc.AttributeDeserializer;
-import net.demilich.metastone.game.cards.desc.AuraDeserializer;
-import net.demilich.metastone.game.cards.desc.CardCostModifierDeserializer;
-import net.demilich.metastone.game.cards.desc.CardDesc;
-import net.demilich.metastone.game.cards.desc.ChooseBattlecryCardDesc;
-import net.demilich.metastone.game.cards.desc.ChooseOneCardDesc;
-import net.demilich.metastone.game.cards.desc.ConditionDeserializer;
-import net.demilich.metastone.game.cards.desc.GroupCardDesc;
-import net.demilich.metastone.game.cards.desc.HeroCardDesc;
-import net.demilich.metastone.game.cards.desc.HeroPowerCardDesc;
-import net.demilich.metastone.game.cards.desc.MinionCardDesc;
-import net.demilich.metastone.game.cards.desc.PermanentCardDesc;
-import net.demilich.metastone.game.cards.desc.QuestCardDesc;
-import net.demilich.metastone.game.cards.desc.SecretCardDesc;
-import net.demilich.metastone.game.cards.desc.SpellCardDesc;
-import net.demilich.metastone.game.cards.desc.SpellDeserializer;
-import net.demilich.metastone.game.cards.desc.ValueProviderDeserializer;
-import net.demilich.metastone.game.cards.desc.WeaponCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.desc.*;
+import net.demilich.metastone.game.cards.group.GroupDesc;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
@@ -41,6 +16,14 @@ import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDeserializer;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
+import net.demilich.metastone.utils.ResourceInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class CardParser {
 
@@ -59,6 +42,10 @@ public class CardParser {
 		gsonBuilder.registerTypeAdapter(AuraDesc.class, new AuraDeserializer());
 		gsonBuilder.registerTypeAdapter(ValueProviderDesc.class, new ValueProviderDeserializer());
 		gsonBuilder.registerTypeAdapter(CardCostModifierDesc.class, new CardCostModifierDeserializer());
+		gsonBuilder.registerTypeAdapter(GroupDesc.class, new GroupDeserializer());
+		// Interfaced Deserializers
+		gsonBuilder.registerTypeAdapter(HeroClassImplementation.class,  new HeroClassDeserializer());
+		gsonBuilder.registerTypeAdapter(CardSetImplementation.class,  new CardSetDeserializer());
 		gson = gsonBuilder.create();
 	}
 
@@ -79,34 +66,14 @@ public class CardParser {
 		if (!jsonData.getAsJsonObject().has("set")) {
 			throw new RuntimeException(resourceInputStream.fileName + " is missing 'set' attribute!");
 		}
-		CardType type = CardType.valueOf((String) jsonData.getAsJsonObject().get("type").getAsString());
+		CardType type = CardType.valueOf(jsonData.getAsJsonObject().get("type").getAsString());
 		switch (type) {
 		case SPELL:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
@@ -127,32 +94,20 @@ public class CardParser {
 				}
 				return gson.fromJson(jsonData, SpellCardDesc.class);
 			}
-		case CHOOSE_ONE:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+		case ENCHANTMENT:
+			if (!jsonData.getAsJsonObject().has("description")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!jsonData.getAsJsonObject().has("enchantment")) {
+				throw new RuntimeException(resourceInputStream.fileName + " is missing 'enchantment' attribute!");
+			}
+			return gson.fromJson(jsonData, EnchantmentCardDesc.class);
+		case CHOOSE_ONE:
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
+			}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
@@ -168,31 +123,11 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, ChooseOneCardDesc.class);
 		case MINION:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
@@ -203,10 +138,14 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("baseHp")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseHp' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
-					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
-					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
-					jsonData.getAsJsonObject().has("deckTrigger") || jsonData.getAsJsonObject().has("options"))) {
+			if (!jsonData.getAsJsonObject().has("description")
+					&& (jsonData.getAsJsonObject().has("battlecry")
+					|| jsonData.getAsJsonObject().has("deathrattle")
+					||jsonData.getAsJsonObject().has("attributes")
+					|| jsonData.getAsJsonObject().has("trigger")
+					|| jsonData.getAsJsonObject().has("passiveTrigger")
+					|| jsonData.getAsJsonObject().has("deckTrigger")
+					|| jsonData.getAsJsonObject().has("options"))) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
 			if (jsonData.getAsJsonObject().has("options")) {
@@ -215,65 +154,29 @@ public class CardParser {
 				return gson.fromJson(jsonData, MinionCardDesc.class);
 			}
 		case PERMANENT:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
-					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
-					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
-					jsonData.getAsJsonObject().has("deckTrigger") || jsonData.getAsJsonObject().has("options"))) {
+			if (!jsonData.getAsJsonObject().has("description")
+					&& (jsonData.getAsJsonObject().has("battlecry")
+					|| jsonData.getAsJsonObject().has("deathrattle")
+					||jsonData.getAsJsonObject().has("attributes")
+					|| jsonData.getAsJsonObject().has("trigger")
+					|| jsonData.getAsJsonObject().has("passiveTrigger")
+					|| jsonData.getAsJsonObject().has("deckTrigger")
+					|| jsonData.getAsJsonObject().has("options"))) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
 			return gson.fromJson(jsonData, PermanentCardDesc.class);
 		case WEAPON:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
@@ -284,40 +187,25 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("durability")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'durability' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("description") && (jsonData.getAsJsonObject().has("battlecry") || 
-					jsonData.getAsJsonObject().has("deathrattle") ||jsonData.getAsJsonObject().has("attributes") || 
-					jsonData.getAsJsonObject().has("trigger") || jsonData.getAsJsonObject().has("passiveTrigger") || 
-					jsonData.getAsJsonObject().has("deckTrigger") || jsonData.getAsJsonObject().has("onEquip") || 
-					jsonData.getAsJsonObject().has("onUnequip"))) {
+			if (!jsonData.getAsJsonObject().has("description")
+					&& (jsonData.getAsJsonObject().has("battlecry")
+					|| jsonData.getAsJsonObject().has("deathrattle")
+					|| jsonData.getAsJsonObject().has("attributes")
+					|| jsonData.getAsJsonObject().has("trigger")
+					|| jsonData.getAsJsonObject().has("passiveTrigger")
+					|| jsonData.getAsJsonObject().has("deckTrigger")
+					|| jsonData.getAsJsonObject().has("options")
+					|| jsonData.getAsJsonObject().has("onEquip")
+					|| jsonData.getAsJsonObject().has("onUnequip"))) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
 		case HERO_POWER:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("rarity")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
-			} else {
-				boolean check = false;
-				for (Rarity rarity : Rarity.values()) {
-					if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'rarity' attribute!");
-				}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("baseManaCost")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'baseManaCost' attribute!");
@@ -325,7 +213,8 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("description")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
-			if (!jsonData.getAsJsonObject().has("spell") && !jsonData.getAsJsonObject().has("options")) {
+			if (!jsonData.getAsJsonObject().has("spell")
+					&& !jsonData.getAsJsonObject().has("options")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'spell' or 'options' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("targetSelection")) {
@@ -333,18 +222,11 @@ public class CardParser {
 			}
 			return gson.fromJson(jsonData, HeroPowerCardDesc.class);	
 		case HERO:
-			if (!jsonData.getAsJsonObject().has("heroClass")) {
-				throw new RuntimeException(resourceInputStream.fileName + " is missing 'heroClass' attribute!");
-			} else {
-				boolean check = false;
-				for (HeroClass heroClass : HeroClass.values()) {
-					if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-						check = true;
-					}
-				}
-				if (!check) {
-					throw new RuntimeException(resourceInputStream.fileName + " has corrupted 'heroClass' attribute!");
-				}
+			if (!checkHeroClass(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'heroClass' attribute!");
+			}
+			if (!checkRarity(jsonData)) {
+				throw new RuntimeException(resourceInputStream.fileName + " has missing/corrupted 'rarity' attribute!");
 			}
 			if (!jsonData.getAsJsonObject().has("rarity")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'rarity' attribute!");
@@ -367,5 +249,32 @@ public class CardParser {
 			break;
 		}
 		return null;
+	}
+
+	public boolean checkHeroClass(JsonElement jsonData) {
+		if (!jsonData.getAsJsonObject().has("heroClass")) {
+			return false;
+		} else {
+			for (HeroClassImplementation heroClass : HeroClassImplementation.values()) {
+				if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+	public boolean checkRarity(JsonElement jsonData) {
+		if (!jsonData.getAsJsonObject().has("rarity")) {
+			return false;
+		} else {
+			boolean check = false;
+			for (Rarity rarity : Rarity.values()) {
+				if (jsonData.getAsJsonObject().get("rarity").getAsString().equalsIgnoreCase(rarity.toString())) {
+					check = true;
+				}
+			}
+			return check;
+		}
 	}
 }

@@ -1,0 +1,11 @@
+{
+	"name": "Massive",
+	"type": "ENCHANTMENT",
+	"description": "Taunt",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "TAUNT"
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

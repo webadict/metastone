@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 
 public class HearthHeadImporter implements IDeckImporter {
 	private static Logger logger = LoggerFactory.getLogger(IcyVeinsImporter.class);
@@ -54,7 +55,7 @@ public class HearthHeadImporter implements IDeckImporter {
 
 	private Deck parse(String url) throws IOException {
 		List<Card> cards = new ArrayList<Card>();
-		HeroClass heroClass = HeroClass.ANY;
+		HeroClassImplementation heroClass = NonHeroClass.NEUTRAL;
 		
 		Response response= Jsoup.connect(url)
 		           .ignoreContentType(true)
@@ -68,7 +69,7 @@ public class HearthHeadImporter implements IDeckImporter {
 			Card card = CardCatalogue.getCardByBlizzardId(cid);
 			if (card != null) {
 				cards.add(card);
-				if (card.getHeroClass() != HeroClass.ANY) {
+				if (card.getHeroClass() != NonHeroClass.NEUTRAL) {
 					heroClass = card.getHeroClass();
 				}
 			} else {

@@ -1,9 +1,12 @@
 package net.demilich.metastone.game.entities;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -15,6 +18,7 @@ public abstract class Entity extends CustomCloneable {
 	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
+	protected List<Enchantment> enchantmentList = new ArrayList<>();
 
 	@Override
 	public Entity clone() {
@@ -114,14 +118,17 @@ public abstract class Entity extends CustomCloneable {
 		attributes.remove(attribute);
 	}
 
+	@Deprecated
 	public void setAttribute(Attribute attribute) {
 		attributes.put(attribute, 1);
 	}
 
+	@Deprecated
 	public void setAttribute(Attribute attribute, int value) {
 		attributes.put(attribute, value);
 	}
 
+	@Deprecated
 	public void setAttribute(Attribute attribute, Object value) {
 		attributes.put(attribute, value);
 	}

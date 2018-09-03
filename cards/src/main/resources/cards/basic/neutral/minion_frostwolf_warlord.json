@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Battlecry: Gain +1/+1 for each other friendly minion on the battlefield.",
 	"battlecry": {

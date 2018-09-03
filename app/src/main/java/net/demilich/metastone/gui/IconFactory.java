@@ -3,7 +3,9 @@ package net.demilich.metastone.gui;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import net.demilich.metastone.game.cards.Rarity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.gui.dialog.DialogType;
 
@@ -12,7 +14,7 @@ public class IconFactory {
 	//public static final String RESOURCE_PATH = "/net/demilich/metastone/resources";
 	public static final String RESOURCE_PATH = "";
 
-	public static Image getClassIcon(HeroClass heroClass) {
+	public static Image getClassIcon(HeroClassImplementation heroClass) {
 		String iconPath = RESOURCE_PATH + "/img/classes/";
 		iconPath += heroClass.toString().toLowerCase();
 		iconPath += ".png";
@@ -46,40 +48,41 @@ public class IconFactory {
 		return new Image(iconPath);
 	}
 
-	public static String getHeroIconUrl(HeroClass heroClass) {
+	public static String getHeroIconUrl(HeroClassImplementation heroClass) {
 		String iconPath = RESOURCE_PATH + "/img/heroes/";
-		switch (heroClass) {
-		case DRUID:
-			iconPath += "malfurion";
-			break;
-		case HUNTER:
-			iconPath += "rexxar";
-			break;
-		case MAGE:
-			iconPath += "jaina";
-			break;
-		case PALADIN:
-			iconPath += "uther";
-			break;
-		case PRIEST:
-			iconPath += "anduin";
-			break;
-		case ROGUE:
-			iconPath += "valeera";
-			break;
-		case SHAMAN:
-			iconPath += "thrall";
-			break;
-		case WARLOCK:
-			iconPath += "guldan";
-			break;
-		case WARRIOR:
-			iconPath += "garrosh";
-			break;
-		default:
-		case ANY:
+		if (heroClass instanceof HeroClass) {
+			HeroClass baseHeroClass = (HeroClass) heroClass;
+			switch (baseHeroClass) {
+				case DRUID:
+					iconPath += "malfurion";
+					break;
+				case HUNTER:
+					iconPath += "rexxar";
+					break;
+				case MAGE:
+					iconPath += "jaina";
+					break;
+				case PALADIN:
+					iconPath += "uther";
+					break;
+				case PRIEST:
+					iconPath += "anduin";
+					break;
+				case ROGUE:
+					iconPath += "valeera";
+					break;
+				case SHAMAN:
+					iconPath += "thrall";
+					break;
+				case WARLOCK:
+					iconPath += "guldan";
+					break;
+				case WARRIOR:
+					iconPath += "garrosh";
+					break;
+			}
+		} else {
 			iconPath += "unknown";
-			break;
 
 		}
 		return iconPath + ".png";
@@ -87,38 +90,38 @@ public class IconFactory {
 
 	public static String getHeroPowerIconUrl(HeroPower heroPower) {
 		String iconPath = RESOURCE_PATH + "/img/powers/";
-		switch (heroPower.getHeroClass()) {
-		case DRUID:
-			iconPath += "shapeshift";
-			break;
-		case HUNTER:
-			iconPath += "steady_shot";
-			break;
-		case MAGE:
-			iconPath += "fireblast";
-			break;
-		case PALADIN:
-			iconPath += "reinforce";
-			break;
-		case PRIEST:
-			iconPath += "lesser_heal";
-			break;
-		case ROGUE:
-			iconPath += "dagger_mastery";
-			break;
-		case SHAMAN:
-			iconPath += "totemic_call";
-			break;
-		case WARLOCK:
-			iconPath += "life_tap";
-			break;
-		case WARRIOR:
-			iconPath += "armor_up";
-			break;
-		default:
+		if (heroPower.getHeroClass() instanceof HeroClass) {
+			switch ((HeroClass) heroPower.getHeroClass()) {
+				case DRUID:
+					iconPath += "shapeshift";
+					break;
+				case HUNTER:
+					iconPath += "steady_shot";
+					break;
+				case MAGE:
+					iconPath += "fireblast";
+					break;
+				case PALADIN:
+					iconPath += "reinforce";
+					break;
+				case PRIEST:
+					iconPath += "lesser_heal";
+					break;
+				case ROGUE:
+					iconPath += "dagger_mastery";
+					break;
+				case SHAMAN:
+					iconPath += "totemic_call";
+					break;
+				case WARLOCK:
+					iconPath += "life_tap";
+					break;
+				case WARRIOR:
+					iconPath += "armor_up";
+					break;
+			}
+		} else {
 			iconPath += "unknown";
-			break;
-
 		}
 		iconPath += ".png";
 		return iconPath;

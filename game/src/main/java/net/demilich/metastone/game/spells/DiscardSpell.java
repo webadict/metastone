@@ -32,6 +32,11 @@ public class DiscardSpell extends Spell {
 		EntityFilter cardFilter = (EntityFilter) desc.get(SpellArg.CARD_FILTER);
 		int numberOfCards = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
 
+		if (target instanceof Card) {
+			context.getLogic().discardCard(player, (Card) target);
+			return;
+		}
+
 		CardCollection discardableCards = new CardCollection();
 		for (Card card : player.getHand()) {
 			if (cardFilter == null || cardFilter.matches(context, player, card)) {

@@ -2,23 +2,24 @@ package net.demilich.metastone.game.decks;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 
 public class Deck {
 
 	private String name = "";
-	private final HeroClass heroClass;
+	private final HeroClassImplementation heroClass;
 	private final CardCollection cards = new CardCollection();
 	private String description;
 	private String filename;
 	private boolean arbitrary;
 
-	public Deck(HeroClass heroClass) {
+	public Deck(HeroClassImplementation heroClass) {
 		this.heroClass = heroClass;
 	}
 
-	public Deck(HeroClass heroClass, boolean arbitrary) {
+	public Deck(HeroClassImplementation heroClass, boolean arbitrary) {
 		this.heroClass = heroClass;
 		this.arbitrary = arbitrary;
 	}
@@ -45,7 +46,7 @@ public class Deck {
 		return description;
 	}
 
-	public HeroClass getHeroClass() {
+	public HeroClassImplementation getHeroClass() {
 		return heroClass;
 	}
 
@@ -66,7 +67,7 @@ public class Deck {
 	}
 
 	public boolean isMetaDeck() {
-		return getHeroClass() == HeroClass.DECK_COLLECTION;
+		return getHeroClass() == NonHeroClass.DECK_COLLECTION;
 	}
 	
 	public boolean isTooBig() {

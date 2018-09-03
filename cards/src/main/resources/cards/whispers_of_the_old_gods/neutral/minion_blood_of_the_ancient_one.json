@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 9,
 	"baseHp": 9,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "EPIC",
 	"description": "If you control two of these at the end of your turn, merge them into 'The Ancient One'.",
 	"trigger": {

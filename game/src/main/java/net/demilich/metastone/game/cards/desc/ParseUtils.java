@@ -11,8 +11,10 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.group.GroupDesc;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -42,6 +44,7 @@ public class ParseUtils {
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
 	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
+	private static GroupDeserializer groupDeserializer = new GroupDeserializer();
 
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
@@ -78,6 +81,9 @@ public class ParseUtils {
 			}
 			return array;
 		}
+		case GROUP:
+			GroupDesc groupDesc = groupDeserializer.deserialize(entry, GroupDesc.class, null);
+			return groupDesc.create();
 		case ATTRIBUTE:
 			return Enum.valueOf(Attribute.class, entry.getAsString());
 		case PLAYER_ATTRIBUTE:
@@ -87,12 +93,12 @@ public class ParseUtils {
 		case RARITY:
 			return Enum.valueOf(Rarity.class, entry.getAsString());
 		case HERO_CLASS:
-			return Enum.valueOf(HeroClass.class, entry.getAsString());
+			return HeroClassImplementation.valueOf(entry.getAsString());
 		case HERO_CLASS_ARRAY: {
 			JsonArray jsonArray = entry.getAsJsonArray();
-			HeroClass[] array = new HeroClass[jsonArray.size()];
+			HeroClassImplementation[] array = new HeroClassImplementation[jsonArray.size()];
 			for (int i = 0; i < array.length; i++) {
-				array[i] = Enum.valueOf(HeroClass.class, jsonArray.get(i).getAsString());
+				array[i] = HeroClassImplementation.valueOf(jsonArray.get(i).getAsString());
 			}
 			return array;
 		}

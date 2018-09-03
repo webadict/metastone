@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Battlecry: Summon a 2/1 Mechanical Dragonling.",
 	"battlecry": {

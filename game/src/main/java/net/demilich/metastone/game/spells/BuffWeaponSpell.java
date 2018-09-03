@@ -14,6 +14,9 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+/**
+ * @deprecated As of v2.0, use BuffSpell instead, targeting {@link EntityReference.FRIENDLY_WEAPON} instead.
+ */
 @Deprecated
 public class BuffWeaponSpell extends Spell {
 

@@ -34,7 +34,7 @@ public class AdaptSpell extends Spell {
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			randomTarget = SpellUtils.getRandomTarget(validTargets);
 		}
-		SpellDesc[] group = SpellUtils.getGroup(context, desc);
+		SpellDesc[] group = SpellUtils.getGroup(context, desc).getGroup(context);
 		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, null, source, 3);
 		int count = desc.getValue(SpellArg.VALUE, context, player, null, source, 1);
 		List<SpellDesc> spellList = new ArrayList<SpellDesc>();
@@ -43,8 +43,8 @@ public class AdaptSpell extends Spell {
 		}
 
 		for (int j = 0; j < count; j++) {
-			List<SpellDesc> adaptions = new ArrayList<SpellDesc>(spellList);
-			List<SpellDesc> spells = new ArrayList<SpellDesc>();
+			List<SpellDesc> adaptions = new ArrayList<>(spellList);
+			List<SpellDesc> spells = new ArrayList<>();
 			for (int i = 0; i < howMany; i++) {
 				SpellDesc spell = adaptions.remove(context.getLogic().random(adaptions.size()));
 				spells.add(spell);

@@ -2,7 +2,7 @@
 	"name": "Ancient Curse",
 	"baseManaCost": 0,
 	"type": "SPELL",
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"description": "When you draw this, take 7 damage and draw a card.",
 	"targetSelection": "NONE",

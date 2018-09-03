@@ -1,17 +1,17 @@
 package net.demilich.metastone.gui.common;
 
 import javafx.util.StringConverter;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 
-public class CardSetStringConverter extends StringConverter<CardSet> {
+public class CardSetStringConverter extends StringConverter<CardSetImplementation> {
 
 	@Override
-	public CardSet fromString(String string) {
+	public CardSetImplementation fromString(String string) {
 		return null;
 	}
 
 	@Override
-	public String toString(CardSet object) {
+	public String toString(CardSetImplementation object) {
 		return object.toString();
 	}
 }

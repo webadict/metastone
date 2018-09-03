@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 1,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Battlecry: Restore 2 Health.",
 	"battlecry": {

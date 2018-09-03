@@ -1,22 +1,22 @@
 package net.demilich.metastone.game.decks;
 
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardSet;
 
 public class DeckFormat {
 
 	private String name = "";
 	private String filename;
-	private List<CardSet> sets;
+	private List<CardSetImplementation> sets;
 
 	public DeckFormat() {
-		sets = new ArrayList<CardSet>();
+		sets = new ArrayList<>();
 	}
 
-	public void addSet(CardSet cardSet) {
+	public void addSet(CardSetImplementation cardSet) {
 		sets.add(cardSet);
 	}
 
@@ -27,7 +27,7 @@ public class DeckFormat {
 		return false;
 	}
 
-	public boolean isInFormat(CardSet set) {
+	public boolean isInFormat(CardSetImplementation set) {
 		return sets.contains(set);
 	}
 
@@ -40,8 +40,8 @@ public class DeckFormat {
 		return true;
 	}
 
-	public List<CardSet> getCardSets() {
-		return new ArrayList<CardSet>(sets);
+	public List<CardSetImplementation> getCardSets() {
+		return new ArrayList<>(sets);
 	}
 
 	public String getName() {

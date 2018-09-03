@@ -38,7 +38,7 @@ public class PlayPermanentCardAction extends PlayCardAction {
 		}
 		Player player = context.getPlayer(playerId);
 		int index = player.getSummons().indexOf(nextTo);
-		context.getLogic().summon(playerId, permanent, permanentCard, index, true);
+		context.getLogic().newSummon(playerId, permanent, permanentCard, index, true);
 	}
 
 }

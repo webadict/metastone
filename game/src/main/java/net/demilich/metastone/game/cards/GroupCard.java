@@ -2,11 +2,11 @@ package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.GroupCardDesc;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
+import net.demilich.metastone.game.cards.group.GroupDesc;
 
 public class GroupCard extends Card {
 
-	private SpellDesc[] spells;
+	private GroupDesc group;
 
 	public GroupCard(GroupCardDesc desc) {
 		super(desc);
@@ -19,12 +19,12 @@ public class GroupCard extends Card {
 		return clone;
 	}
 
-	public SpellDesc[] getGroup() {
-		return spells;
+	public GroupDesc getGroup() {
+		return group;
 	}
 
-	public void setGroup(SpellDesc[] spells) {
-		this.spells = spells;
+	public void setGroup(GroupDesc group) {
+		this.group = group;
 	}
 
 	@Override

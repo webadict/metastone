@@ -1,0 +1,28 @@
+{
+	"name": "Death Coil",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "DEATH_KNIGHT",
+	"rarity": "FREE",
+	"description": "Deal 5 damage to an enemy, or restore 5 Health to a friendly character.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "EitherOrSpell",
+		"spell1": {
+			"class": "RestoreSpell",
+			"value": 5
+		},
+		"spell2": {
+			"class": "DamageSpell",
+			"value": 5
+		},
+		"condition":
+		{
+			"class": "OwnedByPlayerCondition",
+			"targetPlayer": "SELF"
+		}
+	},
+	"collectible": false,
+	"set": "KNIGHTS_OF_THE_FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

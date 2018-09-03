@@ -1,9 +1,7 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.SummonCardDesc;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.Summon;
 
 public abstract class SummonCard extends Card {

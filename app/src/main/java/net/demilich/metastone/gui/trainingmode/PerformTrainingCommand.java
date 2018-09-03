@@ -13,7 +13,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
 import net.demilich.metastone.game.behaviour.threat.cuckoo.CuckooLearner;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.statistics.Statistic;
@@ -60,7 +60,7 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 					Player player2 = new Player(opponentConfig);
 					
 					DeckFormat deckFormat = new DeckFormat();
-					for (CardSet set : CardSet.values()) {
+					for (BaseCardSet set : BaseCardSet.values()) {
 						deckFormat.addSet(set);
 					}
 

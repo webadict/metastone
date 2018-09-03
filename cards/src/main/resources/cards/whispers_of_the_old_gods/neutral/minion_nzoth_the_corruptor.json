@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 7,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Summon your friendly Deathrattle minions that died this game.",
 	"battlecry": {

@@ -7,6 +7,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.SummonCard;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
@@ -55,11 +56,20 @@ public class SummonSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		int count = desc.getValue(SpellArg.VALUE, context, player, target, source, 1);
+		if (target instanceof Summon) {
+			for (int i = 0; i < count; i++) {
+				int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
+				Summon clone = (Summon) target.clone();
+				clone.clearSpellTriggers();
+				context.getLogic().newSummon(player.getId(), clone, null, boardPosition, false);
+			}
+			return;
+		}
 		for (Card card : SpellUtils.getCards(context, desc)) {
 			for (int i = 0; i < count; i++) {
 				int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 				SummonCard summonCard = (SummonCard) card.clone();
-				context.getLogic().summon(player.getId(), summonCard.summon(), null, boardPosition, false);
+				context.getLogic().newSummon(player.getId(), summonCard.summon(), null, boardPosition, false);
 			}
 		}
 	}

@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "RARE",
 	"description": "Battlecry: Give adjacent minions Taunt.",
 	"battlecry": {

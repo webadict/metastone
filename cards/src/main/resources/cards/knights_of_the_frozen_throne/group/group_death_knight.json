@@ -1,0 +1,20 @@
+{
+	"name": "Spare Parts",
+	"type": "GROUP",
+	"group": {
+		"class": "CardGroup",
+		"cards": [
+			"spell_anti-magic_shell",
+			"spell_army_of_the_dead",
+			"spell_death_and_decay",
+			"spell_death_coil",
+			"spell_death_grip",
+			"spell_doom_pact",
+			"spell_obliterate",
+			"weapon_frostmourne"
+		]
+	},
+	"collectible": false,
+	"set": "KNIGHTS_OF_THE_FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

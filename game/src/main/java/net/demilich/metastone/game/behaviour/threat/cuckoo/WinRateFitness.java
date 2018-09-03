@@ -13,7 +13,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.threat.FeatureVector;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.logic.GameLogic;
@@ -44,7 +44,7 @@ public class WinRateFitness implements IFitnessFunction {
 			Player player2 = new Player(player2Config);
 
 			DeckFormat deckFormat = new DeckFormat();
-			for (CardSet set : CardSet.values()) {
+			for (BaseCardSet set : BaseCardSet.values()) {
 				deckFormat.addSet(set);
 			}
 

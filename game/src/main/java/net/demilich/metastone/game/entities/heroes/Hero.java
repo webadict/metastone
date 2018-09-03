@@ -1,18 +1,19 @@
 package net.demilich.metastone.game.entities.heroes;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.HeroCard;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public class Hero extends Actor {
 
-	private HeroClass heroClass;
+	private HeroClassImplementation heroClass;
 	private HeroPower heroPower;
 	private Weapon weapon;
 
@@ -61,7 +62,7 @@ public class Hero extends Actor {
 		return EntityType.HERO;
 	}
 
-	public HeroClass getHeroClass() {
+	public HeroClassImplementation getHeroClass() {
 		return heroClass;
 	}
 
@@ -79,7 +80,7 @@ public class Hero extends Actor {
 		setAttribute(Attribute.ARMOR, newArmor);
 	}
 	
-	public void setHeroClass(HeroClass heroClass) {
+	public void setHeroClass(HeroClassImplementation heroClass) {
 		this.heroClass = heroClass;
 	}
 

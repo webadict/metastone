@@ -14,7 +14,7 @@ import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.MetaDeck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 
 public class ChooseClassView extends BorderPane implements EventHandler<ActionEvent> {
 	@FXML

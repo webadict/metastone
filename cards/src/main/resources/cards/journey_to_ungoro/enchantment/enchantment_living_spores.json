@@ -1,0 +1,15 @@
+{
+	"name": "Living Spores",
+	"type": "ENCHANTMENT",
+	"description": "Deathrattle: Summon two 1/1 Plants.",
+	"enchantment": {
+		"class": "DeathrattleEnchantment",
+		"spell": {
+			"class": "SummonSpell",
+			"cardId": "token_sapling",
+			"value": 2
+		}
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

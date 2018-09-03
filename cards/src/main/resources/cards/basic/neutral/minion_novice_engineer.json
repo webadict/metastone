@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 1,
 	"baseHp": 1,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Battlecry: Draw a card.",
 	"battlecry": {

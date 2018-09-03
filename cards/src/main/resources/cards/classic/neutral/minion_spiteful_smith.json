@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 6,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"description": "Enrage: Your weapon has +2 Attack.",
 	"aura": {

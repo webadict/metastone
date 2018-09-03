@@ -1,20 +1,21 @@
 package net.demilich.metastone.game.decks;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
 import net.demilich.metastone.game.decks.validation.IDeckValidator;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomDeck extends Deck {
 	
 	private DeckFormat deckFormat;
 
-	public RandomDeck(HeroClass heroClass, DeckFormat deckFormat) {
+	public RandomDeck(HeroClassImplementation heroClass, DeckFormat deckFormat) {
 		super(heroClass);
 		this.deckFormat = deckFormat;
 		setName("[Random deck]");
@@ -25,10 +26,16 @@ public class RandomDeck extends Deck {
 		Deck copyDeck = new Deck(getHeroClass());
 		IDeckValidator deckValidator = new DefaultDeckValidator();
 		CardCollection classCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.hasHeroClass(getHeroClass());
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& card.hasHeroClass(getHeroClass());
 		});
 		CardCollection neutralCards = CardCatalogue.query(deckFormat, card -> {
-			return card.isCollectible() && !card.getCardType().isCardType(CardType.HERO) && !card.getCardType().isCardType(CardType.HERO_POWER) && card.hasHeroClass(HeroClass.ANY);
+			return card.isCollectible()
+					&& !card.getCardType().isCardType(CardType.HERO)
+					&& !card.getCardType().isCardType(CardType.HERO_POWER)
+					&& card.hasHeroClass(NonHeroClass.NEUTRAL);
 		});
 
 		while (!copyDeck.isComplete()) {

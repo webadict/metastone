@@ -1,9 +1,5 @@
 package net.demilich.metastone.gui.trainingmode;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,10 +13,14 @@ import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.layout.BorderPane;
 import net.demilich.metastone.GameNotification;
 import net.demilich.metastone.NotificationProxy;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.gui.common.DeckStringConverter;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 public class TrainingConfigView extends BorderPane {
 
@@ -95,7 +95,7 @@ public class TrainingConfigView extends BorderPane {
 	public void injectDecks(List<Deck> decks) {
 		List<Deck> filteredDecks = FXCollections.observableArrayList();
 		for (Deck deck : decks) {
-			if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
+			if (deck.getHeroClass() != NonHeroClass.DECK_COLLECTION) {
 				filteredDecks.add(deck);
 			}
 		}

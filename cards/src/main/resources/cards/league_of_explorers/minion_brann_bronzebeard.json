@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 4,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Your Battlecries trigger twice.",
 	"attributes": {

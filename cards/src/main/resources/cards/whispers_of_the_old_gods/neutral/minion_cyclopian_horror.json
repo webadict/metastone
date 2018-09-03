@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "EPIC",
 	"description": "Taunt. Battlecry: Gain +1 Health for each enemy minion.",
 	"battlecry": {

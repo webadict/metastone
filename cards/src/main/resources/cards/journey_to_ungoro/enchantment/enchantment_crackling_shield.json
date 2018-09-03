@@ -1,0 +1,11 @@
+{
+	"name": "Crackling Shield",
+	"type": "ENCHANTMENT",
+	"description": "Divine Shield",
+	"enchantment": {
+		"class": "AttributeEnchantment",
+		"attribute": "DIVINE_SHIELD"
+	},
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,44 +1,35 @@
 package net.demilich.metastone.gui.deckbuilder;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import net.demilich.metastone.GameNotification;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCatalogue;
+import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.decks.Deck;
+import net.demilich.metastone.game.decks.DeckFormat;
+import net.demilich.metastone.game.decks.MetaDeck;
+import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
+import net.demilich.metastone.game.decks.validation.IDeckValidator;
+import net.demilich.metastone.utils.MetastoneProperties;
+import net.demilich.metastone.utils.ResourceInputStream;
+import net.demilich.metastone.utils.ResourceLoader;
+import net.demilich.metastone.utils.UserHomeMetastone;
+import net.demilich.nittygrittymvc.Proxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import net.demilich.metastone.utils.MetastoneProperties;
-import net.demilich.metastone.utils.ResourceInputStream;
-import net.demilich.metastone.utils.ResourceLoader;
-import net.demilich.metastone.utils.UserHomeMetastone;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import net.demilich.metastone.GameNotification;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.decks.Deck;
-import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.decks.MetaDeck;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
-import net.demilich.metastone.game.decks.validation.DefaultDeckValidator;
-import net.demilich.metastone.game.decks.validation.IDeckValidator;
-import net.demilich.nittygrittymvc.Proxy;
+import java.util.*;
 
 public class DeckProxy extends Proxy<GameNotification> {
 
@@ -80,9 +71,9 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return activeDeck;
 	}
 
-	public List<Card> getCards(HeroClass heroClass) {
+	public List<Card> getCards(HeroClassImplementation heroClass) {
 		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet cardSet : CardSet.values()) {
+		for (BaseCardSet cardSet : BaseCardSet.values()) {
 			deckFormat.addSet(cardSet);
 		}
 		CardCollection cardCollection;
@@ -91,7 +82,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		} else {
 			cardCollection = CardCatalogue.query(deckFormat, heroClass);
 			// add neutral cards
-			cardCollection.addAll(CardCatalogue.query(deckFormat, HeroClass.ANY));
+			cardCollection.addAll(CardCatalogue.query(deckFormat, NonHeroClass.NEUTRAL));
 		}
 		cardCollection.sortByName();
 		cardCollection.sortByManaCost();
@@ -179,10 +170,10 @@ public class DeckProxy extends Proxy<GameNotification> {
 			HashMap<String, Object> map = gson.fromJson(reader, new TypeToken<HashMap<String, Object>>() {
 			}.getType());
 			if (!map.containsKey("heroClass")) {
-				logger.error("Deck {} does not speficy a value for 'heroClass' and is therefor not valid", resourceInputStream.fileName);
+				logger.error("Deck {} does not specify a value for 'heroClass' and is therefore not valid", resourceInputStream.fileName);
 				continue;
 			}
-			HeroClass heroClass = HeroClass.valueOf((String) map.get("heroClass"));
+			HeroClassImplementation heroClass = HeroClassImplementation.valueOf((String) map.get("heroClass"));
 			String deckName = (String) map.get("name");
 			Deck deck = null;
 			// this one is a meta deck; we need to parse those after all other
@@ -222,7 +213,7 @@ public class DeckProxy extends Proxy<GameNotification> {
 		return new MetaDeck(decksInMetaDeck);
 	}
 
-	private Deck parseStandardDeck(String deckName, HeroClass heroClass, Map<String, Object> map) {
+	private Deck parseStandardDeck(String deckName, HeroClassImplementation heroClass, Map<String, Object> map) {
 		boolean arbitrary = false;
 		if (map.containsKey("arbitrary")) {
 			arbitrary = (boolean) map.get("arbitrary");

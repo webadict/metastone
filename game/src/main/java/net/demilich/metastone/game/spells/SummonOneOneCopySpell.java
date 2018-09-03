@@ -16,6 +16,10 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.source.CardSource;
 
+/**
+ * @deprecated As of v2.0, use {@link SummonAndDoSomethingSpell} instead.
+ */
+@Deprecated
 public class SummonOneOneCopySpell extends Spell {
 
 	public static SpellDesc create() {
@@ -55,7 +59,7 @@ public class SummonOneOneCopySpell extends Spell {
 
 		if (minionCard != null) {
 			Minion minion = minionCard.summon();
-			if (context.getLogic().summon(player.getId(), minion, null, boardPosition, false)) {
+			if (context.getLogic().newSummon(player.getId(), minion, null, boardPosition, false) != null) {
 				minion.setAttack(1);
 				minion.setHp(1);
 				minion.setMaxHp(1);

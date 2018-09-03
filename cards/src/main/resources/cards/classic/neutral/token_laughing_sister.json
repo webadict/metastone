@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 5,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
 	"description": "Can't be targeted by spells or Hero Powers.",
 	"attributes": {

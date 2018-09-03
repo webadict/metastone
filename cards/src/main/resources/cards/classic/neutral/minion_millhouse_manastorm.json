@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Enemy spells cost (0) next turn.",
 	"battlecry": {

@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 8,
 	"baseHp": 8,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"description": "Battlecry: If you control a Beast, gain Taunt.",
 	"battlecry": {

@@ -1,24 +1,16 @@
 package net.demilich.metastone.game.spells;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
 import net.demilich.metastone.game.actions.GameAction;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardType;
-import net.demilich.metastone.game.cards.GroupCard;
+import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.cards.group.Group;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
@@ -26,6 +18,11 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
 import net.demilich.metastone.game.targeting.EntityReference;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
 
 public class SpellUtils {
 
@@ -82,6 +79,12 @@ public class SpellUtils {
 		String[] cardNames = null;
 		if (spell.contains(SpellArg.CARDS)) {
 			cardNames = (String[]) spell.get(SpellArg.CARDS);
+		} else if (spell.contains(SpellArg.GROUP)) {
+			Group group = getGroup(context, spell);
+			Entity[] entities = group.getGroup(context);
+			if (entities instanceof Card[]) {
+				return (Card[]) entities;
+			}
 		} else {
 			cardNames = new String[1];
 			cardNames[0] = (String) spell.get(SpellArg.CARD);
@@ -114,14 +117,14 @@ public class SpellUtils {
 		}
 	}
 	
-	public static SpellDesc[] getGroup(GameContext context, SpellDesc spell) {
+	public static Group getGroup(GameContext context, SpellDesc spell) {
 		String groupCardId = (String) spell.get(SpellArg.GROUP);
 		Card card = context.getCardById(groupCardId);
 		if (card instanceof GroupCard) {
 			GroupCard groupCard = (GroupCard) card;
-			return groupCard.getGroup();
+			return groupCard.getGroup().create();
 		}
-		return new SpellDesc[0];
+		return null;
 	}
 
 	public static DiscoverAction getSpellDiscover(GameContext context, Player player, SpellDesc desc, List<SpellDesc> spells) {
@@ -149,10 +152,10 @@ public class SpellUtils {
 		return result.getRandom();
 	}
 	
-	public static HeroClass getRandomHeroClass() {
-		HeroClass[] values = HeroClass.values();
-		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
-		for (HeroClass heroClass : values) {
+	public static HeroClassImplementation getRandomBaseHeroClass() {
+		HeroClassImplementation[] values = HeroClassImplementation.values();
+		List<HeroClassImplementation> heroClasses = new ArrayList<>();
+		for (HeroClassImplementation heroClass : values) {
 			if (heroClass.isBaseClass()) {
 				heroClasses.add(heroClass);
 			}
@@ -160,13 +163,13 @@ public class SpellUtils {
 		return heroClasses.get(ThreadLocalRandom.current().nextInt(heroClasses.size()));
 	}
 	
-	public static HeroClass getRandomHeroClassExcept(HeroClass... heroClassesExcluded) {
-		HeroClass[] values = HeroClass.values();
-		List<HeroClass> heroClasses = new ArrayList<HeroClass>();
-		for (HeroClass heroClass : values) {
+	public static HeroClassImplementation getRandomHeroClassExcept(HeroClassImplementation... heroClassesExcluded) {
+		HeroClassImplementation[] values = HeroClassImplementation.values();
+		List<HeroClassImplementation> heroClasses = new ArrayList<>();
+		for (HeroClassImplementation heroClass : values) {
 			if (heroClass.isBaseClass()) {
 				heroClasses.add(heroClass);
-				for (HeroClass heroClassExcluded : heroClassesExcluded) {
+				for (HeroClassImplementation heroClassExcluded : heroClassesExcluded) {
 					if (heroClassExcluded == heroClass) {
 						heroClasses.remove(heroClass);
 					}
@@ -182,7 +185,7 @@ public class SpellUtils {
 	}
 
 	public static List<Actor> getValidRandomTargets(List<Entity> targets) {
-		List<Actor> validTargets = new ArrayList<Actor>();
+		List<Actor> validTargets = new ArrayList<>();
 		for (Entity entity : targets) {
 			Actor actor = (Actor) entity;
 			if (!actor.isDestroyed() || actor.getEntityType() == EntityType.HERO) {

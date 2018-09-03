@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 2,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"description": "Battlecry: Give your C'Thun +2/+2 (wherever it is).",
 	"battlecry": {

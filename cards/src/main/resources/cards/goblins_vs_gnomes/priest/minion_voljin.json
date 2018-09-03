@@ -10,7 +10,8 @@
 	"battlecry": {
 		"targetSelection": "MINIONS",
 		"spell": {
-			"class": "SwapHpSpell"
+			"class": "SwapAttributeSpell",
+			"attribute": "HP"
 		}
 	},
 	"attributes": {

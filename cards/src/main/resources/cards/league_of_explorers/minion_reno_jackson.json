@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 6,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: If your deck contains no duplicates, fully heal your Hero.",
 	"battlecry": {

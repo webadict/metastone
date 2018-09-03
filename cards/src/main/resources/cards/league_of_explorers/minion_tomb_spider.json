@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
-	"heroClass": "ANY",
+	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
 	"race": "BEAST",
 	"description": "Battlecry: Discover a Beast.",

@@ -1,9 +1,5 @@
 package net.demilich.metastone.gui.gameconfig;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,21 +12,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import net.demilich.metastone.game.behaviour.GreedyOptimizeMove;
-import net.demilich.metastone.game.behaviour.IBehaviour;
-import net.demilich.metastone.game.behaviour.NoAggressionBehaviour;
-import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
+import net.demilich.metastone.game.behaviour.*;
 import net.demilich.metastone.game.behaviour.heuristic.WeightedHeuristic;
 import net.demilich.metastone.game.behaviour.human.HumanBehaviour;
 import net.demilich.metastone.game.behaviour.threat.GameStateValueBehaviour;
-import net.demilich.metastone.game.behaviour.FlatMonteCarlo;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.HeroCard;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.decks.Deck;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.heroes.MetaHero;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.gui.IconFactory;
@@ -38,6 +31,10 @@ import net.demilich.metastone.gui.common.BehaviourStringConverter;
 import net.demilich.metastone.gui.common.DeckStringConverter;
 import net.demilich.metastone.gui.common.HeroStringConverter;
 import net.demilich.metastone.gui.playmode.config.PlayerConfigType;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayerConfigView extends VBox {
 
@@ -92,12 +89,12 @@ public class PlayerConfigView extends VBox {
 	}
 
 	private void filterDecks() {
-		HeroClass heroClass = getPlayerConfig().getHeroCard().getHeroClass();
+		HeroClassImplementation heroClass = getPlayerConfig().getHeroCard().getHeroClass();
 		ObservableList<Deck> deckList = FXCollections.observableArrayList();
 
-		if (heroClass == HeroClass.DECK_COLLECTION) {
+		if (heroClass == NonHeroClass.DECK_COLLECTION) {
 			for (Deck deck : decks) {
-				if (deck.getHeroClass() != HeroClass.DECK_COLLECTION) {
+				if (deck.getHeroClass() != NonHeroClass.DECK_COLLECTION) {
 					continue;
 				}
 				if (deckFormat != null && deckFormat.isInFormat(deck)) {
@@ -108,10 +105,10 @@ public class PlayerConfigView extends VBox {
 			Deck randomDeck = DeckFactory.getRandomDeck(heroClass, deckFormat);
 			deckList.add(randomDeck);
 			for (Deck deck : decks) {
-				if (deck.getHeroClass() == HeroClass.DECK_COLLECTION) {
+				if (deck.getHeroClass() == NonHeroClass.DECK_COLLECTION) {
 					continue;
 				}
-				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == HeroClass.ANY) {
+				if (deck.getHeroClass() == heroClass || deck.getHeroClass() == NonHeroClass.NEUTRAL) {
 					if (deckFormat != null && deckFormat.isInFormat(deck)) {
 						deckList.add(deck);
 					}

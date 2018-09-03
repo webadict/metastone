@@ -12,6 +12,10 @@ import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
+/**
+ * @deprecated As of v2.0, use {@link SwapAttributeSpell} instead with {@link SpellArg.ATTRIBUTE} set to HP.
+ */
+@Deprecated
 public class SwapHpSpell extends Spell {
 
 	public static SpellDesc create() {
