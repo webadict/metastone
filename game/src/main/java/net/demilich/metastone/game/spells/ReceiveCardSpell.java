@@ -38,7 +38,7 @@ public class ReceiveCardSpell extends Spell {
 				}
 			}
 		} else {
-			for (Card card : SpellUtils.getCards(context, desc)) {
+			for (Card card : SpellUtils.getCards(context, player, desc, source, target)) {
 				for (int i = 0; i < count; i++) {
 					context.getLogic().receiveCard(player.getId(), card);
 				}

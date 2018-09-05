@@ -14,7 +14,7 @@ import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 
 public class TargetingTests extends TestBase {
 

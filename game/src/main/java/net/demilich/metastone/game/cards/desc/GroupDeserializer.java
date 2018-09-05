@@ -27,6 +27,7 @@ public class GroupDeserializer implements JsonDeserializer<GroupDesc> {
 		}
 		Map<GroupArg, Object> groupArgs = GroupDesc.build(groupClass);
 		parseArgument(GroupArg.CARDS, jsonData, groupArgs, ParseValueType.STRING_ARRAY);
+		parseArgument(GroupArg.TYPE, jsonData, groupArgs, ParseValueType.CARD_TYPE);
 		return new GroupDesc(groupArgs);
 	}
 

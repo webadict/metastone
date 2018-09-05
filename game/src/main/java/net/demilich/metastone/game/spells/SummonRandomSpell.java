@@ -4,7 +4,9 @@ import java.util.Map;
 
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.SummonCard;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -19,10 +21,10 @@ public class SummonRandomSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
-		String[] minionCardsId = (String[]) desc.get(SpellArg.CARDS);
-		String randomMinionId = minionCardsId[context.getLogic().random(minionCardsId.length)];
-		MinionCard randomMinionCard = (MinionCard) context.getCardById(randomMinionId);
-		context.getLogic().summon(player.getId(), randomMinionCard.summon());
+		Card[] cards = SpellUtils.getCards(context, player, desc, source, target);
+		Card card = cards[context.getLogic().random(cards.length)];
+		SummonCard randomSummonCard = (SummonCard) card;
+		context.getLogic().summon(player.getId(), randomSummonCard.summon());
 	}
 
 }

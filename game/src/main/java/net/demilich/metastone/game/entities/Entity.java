@@ -26,6 +26,10 @@ public abstract class Entity extends CustomCloneable {
 		return clone;
 	}
 
+	public void addEnchantment(Enchantment enchantment) {
+		enchantmentList.add(enchantment);
+	}
+
 	@Deprecated
 	public Object getAttribute(Attribute attribute) {
 		return attributes.get(attribute);

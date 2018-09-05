@@ -79,7 +79,7 @@ public class SimulateGamesCommand extends SimpleCommand<GameNotification> {
 				// Executors.newSingleThreadExecutor();
 
 				List<Future<Void>> futures = new ArrayList<Future<Void>>();
-				// send initial status update
+				// send initial status initializeImplementations
 				Tuple<Integer, Integer> progress = new Tuple<>(0, gameConfig.getNumberOfGames());
 				getFacade().sendNotification(GameNotification.SIMULATION_PROGRESS_UPDATE, progress);
 

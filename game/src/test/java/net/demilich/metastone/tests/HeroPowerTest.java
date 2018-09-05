@@ -7,7 +7,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;

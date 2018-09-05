@@ -1,8 +1,5 @@
 package net.demilich.metastone.tests;
 
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -11,10 +8,12 @@ import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SecretCard;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.logic.GameLogic;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class SecretTest extends TestBase {
 

@@ -12,7 +12,7 @@ import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.targeting.EntityReference;

@@ -7,6 +7,11 @@ import java.util.Map;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
+import net.demilich.metastone.game.cards.Card;
+import net.demilich.metastone.game.cards.CardCollection;
+import net.demilich.metastone.game.cards.CardType;
+import net.demilich.metastone.game.cards.EnchantmentCard;
+import net.demilich.metastone.game.cards.group.Group;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -34,38 +39,43 @@ public class AdaptSpell extends Spell {
 		if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
 			randomTarget = SpellUtils.getRandomTarget(validTargets);
 		}
-		SpellDesc[] group = SpellUtils.getGroup(context, desc).getGroup(context);
-		int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, null, source, 3);
-		int count = desc.getValue(SpellArg.VALUE, context, player, null, source, 1);
-		List<SpellDesc> spellList = new ArrayList<SpellDesc>();
-		for (SpellDesc spell : group) {
-			spellList.add(spell);
-		}
-
-		for (int j = 0; j < count; j++) {
-			List<SpellDesc> adaptions = new ArrayList<>(spellList);
-			List<SpellDesc> spells = new ArrayList<>();
-			for (int i = 0; i < howMany; i++) {
-				SpellDesc spell = adaptions.remove(context.getLogic().random(adaptions.size()));
-				spells.add(spell);
+		Group group = SpellUtils.getGroup(context, desc);
+		if (group.getType() == CardType.ENCHANTMENT) {
+			Entity[] entities = group.getGroup(context);
+			CardCollection cards = new CardCollection();
+			for (Entity entity : entities) {
+				if (entity instanceof EnchantmentCard) {
+					cards.add((EnchantmentCard) entity);
+				}
 			}
-			
-			if (spells.isEmpty()) {
-				return;
-			}
-			SpellDesc spell = SpellUtils.getSpellDiscover(context, player, desc, spells).getSpell();
-			spellList.remove(spell);
-			
-			if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
-				onCast(context, player, spell, source, randomTarget);
-			} else {
-				// there is at least one target and RANDOM_TARGET flag is not set,
-				// cast in on all targets
+			int howMany = desc.getValue(SpellArg.HOW_MANY, context, player, null, source, 3);
+			int count = desc.getValue(SpellArg.VALUE, context, player, null, source, 1);
 
-				for (Entity target : validTargets) {
-					context.getEnvironment().put(Environment.SPELL_TARGET, target.getReference());
-					onCast(context, player, spell, source, target);
-					context.getEnvironment().remove(Environment.SPELL_TARGET);
+			for (int j = 0; j < count; j++) {
+				CardCollection adaptions = new CardCollection();
+				CardCollection choices = new CardCollection();
+				for (int i = 0; i < howMany; i++) {
+					Card card = adaptions.getRandom();
+					adaptions.remove(card);
+					choices.add(card);
+				}
+
+				if (choices.isEmpty()) {
+					return;
+				}
+				SpellDesc spell = SpellUtils.getDiscover(context, player, AddEnchantmentSpell.create(), cards).getSpell();
+
+				if (validTargets.size() > 0 && desc.getBool(SpellArg.RANDOM_TARGET)) {
+					onCast(context, player, spell, source, randomTarget);
+				} else {
+					// there is at least one target and RANDOM_TARGET flag is not set,
+					// cast in on all targets
+
+					for (Entity target : validTargets) {
+						context.getEnvironment().put(Environment.SPELL_TARGET, target.getReference());
+						onCast(context, player, spell, source, target);
+						context.getEnvironment().remove(Environment.SPELL_TARGET);
+					}
 				}
 			}
 		}

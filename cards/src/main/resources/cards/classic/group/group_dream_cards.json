@@ -5,13 +5,11 @@
 		"class": "CardGroup",
 		"type": "SPELL",
 		"cards": [
-			"spell_armor_plating",
-			"spell_emergency_coolant",
-			"spell_finicky_cloakfield",
-			"spell_reversing_switch",
-			"spell_rusty_horn",
-			"spell_time_rewinder",
-			"spell_whirling_blades"
+			"token_emerald_drake",
+			"token_laughing_sister",
+			"spell_nightmare",
+			"spell_ysera_awakens",
+			"spell_dream"
 		]
 	},
 	"collectible": false,

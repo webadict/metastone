@@ -1,6 +1,7 @@
 package net.demilich.metastone.game.cards.group;
 
 import net.demilich.metastone.game.GameContext;
+import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
 
 public abstract class Group {
@@ -12,6 +13,10 @@ public abstract class Group {
 	}
 
 	public abstract Entity[] getGroup(GameContext context);
+
+	public CardType getType() {
+		return (CardType) desc.get(GroupArg.TYPE);
+	}
 
 	@Override
 	public String toString() {

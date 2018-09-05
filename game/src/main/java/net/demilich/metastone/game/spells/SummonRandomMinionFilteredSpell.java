@@ -13,6 +13,10 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.source.CardSource;
 
+/**
+ * @deprecated As of v2.0.0, use SummonRandomSpell instead.
+ */
+@Deprecated
 public class SummonRandomMinionFilteredSpell extends Spell {
 
 	protected static MinionCard getRandomMatchingMinionCard(GameContext context, Player player, EntityFilter cardFilter, CardSource cardSource) {

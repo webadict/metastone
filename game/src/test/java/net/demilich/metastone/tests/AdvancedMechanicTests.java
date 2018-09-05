@@ -19,7 +19,7 @@ import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.spells.SetHpSpell;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;

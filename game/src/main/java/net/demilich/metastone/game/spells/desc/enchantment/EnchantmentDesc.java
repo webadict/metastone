@@ -59,7 +59,7 @@ public class EnchantmentDesc extends Desc<EnchantmentArg> {
 
 	@Override
 	public EnchantmentDesc clone() {
-		EnchantmentDesc clone = new EnchantmentDesc(build(getManaModifierClass()));
+		EnchantmentDesc clone = new EnchantmentDesc(build(getEnchantmentClass()));
 		for (EnchantmentArg cardCostModififerArg : arguments.keySet()) {
 			Object value = arguments.get(cardCostModififerArg);
 			if (value instanceof CustomCloneable) {
@@ -73,9 +73,9 @@ public class EnchantmentDesc extends Desc<EnchantmentArg> {
 	}
 
 	public Enchantment create() {
-		Class<? extends Enchantment> manaModifierClass = getManaModifierClass();
+		Class<? extends Enchantment> enchantmentClass = getEnchantmentClass();
 		try {
-			return manaModifierClass.getConstructor(EnchantmentDesc.class).newInstance(this);
+			return enchantmentClass.getConstructor(EnchantmentDesc.class).newInstance(this);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class EnchantmentDesc extends Desc<EnchantmentArg> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Class<? extends Enchantment> getManaModifierClass() {
+	public Class<? extends Enchantment> getEnchantmentClass() {
 		return (Class<? extends Enchantment>) get(EnchantmentArg.CLASS);
 	}
 

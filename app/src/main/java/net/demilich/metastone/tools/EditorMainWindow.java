@@ -286,7 +286,7 @@ class EditorMainWindow extends BorderPane {
 		card.id = getCardId(card);
 		contentPanel.getChildren().setAll(cardEditor.getPanel());
 
-		// update ui
+		// initializeImplementations ui
 		nameField.setText(card.name);
 		idLabel.setText(card.id);
 		descriptionField.setText(card.description);

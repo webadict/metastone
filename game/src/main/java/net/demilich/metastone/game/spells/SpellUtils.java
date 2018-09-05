@@ -17,6 +17,7 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.spells.desc.filter.Operation;
+import net.demilich.metastone.game.spells.desc.source.CardSource;
 import net.demilich.metastone.game.targeting.EntityReference;
 
 import java.util.ArrayList;
@@ -53,6 +54,17 @@ public class SpellUtils {
 		return false;
 	}
 
+	public static CardCollection getCardCollection(GameContext context, Player player, SpellDesc spell, Entity target, Entity source) {
+		CardCollection cards;
+		if (spell.contains(SpellArg.CARD_SOURCE)) {
+			CardSource cardSource = (CardSource) spell.get(SpellArg.CARD_SOURCE);
+			cards = cardSource.getCards(context, player);
+		} else {
+			cards = CardCatalogue.query(context.getDeckFormat());
+		}
+		return cards;
+	}
+
 	public static CardCollection getCards(CardCollection source, Predicate<Card> filter) {
 		CardCollection result = new CardCollection();
 		for (Card card : source) {
@@ -75,8 +87,8 @@ public class SpellUtils {
 		return card;
 	}
 
-	public static Card[] getCards(GameContext context, SpellDesc spell) {
-		String[] cardNames = null;
+	public static Card[] getCards(GameContext context, Player player, SpellDesc spell, Entity source, Entity target) {
+		String[] cardNames = new String[0];
 		if (spell.contains(SpellArg.CARDS)) {
 			cardNames = (String[]) spell.get(SpellArg.CARDS);
 		} else if (spell.contains(SpellArg.GROUP)) {
@@ -85,7 +97,17 @@ public class SpellUtils {
 			if (entities instanceof Card[]) {
 				return (Card[]) entities;
 			}
-		} else {
+		} else if (spell.contains(SpellArg.CARD_FILTER)) {
+			EntityFilter cardFilter = (EntityFilter) spell.get(SpellArg.CARD_FILTER);
+			CardCollection cardCollection = getCardCollection(context, player, spell, target, source);
+			List<Card> cards = new ArrayList<>();
+			for (Card card : cardCollection) {
+				if (cardFilter.matches(context, player, card)) {
+					cards.add(card);
+				}
+			}
+			return cards.toArray(new Card[0]);
+		} else if (spell.contains(SpellArg.CARD)) {
 			cardNames = new String[1];
 			cardNames[0] = (String) spell.get(SpellArg.CARD);
 		}
@@ -96,8 +118,7 @@ public class SpellUtils {
 		return cards;
 	}
 	
-	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc desc, CardCollection cards) {
-		SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
+	public static DiscoverAction getDiscover(GameContext context, Player player, SpellDesc spell, CardCollection cards) {
 		List<GameAction> discoverActions = new ArrayList<>();
 		for (Card card : cards) {
 			SpellDesc spellClone = spell.addArg(SpellArg.CARD, card.getCardId());

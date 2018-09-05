@@ -1,8 +1,9 @@
 {
-	"name": "Spare Parts",
+	"name": "Death Knight Cards",
 	"type": "GROUP",
 	"group": {
 		"class": "CardGroup",
+		"type": "SPELL",
 		"cards": [
 			"spell_anti-magic_shell",
 			"spell_army_of_the_dead",

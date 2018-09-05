@@ -2,18 +2,21 @@ package net.demilich.metastone.game.spells.desc.filter;
 
 public enum FilterArg {
 	CLASS,
-	TARGET_PLAYER,
-	VALUE,
-	RACE,
-	OPERATION,
+
 	ATTRIBUTE,
+	CARD_ID,
 	CARD_TYPE,
-	RARITY,
-	MANA_COST,
+	FILTERS,
+	GROUP,
 	HERO_CLASS,
 	HERO_CLASSES,
-	CARD_ID,
-	FILTERS,
 	INVERT,
-	TARGET
+	MANA_COST,
+	OPERATION,
+	RACE,
+	RARITY,
+	TARGET,
+	TARGET_PLAYER,
+	VALUE,
+
 }

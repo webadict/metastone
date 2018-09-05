@@ -8,11 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonSpell",
-		"cards": [
-			"token_huffer",
-			"token_misha",
-			"token_leokk"
-		]
+		"group": "group_beast_companions"
 	},
 	"collectible": true,
 	"set": "WHISPERS_OF_THE_OLD_GODS",

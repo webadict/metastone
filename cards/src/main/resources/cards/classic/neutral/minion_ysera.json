@@ -15,13 +15,7 @@
 		},
 		"spell": {
 			"class": "ReceiveRandomCardSpell",
-			"cards": [
-				"token_emerald_drake",
-				"token_laughing_sister",
-				"spell_nightmare",
-				"spell_ysera_awakens",
-				"spell_dream"
-			]
+			"group": "group_dream_cards"
 		}
 	},
 	"collectible": true,

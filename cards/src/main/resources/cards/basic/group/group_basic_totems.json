@@ -1,0 +1,17 @@
+{
+	"name": "Basic Totems",
+	"type": "GROUP",
+	"group": {
+		"class": "CardGroup",
+		"type": "MINION",
+		"cards": [
+			"token_searing_totem",
+			"token_healing_totem",
+			"token_wrath_of_air_totem",
+			"token_stoneclaw_totem"
+		]
+	},
+	"collectible": false,
+	"set": "BASIC",
+	"fileFormatVersion": 1
+}

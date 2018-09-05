@@ -1,15 +1,15 @@
 package net.demilich.metastone.tests;
 
-import java.util.EnumMap;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
+
+import java.util.EnumMap;
 
 public class TestSpellCard extends SpellCard {
 
@@ -18,8 +18,8 @@ public class TestSpellCard extends SpellCard {
 		desc.name = "Unit Test Spell";
 		desc.rarity = Rarity.FREE;
 		desc.type = CardType.SPELL;
-		desc.heroClass = HeroClass.ANY;
-		desc.attributes = new EnumMap<Attribute, Object>(Attribute.class);
+		desc.heroClass = NonHeroClass.NEUTRAL;
+		desc.attributes = new EnumMap<>(Attribute.class);
 		return desc;
 	}
 

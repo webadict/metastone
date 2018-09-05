@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 
 public class ManaTests extends TestBase {
 	

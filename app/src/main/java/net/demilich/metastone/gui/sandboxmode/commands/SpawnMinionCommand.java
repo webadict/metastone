@@ -51,7 +51,7 @@ public class SpawnMinionCommand extends SimpleCommand<GameNotification> {
 		Minion minion = minionCard.summon();
 		Actor nextTo = (Actor) context.resolveSingleTarget(action.getTargetKey());
 		int index = selectedPlayer.getSummons().indexOf(nextTo);
-		context.getLogic().summon(selectedPlayer.getId(), minion, minionCard, index, false);
+		context.getLogic().newSummon(selectedPlayer.getId(), minion, minionCard, index, false);
 		
 		if (context.ignoreEvents()) {
 			context.setIgnoreEvents(false);

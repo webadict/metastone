@@ -24,7 +24,7 @@ public class DiscoverCardSpell extends Spell {
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		CardCollection result = new CardCollection();
 		boolean cannotReceiveOwned = desc.getBool(SpellArg.CANNOT_RECEIVE_OWNED);
-		for (Card card : SpellUtils.getCards(context, desc)) {
+		for (Card card : SpellUtils.getCards(context, player, desc, source, target)) {
 			if (!cannotReceiveOwned || !context.getLogic().hasCard(player, card)) {
 				result.add(card);
 			}
@@ -43,7 +43,8 @@ public class DiscoverCardSpell extends Spell {
 		}
 		
 		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+			SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
+			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, spell, cards).getSpell(), source, target);
 		}
 	}
 

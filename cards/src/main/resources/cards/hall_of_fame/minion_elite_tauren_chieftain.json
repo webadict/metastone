@@ -11,11 +11,7 @@
 		"spell": {
 			"class": "ReceiveRandomCardSpell",
 			"targetPlayer": "BOTH",
-			"cards": [
-				"spell_i_am_murloc",
-				"spell_power_of_the_horde",
-				"spell_rogues_do_it"
-			]
+			"group": "group_power_chords"
 		}
 	},
 	"attributes": {

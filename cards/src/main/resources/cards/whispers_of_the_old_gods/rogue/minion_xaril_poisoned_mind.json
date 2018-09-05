@@ -10,24 +10,12 @@
 	"battlecry": {
 		"spell": {
 			"class": "ReceiveRandomCardSpell",
-			"cards": [
-				"spell_bloodthistle_toxin",
-				"spell_briarthorn_toxin",
-				"spell_fadeleaf_toxin",
-				"spell_firebloom_toxin",
-				"spell_kingsblood_toxin"
-			]
+			"group": "group_toxins"
 		}
 	},
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",
-		"cards": [
-			"spell_bloodthistle_toxin",
-			"spell_briarthorn_toxin",
-			"spell_fadeleaf_toxin",
-			"spell_firebloom_toxin",
-			"spell_kingsblood_toxin"
-		]
+		"group": "group_toxins"
 	},
 	"attributes": {
 		"BATTLECRY": true,

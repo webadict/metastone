@@ -4,4 +4,5 @@ public enum GroupArg {
 	CLASS,
 
 	CARDS,
+	TYPE,
 }

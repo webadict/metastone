@@ -7,7 +7,7 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.WeaponCard;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 
 public class WeaponTests extends TestBase {
 	

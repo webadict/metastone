@@ -1,13 +1,5 @@
 package net.demilich.metastone.tests;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import org.slf4j.LoggerFactory;
-
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import net.demilich.metastone.game.GameContext;
@@ -15,21 +7,24 @@ import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PhysicalAttackAction;
 import net.demilich.metastone.game.behaviour.Behaviour;
-import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.CardCatalogue;
-import net.demilich.metastone.game.cards.CardParseException;
-import net.demilich.metastone.game.cards.CardSet;
-import net.demilich.metastone.game.cards.HeroCard;
-import net.demilich.metastone.game.cards.MinionCard;
+import net.demilich.metastone.game.cards.*;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
+import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.targeting.EntityReference;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TestBase {
 
@@ -91,9 +86,9 @@ public class TestBase {
 		context.getLogic().performGameAction(player.getId(), physicalAttackAction);
 	}
 
-	protected static DebugContext createContext(HeroClass hero1, HeroClass hero2) {
+	protected static DebugContext createContext(HeroClassImplementation hero1, HeroClassImplementation hero2) {
 		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet set : CardSet.values()) {
+		for (BaseCardSet set : BaseCardSet.values()) {
 			deckFormat.addSet(set);
 		}
 		PlayerConfig player1Config = new PlayerConfig(DeckFactory.getRandomDeck(hero1, deckFormat), new TestBehaviour());
@@ -124,7 +119,7 @@ public class TestBase {
 		return null;
 	}
 
-	protected static HeroCard getHeroCardForClass(HeroClass heroClass) {
+	protected static HeroCard getHeroCardForClass(HeroClassImplementation heroClass) {
 		for (Card card : CardCatalogue.getHeroes()) {
 			HeroCard heroCard = (HeroCard) card;
 			if (heroCard.getHeroClass() == heroClass) {

@@ -11,12 +11,12 @@ import net.demilich.metastone.game.behaviour.PlayRandomBehaviour;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
-import net.demilich.metastone.game.cards.CardSet;
+import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.decks.DeckFactory;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Actor;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.gameconfig.PlayerConfig;
 
@@ -55,7 +55,7 @@ public class CloningTest extends TestBase {
 	@Test
 	public void testCloning() {
 		DeckFormat deckFormat = new DeckFormat();
-		for (CardSet set : CardSet.values()) {
+		for (BaseCardSet set : BaseCardSet.values()) {
 			deckFormat.addSet(set);
 		}
 		for (int i = 0; i < 100; i++) {

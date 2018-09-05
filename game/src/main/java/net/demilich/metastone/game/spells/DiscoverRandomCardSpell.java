@@ -77,7 +77,8 @@ public class DiscoverRandomCardSpell extends Spell {
 		}
 		
 		if (!cards.isEmpty()) {
-			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, desc, cards).getSpell(), source, target);
+			SpellDesc spell = (SpellDesc) desc.get(SpellArg.SPELL);
+			SpellUtils.castChildSpell(context, player, SpellUtils.getDiscover(context, player, spell, cards).getSpell(), source, target);
 		}
 	}
 

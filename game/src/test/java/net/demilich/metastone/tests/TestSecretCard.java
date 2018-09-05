@@ -1,13 +1,11 @@
 package net.demilich.metastone.tests;
 
-import java.util.EnumMap;
-
 import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SecretCard;
 import net.demilich.metastone.game.cards.desc.SecretCardDesc;
-import net.demilich.metastone.game.entities.heroes.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.spells.DamageSpell;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.trigger.EventTriggerDesc;
@@ -16,6 +14,8 @@ import net.demilich.metastone.game.spells.trigger.TurnEndTrigger;
 import net.demilich.metastone.game.spells.trigger.types.Secret;
 import net.demilich.metastone.game.targeting.EntityReference;
 
+import java.util.EnumMap;
+
 public class TestSecretCard extends SecretCard {
 
 	private static SecretCardDesc getDesc() {
@@ -23,8 +23,8 @@ public class TestSecretCard extends SecretCard {
 		desc.name = "Trap";
 		desc.rarity = Rarity.FREE;
 		desc.type = CardType.SPELL;
-		desc.heroClass = HeroClass.ANY;
-		desc.attributes = new EnumMap<Attribute, Object>(Attribute.class);
+		desc.heroClass = NonHeroClass.NEUTRAL;
+		desc.attributes = new EnumMap<>(Attribute.class);
 		desc.trigger = EventTriggerDesc.createEmpty(TurnEndTrigger.class);
 		return desc;
 	}

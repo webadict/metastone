@@ -44,7 +44,7 @@ public class PerformTrainingCommand extends SimpleCommand<GameNotification> {
 
 				CuckooLearner learner = new CuckooLearner(config.getDeckToTrain(), config.getDecks());
 
-				// send initial status update
+				// send initial status initializeImplementations
 				TrainingProgressReport progress = new TrainingProgressReport(gamesCompleted, config.getNumberOfGames(), gamesWon);
 				getFacade().sendNotification(GameNotification.TRAINING_PROGRESS_UPDATE, progress);
 				for (int i = 0; i < config.getNumberOfGames(); i++) {

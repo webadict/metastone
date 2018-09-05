@@ -8,11 +8,7 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonRandomSpell",
-		"cards": [
-			"token_huffer",
-			"token_misha",
-			"token_leokk"
-		]
+		"group": "group_beast_companions"
 	},
 	"collectible": true,
 	"set": "BASIC",

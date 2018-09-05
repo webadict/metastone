@@ -31,21 +31,22 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 			throw new JsonParseException("Condition parser encountered an invalid class: " + conditionClassName);
 		}
 		Map<ConditionArg, Object> arguments = ConditionDesc.build(conditionClass);
+		parseArgument(ConditionArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
+		parseArgument(ConditionArg.CARD_FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
+		parseArgument(ConditionArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
+		parseArgument(ConditionArg.CARD_IDS, jsonData, arguments, ParseValueType.STRING_ARRAY);
+		parseArgument(ConditionArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
+		parseArgument(ConditionArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
+		parseArgument(ConditionArg.GROUP, jsonData, arguments, ParseValueType.GROUP);
+		parseArgument(ConditionArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
+		parseArgument(ConditionArg.CONDITIONS, jsonData, arguments, ParseValueType.CONDITION_ARRAY);
+		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
 		parseArgument(ConditionArg.RACE, jsonData, arguments, ParseValueType.RACE);
 		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ConditionArg.VALUE1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.VALUE2, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(ConditionArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
-		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
-		parseArgument(ConditionArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
-		parseArgument(ConditionArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
-		parseArgument(ConditionArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
-		parseArgument(ConditionArg.CONDITIONS, jsonData, arguments, ParseValueType.CONDITION_ARRAY);
-		parseArgument(ConditionArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
-		parseArgument(ConditionArg.CARD_IDS, jsonData, arguments, ParseValueType.STRING_ARRAY);
-		parseArgument(ConditionArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
-		parseArgument(ConditionArg.CARD_FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
 
 		return new ConditionDesc(arguments);
 	}

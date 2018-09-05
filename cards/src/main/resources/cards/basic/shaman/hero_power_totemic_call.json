@@ -8,48 +8,14 @@
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "SummonRandomNotOnBoardSpell",
-		"cards": [
-			"token_searing_totem",
-			"token_healing_totem",
-			"token_wrath_of_air_totem",
-			"token_stoneclaw_totem"
-		]
+		"group": "group_basic_totems"
 	},
 	"condition": {
 		"class": "AndCondition",
 		"conditions": [
 			{
-				"class": "AndCondition",
-				"conditions": [
-					{
-						"class": "MinionOnBoardCondition",
-						"cardFilter": {
-							"class": "SpecificCardFilter",
-							"cardId": "token_searing_totem"
-						}
-					},
-					{
-						"class": "MinionOnBoardCondition",
-						"cardFilter": {
-							"class": "SpecificCardFilter",
-							"cardId": "token_healing_totem"
-						}
-					},
-					{
-						"class": "MinionOnBoardCondition",
-						"cardFilter": {
-							"class": "SpecificCardFilter",
-							"cardId": "token_wrath_of_air_totem"
-						}
-					},
-					{
-						"class": "MinionOnBoardCondition",
-						"cardFilter": {
-							"class": "SpecificCardFilter",
-							"cardId": "token_stoneclaw_totem"
-						}
-					}
-				],
+				"class": "GroupOnBoardCondition",
+				"group": "group_basic_totems",
 				"invert": true
 			},
 			{

@@ -65,7 +65,7 @@ public class SummonSpell extends Spell {
 			}
 			return;
 		}
-		for (Card card : SpellUtils.getCards(context, desc)) {
+		for (Card card : SpellUtils.getCards(context, player, desc, source, target)) {
 			for (int i = 0; i < count; i++) {
 				int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 				SummonCard summonCard = (SummonCard) card.clone();
