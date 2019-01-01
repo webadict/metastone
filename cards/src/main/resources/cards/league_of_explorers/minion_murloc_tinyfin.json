@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "",
 	"collectible": true,
 	"set": "LEAGUE_OF_EXPLORERS",

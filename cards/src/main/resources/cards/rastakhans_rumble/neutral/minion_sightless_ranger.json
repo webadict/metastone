@@ -1,0 +1,24 @@
+{
+	"name": "Sightless Ranger",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Rush. Overkill: Summon two 1/1 Bats.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"value": 2,
+			"card": "token_bat_rastakhan"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

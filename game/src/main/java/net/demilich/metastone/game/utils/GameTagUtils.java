@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.utils;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 
 public class GameTagUtils {
 
@@ -66,7 +66,7 @@ public class GameTagUtils {
 		case DEATHRATTLES:
 		case DEBUG:
 		case MANA_COST_MODIFIER:
-		case RACE:
+		case TRIBE:
 			return TagValueType.OTHER;
 		default:
 			break;

@@ -1,0 +1,24 @@
+{
+	"name": "Banana Buffoon",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Battlecry: Add 2 Bananas to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"value": 2,
+			"card": "spell_banana"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

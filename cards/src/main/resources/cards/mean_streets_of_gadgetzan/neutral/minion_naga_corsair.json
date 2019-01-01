@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Battlecry: Give your weapon +1 Attack.",
 	"battlecry": {
 		"targetSelection": "NONE",

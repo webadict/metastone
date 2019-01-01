@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Put a random 1-Cost minion from each deck into the battlefield.",
 	"battlecry": {
 		"targetSelection": "NONE",

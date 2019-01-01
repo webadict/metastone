@@ -1,0 +1,28 @@
+{
+	"name": "Dark Possession",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "RARE",
+	"description": "Deal $2 damage to a friendly character. Discover a Demon.",
+	"targetSelection": "FRIENDLY_CHARACTERS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "DamageSpell",
+				"value": 2
+			},
+			{
+				"class": "DiscoverSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"tribe": "DEMON"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

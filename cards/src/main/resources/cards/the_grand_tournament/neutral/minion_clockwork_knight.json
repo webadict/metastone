@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Give a friendly Mech +1/+1.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
@@ -15,8 +15,8 @@
 			"attackBonus": 1,
 			"hpBonus": 1,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

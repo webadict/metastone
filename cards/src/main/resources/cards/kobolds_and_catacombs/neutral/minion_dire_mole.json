@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"collectible": true,
 	"set": "KOBOLDS_AND_CATACOMBS",
 	"fileFormatVersion": 1

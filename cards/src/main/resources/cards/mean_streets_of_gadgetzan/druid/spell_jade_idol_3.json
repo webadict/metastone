@@ -11,8 +11,7 @@
 		"spells": [
 			{
 				"class": "ShuffleToDeckSpell",
-				"value": 3,
-				"target": "NONE",
+				"howMany": 3,
 				"card": "spell_jade_idol"
 			},
 			{

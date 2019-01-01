@@ -16,8 +16,8 @@
 		"class": "EntityCounter",
 		"target": "FRIENDLY_MINIONS",
 		"filter": {
-			"class": "RaceFilter",
-			"race": "MURLOC"
+			"class": "TribeFilter",
+			"tribe": "MURLOC"
 		}
 	},
 	"collectible": true,

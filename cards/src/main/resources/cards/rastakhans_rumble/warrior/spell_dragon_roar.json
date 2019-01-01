@@ -1,0 +1,20 @@
+{
+	"name": "Dragon Roar",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "COMMON",
+	"description": "Add 2 random Dragons to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ReceiveCardSpell",
+		"value": 2,
+		"cardFilter": {
+			"class": "CardFilter",
+			"tribe": "DRAGON"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

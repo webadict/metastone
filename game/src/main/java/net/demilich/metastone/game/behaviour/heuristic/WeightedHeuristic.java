@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.behaviour.heuristic;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.minions.Minion;
@@ -28,7 +28,7 @@ public class WeightedHeuristic implements IGameStateHeuristic {
 		if (context.getLogic().hasEntityAttribute(minion, Attribute.ENRAGED)) {
 			minionScore += 1;
 		}
-		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH) || context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH_FOR_ONE_TURN)) {
 			minionScore += 1;
 		}
 		if (context.getLogic().hasEntityAttribute(minion, Attribute.UNTARGETABLE_BY_SPELLS)) {

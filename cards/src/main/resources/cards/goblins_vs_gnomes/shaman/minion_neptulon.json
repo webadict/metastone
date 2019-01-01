@@ -13,8 +13,8 @@
 			"class": "ReceiveCardSpell",
 			"value": 4,
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "MURLOC"
+				"class": "TribeFilter",
+				"tribe": "MURLOC"
 			}
 		}
 	},

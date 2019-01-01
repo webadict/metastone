@@ -12,8 +12,8 @@
 			"class": "DamageSpell",
 			"value": 6,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "DRAGON"
+				"class": "TribeFilter",
+				"tribe": "DRAGON"
 			}
 		},
 		"targetSelection": "ANY"

@@ -3,12 +3,12 @@ package net.demilich.metastone.game.cards.costmodifier;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
@@ -51,7 +51,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 
-		if (getRequiredRace() != null && card.getRace() != getRequiredRace()) {
+		if (getRequiredTribe() != null && card.getTribe() != getRequiredTribe()) {
 			return false;
 		}
 
@@ -129,8 +129,8 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		return (List<Integer>) desc.get(CardCostModifierArg.CARD_IDS);
 	}
 
-	protected Race getRequiredRace() {
-		return (Race) get(CardCostModifierArg.RACE);
+	protected Tribe getRequiredTribe() {
+		return (Tribe) get(CardCostModifierArg.TRIBE);
 	}
 
 	protected TargetPlayer getTargetPlayer() {

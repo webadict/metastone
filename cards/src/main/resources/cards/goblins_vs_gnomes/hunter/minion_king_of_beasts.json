@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Taunt. Battlecry: Gain +1 Attack for each other Beast you have.",
 	"battlecry": {
 		"spell": {
@@ -16,8 +16,8 @@
 				"class": "EntityCounter",
 				"target": "OTHER_FRIENDLY_MINIONS",
 				"filter": {
-					"class": "RaceFilter",
-					"race": "BEAST"
+					"class": "TribeFilter",
+					"tribe": "BEAST"
 				}
 			}
 		}

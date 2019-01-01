@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "At the end of your turn, give another friendly Mech +2/+2.",
 	"trigger": {
 		"eventTrigger": {
@@ -20,8 +20,8 @@
 			"hpBonus": 2,
 			"randomTarget": true,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

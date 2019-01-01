@@ -6,17 +6,28 @@
 	"baseHp": 12,
 	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Deathrattle: Put all Dragons in your hand into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
 		"targetPlayer": "SELF",
-		"value": 7,
+		"value": {
+			"class": "AlgebraicValueProvider",
+			"operation": "SUBTRACT",
+			"value1": {
+				"class": "GameValueProvider",
+				"gameValue": "MAX_MINION_COUNT"
+			},
+			"value2": {
+				"class": "EntityCounter",
+				"target": "FRIENDLY_MINIONS"
+			}
+		},
 		"cardLocation": "HAND",
 		"cardFilter": {
 			"class": "CardFilter",
 			"cardType": "MINION",
-			"race": "DRAGON"
+			"tribe": "DRAGON"
 		}
 	},
 	"attributes": {

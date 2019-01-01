@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: Summon a 1/1 Ooze with Taunt.",
 	"battlecry": {
 		"spell": {

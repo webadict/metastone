@@ -1,0 +1,17 @@
+{
+	"name": "Bull Dozer",
+	"baseManaCost": 9,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 9,
+	"baseHp": 7,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "Divine Shield",
+	"attributes": {
+		"DIVINE_SHIELD": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

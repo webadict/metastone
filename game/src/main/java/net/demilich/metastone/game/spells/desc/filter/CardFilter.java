@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells.desc.filter;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
@@ -10,7 +10,7 @@ import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.SpellUtils;
 
 public class CardFilter extends EntityFilter {
@@ -49,8 +49,8 @@ public class CardFilter extends EntityFilter {
 		if (cardType != null && !card.getCardType().isCardType(cardType)) {
 			return false;
 		}
-		Race race = (Race) desc.get(FilterArg.RACE);
-		if (race != null && race != card.getRace()) {
+		Tribe tribe = (Tribe) desc.get(FilterArg.TRIBE);
+		if (tribe != null && tribe != card.getTribe()) {
 			return false;
 		}
 		

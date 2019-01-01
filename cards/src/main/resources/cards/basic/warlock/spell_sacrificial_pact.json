@@ -19,8 +19,8 @@
 			}
 		],
 		"filter": {
-			"class": "RaceFilter",
-			"race": "DEMON"
+			"class": "TribeFilter",
+			"tribe": "DEMON"
 		}
 	},
 	"collectible": true,

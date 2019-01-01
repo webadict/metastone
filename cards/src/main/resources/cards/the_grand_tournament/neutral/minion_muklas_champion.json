@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Inspire: Give your other minions +1/+1.",
 	"trigger": {
 		"eventTrigger": {

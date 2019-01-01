@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "WARRIOR",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever you gain Armor, give this minion +1 Attack.",
 	"trigger": {
 		"eventTrigger": {

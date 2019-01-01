@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Whenever you discard a card, draw a card.",
 	"trigger": {
 		"eventTrigger": {

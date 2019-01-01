@@ -1,0 +1,26 @@
+{
+	"name": "Arena Patron",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Overkill: Summon another Arena Patron.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "minion_arena_patron"
+		}
+	},
+	"attributes": {
+		"OVERKILL": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

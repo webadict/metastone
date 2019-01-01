@@ -13,8 +13,8 @@
 			"class": "DrawCardUntilConditionSpell",
 			"value": 60,
 			"condition": {
-				"class": "RaceCondition",
-				"race": "DRAGON",
+				"class": "TribeCondition",
+				"tribe": "DRAGON",
 				"invert": true
 			}
 		}

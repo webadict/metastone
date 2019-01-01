@@ -7,15 +7,8 @@
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
 	"description": "Your hero is Immune while attacking.",
-	"onEquip": {
-		"class": "AddAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "IMMUNE_WHILE_ATTACKING"
-	},
-	"onUnequip": {
-		"class": "RemoveAttributeSpell",
-		"target": "FRIENDLY_HERO",
-		"attribute": "IMMUNE_WHILE_ATTACKING"
+	"attributes": {
+		"IMMUNE_WHILE_ATTACKING": true
 	},
 	"collectible": true,
 	"set": "CLASSIC",

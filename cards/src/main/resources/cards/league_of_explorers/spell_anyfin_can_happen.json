@@ -11,7 +11,7 @@
 		"value": 7,
 		"cardFilter": {
 			"class": "CardFilter",
-			"race": "MURLOC"
+			"tribe": "MURLOC"
 		}
 	},
 	"collectible": true,

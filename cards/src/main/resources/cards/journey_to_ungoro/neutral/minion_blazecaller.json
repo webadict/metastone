@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Battlecry: If you played an Elemental last turn, deal 5 damage.",
 	"battlecry": {
 		"targetSelection": "ANY",
@@ -18,7 +18,7 @@
 			"class": "PlayedLastTurnCondition",
 			"filter": {
 				"class": "CardFilter",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		}
 	},

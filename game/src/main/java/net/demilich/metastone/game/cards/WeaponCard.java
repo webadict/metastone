@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayWeaponCardAction;
@@ -67,8 +67,6 @@ public class WeaponCard extends Card {
 		if (desc.cardCostModifier != null) {
 			weapon.setCardCostModifier(desc.cardCostModifier.create());
 		}
-		weapon.setOnEquip(desc.onEquip);
-		weapon.setOnUnequip(desc.onUnequip);
 		return weapon;
 	}
 

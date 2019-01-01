@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, gain Charge.",
 	"battlecry": {
 		"spell": {

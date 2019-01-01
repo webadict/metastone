@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Battlecry: If you played an Elemental last turn, summon two 2/3 Elementals with Taunt.",
 	"battlecry": {
 		"targetSelection": "ANY",
@@ -20,7 +20,7 @@
 			"class": "PlayedLastTurnCondition",
 			"filter": {
 				"class": "CardFilter",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		}
 	},

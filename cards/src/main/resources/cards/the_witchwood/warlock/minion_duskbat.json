@@ -1,0 +1,32 @@
+{
+	"name": "Duskbat",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Battlecry: If your hero took damage this turn, summon two 1/1 Bats.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"value": 2,
+			"card": "token_bat"
+		},
+		"condition": {
+			"class": "AttributeCondition",
+			"target": "FRIENDLY_HERO",
+			"value": 0,
+			"attribute": "DAMAGE_THIS_TURN",
+			"operation": "GREATER"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

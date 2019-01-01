@@ -1,0 +1,29 @@
+{
+	"name": "Totemic Smash",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Deal 2 damage. Overkill: Summon a basic Totem.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"group": "group_basic_totems"
+		},
+		"condition": {
+			"class": "OverkillCondition"
+		}
+	},
+	"attributes": {
+		"OVERKILL": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

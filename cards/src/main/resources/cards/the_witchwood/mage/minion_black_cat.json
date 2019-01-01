@@ -1,0 +1,41 @@
+{
+	"name": "Black Cat",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Spell Damage +1. Battlecry: If your deck has only odd-Cost cards, draw a card.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DrawCardSpell"
+		},
+		"condition": {
+			"class": "DeckCondition",
+			"condition": {
+				"class": "ComparisonCondition",
+				"operation": "EQUAL",
+				"value1": {
+					"class": "AlgebraicValueProvider",
+					"value1": {
+						"class": "AttributeValueProvider",
+						"attribute": "BASE_MANA_COST"
+					},
+					"value2": 2,
+					"operation": "MODULO"
+				},
+				"value2": 1
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"SPELL_DAMAGE": 1
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

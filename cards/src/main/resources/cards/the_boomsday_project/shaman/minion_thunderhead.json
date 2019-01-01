@@ -1,0 +1,29 @@
+{
+	"name": "Thunderhead",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"rarity": "EPIC",
+	"tribe": "ELEMENTAL",
+	"description": "After you play a card with Overload, summon two 1/1 Sparks with Rush.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterCardPlayedTrigger",
+			"requiredAttribute": "OVERLOAD",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"cards": [
+				"token_spark",
+				"token_spark"
+			],
+			"boardPositionRelative": true
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

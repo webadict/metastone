@@ -6,7 +6,7 @@
 	"baseHp": 9,
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "At the end of each turn, destroy this minion if it's your only one.",
 	"trigger": {
 		"eventTrigger": {

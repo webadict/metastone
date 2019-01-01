@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Gain +1 Attack for each other card in your hand.",
 	"battlecry": {
 		"spell": {

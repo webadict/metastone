@@ -9,15 +9,17 @@
 	"description": "Battlecry: Draw a card, if it is a minion turn it into a chicken.",
 	"battlecry": {
 		"spell": {
-			"class": "DrawCardAndDoSomethingSpell",
-			"spell": {
+			"class": "DrawCardSpell",
+			"subSpell": {
 				"class": "ConditionalSpell",
 				"spell": {
 					"class": "TransformCardSpell",
+					"target": "SPELL_OUTPUT",
 					"card": "token_chicken_gvg"
 				},
 				"condition": {
 					"class": "CardPropertyCondition",
+					"target": "SPELL_OUTPUT",
 					"cardType": "MINION"
 				}
 			}

@@ -1,0 +1,28 @@
+{
+	"name": "Predatory Instincts",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Draw a Beast from your deck. Double its Health.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"tribe": "BEAST"
+		},
+		"subSpell": {
+			"class": "BuffSpell",
+			"target": "SPELL_OUTPUT",
+			"hpBonus": {
+				"class": "AttributeValueProvider",
+				"target": "SPELL_OUTPUT",
+				"attribute": "HP"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

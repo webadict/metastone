@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: Give your other Murlocs +2 Health.",
 	"battlecry": {
 		"spell": {
@@ -14,8 +14,8 @@
 			"target": "OTHER_FRIENDLY_MINIONS",
 			"hpBonus": 2,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MURLOC"
+				"class": "TribeFilter",
+				"tribe": "MURLOC"
 			}
 		}
 	},

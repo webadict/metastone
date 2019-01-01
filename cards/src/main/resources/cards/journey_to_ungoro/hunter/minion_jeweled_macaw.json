@@ -6,16 +6,16 @@
 	"baseHp": 1,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Add a random Beast card to your hand.",
 	"battlecry": {
 		"targetSelection": "NONE",
-	"spell": {
-		"class": "ReceiveCardSpell",
-		"cardFilter": {
-			"class": "RaceFilter",
-			"race": "BEAST"
-		}
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "TribeFilter",
+				"tribe": "BEAST"
+			}
 		}
 	},
 	"attributes": {

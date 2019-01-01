@@ -1,0 +1,26 @@
+{
+	"name": "Revenge of the Wild",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Summon your Beasts that died this turn.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 3
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "token_devilsaur"
+		},
+		"condition": {
+			"class": "OverkillCondition"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

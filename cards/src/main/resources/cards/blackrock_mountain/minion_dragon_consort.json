@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "PALADIN",
 	"rarity": "RARE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: The next Dragon you play costs (2) less.",
 	"battlecry": {
 		"spell": {
@@ -15,13 +15,13 @@
 			"cardCostModifier": {
 				"class": "CardCostModifier",
 				"cardType": "MINION",
-				"race": "DRAGON",
+				"tribe": "DRAGON",
 				"operation": "SUBTRACT",
 				"value": "2",
 				"expirationTrigger": {
 					"class": "CardPlayedTrigger",
 					"targetPlayer": "SELF",
-					"race": "DRAGON"
+					"tribe": "DRAGON"
 				}
 			}
 		}

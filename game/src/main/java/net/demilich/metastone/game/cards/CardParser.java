@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.desc.*;
 import net.demilich.metastone.game.cards.group.GroupDesc;
 import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
@@ -194,9 +194,7 @@ public class CardParser {
 					|| jsonData.getAsJsonObject().has("trigger")
 					|| jsonData.getAsJsonObject().has("passiveTrigger")
 					|| jsonData.getAsJsonObject().has("deckTrigger")
-					|| jsonData.getAsJsonObject().has("options")
-					|| jsonData.getAsJsonObject().has("onEquip")
-					|| jsonData.getAsJsonObject().has("onUnequip"))) {
+					|| jsonData.getAsJsonObject().has("options"))) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'description' attribute!");
 			}
 			return gson.fromJson(jsonData, WeaponCardDesc.class);
@@ -254,14 +252,8 @@ public class CardParser {
 	public boolean checkHeroClass(JsonElement jsonData) {
 		if (!jsonData.getAsJsonObject().has("heroClass")) {
 			return false;
-		} else {
-			for (HeroClassImplementation heroClass : HeroClassImplementation.values()) {
-				if (jsonData.getAsJsonObject().get("heroClass").getAsString().equalsIgnoreCase(heroClass.toString())) {
-					return true;
-				}
-			}
-			return false;
 		}
+		return true;
 	}
 
 	public boolean checkRarity(JsonElement jsonData) {

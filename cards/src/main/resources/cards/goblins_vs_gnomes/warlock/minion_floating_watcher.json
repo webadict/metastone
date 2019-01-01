@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Whenever your hero takes damage on your turn, gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {

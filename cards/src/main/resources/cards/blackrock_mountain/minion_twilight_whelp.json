@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, gain +2 Health.",
 	"battlecry": {
 		"spell": {
@@ -18,7 +18,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.ParseUtils;
@@ -23,6 +23,7 @@ import net.demilich.metastone.game.cards.interfaced.BaseCardSet;
 import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.entities.AttributeMap;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.gui.common.ComboBoxKeyHandler;
 import org.apache.commons.lang3.StringUtils;
@@ -184,7 +185,7 @@ class EditorMainWindow extends BorderPane {
 	}
 
 	private void onAttributesChanged() {
-		card.attributes = new EnumMap<Attribute, Object>(Attribute.class);
+		card.attributes = new AttributeMap();
 		for (int i = 0; i < attributeBoxes.size(); i++) {
 			ComboBox<Attribute> attributeBox = attributeBoxes.get(i);
 			TextField attributeField = attributeFields.get(i);

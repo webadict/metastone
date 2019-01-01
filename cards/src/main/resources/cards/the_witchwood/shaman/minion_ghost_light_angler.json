@@ -1,0 +1,17 @@
+{
+	"name": "Ghost Light Angler",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "COMMON",
+	"tribe": "MURLOC",
+	"description": "Echo",
+	"attributes": {
+		"ECHO": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

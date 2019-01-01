@@ -62,6 +62,10 @@ public class SpellDesc extends Desc<SpellArg> {
 		return (Class<? extends Spell>) arguments.get(SpellArg.CLASS);
 	}
 
+	public SpellDesc getSubSpell() {
+	    return (SpellDesc) arguments.get(SpellArg.SUB_SPELL);
+    }
+
 	public EntityReference getTarget() {
 		return (EntityReference) arguments.get(SpellArg.TARGET);
 	}

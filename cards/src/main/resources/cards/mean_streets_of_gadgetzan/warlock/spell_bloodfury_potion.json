@@ -17,8 +17,8 @@
 			"hpBonus": 3
 		},
 		"condition": {
-			"class": "RaceCondition",
-			"race": "DEMON"
+			"class": "TribeCondition",
+			"tribe": "DEMON"
 		}
 	},
 	"collectible": true,

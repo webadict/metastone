@@ -10,7 +10,18 @@
 	"battlecry": {
 		"spell": {
 			"class": "ResurrectSpell",
-			"value": 7,
+			"value": {
+				"class": "AlgebraicValueProvider",
+				"operation": "SUBTRACT",
+				"value1": {
+					"class": "GameValueProvider",
+					"gameValue": "MAX_MINION_COUNT"
+				},
+				"value2": {
+					"class": "EntityCounter",
+					"target": "FRIENDLY_MINIONS"
+				}
+			},
 			"cardFilter": {
 				"class": "CardFilter",
 				"attribute": "DEATHRATTLES",

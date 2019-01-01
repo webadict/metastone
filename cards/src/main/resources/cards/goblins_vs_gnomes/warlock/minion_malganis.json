@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Your other Demons have +2/+2. Your hero is Immune.",
 	"aura": {
 		"class": "BuffAura",
@@ -14,8 +14,8 @@
 		"attackBonus": 2,
 		"hpBonus": 2,
 		"filter": {
-			"class": "RaceFilter",
-			"race": "DEMON"
+			"class": "TribeFilter",
+			"tribe": "DEMON"
 		}
 	},
 	"attributes": {

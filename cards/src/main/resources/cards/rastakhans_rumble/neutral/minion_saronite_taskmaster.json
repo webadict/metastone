@@ -1,0 +1,24 @@
+{
+	"name": "Saronite Taskmaster",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Battlecry: Summon a 0/3 Free Agent with Taunt for your opponent.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"targetPlayer": "OPPONENT",
+			"card": "token_free_agent"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

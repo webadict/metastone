@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Trigger a friendly minion's Deathrattle.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",

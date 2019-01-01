@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",

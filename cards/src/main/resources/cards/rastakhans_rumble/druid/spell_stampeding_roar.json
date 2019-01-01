@@ -1,0 +1,26 @@
+{
+	"name": "Stampeding Roar",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "EPIC",
+	"description": "Summon a Beast from your hand and give it Rush.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "RecruitSpell",
+		"subSpell": {
+			"class": "AddAttributeSpell",
+			"target": "SPELL_OUTPUT",
+			"attribute": "RUSH"
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"cardType": "MINION",
+			"tribe": "BEAST"
+		},
+		"cardLocation": "HAND"
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

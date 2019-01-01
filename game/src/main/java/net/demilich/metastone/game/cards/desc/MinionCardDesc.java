@@ -2,13 +2,13 @@ package net.demilich.metastone.game.cards.desc;
 
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.MinionCard;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 
 public class MinionCardDesc extends SummonCardDesc {
 
 	public int baseAttack;
 	public int baseHp;
-	public Race race;
+	public Tribe tribe;
 
 	@Override
 	public Card createInstance() {

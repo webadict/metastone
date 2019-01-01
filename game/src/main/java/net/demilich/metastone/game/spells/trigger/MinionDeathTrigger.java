@@ -3,7 +3,7 @@ package net.demilich.metastone.game.spells.trigger;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.events.KillEvent;
@@ -25,8 +25,8 @@ public class MinionDeathTrigger extends GameEventTrigger {
 
 		Minion minion = (Minion) killEvent.getVictim();
 
-		Race race = (Race) desc.get(EventTriggerArg.RACE);
-		if (race != null && minion.getRace() != race) {
+		Tribe tribe = (Tribe) desc.get(EventTriggerArg.TRIBE);
+		if (tribe != null && minion.getTribe() != tribe) {
 			return false;
 		}
 		

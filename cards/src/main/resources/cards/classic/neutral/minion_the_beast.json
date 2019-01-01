@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Deathrattle: Summon a 3/3 Finkle Einhorn for your opponent.",
 	"deathrattle": {
 		"class": "SummonSpell",

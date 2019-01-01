@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever your opponent plays a card, discard the top 3 cards of your deck.",
 	"trigger": {
 		"eventTrigger": {

@@ -6,13 +6,13 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever a friendly Mech dies, gain +2/+2.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
 			"targetPlayer": "SELF",
-			"race": "MECH"
+			"tribe": "MECH"
 		},
 		"spell": {
 			"class": "BuffSpell",

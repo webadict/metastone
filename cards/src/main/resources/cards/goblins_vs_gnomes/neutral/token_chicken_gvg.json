@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": false,
 	"set": "GOBLINS_VS_GNOMES",

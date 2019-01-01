@@ -6,7 +6,7 @@
 	"baseHp": 12,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Destroy all other minions and discard your hand.",
 	"battlecry": {
 		"targetSelection": "NONE",

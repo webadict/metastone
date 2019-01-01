@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Can't be targeted by Spells or Hero Powers.",
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true

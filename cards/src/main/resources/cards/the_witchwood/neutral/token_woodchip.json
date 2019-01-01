@@ -1,0 +1,13 @@
+{
+	"name": "Woodchip",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

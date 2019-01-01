@@ -13,7 +13,7 @@ public enum FilterArg {
 	INVERT,
 	MANA_COST,
 	OPERATION,
-	RACE,
+	TRIBE,
 	RARITY,
 	TARGET,
 	TARGET_PLAYER,

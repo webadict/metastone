@@ -1,8 +1,8 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.events.BeforeSummonEvent;
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
@@ -18,8 +18,8 @@ public class BeforeMinionSummonedTrigger extends GameEventTrigger {
 	@Override
 	protected boolean fire(GameEvent event, Entity host) {
 		BeforeSummonEvent summonEvent = (BeforeSummonEvent) event;
-		Race race = (Race) desc.get(EventTriggerArg.RACE);
-		if (race != null && summonEvent.getMinion().getRace() != race) {
+		Tribe tribe = (Tribe) desc.get(EventTriggerArg.TRIBE);
+		if (tribe != null && summonEvent.getMinion().getTribe() != tribe) {
 			return false;
 		}
 

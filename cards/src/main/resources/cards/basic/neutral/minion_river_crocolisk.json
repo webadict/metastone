@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": true,
 	"set": "BASIC",

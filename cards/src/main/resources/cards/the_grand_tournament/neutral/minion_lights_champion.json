@@ -12,8 +12,8 @@
 		"spell": {
 			"class": "SilenceSpell",
 			"filter": {
-				"class": "RaceFilter",
-				"race": "DEMON"
+				"class": "TribeFilter",
+				"tribe": "DEMON"
 			}
 		}
 	},

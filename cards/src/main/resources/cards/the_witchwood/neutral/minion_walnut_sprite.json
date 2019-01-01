@@ -1,0 +1,16 @@
+{
+	"name": "Walnut Sprite",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"description": "Echo",
+	"attributes": {
+		"ECHO": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

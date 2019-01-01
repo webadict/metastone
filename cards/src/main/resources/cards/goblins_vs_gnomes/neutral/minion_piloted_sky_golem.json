@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Summon a random 4-Cost minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",

@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Summon a 1/1 Cat.",
 	"battlecry": {
 		"targetSelection": "NONE",

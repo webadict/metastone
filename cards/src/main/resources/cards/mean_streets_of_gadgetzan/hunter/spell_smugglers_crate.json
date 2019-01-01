@@ -14,7 +14,7 @@
 		"filter": {
 			"class": "CardFilter",
 			"cardType": "MINION",
-			"race": "BEAST"
+			"tribe": "BEAST"
 		},
 		"randomTarget": true
 	},

@@ -1,0 +1,25 @@
+{
+	"name": "Giggling Inventor",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"rarity": "RARE",
+	"description": "Battlecry: Summon two 1/2 Mechs with Taunt and Divine Shield",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"value": 2,
+			"card": "token_annoy-o-tron",
+			"boardPositionRelative": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 2
+}

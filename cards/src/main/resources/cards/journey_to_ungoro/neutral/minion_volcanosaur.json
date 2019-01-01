@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 5,
 	"baseHp": 6,
-	"heroClass": "ANY",	
+	"heroClass": "ANY",
 	"rarity": "RARE",
 	"description": "Battlecry: Adapt, then Adapt.",
 	"battlecry": {

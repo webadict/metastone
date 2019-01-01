@@ -1,0 +1,26 @@
+{
+	"name": "Half-Time Scavenger",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Stealth. Overkill: Gain 3 Armor.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "BuffHeroSpell",
+			"armorBonus": 3
+		}
+	},
+	"attributes": {
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

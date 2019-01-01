@@ -1,0 +1,14 @@
+{
+	"name": "Mechanical Dragon",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 7,
+	"baseHp": 7,
+	"rarity": "FREE",
+	"tribe": "MECH",
+	"description": "",
+	"collectible": false,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

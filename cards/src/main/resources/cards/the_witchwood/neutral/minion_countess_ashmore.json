@@ -1,0 +1,48 @@
+{
+	"name": "Countess Ashmore",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Draw a Rush, Lifesteal, and Deathrattle card from your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DrawCardSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"attribute": "RUSH"
+					}
+				},
+				{
+					"class": "DrawCardSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"attribute": "LIFESTEAL"
+					}
+				},
+				{
+					"class": "DrawCardSpell",
+					"value": 1,
+					"cardFilter": {
+						"class": "CardFilter",
+						"attribute": "DEATHRATTLES"
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

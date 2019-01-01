@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "At the start of each turn, gain +1 Attack.",
 	"trigger": {
 		"eventTrigger": {

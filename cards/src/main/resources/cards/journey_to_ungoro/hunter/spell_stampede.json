@@ -6,25 +6,24 @@
 	"rarity": "EPIC",
 	"description": "Whenever you play a Beast this turn, add a random Beast to your hand.",
 	"targetSelection": "NONE",
-		"spell": {
+	"spell": {
 		"class": "AddSpellTriggerSpell",
 		"target": "FRIENDLY_PLAYER",
 		"trigger": {
 			"eventTrigger": {
-			"class": "MinionPlayedTrigger",
-			"sourcePlayer": "SELF",
-			"race": "BEAST"
-		},
-		"spell": {
-			"class": "ReceiveCardSpell",
-			"cardFilter": {
-				"class": "CardFilter",
-				"race": "BEAST"
-			}
+				"class": "MinionPlayedTrigger",
+				"sourcePlayer": "SELF",
+				"tribe": "BEAST"
+			},
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"cardFilter": {
+					"class": "CardFilter",
+					"tribe": "BEAST"
+				}
 			},
 			"oneTurn": true
-			
-			}
+		}
 	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",

@@ -1,0 +1,25 @@
+{
+	"name": "Springpaw",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Rush. Battlecry: Add a 1/1 Lynx with Rush to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "RecieveCardSpell",
+			"card": "token_lynx"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Give your other Mechs +2 Attack.",
 	"battlecry": {
 		"spell": {
@@ -14,8 +14,8 @@
 			"target": "OTHER_FRIENDLY_MINIONS",
 			"attackBonus": 2,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

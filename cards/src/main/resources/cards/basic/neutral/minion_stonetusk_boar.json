@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "NEUTRAL",
 	"rarity": "FREE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Charge",
 	"attributes": {
 		"CHARGE": true

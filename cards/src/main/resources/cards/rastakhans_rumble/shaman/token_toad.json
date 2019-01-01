@@ -1,0 +1,17 @@
+{
+	"name": "Toad",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "SHAMAN",
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

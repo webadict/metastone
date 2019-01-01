@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Spell Damage +1",
 	"attributes": {
 		"SPELL_DAMAGE": 1

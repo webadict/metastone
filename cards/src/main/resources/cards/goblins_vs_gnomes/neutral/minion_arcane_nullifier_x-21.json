@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Taunt. Can't be targeted by spells or Hero Powers.",
 	"attributes": {
 		"TAUNT": true,

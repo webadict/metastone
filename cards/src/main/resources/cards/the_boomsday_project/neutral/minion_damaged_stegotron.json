@@ -1,0 +1,26 @@
+{
+	"name": "Damaged Stegotron",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 5,
+	"baseHp": 12,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "Taunt. Battlecry: Deal 6 damage to this minion.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "SELF",
+			"value": 6
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

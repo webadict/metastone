@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: If you played an Elemental last turn, Adapt.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -19,7 +19,7 @@
 			"class": "PlayedLastTurnCondition",
 			"filter": {
 				"class": "CardFilter",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		}
 	},

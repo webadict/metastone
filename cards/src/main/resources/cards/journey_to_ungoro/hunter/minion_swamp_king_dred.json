@@ -1,0 +1,24 @@
+{
+	"name": "Swamp King Dred",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 9,
+	"baseHp": 9,
+	"rarity": "LEGENDARY",
+	"tribe": "BEAST",
+	"description": "After your opponent plays a minion, attack it.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterMinionPlayedTrigger",
+			"targetPlayer": "OPPONENT"
+		},
+		"spell": {
+			"class": "FightSpell",
+			"target": "EVENT_TARGET"
+		}
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,35 @@
+{
+	"name": "Lifedrinker",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "RARE",
+	"tribe": "BEAST",
+	"description": "Battlecry: Deal $3 damage to the enemy hero. Restore #3 Health to your hero.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DamageSpell",
+					"target": "ENEMY_HERO",
+					"value": 3
+				},
+				{
+					"class": "HealSpell",
+					"target": "FRIENDLY_HERO",
+					"value": 3
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Players only have 15 seconds to take their turns.",
 	"collectible": true,
 	"set": "CLASSIC",

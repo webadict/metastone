@@ -6,13 +6,13 @@
 	"baseHp": 3,
 	"heroClass": "PALADIN",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever you summon a Mech, gain Divine Shield.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"race": "MECH"
+			"tribe": "MECH"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",

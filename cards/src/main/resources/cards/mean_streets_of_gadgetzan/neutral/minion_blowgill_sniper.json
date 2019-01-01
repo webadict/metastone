@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: Deal 1 damage.",
 	"battlecry": {
 		"targetSelection": "ANY",

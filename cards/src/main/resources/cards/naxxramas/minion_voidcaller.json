@@ -6,14 +6,14 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Deathrattle: Put a random Demon from your hand into the battlefield.",
 	"deathrattle": {
 		"class": "PutRandomMinionOnBoardSpell",
 		"cardLocation": "HAND",
 		"cardFilter": {
-			"class": "RaceFilter",
-			"race": "DEMON"
+			"class": "TribeFilter",
+			"tribe": "DEMON"
 		}
 	},
 	"attributes": {

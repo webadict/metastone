@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Charge",
 	"attributes": {
 		"CHARGE": true

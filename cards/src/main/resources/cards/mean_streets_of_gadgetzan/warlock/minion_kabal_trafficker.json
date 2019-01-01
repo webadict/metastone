@@ -17,7 +17,7 @@
 			"targetPlayer": "SELF",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DEMON"
+				"tribe": "DEMON"
 			}
 		}
 	},

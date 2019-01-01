@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Deathrattle: Summon a 3/2 Big Bad Wolf.",
 	"deathrattle": {
 		"class": "SummonSpell",

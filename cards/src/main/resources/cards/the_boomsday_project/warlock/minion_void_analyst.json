@@ -1,0 +1,28 @@
+{
+	"name": "Void Analyst",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "RARE",
+	"tribe": "DEMON",
+	"description": "Deathrattle: Give all Demons in your hand +1/+1.",
+	"deathrattle": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_HAND",
+		"attackBonus": 1,
+		"hpBonus": 1,
+		"filter": {
+			"class": "CardFilter",
+			"tribe": "DEMON",
+			"cardType": "MINION"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

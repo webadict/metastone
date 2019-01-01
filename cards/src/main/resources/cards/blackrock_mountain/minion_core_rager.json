@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: If your hand is empty, gain +3/+3.",
 	"battlecry": {
 		"spell": {

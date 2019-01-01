@@ -1,5 +1,5 @@
 {
-	"name": "Flame Geyser", 
+	"name": "Flame Geyser",
 	"baseManaCost": 2,
 	"type": "SPELL",
 	"heroClass": "MAGE",
@@ -14,8 +14,8 @@
 				"value": 2
 			},
 			{
-			"class": "ReceiveCardSpell",
-			"card": "token_flame_elemental"
+				"class": "ReceiveCardSpell",
+				"card": "token_flame_elemental"
 			}
 		]
 	},

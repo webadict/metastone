@@ -35,7 +35,7 @@ public class AdjacentEffectSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		EntityReference sourceReference = source != null ? source.getReference() : null;
-		List<Summon> adjacentSummons = context.getAdjacentSummons(player, target.getReference());
+		List<Summon> adjacentSummons = context.getAdjacentSummons(target.getReference());
 
 		SpellDesc primary = (SpellDesc) desc.get(SpellArg.SPELL_1);
 		if (primary != null) {

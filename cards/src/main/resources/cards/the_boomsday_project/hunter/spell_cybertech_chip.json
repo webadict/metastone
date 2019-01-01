@@ -1,0 +1,23 @@
+{
+	"name": "Cybertech Chip",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Give your minions Deathrattle: Add a random mech to your hand",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "AddDeathrattleSpell",
+		"target": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "TribeFilter",
+				"tribe": "MECH"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

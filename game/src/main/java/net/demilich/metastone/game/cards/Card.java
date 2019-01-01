@@ -1,16 +1,15 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
-import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.targeting.CardLocation;
@@ -67,7 +66,7 @@ public abstract class Card extends Entity {
 	@Override
 	public Card clone() {
 		Card clone = (Card) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
+		clone.attributes = getAttributes().clone();
 		return clone;
 	}
 
@@ -217,7 +216,7 @@ public abstract class Card extends Entity {
 		if (getRarity().toString().toLowerCase().contains(filter)) {
 			return true;
 		}
-		if (getRace() != Race.NONE && getRace().toString().toLowerCase().contains(filter)) {
+		if (getTribe() != Tribe.NONE && getTribe().toString().toLowerCase().contains(filter)) {
 			return true;
 		}
 		String cardType = getCardType() == CardType.CHOOSE_ONE ? "SPELL" : getCardType().toString();

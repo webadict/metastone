@@ -1,0 +1,16 @@
+{
+	"name": "Rabid Worgen",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"description": "Rush",
+	"attributes": {
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

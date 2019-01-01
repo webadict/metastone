@@ -36,12 +36,13 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 		parseArgument(ConditionArg.CARD_ID, jsonData, arguments, ParseValueType.STRING);
 		parseArgument(ConditionArg.CARD_IDS, jsonData, arguments, ParseValueType.STRING_ARRAY);
 		parseArgument(ConditionArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
+        parseArgument(ConditionArg.CONDITION, jsonData, arguments, ParseValueType.CONDITION);
+        parseArgument(ConditionArg.CONDITIONS, jsonData, arguments, ParseValueType.CONDITION_ARRAY);
 		parseArgument(ConditionArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
 		parseArgument(ConditionArg.GROUP, jsonData, arguments, ParseValueType.GROUP);
 		parseArgument(ConditionArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
-		parseArgument(ConditionArg.CONDITIONS, jsonData, arguments, ParseValueType.CONDITION_ARRAY);
 		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
-		parseArgument(ConditionArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(ConditionArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
 		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ConditionArg.VALUE1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.VALUE2, jsonData, arguments, ParseValueType.VALUE);

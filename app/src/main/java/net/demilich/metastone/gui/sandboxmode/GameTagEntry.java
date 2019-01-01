@@ -1,6 +1,6 @@
 package net.demilich.metastone.gui.sandboxmode;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.utils.GameTagUtils;
 import net.demilich.metastone.game.utils.TagValueType;
 

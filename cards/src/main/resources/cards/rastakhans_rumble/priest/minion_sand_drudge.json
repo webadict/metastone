@@ -1,0 +1,24 @@
+{
+	"name": "Sand Drudge",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Whenever you cast a spell, summon a 1/1 Zombie with Taunt.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_violet_apprentice",
+			"boardPositionRelative": true
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

@@ -114,12 +114,15 @@ public class GameContext implements Cloneable, IDisposable {
 		Stack<Integer> damageStack = new Stack<Integer>();
 		damageStack.addAll(getDamageStack());
 		clone.getEnvironment().put(Environment.DAMAGE_STACK, damageStack);
-		Stack<EntityReference> summonReferenceStack = new Stack<EntityReference>();
+		Stack<EntityReference> summonReferenceStack = new Stack<>();
 		summonReferenceStack.addAll(getSummonReferenceStack());
 		clone.getEnvironment().put(Environment.SUMMON_REFERENCE_STACK, summonReferenceStack);
-		Stack<EntityReference> eventTargetReferenceStack = new Stack<EntityReference>();
+		Stack<EntityReference> eventTargetReferenceStack = new Stack<>();
 		eventTargetReferenceStack.addAll(getEventTargetStack());
 		clone.getEnvironment().put(Environment.EVENT_TARGET_REFERENCE_STACK, eventTargetReferenceStack);
+        Stack<EntityReference> spellOutputReferenceStack = new Stack<>();
+        spellOutputReferenceStack.addAll(getSpellOutputStack());
+        clone.getEnvironment().put(Environment.SPELL_OUTPUT_STACK, spellOutputReferenceStack);
 		
 		for (Environment key : getEnvironment().keySet()) {
 			if (!key.customClone()) {
@@ -160,8 +163,7 @@ public class GameContext implements Cloneable, IDisposable {
 	}
 
 	public void endTurn() {
-		logic.endTurn(activePlayer);
-		activePlayer = activePlayer == PLAYER_1 ? PLAYER_2 : PLAYER_1;
+		activePlayer = logic.endTurn(activePlayer);
 		onGameStateChanged();
 		turnState = TurnState.TURN_ENDED;
 	}
@@ -203,7 +205,25 @@ public class GameContext implements Cloneable, IDisposable {
 		return activePlayer;
 	}
 
-	public List<Summon> getAdjacentSummons(Player player, EntityReference minionReference) {
+    public List<Entity> getAdjacentEntities(List<Entity> entityList, EntityReference entityReference) {
+	    List<Entity> adjacentEntities = new ArrayList<>();
+        Entity entity = resolveSingleTarget(entityReference);
+        int index = entityList.indexOf(entity);
+        if (index == -1) {
+            return adjacentEntities;
+        }
+        int left = index - 1;
+        int right = index + 1;
+        if (left > -1 && left < adjacentEntities.size()) {
+            adjacentEntities.add(entityList.get(left));
+        }
+        if (right > -1 && right < entityList.size()) {
+            adjacentEntities.add(entityList.get(right));
+        }
+        return adjacentEntities;
+    }
+
+	public List<Summon> getAdjacentSummons(EntityReference minionReference) {
 		List<Summon> adjacentSummons = new ArrayList<>();
 		Summon summon = (Summon) resolveSingleTarget(minionReference);
 		List<Summon> summons = getPlayer(summon.getOwner()).getSummons();
@@ -285,6 +305,14 @@ public class GameContext implements Cloneable, IDisposable {
 		}
 		return (Stack<EntityReference>) environment.get(Environment.EVENT_TARGET_REFERENCE_STACK);
 	}
+
+    @SuppressWarnings("unchecked")
+    public Stack<EntityReference> getSpellOutputStack() {
+        if (!environment.containsKey(Environment.SPELL_OUTPUT_STACK)) {
+            environment.put(Environment.SPELL_OUTPUT_STACK, new Stack<EntityReference>());
+        }
+        return (Stack<EntityReference>) environment.get(Environment.SPELL_OUTPUT_STACK);
+    }
 
 	public List<Summon> getLeftSummons(Player player, EntityReference minionReference) {
 		List<Summon> leftSummons = new ArrayList<>();

@@ -7,6 +7,7 @@ public enum Environment {
 	ATTACKER_REFERENCE,
 	EVENT_TARGET_REFERENCE_STACK,
 	TARGET,
+    SPELL_OUTPUT_STACK,
 	SPELL_TARGET,
 	SPELL_VALUE,
 	TRANSFORM_REFERENCE,
@@ -21,6 +22,7 @@ public enum Environment {
 	public boolean customClone() {
 		return (this == SUMMON_REFERENCE_STACK ||
 				this == EVENT_TARGET_REFERENCE_STACK ||
-				this == DAMAGE_STACK);
+				this == DAMAGE_STACK ||
+                this == SPELL_OUTPUT_STACK);
 	}
 }

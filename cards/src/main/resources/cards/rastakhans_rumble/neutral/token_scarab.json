@@ -1,0 +1,14 @@
+{
+	"name": "Scarab",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "NEUTRAL",
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

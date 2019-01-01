@@ -174,9 +174,6 @@ DoubleAttackSpell
 Doubles the Attack of the target. Also doubles temporary Attack.
 Examples: Blessed Champion, Gahz’rilla
 
-DrawCardAndDoSomethingSpell {}: Consider merging with DrawCardSpell?
-[] 
-
 DrawCardSpell
 Target player draws a Card from their Deck.
 Examples: Coldlight Oracle, Gnomish Inventor, Cult Master
@@ -224,11 +221,11 @@ Heals the target.
 Examples: Lesser Heal (Hero Power), Flash Heal, Voodoo Doctor, Circle of Healing
 “value”: Integer. The amount to heal for.
 
-JoustSpell {}: Rewrite JoustSpell
-Creates a Joust Event.
+JoustSpell
 Examples: Tuskarr Jouster, Healing Wave
-“spell1”: Spell. Spell to cast if the Joust succeeds.
-“spell2”: Optional Spell. Spell to cast if the Joust fails.
+“spell1”: Optional(?) Spell. Spell to cast if the Joust fails. This is surprisingly confusing.
+“spell2”: Optional Spell. Spell to cast if the Joust succeeds.
+"spell": Spell. Spell to cast if the joust succeeds.
 
 MetaSpell
 A Spell that casts multiple Spells in succession. These do not act as separate Spells.

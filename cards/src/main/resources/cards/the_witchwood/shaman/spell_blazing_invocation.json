@@ -1,0 +1,20 @@
+{
+	"name": "Blazing Invocation",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Discover a Battlecry minion.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"attribute": "BATTLECRY",
+			"cardType": "MINION"
+		}
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

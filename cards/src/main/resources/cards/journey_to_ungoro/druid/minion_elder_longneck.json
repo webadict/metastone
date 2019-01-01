@@ -17,11 +17,11 @@
 		"condition": {
 			"class": "HoldsCardCondition",
 			"cardFilter": {
-			"class": "CardFilter",
-			"cardType": "MINION",
-			"attribute": "ATTACK",
-			"operation": "GREATER_OR_EQUAL",
-			"value": 5
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"attribute": "ATTACK",
+				"operation": "GREATER_OR_EQUAL",
+				"value": 5
 			}
 		}
 	},

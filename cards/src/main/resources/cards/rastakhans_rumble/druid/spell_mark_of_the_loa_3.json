@@ -1,0 +1,31 @@
+{
+	"name": "+2/+4 and Taunt and Summon two 3/2 Raptors",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "COMMON",
+	"description": "Give a minion +2/+4 and Taunt and Summon two 3/2 Raptors",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 2,
+				"hpBonus": 4
+			},
+			{
+				"class": "AddAttributeSpell",
+				"attribute": "TAUNT"
+			},
+			{
+				"class": "SummonSpell",
+				"value": 2,
+				"card": "token_raptor_rastakhan"
+			}
+		]
+	},
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

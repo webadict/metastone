@@ -26,10 +26,14 @@ public class EntityReference {
 	public static final EntityReference FRIENDLY_PLAYER = new EntityReference(-21);
 	public static final EntityReference ENEMY_PLAYER = new EntityReference(-22);
 	public static final EntityReference MINIONS_TO_LEFT = new EntityReference(-23);
-	public static final EntityReference MINIONS_TO_RIGHT = new EntityReference(-24);
+    public static final EntityReference MINIONS_TO_RIGHT = new EntityReference(-24);
+    public static final EntityReference FRIENDLY_GRAVEYARD = new EntityReference(-25);
+    public static final EntityReference ENEMY_GRAVEYARD = new EntityReference(-26);
 
-	public static final EntityReference TARGET = new EntityReference(-30);
+
+    public static final EntityReference TARGET = new EntityReference(-30);
 	public static final EntityReference SPELL_TARGET = new EntityReference(-31);
+	public static final EntityReference SPELL_OUTPUT = new EntityReference(-32);
 
 	public static final EntityReference EVENT_TARGET = new EntityReference(-40);
 	public static final EntityReference SELF = new EntityReference(-41);

@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 2,
-	"heroClass": "HUNTER",	
+	"heroClass": "HUNTER",
 	"rarity": "COMMON",
 	"description": "Battlecry: Adapt a friendly Beast.",
 	"battlecry": {
@@ -14,8 +14,8 @@
 			"group": "group_adapt"
 		},
 		"filter": {
-			"class": "RaceFilter",
-			"race": "BEAST"
+			"class": "TribeFilter",
+			"tribe": "BEAST"
 		}
 	},
 	"attributes": {

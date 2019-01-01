@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "At the end of your turn, deal 2 damage to a non-Mech minion.",
 	"trigger": {
 		"eventTrigger": {
@@ -19,8 +19,8 @@
 			"value": 2,
 			"howMany": 1,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MECH",
+				"class": "TribeFilter",
+				"tribe": "MECH",
 				"invert": true
 			}
 		}

@@ -1,19 +1,13 @@
 package net.demilich.metastone.game.entities.weapons;
 
-import net.demilich.metastone.game.Attribute;
-import net.demilich.metastone.game.GameContext;
-import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.spells.desc.SpellDesc;
-import net.demilich.metastone.game.targeting.EntityReference;
 
 public class Weapon extends Actor {
 
 	private boolean active;
-	private SpellDesc onEquip;
-	private SpellDesc onUnequip;
 
 	public Weapon(Card sourceCard) {
 		super(sourceCard);
@@ -50,28 +44,8 @@ public class Weapon extends Actor {
 		return active;
 	}
 
-	public void onEquip(GameContext context, Player player) {
-		if (onEquip != null) {
-			context.getLogic().castSpell(player.getId(), onEquip, getReference(), EntityReference.NONE, false);
-		}
-	}
-
-	public void onUnequip(GameContext context, Player player) {
-		if (onUnequip != null) {
-			context.getLogic().castSpell(player.getId(), onUnequip, getReference(), EntityReference.NONE, false);
-		}
-	}
-
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public void setOnEquip(SpellDesc onEquip) {
-		this.onEquip = onEquip;
-	}
-
-	public void setOnUnequip(SpellDesc onUnequip) {
-		this.onUnequip = onUnequip;
 	}
 
 	@Override

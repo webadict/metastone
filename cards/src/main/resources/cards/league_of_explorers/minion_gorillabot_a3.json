@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: If you control another Mech, Discover a Mech.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -19,14 +19,14 @@
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
-				"race": "MECH"
+				"tribe": "MECH"
 			}
 		},
 		"condition": {
 			"class": "MinionOnBoardCondition",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

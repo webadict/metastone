@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Summon a random 1-Cost minion for your opponent.",
 	"battlecry": {
 		"spell": {

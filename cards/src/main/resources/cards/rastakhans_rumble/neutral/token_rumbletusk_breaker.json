@@ -1,0 +1,13 @@
+{
+	"name": "Rumbletusk Breaker",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "NEUTRAL",
+	"rarity": "FREE",
+	"description": "",
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

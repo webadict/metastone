@@ -1,0 +1,39 @@
+{
+	"name": "Omega Assembly",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARRIOR",
+	"rarity": "RARE",
+	"description": "Discover a Mech. If you have 10 mana crystals, keep all 3 cards.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "EitherOrSpell",
+		"condition": {
+			"class": "ManaMaxedCondition"
+		},
+		"spell1": {
+			"class": "ReceiveCardSpell",
+			"value": 3,
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "MECH",
+				"cardType": "MINION"
+			}
+		},
+		"spell2": {
+			"class": "DiscoverSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "MECH",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,16 @@
+{
+	"name": "Furious Ettin",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 5,
+	"baseHp": 9,
+	"rarity": "COMMON",
+	"description": "Taunt",
+	"attributes": {
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

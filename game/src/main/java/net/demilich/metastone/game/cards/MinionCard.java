@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayMinionCardAction;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 
@@ -27,8 +26,8 @@ public class MinionCard extends SummonCard {
 		setAttribute(Attribute.ATTACK, desc.baseAttack);
 		setAttribute(Attribute.HP, desc.baseHp);
 		setAttribute(Attribute.MAX_HP, desc.baseHp);
-		if (desc.race != null) {
-			setRace(desc.race);
+		if (desc.tribe != null) {
+			setTribe(desc.tribe);
 		}
 		this.desc = desc;
 	}

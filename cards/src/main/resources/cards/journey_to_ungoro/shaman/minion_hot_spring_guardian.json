@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Taunt. Battlecry: Restore 3 Health.",
 	"battlecry": {
 		"targetSelection": "ANY",

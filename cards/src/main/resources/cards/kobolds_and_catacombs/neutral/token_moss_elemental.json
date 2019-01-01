@@ -1,0 +1,14 @@
+{
+	"name": "Moss Elemental",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"rarity": "FREE",
+	"tribe": "ELEMENTAL",
+	"description": "",
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

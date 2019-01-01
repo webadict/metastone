@@ -15,7 +15,10 @@
 				"class": "MinionCountCondition",
 				"targetPlayer": "SELF",
 				"operation": "LESS",
-				"value": 7
+				"value": {
+					"class": "GameValueProvider",
+					"gameValue": "MAX_MINION_COUNT"
+				}
 			}
 		},
 		"spell": {

@@ -61,7 +61,12 @@ public class SummonSpell extends Spell {
 				int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 				Summon clone = (Summon) target.clone();
 				clone.clearSpellTriggers();
-				context.getLogic().newSummon(player.getId(), clone, null, boardPosition, false);
+				Summon summon = context.getLogic().newSummon(player.getId(), clone, null, boardPosition, false);
+
+                SpellDesc subSpell = desc.getSubSpell();
+                if (summon != null && subSpell != null) {
+                    SpellUtils.castChildSpell(context, player, subSpell, source, target, summon);
+                }
 			}
 			return;
 		}
@@ -69,7 +74,12 @@ public class SummonSpell extends Spell {
 			for (int i = 0; i < count; i++) {
 				int boardPosition = SpellUtils.getBoardPosition(context, player, desc, source, i);
 				SummonCard summonCard = (SummonCard) card.clone();
-				context.getLogic().newSummon(player.getId(), summonCard.summon(), null, boardPosition, false);
+				Summon summon = context.getLogic().newSummon(player.getId(), summonCard.summon(), null, boardPosition, false);
+
+                SpellDesc subSpell = desc.getSubSpell();
+                if (summon != null && subSpell != null) {
+                    SpellUtils.castChildSpell(context, player, subSpell, source, target, summon);
+                }
 			}
 		}
 	}

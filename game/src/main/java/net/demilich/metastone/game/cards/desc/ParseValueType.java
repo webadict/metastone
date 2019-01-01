@@ -1,25 +1,32 @@
 package net.demilich.metastone.game.cards.desc;
 
 public enum ParseValueType {
+    // Base parse value types
 	BOOLEAN,
 	INTEGER,
 	STRING,
 	STRING_ARRAY,
 
+    // Attribute types
+    MULTIPLIER,
+
+    // Basic card desc types
 	ATTRIBUTE,
 	CARD_TYPE,
+    CARD_TYPE_ARRAY,
 	CONDITION,
 	CONDITION_ARRAY,
 	HERO_CLASS,
 	HERO_CLASS_ARRAY,
-	RACE,
+	TRIBE,
 	RARITY,
 	SPELL,
 	SPELL_ARRAY,
 	TARGET_PLAYER,
 	VALUE,
 	VALUE_PROVIDER,
-	
+
+    // Advanced card desc types
 	ENTITY_FILTER,
 	ENTITY_FILTER_ARRAY,
 	GROUP,

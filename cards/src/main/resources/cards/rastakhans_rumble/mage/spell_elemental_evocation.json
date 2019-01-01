@@ -1,0 +1,26 @@
+{
+	"name": "Elemental Evocation",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "COMMON",
+	"description": "The next Elemental you play this turn costs (2) less.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "CardCostModifierSpell",
+		"target": "FRIENDLY_PLAYER",
+		"cardCostModifier": {
+			"class": "OneTurnCostModifier",
+			"cardType": "SPELL",
+			"operation": "SUBTRACT",
+			"value": 2,
+			"expirationTrigger": {
+				"class": "MinionPlayedTrigger",
+				"tribe": "ELEMENTAL"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

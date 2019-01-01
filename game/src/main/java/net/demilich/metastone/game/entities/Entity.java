@@ -5,9 +5,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.enchantment.Enchantment;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.IdFactory;
@@ -15,10 +14,15 @@ import net.demilich.metastone.game.targeting.IdFactory;
 public abstract class Entity extends CustomCloneable {
 
 	private String name;
-	protected Map<Attribute, Object> attributes = new EnumMap<Attribute, Object>(Attribute.class);
+	protected AttributeMap attributes;
 	private int id = IdFactory.UNASSIGNED;
 	private int ownerIndex = -1;
 	protected List<Enchantment> enchantmentList = new ArrayList<>();
+
+	protected Entity() {
+	    super();
+	    attributes = new AttributeMap();
+    }
 
 	@Override
 	public Entity clone() {
@@ -35,7 +39,7 @@ public abstract class Entity extends CustomCloneable {
 		return attributes.get(attribute);
 	}
 
-	public Map<Attribute, Object> getAttributes() {
+	public AttributeMap getAttributes() {
 		return attributes;
 	}
 
@@ -62,8 +66,8 @@ public abstract class Entity extends CustomCloneable {
 		return ownerIndex;
 	}
 
-	public Race getRace() {
-		return hasAttribute(Attribute.RACE) ? (Race) getAttribute(Attribute.RACE) : Race.NONE;
+	public Tribe getTribe() {
+		return hasAttribute(Attribute.TRIBE) ? (Tribe) getAttribute(Attribute.TRIBE) : Tribe.NONE;
 	}
 
 	public EntityReference getReference() {
@@ -161,8 +165,8 @@ public abstract class Entity extends CustomCloneable {
 		this.ownerIndex = ownerIndex;
 	}
 
-	public void setRace(Race race) {
-		setAttribute(Attribute.RACE, race);
+	public void setTribe(Tribe tribe) {
+		setAttribute(Attribute.TRIBE, tribe);
 	}
 
 }

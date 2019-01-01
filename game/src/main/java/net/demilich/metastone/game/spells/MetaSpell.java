@@ -32,10 +32,14 @@ public class MetaSpell extends Spell {
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
 		context.getEnvironment().put(Environment.SPELL_VALUE, desc.getValue(SpellArg.VALUE, context, player, target, source, 0));
-		for (SpellDesc spell : (SpellDesc[]) desc.get(SpellArg.SPELLS)) {
-			SpellUtils.castChildSpell(context, player, spell, source, target);
-		}
-		context.getEnvironment().remove(Environment.SPELL_VALUE);
+		if (desc.contains(SpellArg.SPELLS)) {
+            for (SpellDesc spell : (SpellDesc[]) desc.get(SpellArg.SPELLS)) {
+                SpellUtils.castChildSpell(context, player, spell, source, target);
+            }
+        } else if (desc.contains(SpellArg.SPELL)) {
+            SpellUtils.castChildSpell(context, player, (SpellDesc) desc.get(SpellArg.SPELL), source, target);
+        }
+        context.getEnvironment().remove(Environment.SPELL_VALUE);
 	}
 
 }

@@ -44,7 +44,7 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		parseArgument(ValueProviderArg.OFFSET, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(ValueProviderArg.OPERATION, jsonData, arguments, ParseValueType.ALGEBRAIC_OPERATION);
 		parseArgument(ValueProviderArg.PLAYER_ATTRIBUTE, jsonData, arguments, ParseValueType.PLAYER_ATTRIBUTE);
-		parseArgument(ValueProviderArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(ValueProviderArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
 		parseArgument(ValueProviderArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(ValueProviderArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);

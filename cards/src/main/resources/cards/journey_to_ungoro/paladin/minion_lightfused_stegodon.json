@@ -4,7 +4,7 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 4,
-	"heroClass": "PALADIN",	
+	"heroClass": "PALADIN",
 	"rarity": "RARE",
 	"description": "Battlecry: Adapt your Silver Hand Recruits.",
 	"battlecry": {

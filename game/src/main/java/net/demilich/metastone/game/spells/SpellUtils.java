@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
@@ -11,7 +11,7 @@ import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -35,6 +35,17 @@ public class SpellUtils {
 		}
 		context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference, true);
 	}
+
+    public static void castChildSpell(GameContext context, Player player, SpellDesc spell, Entity source, Entity target, Entity output) {
+	    context.getSpellOutputStack().push(output.getReference());
+        EntityReference sourceReference = source != null ? source.getReference() : null;
+        EntityReference targetReference = spell.getTarget();
+        if (targetReference == null && target != null) {
+            targetReference = target.getReference();
+        }
+        context.getLogic().castSpell(player.getId(), spell, sourceReference, targetReference, true);
+        context.getSpellOutputStack().pop();
+    }
 
 	public static boolean evaluateOperation(Operation operation, int actualValue, int targetValue) {
 		switch (operation) {
@@ -230,10 +241,10 @@ public class SpellUtils {
 		return validTargets;
 	}
 
-	public static int hasHowManyOfRace(Player player, Race race) {
+	public static int hasHowManyOfTribe(Player player, Tribe tribe) {
 		int count = 0;
 		for (Summon summon : player.getSummons()) {
-			if (summon.getRace() == race) {
+			if (summon.getTribe() == tribe) {
 				count++;
 			}
 		}
@@ -260,9 +271,9 @@ public class SpellUtils {
 		return false;
 	}
 
-	public static boolean holdsMinionOfRace(Player player, Race race) {
+	public static boolean holdsMinionOfTribe(Player player, Tribe tribe) {
 		for (Card card : player.getHand()) {
-			if (card.getRace() == race) {
+			if (card.getTribe() == tribe) {
 				return true;
 			}
 		}

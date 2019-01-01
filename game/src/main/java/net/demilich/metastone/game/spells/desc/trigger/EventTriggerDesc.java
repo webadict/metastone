@@ -47,6 +47,10 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 		return getInt(EventTriggerArg.VALUE);
 	}
 
+	public boolean hasCountByValue() {
+	    return getBool(EventTriggerArg.COUNT_BY_VALUE);
+    }
+
 	@SuppressWarnings("unchecked")
 	public Class<? extends GameEventTrigger> getTriggerClass() {
 		return (Class<? extends GameEventTrigger>) get(EventTriggerArg.CLASS);

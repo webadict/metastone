@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "MAGE",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Freeze any character damaged by this minion.",
 	"trigger": {
 		"eventTrigger": {

@@ -1,0 +1,28 @@
+{
+	"name": "High Priestess Jeklik",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Taunt, Lifesteal. When you discard this, add 2 copies of it to your hand.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DiscardTrigger",
+			"target": "SELF"
+		},
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"target": "SELF",
+			"value": 2
+		}
+	},
+	"attributes": {
+		"LIFESTEAL": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

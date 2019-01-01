@@ -1,0 +1,32 @@
+{
+	"name": "Gurubashi Offering",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 2,
+	"heroClass": "NEUTRAL",
+	"rarity": "EPIC",
+	"description": "At the start of your turn, destroy this and gain 8 Armor.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnStartTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DestroySpell",
+					"target": "SELF"
+				},
+				{
+					"class": "BuffHeroSpell",
+					"armorBonus": 8
+				}
+			]
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

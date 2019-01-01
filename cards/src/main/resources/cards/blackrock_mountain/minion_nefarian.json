@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Add 2 random spells to your hand (from your opponent's class).",
 	"battlecry": {
 		"targetSelection": "NONE",

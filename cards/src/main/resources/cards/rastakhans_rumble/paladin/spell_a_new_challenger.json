@@ -1,0 +1,37 @@
+{
+	"name": "A New Challenger...",
+	"baseManaCost": 7,
+	"type": "SPELL",
+	"heroClass": "PALADIN",
+	"rarity": "EPIC",
+	"description": "Discover a 6-Cost minion. Summon it with Taunt and Divine Shield.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DiscoverSpell",
+		"spell": {
+			"class": "SummonSpell",
+			"subSpell": {
+				"class": "MetaSpell",
+				"target": "SPELL_OUTPUT",
+				"spells": [
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "TAUNT"
+					},
+					{
+						"class": "AddAttributeSpell",
+						"attribute": "DIVINE_SHIELD"
+					}
+				]
+			}
+		},
+		"cardFilter": {
+			"class": "CardFilter",
+			"manaCost": 6,
+			"cardType": "MINION"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

@@ -23,8 +23,8 @@
 				}
 			],
 			"filter": {
-				"class": "RaceFilter",
-				"race": "BEAST"
+				"class": "TribeFilter",
+				"tribe": "BEAST"
 			}
 		}
 	},

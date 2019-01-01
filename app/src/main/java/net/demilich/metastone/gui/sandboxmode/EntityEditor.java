@@ -15,7 +15,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.utils.TagValueType;
 import net.demilich.metastone.gui.common.IntegerTextField;

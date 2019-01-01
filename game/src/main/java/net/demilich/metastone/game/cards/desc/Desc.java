@@ -23,6 +23,13 @@ public class Desc<T> {
 		return arguments.get(arg);
 	}
 
+    public Object get(T arg, Object defaultObject) {
+        if (!arguments.containsKey(arg) || arguments.get(arg) == null) {
+            return defaultObject;
+        }
+	    return arguments.get(arg);
+    }
+
 	public boolean getBool(T arg) {
 		return arguments.containsKey(arg) ? (boolean) get(arg) : false;
 	}

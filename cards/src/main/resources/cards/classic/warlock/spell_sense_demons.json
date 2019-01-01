@@ -12,7 +12,7 @@
 		"card": "token_worthless_imp",
 		"cardFilter": {
 			"class": "CardFilter",
-			"race": "DEMON"
+			"tribe": "DEMON"
 		}
 	},
 	"collectible": true,

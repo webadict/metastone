@@ -1,0 +1,31 @@
+{
+	"name": "Dyn-o-matic",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"rarity": "RARE",
+	"tribe": "MECH",
+	"description": "Battlecry: Deal 5 damage randomly split among all minions except Mechs.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MissilesSpell",
+			"target": "ALL_MINIONS",
+			"value": 1,
+			"howMany": 5,
+			"filter": {
+				"class": "TribeFilter",
+				"tribe": "MECH",
+				"invert": true
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

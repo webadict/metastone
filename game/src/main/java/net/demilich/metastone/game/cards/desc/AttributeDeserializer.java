@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 
 public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Object>> {
 
@@ -54,6 +54,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.STEALTH, jsonData, map, ParseValueType.BOOLEAN);
+        parseAttribute(Attribute.STEALTH_FOR_ONE_TURN, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.AURA_UNTARGETABLE_BY_SPELLS, jsonData, map, ParseValueType.BOOLEAN);//TODO Remove from Spellstopper
 		parseAttribute(Attribute.TAUNT, jsonData, map, ParseValueType.BOOLEAN);

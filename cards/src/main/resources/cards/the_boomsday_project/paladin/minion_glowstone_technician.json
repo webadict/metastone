@@ -1,0 +1,28 @@
+{
+	"name": "Glowstone Technician",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"rarity": "EPIC",
+	"description": "Battlecry: Give all minions in your hand +2/+2.",
+	"battlecry": {
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HAND",
+			"attackBonus": 2,
+			"hpBonus": 2,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

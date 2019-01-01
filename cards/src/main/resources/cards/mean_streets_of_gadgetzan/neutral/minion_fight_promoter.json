@@ -21,7 +21,7 @@
 				"attribute": "HP",
 				"operation": "GREATER_OR_EQUAL",
 				"value": 6
-			} 
+			}
 		}
 	},
 	"attributes": {

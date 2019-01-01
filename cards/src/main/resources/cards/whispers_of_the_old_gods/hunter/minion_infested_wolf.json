@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Deathrattle: Summon two 1/1 Spiders.",
 	"deathrattle": {
 		"class": "SummonSpell",

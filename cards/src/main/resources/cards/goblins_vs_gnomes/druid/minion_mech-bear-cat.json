@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever this minion takes damage, add a Spare Part card to your hand.",
 	"trigger": {
 		"eventTrigger": {

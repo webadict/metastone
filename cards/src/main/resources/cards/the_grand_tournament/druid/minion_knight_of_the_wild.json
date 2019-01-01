@@ -11,7 +11,7 @@
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"race": "BEAST"
+			"tribe": "BEAST"
 		},
 		"spell": {
 			"class": "CardCostModifierSpell",

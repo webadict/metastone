@@ -11,8 +11,8 @@
 		"target": "FRIENDLY_MINIONS",
 		"hpBonus": 2,
 		"filter": {
-			"class": "RaceFilter",
-			"race": "TOTEM"
+			"class": "TribeFilter",
+			"tribe": "TOTEM"
 		}
 	},
 	"collectible": true,

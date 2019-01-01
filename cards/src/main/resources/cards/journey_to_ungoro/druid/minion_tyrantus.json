@@ -6,7 +6,7 @@
 	"baseHp": 12,
 	"heroClass": "DRUID",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Can't be targeted by Spells or Hero Powers.",
 	"attributes": {
 		"UNTARGETABLE_BY_SPELLS": true

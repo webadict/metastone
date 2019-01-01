@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "DRUID",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Inspire: Give your hero +2 Attack this turn.",
 	"trigger": {
 		"eventTrigger": {

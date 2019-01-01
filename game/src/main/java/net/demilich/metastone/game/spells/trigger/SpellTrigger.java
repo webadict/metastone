@@ -195,13 +195,6 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		}
 	}
 	
-	public void countDown(int num) {
-		primaryTrigger.countDown(num);
-		if (secondaryTrigger != null) {
-			secondaryTrigger.countDown(num);
-		}
-	}
-	
 	public boolean hasCounter() {
 		if (secondaryTrigger != null) {
 			return primaryTrigger.getTriggerCount() > 0 || secondaryTrigger.getTriggerCount() > 0;

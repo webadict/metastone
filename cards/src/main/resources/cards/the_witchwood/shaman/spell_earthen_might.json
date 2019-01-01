@@ -1,0 +1,32 @@
+{
+	"name": "Earthen Might",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "RARE",
+	"description": "Give a minion +2/+2. If it's an Elemental, add a random Elemental to your hand.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"condition": {
+			"class": "TribeCondition",
+			"tribe": "ELEMENTAL"
+		},
+		"spell1": {
+			"class": "BuffSpell",
+			"attackBonus": 2,
+			"hpBonus": 2
+		},
+		"spell2": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "ELEMENTAL",
+				"cardType": "MINION"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

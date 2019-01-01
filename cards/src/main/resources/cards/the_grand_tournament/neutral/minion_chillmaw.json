@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Taunt. Deathrattle: If you're holding a Dragon, deal 3 damage to all minions.",
 	"deathrattle": {
 		"class": "ConditionalSpell",
@@ -19,7 +19,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

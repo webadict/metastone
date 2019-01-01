@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "PALADIN",
 	"rarity": "COMMON",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Inspire: Summon a random Murloc.",
 	"trigger": {
 		"eventTrigger": {
@@ -18,7 +18,7 @@
 			"boardPositionRelative": true,
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "MURLOC"
+				"tribe": "MURLOC"
 			}
 		}
 	},

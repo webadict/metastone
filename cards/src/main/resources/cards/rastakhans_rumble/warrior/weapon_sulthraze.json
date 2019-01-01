@@ -1,0 +1,25 @@
+{
+	"name": "Sul'thraze",
+	"baseManaCost": 6,
+	"type": "WEAPON",
+	"damage": 4,
+	"durability": 4,
+	"heroClass": "WARRIOR",
+	"rarity": "EPIC",
+	"description": "Overkill: You may attack again.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "FRIENDLY_HERO",
+			"attribute": "EXTRA_ATTACKS",
+			"value": 1
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

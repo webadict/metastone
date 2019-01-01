@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Equip a random weapon for each player",
 	"battlecry": {
 		"spell": {

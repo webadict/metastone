@@ -6,15 +6,15 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Deal 2 damage to all other minions.",
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-		"class": "DamageSpell",
-		"target": "ALL_OTHER_MINIONS",
-		"value": 2
-	}
+			"class": "DamageSpell",
+			"target": "ALL_OTHER_MINIONS",
+			"value": 2
+		}
 	},
 	"attributes": {
 		"BATTLECRY": true,

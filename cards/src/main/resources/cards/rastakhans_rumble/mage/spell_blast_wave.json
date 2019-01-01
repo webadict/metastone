@@ -1,0 +1,34 @@
+{
+	"name": "Blast Wave",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"description": "Deal 2 damage to all minions. Overkill: Add a random Mage spell to your hand.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"target": "ALL_MINIONS",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"spell2": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"heroClass": "MAGE"
+			}
+		},
+		"condition": {
+			"class": "OverkillCondition"
+		}
+	},
+	"attributes": {
+		"OVERKILL": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

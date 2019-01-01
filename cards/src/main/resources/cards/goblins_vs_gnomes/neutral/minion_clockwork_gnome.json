@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Put a Spare Part card in your hand.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",

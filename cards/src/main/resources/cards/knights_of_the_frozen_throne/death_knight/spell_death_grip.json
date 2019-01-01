@@ -16,8 +16,7 @@
 			"class": "DamageSpell",
 			"value": 5
 		},
-		"condition":
-		{
+		"condition": {
 			"class": "OwnedByPlayerCondition",
 			"targetPlayer": "SELF"
 		}

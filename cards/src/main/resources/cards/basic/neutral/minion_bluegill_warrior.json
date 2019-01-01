@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Charge",
 	"attributes": {
 		"CHARGE": true

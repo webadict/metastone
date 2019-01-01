@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Battlecry: Reduce the Cost of Elementals in your hand by (1).",
 	"battlecry": {
 		"targetSelection": "ANY",
@@ -16,7 +16,7 @@
 			"cardCostModifier": {
 				"class": "CardCostModifier",
 				"target": "FRIENDLY_HAND",
-				"race": "ELEMENTAL",
+				"tribe": "ELEMENTAL",
 				"operation": "SUBTRACT",
 				"value": 1
 			}

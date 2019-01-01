@@ -10,6 +10,10 @@ import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 
+/**
+ * @deprecated As of v2.0.0, use DrawCardSpell instead. Maybe.
+ */
+@Deprecated
 public class FromDeckToHandSpell extends Spell {
 
 	@Override

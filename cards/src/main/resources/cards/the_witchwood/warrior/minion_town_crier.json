@@ -1,0 +1,29 @@
+{
+	"name": "Town Crier",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"baseAttack": 1,
+	"baseHp": 2,
+	"rarity": "EPIC",
+	"description": "Battlecry: Draw a Rush minion from your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "FromDeckToHandSpell",
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "RUSH",
+				"cardType": "MINION",
+				"operation": "HAS"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -16,8 +16,8 @@
 		"condition": {
 			"class": "MinionOnBoardCondition",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "BEAST"
+				"class": "TribeFilter",
+				"tribe": "BEAST"
 			}
 		}
 	},

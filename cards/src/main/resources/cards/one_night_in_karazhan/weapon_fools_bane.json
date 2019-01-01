@@ -7,35 +7,9 @@
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
 	"description": "Unlimited attacks each turn. Can't attack heroes.",
-	"onEquip": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "AddAttributeSpell",
-				"target": "FRIENDLY_HERO",
-				"attribute": "CANNOT_ATTACK_HEROES"
-			},
-			{
-				"class": "AddAttributeSpell",
-				"target": "FRIENDLY_HERO",
-				"attribute": "UNLIMITED_ATTACKS"
-			}
-		]
-	},
-	"onUnequip": {
-		"class": "MetaSpell",
-		"spells": [
-			{
-				"class": "RemoveAttributeSpell",
-				"target": "FRIENDLY_HERO",
-				"attribute": "CANNOT_ATTACK_HEROES"
-			},
-			{
-				"class": "RemoveAttributeSpell",
-				"target": "FRIENDLY_HERO",
-				"attribute": "UNLIMITED_ATTACKS"
-			}
-		]
+	"attributes": {
+		"CANNOT_ATTACK_HEROES": true,
+		"UNLIMITED_ATTACKS": true
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

@@ -1,6 +1,5 @@
 package net.demilich.metastone.game.entities.minions;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.cards.MinionCard;
 import net.demilich.metastone.game.entities.EntityType;
 
@@ -8,8 +7,8 @@ public class Minion extends Summon {
 
 	public Minion(MinionCard sourceCard) {
 		super(sourceCard);
-		Race race = getRace();
-		setRace(race);
+		Tribe tribe = getTribe();
+		setTribe(tribe);
 	}
 
 	@Override

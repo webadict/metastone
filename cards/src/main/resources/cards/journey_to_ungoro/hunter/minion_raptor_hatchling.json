@@ -8,8 +8,8 @@
 	"rarity": "RARE",
 	"description": "Deathrattle: Shuffle a 4/3 Raptor into your deck.",
 	"deathrattle": {
-			"class": "ShuffleToDeckSpell",
-			"card": "token_raptor_patriarch"
+		"class": "ShuffleToDeckSpell",
+		"card": "token_raptor_patriarch"
 	},
 	"attributes": {
 		"DEATHRATTLES": true

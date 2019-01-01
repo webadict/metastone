@@ -1,0 +1,26 @@
+{
+	"name": "Spellzerker",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Has Spell Damage +2 while damaged.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES",
+			"fireCondition": {
+				"class": "OverkillCondition"
+			}
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 5
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

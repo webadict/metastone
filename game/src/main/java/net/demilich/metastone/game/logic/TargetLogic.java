@@ -6,7 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -34,7 +34,8 @@ public class TargetLogic {
 	private boolean containsTaunters(GameContext context, List<Minion> minions) {
 		for (Entity entity : minions) {
 			if (context.getLogic().hasEntityAttribute(entity, Attribute.TAUNT)
-					&& !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    && !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    && !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH_FOR_ONE_TURN)
 					&& !context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE)) {
 				return true;
 			}
@@ -60,7 +61,8 @@ public class TargetLogic {
 			}
 
 			if (entity.getOwner() != player.getId()
-					&& (context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    && (context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    || context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH_FOR_ONE_TURN)
 					|| context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE))) {
 				continue;
 			}
@@ -181,7 +183,8 @@ public class TargetLogic {
 		List<Entity> taunters = new ArrayList<>();
 		for (Actor entity : entities) {
 			if (context.getLogic().hasEntityAttribute(entity, Attribute.TAUNT)
-					&& !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    && !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH)
+                    && !context.getLogic().hasEntityAttribute(entity, Attribute.STEALTH_FOR_ONE_TURN)
 					&& !context.getLogic().hasEntityAttribute(entity, Attribute.IMMUNE)) {
 				taunters.add(entity);
 			}
@@ -247,7 +250,7 @@ public class TargetLogic {
 			targets.remove(source);
 			return targets;
 		} else if (targetKey == EntityReference.ADJACENT_MINIONS) {
-			return new ArrayList<>(context.getAdjacentSummons(player, source.getReference()));
+			return new ArrayList<>(context.getAdjacentSummons(source.getReference()));
 		} else if (targetKey == EntityReference.OPPOSITE_MINIONS) {
 			return new ArrayList<>(context.getOppositeSummons(player, source.getReference()));
 		} else if (targetKey == EntityReference.MINIONS_TO_LEFT) {
@@ -262,7 +265,9 @@ public class TargetLogic {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET)));
 		} else if (targetKey == EntityReference.SPELL_TARGET) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.SPELL_TARGET)));
-		} else if (targetKey == EntityReference.KILLED_MINION) {
+		} else if (targetKey == EntityReference.SPELL_OUTPUT) {
+            return singleTargetAsList(context.resolveSingleTarget(context.getSpellOutputStack().peek()));
+        } else if (targetKey == EntityReference.KILLED_MINION) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.KILLED_MINION)));
 		} else if (targetKey == EntityReference.ATTACKER_REFERENCE) {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
@@ -291,7 +296,12 @@ public class TargetLogic {
 			return singleTargetAsList(player);
 		} else if (targetKey == EntityReference.ENEMY_PLAYER) {
 			return singleTargetAsList(context.getOpponent(player));
-		}
+			// TODO: Fix Graveyard pulling.
+		} else if (targetKey == EntityReference.FRIENDLY_GRAVEYARD) {
+		    return new ArrayList<>(player.getGraveyard());
+        } else if (targetKey == EntityReference.ENEMY_GRAVEYARD) {
+		    return new ArrayList<>(context.getOpponent(player).getGraveyard());
+        }
 
 		return singleTargetAsList(findEntity(context, targetKey));
 	}

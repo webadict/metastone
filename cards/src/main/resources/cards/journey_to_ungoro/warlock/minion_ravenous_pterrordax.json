@@ -4,9 +4,9 @@
 	"type": "MINION",
 	"baseAttack": 4,
 	"baseHp": 4,
-	"heroClass": "WARLOCK",	
+	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Destroy a friendly minion to Adapt twice.",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",

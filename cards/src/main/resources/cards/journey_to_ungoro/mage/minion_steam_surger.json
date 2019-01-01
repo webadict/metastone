@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "MAGE",
 	"rarity": "RARE",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Battlecry: If you played an Elemental last turn, add a 'Flame Geyser' to your hand.",
 	"battlecry": {
 		"spell": {
@@ -18,7 +18,7 @@
 			"class": "PlayedLastTurnCondition",
 			"filter": {
 				"class": "CardFilter",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		}
 	},

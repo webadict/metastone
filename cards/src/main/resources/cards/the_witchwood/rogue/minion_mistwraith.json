@@ -1,0 +1,26 @@
+{
+	"name": "Mistwraith",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"rarity": "RARE",
+	"description": "Whenever you play an Echo card, gain +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "CardPlayedTrigger",
+			"requiredAttribute": "ECHO",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "SELF",
+			"attackBonus": 1,
+			"hpBonus": 1
+		}
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

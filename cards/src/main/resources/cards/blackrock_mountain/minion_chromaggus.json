@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Whenever you draw a card, put another copy into your hand.",
 	"trigger": {
 		"eventTrigger": {

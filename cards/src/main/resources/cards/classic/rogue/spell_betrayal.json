@@ -7,7 +7,9 @@
 	"description": "An enemy minion deals its damage to the minions next to it.",
 	"targetSelection": "ENEMY_MINIONS",
 	"spell": {
-		"class": "custom.BetrayalSpell"
+		"class": "DamageSpell",
+		"target": "ADJACENT_MINIONS",
+		"source": "TARGET"
 	},
 	"collectible": true,
 	"set": "CLASSIC",

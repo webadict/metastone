@@ -1,0 +1,42 @@
+{
+	"name": "Haunting Visions",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "SHAMAN",
+	"rarity": "EPIC",
+	"description": "The next spell you play this turn costs (3) less. Discover a spell.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "MetaSpell",
+		"spells": [
+			{
+				"class": "CardCostModifierSpell",
+				"target": "FRIENDLY_PLAYER",
+				"cardCostModifier": {
+					"class": "OneTurnCostModifier",
+					"cardType": "SPELL",
+					"operation": "SUBTRACT",
+					"value": 3,
+					"expirationTrigger": {
+						"class": "CardPlayedTrigger",
+						"cardType": "SPELL",
+						"targetPlayer": "SELF"
+					}
+				}
+			},
+			{
+				"class": "DiscoverRandomCardSpell",
+				"spell": {
+					"class": "ReceiveCardSpell"
+				},
+				"cardFilter": {
+					"class": "CardFilter",
+					"cardType": "SPELL"
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

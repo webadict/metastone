@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "COMMON",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Whenever you equip a weapon, give it +1 Attack.",
 	"trigger": {
 		"eventTrigger": {

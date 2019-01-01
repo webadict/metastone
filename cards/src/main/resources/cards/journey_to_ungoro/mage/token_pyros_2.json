@@ -6,7 +6,7 @@
 	"baseHp": 10,
 	"heroClass": "MAGE",
 	"rarity": "LEGENDARY",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "",
 	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",

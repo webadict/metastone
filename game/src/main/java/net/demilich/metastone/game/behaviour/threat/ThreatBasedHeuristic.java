@@ -3,7 +3,7 @@ package net.demilich.metastone.game.behaviour.threat;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.behaviour.heuristic.IGameStateHeuristic;
@@ -17,7 +17,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 	private static List<String> hardRemoval;
 
 	static {
-		hardRemoval = new ArrayList<String>();
+		hardRemoval = new ArrayList<>();
 		hardRemoval.add("spell_polymorph");
 		hardRemoval.add("spell_execute");
 		hardRemoval.add("spell_crush");
@@ -116,7 +116,7 @@ public class ThreatBasedHeuristic implements IGameStateHeuristic {
 			minionScore += minion.getAttributeValue(Attribute.SPELL_DAMAGE) * weights.get(WeightedFeature.MINION_SPELL_POWER_MODIFIER);
 		}
 
-		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH)) {
+		if (context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH) || context.getLogic().hasEntityAttribute(minion, Attribute.STEALTH_FOR_ONE_TURN)) {
 			minionScore += weights.get(WeightedFeature.MINION_STEALTHED_MODIFIER);
 		}
 		if (context.getLogic().hasEntityAttribute(minion, Attribute.UNTARGETABLE_BY_SPELLS)) {

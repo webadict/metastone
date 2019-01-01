@@ -6,12 +6,12 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Taunt. Has +2 Attack during your opponent's turn.",
 	"targetSelection": "NONE",
 	"trigger": {
 		"eventTrigger": {
-		"class": "TurnStartTrigger",
+			"class": "TurnStartTrigger",
 			"targetPlayer": "OPPONENT"
 		},
 		"spell": {
@@ -19,7 +19,7 @@
 			"target": "SELF",
 			"value": 2
 		}
-	},	
+	},
 	"attributes": {
 		"TAUNT": true
 	},

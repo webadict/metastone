@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "WARLOCK",
 	"rarity": "FREE",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Battlecry: Deal 1 damage to ALL other characters.",
 	"battlecry": {
 		"spell": {

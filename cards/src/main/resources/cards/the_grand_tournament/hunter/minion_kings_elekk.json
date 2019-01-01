@@ -6,13 +6,14 @@
 	"baseHp": 2,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Reveal a minion in each deck. If yours costs more, draw it.",
 	"battlecry": {
 		"spell": {
 			"class": "JoustSpell",
-			"spell": {
-				"class": "FromDeckToHandSpell"
+			"spell1": {
+				"class": "FromDeckToHandSpell",
+				"card": "SPELL_OUTPUT"
 			}
 		}
 	},

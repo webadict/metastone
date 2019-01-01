@@ -1,0 +1,23 @@
+{
+	"name": "Whirliglider",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"rarity": "COMMON",
+	"description": "Battlecry: Summon a 0/2 Goblin Bomb",
+	"battlecry": {
+		"spell": {
+			"class": "SummonSpell",
+			"card": "minion_goblin_bomb",
+			"boardPositionRelative": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

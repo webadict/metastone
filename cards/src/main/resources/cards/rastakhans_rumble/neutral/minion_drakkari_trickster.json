@@ -1,0 +1,27 @@
+{
+	"name": "Drakkari Trickster",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"heroClass": "NEUTRAL",
+	"rarity": "EPIC",
+	"description": "Battlecry: Give each player a copy of a random card from their opponent's deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"targetPlayer": "BOTH",
+			"cardSource": {
+				"class": "DeckSource",
+				"targetPlayer": "OPPONENT"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

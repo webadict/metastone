@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.entities.heroes;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.HeroCard;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Actor;

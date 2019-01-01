@@ -9,10 +9,11 @@
 	"spell": {
 		"class": "DiscoverRandomCardSpell",
 		"spell": {
-			"class": "ReceiveCardAndDoSomethingSpell",
+			"class": "ReceiveCardSpell",
 			"targetPlayer": "SELF",
-			"spell": {
+			"subSpell": {
 				"class": "BuffSpell",
+				"target": "SPELL_OUTPUT",
 				"value": 1
 			}
 		},

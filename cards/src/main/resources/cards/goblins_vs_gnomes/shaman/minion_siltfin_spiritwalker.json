@@ -6,13 +6,13 @@
 	"baseHp": 5,
 	"heroClass": "SHAMAN",
 	"rarity": "EPIC",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Whenever another friendly Murloc dies, draw a card. Overload: (1)",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
 			"targetPlayer": "SELF",
-			"race": "MURLOC"
+			"tribe": "MURLOC"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

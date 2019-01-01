@@ -48,8 +48,8 @@ OrCondition
 
 OwnedByPlayerCondition
 
-RaceCondition
+TribeCondition
 
-RaceOnBoardCondition
+TribeOnBoardCondition
 
 RandomCondition

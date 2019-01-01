@@ -15,8 +15,8 @@
 				"class": "EntityCounter",
 				"target": "FRIENDLY_MINIONS",
 				"filter": {
-					"class": "RaceFilter",
-					"race": "TOTEM"
+					"class": "TribeFilter",
+					"tribe": "TOTEM"
 				}
 			}
 		}

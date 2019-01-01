@@ -16,10 +16,12 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	private int owner = -1;
 	protected final EventTriggerDesc desc;
 	private int triggerCount;
+	private boolean countByValue;
 
 	public GameEventTrigger(EventTriggerDesc desc) {
 		this.desc = desc;
 		this.triggerCount = desc.getTriggerCount();
+		this.countByValue = desc.hasCountByValue();
 	}
 
 	@Override
@@ -87,6 +89,10 @@ public abstract class GameEventTrigger extends CustomCloneable {
 	public int getTriggerCount() {
 		return triggerCount;
 	}
+
+	public void addToTriggerCount(int value) {
+	    triggerCount += value;
+    }
 
 	public void countDown() {
 		triggerCount--;

@@ -6,7 +6,7 @@
 	"baseHp": 15,
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Battlecry: Destroy your hero and replace him with Lord Jaraxxus.",
 	"battlecry": {
 		"spell": {
@@ -26,7 +26,7 @@
 				},
 				{
 					"class": "OverrideTargetSpell",
-					"target": "FRIENDLY_HERO" 
+					"target": "FRIENDLY_HERO"
 				}
 			]
 		}

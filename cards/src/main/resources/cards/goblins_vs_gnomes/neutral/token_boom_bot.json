@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Deal 1-4 damage to a random enemy.",
 	"deathrattle": {
 		"class": "MissilesSpell",

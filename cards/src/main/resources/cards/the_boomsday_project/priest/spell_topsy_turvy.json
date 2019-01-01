@@ -1,0 +1,15 @@
+{
+	"name": "Topsy Turvy",
+	"baseManaCost": 0,
+	"type": "SPELL",
+	"heroClass": "PRIEST",
+	"rarity": "COMMON",
+	"description": "Swap a minion's Attack and Health",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "SwapAttackAndHpSpell"
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

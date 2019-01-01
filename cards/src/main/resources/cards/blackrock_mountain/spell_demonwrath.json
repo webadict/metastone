@@ -4,15 +4,15 @@
 	"type": "SPELL",
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"description": "Deal 2 damage to all non-Demon minions.",
+	"description": "Deal 2 damage to all minions except Demons.",
 	"targetSelection": "NONE",
 	"spell": {
 		"class": "DamageSpell",
 		"target": "ALL_MINIONS",
 		"value": 2,
 		"filter": {
-			"class": "RaceFilter",
-			"race": "DEMON",
+			"class": "TribeFilter",
+			"tribe": "DEMON",
 			"invert": true
 		}
 	},

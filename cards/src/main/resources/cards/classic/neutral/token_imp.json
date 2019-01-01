@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",

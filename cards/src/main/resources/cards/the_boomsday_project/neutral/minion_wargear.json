@@ -2,11 +2,11 @@
 	"name": "Wargear",
 	"baseManaCost": 5,
 	"type": "MINION",
+	"heroClass": "NEUTRAL",
 	"baseAttack": 5,
 	"baseHp": 5,
-	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Magnetic",
 	"attributes": {
 		"MAGNETIC": true

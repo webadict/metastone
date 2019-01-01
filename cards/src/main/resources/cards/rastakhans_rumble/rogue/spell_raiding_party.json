@@ -1,0 +1,33 @@
+{
+	"name": "Raiding Party",
+	"baseManaCost": 3,
+	"type": "SPELL",
+	"heroClass": "ROGUE",
+	"rarity": "RARE",
+	"description": "Draw two Pirates from your deck. Combo: Draw a Weapon.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ComboSpell",
+		"spell1": {
+			"class": "DrawCardSpell",
+			"value": 2,
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "PIRATE"
+			}
+		},
+		"spell2": {
+			"class": "DrawCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"type": "WEAPON"
+			}
+		}
+	},
+	"attributes": {
+		"COMBO": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

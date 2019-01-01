@@ -6,7 +6,7 @@
 	"baseHp": 9,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Also damages the minions next to whomever he attacks.",
 	"trigger": {
 		"eventTrigger": {

@@ -39,8 +39,8 @@ The base Attack of an entity’s source card.
 CONDITIONAL_ATTACK_BONUS
 The bonus Attack gained through conditional effects, such as Enrage.
 
-RACE
-The Race of an Entity.
+TRIBE
+The Tribe of an Entity.
 
 DESTROYED
 Destroys the target, regardless of other Attributes.

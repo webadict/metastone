@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Taunt. Battlecry: Draw a Beast, Dragon, and Murloc from your deck.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -18,7 +18,7 @@
 					"value": 1,
 					"cardFilter": {
 						"class": "CardFilter",
-						"race": "BEAST"
+						"tribe": "BEAST"
 					}
 				},
 				{
@@ -26,7 +26,7 @@
 					"value": 1,
 					"cardFilter": {
 						"class": "CardFilter",
-						"race": "DRAGON"
+						"tribe": "DRAGON"
 					}
 				},
 				{
@@ -34,7 +34,7 @@
 					"value": 1,
 					"cardFilter": {
 						"class": "CardFilter",
-						"race": "MURLOC"
+						"tribe": "MURLOC"
 					}
 				}
 			]

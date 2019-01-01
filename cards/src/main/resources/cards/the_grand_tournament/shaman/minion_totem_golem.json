@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "SHAMAN",
 	"rarity": "COMMON",
-	"race": "TOTEM",
+	"tribe": "TOTEM",
 	"description": "Overload: (1)",
 	"attributes": {
 		"OVERLOAD": 1

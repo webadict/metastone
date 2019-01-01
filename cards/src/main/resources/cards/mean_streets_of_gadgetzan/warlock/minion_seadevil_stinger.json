@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: The next Murloc you play this turn costs Health instead of Mana.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -20,7 +20,7 @@
 			"secondRevertTrigger": {
 				"class": "CardPlayedTrigger",
 				"targetPlayer": "SELF",
-				"race": "MURLOC"
+				"tribe": "MURLOC"
 			}
 		}
 	},

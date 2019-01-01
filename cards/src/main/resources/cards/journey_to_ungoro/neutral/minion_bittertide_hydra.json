@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Whenever this minion takes damage, deal 3 damage to your hero.",
 	"trigger": {
 		"eventTrigger": {

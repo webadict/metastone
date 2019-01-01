@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "PALADIN",
 	"rarity": "EPIC",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: Your Hero Power becomes 'Summon a 1/1 Murloc.'",
 	"battlecry": {
 		"spell": {

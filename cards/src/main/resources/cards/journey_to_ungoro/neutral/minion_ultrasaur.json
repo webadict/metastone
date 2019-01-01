@@ -6,7 +6,7 @@
 	"baseHp": 14,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",

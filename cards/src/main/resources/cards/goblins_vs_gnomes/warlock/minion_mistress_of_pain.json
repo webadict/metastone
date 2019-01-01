@@ -6,8 +6,8 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "DEMON",
-	"description": "Whenever this minion deals damage, restore that much Health to your hero.",
+	"tribe": "DEMON",
+	"description": "Damage dealt by this minion also heals your hero.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "DamageCausedTrigger",

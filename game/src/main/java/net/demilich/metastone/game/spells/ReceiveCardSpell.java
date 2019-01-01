@@ -9,8 +9,10 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.targeting.CardLocation;
 
-public class ReceiveCardSpell extends Spell {
+public class
+ReceiveCardSpell extends Spell {
 
 	@Override
 	protected void onCast(GameContext context, Player player, SpellDesc desc, Entity source, Entity target) {
@@ -35,16 +37,31 @@ public class ReceiveCardSpell extends Spell {
 				if (card != null) {
 					Card clone = card.clone();
 					context.getLogic().receiveCard(player.getId(), clone);
+
+                    if (card == null || card.getLocation() == CardLocation.GRAVEYARD) {
+                        continue;
+                    }
+                    SpellDesc subSpell = desc.getSubSpell();
+                    if (subSpell != null) {
+                        SpellUtils.castChildSpell(context, player, subSpell, source, target, card);
+                    }
 				}
 			}
 		} else {
 			for (Card card : SpellUtils.getCards(context, player, desc, source, target)) {
 				for (int i = 0; i < count; i++) {
 					context.getLogic().receiveCard(player.getId(), card);
+
+                    if (card == null || card.getLocation() == CardLocation.GRAVEYARD) {
+                        continue;
+                    }
+                    SpellDesc subSpell = desc.getSubSpell();
+                    if (subSpell != null) {
+                        SpellUtils.castChildSpell(context, player, subSpell, source, target, card);
+                    }
 				}
 			}
 		}
-		
 	}
 
 }

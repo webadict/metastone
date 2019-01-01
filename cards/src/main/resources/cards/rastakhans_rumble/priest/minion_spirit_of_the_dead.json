@@ -1,0 +1,27 @@
+{
+	"name": "Spirit of the Dead",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 3,
+	"heroClass": "PRIEST",
+	"rarity": "RARE",
+	"description": "Stealth for 1 turn. After a friendly minion dies, shuffle a 1-Cost copy of it into your deck.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionDiedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 3
+		}
+	},
+	"attributes": {
+		"STEALTH_FOR_ONE_TURN": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

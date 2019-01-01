@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Deathrattle: Deal 3 damage to a random enemy minion.",
 	"deathrattle": {
 		"class": "MissilesSpell",

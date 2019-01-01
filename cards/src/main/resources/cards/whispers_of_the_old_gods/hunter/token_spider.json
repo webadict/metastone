@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": false,
 	"set": "WHISPERS_OF_THE_OLD_GODS",

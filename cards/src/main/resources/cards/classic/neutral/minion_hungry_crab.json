@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "NEUTRAL",
 	"rarity": "EPIC",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Destroy a Murloc and gain +2/+2.",
 	"battlecry": {
 		"targetSelection": "MINIONS",
@@ -24,8 +24,8 @@
 				}
 			],
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MURLOC"
+				"class": "TribeFilter",
+				"tribe": "MURLOC"
 			}
 		}
 	},

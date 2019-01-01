@@ -17,7 +17,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

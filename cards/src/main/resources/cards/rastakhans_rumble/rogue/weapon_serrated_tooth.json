@@ -1,0 +1,21 @@
+{
+	"name": "Serrated Tooth",
+	"baseManaCost": 1,
+	"type": "WEAPON",
+	"damage": 1,
+	"durability": 3,
+	"heroClass": "ROGUE",
+	"rarity": "COMMON",
+	"description": "Deathrattle: Give your minions Rush.",
+	"deathrattle": {
+		"class": "AddAttributeSpell",
+		"target": "FRIENDLY_MINIONS",
+		"attribute": "RUSH"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

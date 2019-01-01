@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Battlecry: Destroy the minions on either side of this minion and gain their Attack and Health.",
 	"battlecry": {
 		"targetSelection": "NONE",

@@ -1,0 +1,24 @@
+{
+	"name": "Gurubashi Chicken",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Overkill: Gain +5 Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"attackBonus": 5
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

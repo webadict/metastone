@@ -1,0 +1,14 @@
+{
+	"name": "Primalfin",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"rarity": "FREE",
+	"tribe": "MURLOC",
+	"description": "",
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

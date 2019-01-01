@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: If your opponent has 15 or less Health, gain +3/+3.",
 	"battlecry": {
 		"spell": {

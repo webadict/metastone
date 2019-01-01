@@ -22,7 +22,7 @@
 			"spell": {
 				"class": "SummonSpell",
 				"card": "token_treant_taunt",
-				"value": 2,	
+				"value": 2,
 				"boardPositionRelative": true
 			}
 		}
@@ -35,7 +35,7 @@
 				{
 					"class": "SummonSpell",
 					"card": "token_treant_taunt",
-					"value": 2,	
+					"value": 2,
 					"boardPositionRelative": true
 				},
 				{

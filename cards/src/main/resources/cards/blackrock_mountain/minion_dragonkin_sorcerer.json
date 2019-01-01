@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Whenever you target this minion with a spell, gain +1/+1.",
 	"trigger": {
 		"eventTrigger": {

@@ -14,8 +14,8 @@
 		"hpBonus": 2,
 		"randomTarget": true,
 		"filter": {
-			"class": "RaceFilter",
-			"race": "MECH"
+			"class": "TribeFilter",
+			"tribe": "MECH"
 		}
 	},
 	"attributes": {

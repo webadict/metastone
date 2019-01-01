@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Deal 2 damage to all minions.",
 	"deathrattle": {
 		"class": "DamageSpell",

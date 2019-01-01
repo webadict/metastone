@@ -6,13 +6,16 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: Summon 1/1 Whelps until your side of the battlefield is full.",
 	"battlecry": {
 		"spell": {
 			"class": "SummonSpell",
 			"card": "token_whelp",
-			"value": 7,
+			"value": {
+				"class": "GameValueProvider",
+				"gameValue": "MAX_MINION_COUNT"
+			},
 			"boardPositionRelative": true
 		}
 	},

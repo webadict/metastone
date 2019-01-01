@@ -10,8 +10,8 @@
 	"deathrattle": {
 		"class": "SummonSpell",
 		"cards": [
-		"token_raptor",
-		"token_raptor"
+			"token_raptor",
+			"token_raptor"
 		]
 	},
 	"attributes": {

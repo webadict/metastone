@@ -5,7 +5,7 @@
 	"type": "HERO",
 	"heroClass": "WARLOCK",
 	"rarity": "LEGENDARY",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"attributes": {
 		"HP": 15,
 		"MAX_HP": 15

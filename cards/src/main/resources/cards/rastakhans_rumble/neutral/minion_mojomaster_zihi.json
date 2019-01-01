@@ -1,0 +1,25 @@
+{
+	"name": "Mojomaster Zihi",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "NEUTRAL",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Set each player to 5 Mana Crystals.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ModifyMaxManaSpell",
+			"operation": "SET",
+			"value": 5,
+			"fullManaCrystals": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

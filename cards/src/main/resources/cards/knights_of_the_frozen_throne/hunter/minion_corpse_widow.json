@@ -1,0 +1,21 @@
+{
+	"name": "Corpse Widow",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 4,
+	"baseHp": 6,
+	"rarity": "RARE",
+	"tribe": "BEAST",
+	"description": "Your Deathrattle cards cost (2) less.",
+	"cardCostModifier": {
+		"class": "CardCostModifier",
+		"value": -2,
+		"cardType": "MINION",
+		"requiredAttribute": "DEATHRATTLES",
+		"targetPlayer": "SELF"
+	},
+	"collectible": true,
+	"set": "KNIGHTS_OF_THE_FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

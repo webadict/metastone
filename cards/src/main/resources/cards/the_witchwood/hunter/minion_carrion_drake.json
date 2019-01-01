@@ -1,0 +1,34 @@
+{
+	"name": "Carrion Drake",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 3,
+	"baseHp": 7,
+	"rarity": "RARE",
+	"tribe": "DRAGON",
+	"description": "Battlecry: If a minion died this turn, gain Poisonous.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "POISONOUS"
+		},
+		"condition": {
+			"class": "ComparisonCondition",
+			"value1": {
+				"class": "DeadMinionsThisTurn",
+				"targetPlayer": "BOTH"
+			},
+			"value2": 0,
+			"operation": "GREATER"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

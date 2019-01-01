@@ -9,15 +9,15 @@
 	"description": "Draw a card and set its cost to (5).",
 	"targetSelection": "NONE",
 	"battlecry": {
-	"spell": {
-		"class": "DrawCardAndDoSomethingSpell",
-		"value": 1,
 		"spell": {
+			"class": "DrawCardSpell",
+			"value": 1,
+			"subSpell": {
 				"class": "CardCostModifierSpell",
 				"target": "FRIENDLY_PLAYER",
 				"cardCostModifier": {
 					"class": "CardCostModifier",
-					"target": "EVENT_CARD",
+					"target": "SPELL_OUTPUT",
 					"operation": "SET",
 					"value": 5
 				}

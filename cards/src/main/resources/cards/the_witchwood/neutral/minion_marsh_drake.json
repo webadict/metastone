@@ -1,0 +1,25 @@
+{
+	"name": "Marsh Drake",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 5,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"tribe": "DRAGON",
+	"description": "Battlecry: Summon a 2/1 Poisonous Drakeslayer for your opponent.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"card": "token_drakeslayer",
+			"targetPlayer": "OPPONENT"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

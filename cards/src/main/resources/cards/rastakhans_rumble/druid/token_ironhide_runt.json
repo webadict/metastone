@@ -1,0 +1,14 @@
+{
+	"name": "Ironhide Runt",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

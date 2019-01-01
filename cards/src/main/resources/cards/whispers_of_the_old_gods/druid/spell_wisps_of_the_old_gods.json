@@ -7,10 +7,10 @@
 	"description": "Choose One - Summon 7 Wisps; or Give your minions +2/+2.",
 	"targetSelection": "NONE",
 	"options": [
-		"spell_wisps_of_WHISPERS_OF_THE_OLD_GODS_1",
-		"spell_wisps_of_WHISPERS_OF_THE_OLD_GODS_2"
+		"spell_wisps_of_the_old_gods_1",
+		"spell_wisps_of_the_old_gods_2"
 	],
-	"bothOptions": "spell_wisps_of_WHISPERS_OF_THE_OLD_GODS_3",
+	"bothOptions": "spell_wisps_of_the_old_gods_3",
 	"collectible": true,
 	"set": "WHISPERS_OF_THE_OLD_GODS",
 	"fileFormatVersion": 1

@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Summon a random legendary minion.",
 	"deathrattle": {
 		"class": "SummonRandomMinionFilteredSpell",

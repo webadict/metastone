@@ -32,7 +32,7 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
 		}
 		Map<CardCostModifierArg, Object> arguments = CardCostModifierDesc.build(cardCostModifierClass);
 		parseArgument(CardCostModifierArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(CardCostModifierArg.RACE, jsonData, arguments, ParseValueType.RACE);
+		parseArgument(CardCostModifierArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
 		parseArgument(CardCostModifierArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(CardCostModifierArg.MIN_VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(CardCostModifierArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);

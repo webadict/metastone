@@ -12,8 +12,8 @@
 		"spell": {
 			"class": "ReceiveCardSpell",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "BEAST"
+				"class": "TribeFilter",
+				"tribe": "BEAST"
 			}
 		}
 	},

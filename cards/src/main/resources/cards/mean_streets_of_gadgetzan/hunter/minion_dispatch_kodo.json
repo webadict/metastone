@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "HUNTER",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Deal damage equal to this minion's Attack.",
 	"battlecry": {
 		"targetSelection": "ANY",

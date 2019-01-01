@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "WARRIOR",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Enrage: +1 Attack.",
 	"trigger": {
 		"eventTrigger": {

@@ -6,13 +6,13 @@
 	"baseHp": 2,
 	"heroClass": "HUNTER",
 	"rarity": "FREE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Whenever you summon a Beast, draw a card.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"race": "BEAST"
+			"tribe": "BEAST"
 		},
 		"spell": {
 			"class": "DrawCardSpell",

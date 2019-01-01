@@ -4,7 +4,10 @@
 	"description": "+1/+1",
 	"enchantment": {
 		"class": "BuffEnchantment",
-		"value": 1
+		"attributes": {
+			"ATTACK": 1,
+			"HP": 1
+		}
 	},
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1

@@ -1,0 +1,39 @@
+{
+	"name": "Wyrmguard",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 11,
+	"rarity": "COMMON",
+	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
+	"battlecry": {
+		"condition": {
+			"class": "HoldsCardCondition",
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "DRAGON"
+			}
+		},
+		"spell": {
+			"class": "MetaSpell",
+			"target": "SELF",
+			"spells": [
+				{
+					"class": "BuffSpell",
+					"attackBonus": 1
+				},
+				{
+					"class": "AddAttributeSpell",
+					"attribute": "TAUNT"
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

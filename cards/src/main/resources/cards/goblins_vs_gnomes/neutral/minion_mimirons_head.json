@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "At the start of your turn, if you have at least 3 Mechs, destroy them all, and form V-07-TR-0N.",
 	"trigger": {
 		"eventTrigger": {
@@ -16,8 +16,8 @@
 				"class": "MinionOnBoardCondition",
 				"value": 3,
 				"cardFilter": {
-					"class": "RaceFilter",
-					"race": "MECH"
+					"class": "TribeFilter",
+					"tribe": "MECH"
 				}
 			}
 		},
@@ -28,8 +28,8 @@
 					"class": "DestroySpell",
 					"target": "FRIENDLY_MINIONS",
 					"filter": {
-						"class": "RaceFilter",
-						"race": "MECH"
+						"class": "TribeFilter",
+						"tribe": "MECH"
 					}
 				},
 				{

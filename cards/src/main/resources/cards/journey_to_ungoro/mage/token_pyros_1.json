@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "MAGE",
 	"rarity": "LEGENDARY",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Deathrattle: Return this to your hand as a 10/10 that costs (10).",
 	"deathrattle": {
 		"class": "ReceiveCardSpell",

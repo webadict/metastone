@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Taunt",
 	"attributes": {
 		"TAUNT": true

@@ -11,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Text;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Permanent;
 import net.demilich.metastone.game.entities.minions.Summon;
@@ -84,7 +84,8 @@ public class SummonToken extends GameToken {
 
 	private void visualizeStealth(GameContext context, Summon summon) {
 		Node token = context.getLogic().hasEntityAttribute(summon, Attribute.TAUNT) ? taunt : defaultToken;
-		token.setOpacity(context.getLogic().hasEntityAttribute(summon, Attribute.STEALTH) ? 0.5 : 1);
+		token.setOpacity(context.getLogic().hasEntityAttribute(summon, Attribute.STEALTH) ||
+                context.getLogic().hasEntityAttribute(summon, Attribute.STEALTH_FOR_ONE_TURN) ? 0.5 : 1);
 	}
 
 }

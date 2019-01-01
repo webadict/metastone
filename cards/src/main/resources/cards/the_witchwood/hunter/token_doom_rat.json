@@ -1,0 +1,14 @@
+{
+	"name": "Doom Rat",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

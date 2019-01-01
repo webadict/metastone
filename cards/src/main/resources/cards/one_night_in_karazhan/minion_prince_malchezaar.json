@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "When the game starts, add 5 extra Legendary minions to your deck.",
 	"deckTrigger": {
 		"eventTrigger": {
@@ -22,7 +22,7 @@
 					"class": "AndFilter",
 					"filters": [
 						{
-							"class": "CardFilter",	
+							"class": "CardFilter",
 							"cardType": "MINION",
 							"rarity": "LEGENDARY"
 						},

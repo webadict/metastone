@@ -20,7 +20,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "BEAST"
+						"tribe": "BEAST"
 					}
 				},
 				{
@@ -31,7 +31,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "DRAGON"
+						"tribe": "DRAGON"
 					}
 				},
 				{
@@ -42,7 +42,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "MURLOC"
+						"tribe": "MURLOC"
 					}
 				}
 			]
@@ -50,7 +50,7 @@
 	},
 	"attributes": {
 		"BATTLECRY": true
-},
+	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",
 	"fileFormatVersion": 1

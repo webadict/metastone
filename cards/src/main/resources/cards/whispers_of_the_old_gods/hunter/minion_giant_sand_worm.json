@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Whenever this minion kills another minion, it may attack again.",
 	"trigger": {
 		"eventTrigger": {

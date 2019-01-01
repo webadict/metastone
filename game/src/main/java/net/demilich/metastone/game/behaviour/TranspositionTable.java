@@ -2,7 +2,7 @@ package net.demilich.metastone.game.behaviour;
 
 import java.util.HashMap;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.cards.Card;

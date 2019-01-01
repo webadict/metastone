@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "NEUTRAL",
 	"rarity": "RARE",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Battlecry: Remove 1 Durability from your opponent's weapon.",
 	"battlecry": {
 		"spell": {

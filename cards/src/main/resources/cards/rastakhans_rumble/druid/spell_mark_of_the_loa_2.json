@@ -1,0 +1,17 @@
+{
+	"name": "Two 3/2 Raptors",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Summon two 3/2 Raptors.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"value": 2,
+		"card": "token_raptor_rastakhan"
+	},
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

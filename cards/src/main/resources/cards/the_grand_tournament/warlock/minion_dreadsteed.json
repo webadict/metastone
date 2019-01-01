@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "WARLOCK",
 	"rarity": "EPIC",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Deathrattle: Summon a Dreadsteed.",
 	"deathrattle": {
 		"class": "SummonSpell",

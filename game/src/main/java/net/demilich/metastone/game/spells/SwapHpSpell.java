@@ -2,18 +2,17 @@ package net.demilich.metastone.game.spells;
 
 import java.util.Map;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 
 /**
- * @deprecated As of v2.0, use {@link SwapAttributeSpell} instead with {@link SpellArg.ATTRIBUTE} set to HP.
+ * @deprecated As of v2.0, use {@link SwapAttributeSpell} instead with {@link SpellArg#ATTRIBUTE} set to HP.
  */
 @Deprecated
 public class SwapHpSpell extends Spell {

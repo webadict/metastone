@@ -6,13 +6,13 @@
 	"baseHp": 1,
 	"heroClass": "ROGUE",
 	"rarity": "RARE",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Whenever you summon a Pirate, gain Stealth.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionSummonedTrigger",
 			"targetPlayer": "SELF",
-			"race": "PIRATE"
+			"tribe": "PIRATE"
 		},
 		"spell": {
 			"class": "AddAttributeSpell",

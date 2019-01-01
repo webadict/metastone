@@ -1,0 +1,23 @@
+{
+	"name": "Blackwald Pixie",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"description": "Battlecry: Refresh your Hero Power.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "RefreshHeroPowerSpell",
+			"targetPlayer": "SELF"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Give a random friendly Beast, Dragon, and Murloc +1/+1.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -21,7 +21,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "BEAST"
+						"tribe": "BEAST"
 					}
 				},
 				{
@@ -32,7 +32,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "DRAGON"
+						"tribe": "DRAGON"
 					}
 				},
 				{
@@ -43,7 +43,7 @@
 					"randomTarget": true,
 					"filter": {
 						"class": "CardFilter",
-						"race": "MURLOC"
+						"tribe": "MURLOC"
 					}
 				}
 			]

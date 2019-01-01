@@ -6,7 +6,7 @@
 	"baseHp": 8,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Costs (1) less Mana for each card in your opponent's hand.",
 	"manaCostModifier": {
 		"class": "PlayerAttributeValueProvider",

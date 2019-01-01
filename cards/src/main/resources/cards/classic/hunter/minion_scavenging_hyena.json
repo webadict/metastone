@@ -6,13 +6,13 @@
 	"baseHp": 2,
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Whenever a friendly Beast dies, gain +2/+1.",
 	"trigger": {
 		"eventTrigger": {
 			"class": "MinionDeathTrigger",
 			"targetPlayer": "SELF",
-			"race": "BEAST"
+			"tribe": "BEAST"
 		},
 		"spell": {
 			"class": "BuffSpell",

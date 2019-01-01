@@ -7,7 +7,7 @@
 	"heroClass": "HUNTER",
 	"rarity": "COMMON",
 	"description": "Charge",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"attributes": {
 		"CHARGE": true
 	},

@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "SHAMAN",
 	"rarity": "RARE",
-	"race": "TOTEM",
+	"tribe": "TOTEM",
 	"description": "At the end of your turn, restore 4 Health to your hero.",
 	"trigger": {
 		"eventTrigger": {

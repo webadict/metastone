@@ -6,7 +6,7 @@
 	"baseHp": 12,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "At the end of your turn, add a Dream Card to your hand.",
 	"trigger": {
 		"eventTrigger": {

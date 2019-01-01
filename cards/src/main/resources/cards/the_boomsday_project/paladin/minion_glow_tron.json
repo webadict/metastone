@@ -1,0 +1,17 @@
+{
+	"name": "Glow-Tron",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "Magnetic",
+	"attributes": {
+		"MAGNETIC": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

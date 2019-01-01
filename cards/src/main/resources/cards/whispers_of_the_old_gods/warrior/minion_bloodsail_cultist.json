@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "WARRIOR",
 	"rarity": "RARE",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Battlecry: If you control a Pirate, give your weapon +1/+1.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -19,8 +19,8 @@
 		"condition": {
 			"class": "MinionOnBoardCondition",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "PIRATE"
+				"class": "TribeFilter",
+				"tribe": "PIRATE"
 			}
 		}
 	},

@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Inspire: Destroy a random minion for each player.",
 	"trigger": {
 		"eventTrigger": {

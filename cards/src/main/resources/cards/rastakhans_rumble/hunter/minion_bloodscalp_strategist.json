@@ -1,0 +1,34 @@
+{
+	"name": "Bloodscalp Strategist",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"heroClass": "HUNTER",
+	"rarity": "RARE",
+	"description": "Battlecry: If you have a weapon equipped, Discover a spell.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverRandomCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			}
+		},
+		"condition": {
+			"class": "HasWeaponCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DISCOVER": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

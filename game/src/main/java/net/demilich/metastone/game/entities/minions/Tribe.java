@@ -1,0 +1,14 @@
+package net.demilich.metastone.game.entities.minions;
+
+public enum Tribe {
+	NONE,
+	
+	BEAST,
+	DEMON,
+	DRAGON,
+	ELEMENTAL,
+	MECH,
+	MURLOC,
+	PIRATE,
+	TOTEM,
+}

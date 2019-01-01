@@ -1,0 +1,22 @@
+{
+	"name": "Nether Portal",
+	"type": "PERMANENT",
+	"heroClass": "WARLOCK",
+	"rarity": "FREE",
+	"description": "At the end of your turn, summon two 3/2 Imps.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TurnEndTrigger",
+			"targetPlayer": "SELF"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"value": 2,
+			"card": "token_nether_imp",
+			"boardPositionRelative": true
+		}
+	},
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

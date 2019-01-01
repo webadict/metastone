@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "PRIEST",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever a character is healed, deal 1 damage to a random enemy.",
 	"trigger": {
 		"eventTrigger": {

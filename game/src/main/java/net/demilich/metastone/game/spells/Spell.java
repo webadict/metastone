@@ -9,10 +9,17 @@ import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
+import net.demilich.metastone.game.targeting.EntityReference;
 
 public abstract class Spell {
 
 	public void cast(GameContext context, Player player, SpellDesc desc, Entity source, List<Entity> targets) {
+        // Change the source of the spell. Used for Betrayal.
+        EntityReference sourceReference = (EntityReference) desc.get(SpellArg.SOURCE);
+        if (sourceReference != null) {
+            source = context.resolveSingleTarget(sourceReference);
+        }
+
 		// no target specified, cast the spell once with target NULL
 		if (targets == null) {
 			castForPlayer(context, player, desc, source, null);

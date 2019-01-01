@@ -6,15 +6,15 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Charge. After you play a pirate, summon this minion from your deck.",
 	"deckTrigger": {
 		"eventTrigger": {
 			"class": "AfterMinionPlayedTrigger",
 			"targetPlayer": "SELF",
 			"queueCondition": {
-				"class": "RaceCondition",
-				"race": "PIRATE"
+				"class": "TribeCondition",
+				"tribe": "PIRATE"
 			}
 		},
 		"spell": {

@@ -1,0 +1,21 @@
+{
+	"name": "Mechano-Egg",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 0,
+	"baseHp": 5,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "Deathrattle: Summon a 8/8 Robosaur.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_robosaur"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

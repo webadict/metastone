@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Restore 8 Health to your hero.",
 	"battlecry": {
 		"spell": {

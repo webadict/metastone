@@ -1,0 +1,14 @@
+{
+	"name": "Raptor",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"heroClass": "DRUID",
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

@@ -1,11 +1,9 @@
 package net.demilich.metastone.game.spells.desc.filter;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
-import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.entities.Entity;
-import net.demilich.metastone.game.entities.weapons.Weapon;
 import net.demilich.metastone.game.spells.SpellUtils;
 
 public class AttributeFilter extends EntityFilter {

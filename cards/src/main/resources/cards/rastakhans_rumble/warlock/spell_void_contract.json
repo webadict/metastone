@@ -1,0 +1,26 @@
+{
+	"name": "Void Contract",
+	"baseManaCost": 8,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Destroy half of each player's deck",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 3
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "token_devilsaur"
+		},
+		"condition": {
+			"class": "OverkillCondition"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

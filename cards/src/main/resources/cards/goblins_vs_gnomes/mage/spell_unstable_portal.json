@@ -7,7 +7,7 @@
 	"description": "Add a random minion to your hand. It costs (3) less.",
 	"targetSelection": "NONE",
 	"spell": {
-		"class": "ReceiveCardAndDoSomethingSpell",
+		"class": "ReceiveCardSpell",
 		"cardFilter": {
 			"class": "CardFilter",
 			"cardType": "MINION"
@@ -17,7 +17,7 @@
 			"target": "FRIENDLY_PLAYER",
 			"cardCostModifier": {
 				"class": "CardCostModifier",
-				"target": "EVENT_CARD",
+				"target": "SPELL_OUTPUT",
 				"operation": "SUBTRACT",
 				"value": 3
 			}

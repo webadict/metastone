@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Add 2 Bananas to your hand.",
 	"battlecry": {
 		"spell": {

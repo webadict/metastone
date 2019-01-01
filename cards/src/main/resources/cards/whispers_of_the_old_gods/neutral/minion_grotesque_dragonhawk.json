@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Windfury",
 	"attributes": {
 		"WINDFURY": true

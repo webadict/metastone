@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Battlecry: If you played an Elemental last turn, Discover an  Elemental.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -19,14 +19,14 @@
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		},
 		"condition": {
 			"class": "PlayedLastTurnCondition",
 			"filter": {
 				"class": "CardFilter",
-				"race": "ELEMENTAL"
+				"tribe": "ELEMENTAL"
 			}
 		}
 	},

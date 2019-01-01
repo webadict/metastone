@@ -3,7 +3,7 @@ package net.demilich.metastone.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.GameAction;
@@ -14,7 +14,7 @@ import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.entities.Actor;
 import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.SilenceSpell;
 import net.demilich.metastone.game.spells.SwapAttackAndHpSpell;
@@ -221,7 +221,7 @@ public class CardInteractionTests extends TestBase {
 		Card jaraxxus = CardCatalogue.getCardById("minion_lord_jaraxxus");
 		// first, just play Jaraxxus on an empty board
 		playCard(context, warlock, jaraxxus);
-		Assert.assertEquals(warlock.getHero().getRace(), Race.DEMON);
+		Assert.assertEquals(warlock.getHero().getTribe(), Tribe.DEMON);
 		Assert.assertEquals(warlock.getHero().getHp(), 15);
 		Assert.assertNotNull(warlock.getHero().getWeapon());
 		
@@ -237,7 +237,7 @@ public class CardInteractionTests extends TestBase {
 		warlock = context.getPlayer1();
 		jaraxxus = CardCatalogue.getCardById("minion_lord_jaraxxus");
 		playCard(context, warlock, jaraxxus);
-		Assert.assertEquals(warlock.getHero().getRace(), Race.DEMON);
+		Assert.assertEquals(warlock.getHero().getTribe(), Tribe.DEMON);
 		// Jaraxxus should be affected by Repentance, bringing him down to 1 hp
 		Assert.assertEquals(warlock.getHero().getHp(), 1);
 		Assert.assertNotNull(warlock.getHero().getWeapon());
@@ -362,7 +362,7 @@ public class CardInteractionTests extends TestBase {
 			if (i == HARVEST_GOLEM) {
 				Assert.assertEquals(context.getLogic().getEntityAttack(minion), 2);
 				Assert.assertEquals(minion.getHp(), 1);
-				Assert.assertEquals(minion.getRace(), Race.MECH);
+				Assert.assertEquals(minion.getTribe(), Tribe.MECH);
 			} else {
 				Assert.assertEquals(context.getLogic().getEntityAttack(minion), 1);
 				Assert.assertEquals(minion.getHp(), 1);

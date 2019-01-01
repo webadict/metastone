@@ -4,9 +4,9 @@
 	"type": "MINION",
 	"baseAttack": 3,
 	"baseHp": 3,
-	"heroClass": "ANY",	
+	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "After this minion attacks a hero, Adapt.",
 	"trigger": {
 		"eventTrigger": {

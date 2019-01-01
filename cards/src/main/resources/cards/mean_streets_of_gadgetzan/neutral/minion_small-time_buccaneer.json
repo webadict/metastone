@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Has +2 Attack while you have a weapon equipped.",
 	"trigger": {
 		"eventTrigger": {

@@ -21,7 +21,7 @@
 				"class": "AttributeFilter",
 				"operation": "HAS",
 				"attribute": "FROZEN"
-			} 
+			}
 		}
 	},
 	"attributes": {

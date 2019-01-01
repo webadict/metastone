@@ -6,15 +6,15 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "BEAST",
-	"description": "Battlecry: Put a random Pirate from your deck into your hand.",
+	"tribe": "BEAST",
+	"description": "Battlecry: Draw a Pirate from your deck.",
 	"battlecry": {
 		"spell": {
-			"class": "FromDeckToHandSpell",
+			"class": "DrawCardSpell",
 			"value": 1,
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "PIRATE"
+				"tribe": "PIRATE"
 			}
 		}
 	},

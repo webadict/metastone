@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Restore 8 Health to the enemy hero.",
 	"deathrattle": {
 		"class": "HealSpell",

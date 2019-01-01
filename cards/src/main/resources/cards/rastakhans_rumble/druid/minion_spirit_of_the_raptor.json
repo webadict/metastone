@@ -1,0 +1,30 @@
+{
+	"name": "Spirit of the Raptor",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 3,
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Stealth for 1 turn. After your hero attacks and kills a minion, draw a card.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "AfterPhysicalAttackTrigger",
+			"sourceEntityType": "HERO",
+			"sourcePlayer": "SELF",
+			"targetEntityType": "MINION",
+			"fireCondition": {
+				"class": "IsDeadCondition"
+			}
+		},
+		"spell": {
+			"class": "DrawCardSpell"
+		}
+	},
+	"attributes": {
+		"STEALTH_FOR_ONE_TURN": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

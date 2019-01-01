@@ -14,13 +14,11 @@ public class DeckCondition extends Condition {
 
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
-		Condition[] conditions = (Condition[]) desc.get(ConditionArg.CONDITIONS);
+		Condition condition = (Condition) desc.get(ConditionArg.CONDITION);
 		for (Card card : player.getDeck()) {
-			for (Condition condition : conditions) {
-				if (!condition.isFulfilled(context, player, source, card)) {
-					return false;
-				}
-			}
+            if (!condition.isFulfilled(context, player, source, card)) {
+                return false;
+            }
 		}
 		return true;
 	}

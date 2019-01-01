@@ -1,0 +1,27 @@
+{
+	"name": "Omega Agent",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"rarity": "EPIC",
+	"description": "Battlecry: If you have 10 Mana Crystals, summon 2 copies of this minion.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"target": "SELF",
+			"value": 2
+		},
+		"condition": {
+			"class": "ManaMaxedCondition"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

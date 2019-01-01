@@ -1,0 +1,23 @@
+{
+	"name": "Snapjaw Shellfighter",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 8,
+	"heroClass": "NEUTRAL",
+	"rarity": "EPIC",
+	"description": "Whenever an adjacent minion takes damage, this minion takes it instead.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "SummonSpell",
+			"card": "minion_arena_patron"
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

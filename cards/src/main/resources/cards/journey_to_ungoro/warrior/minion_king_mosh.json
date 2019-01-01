@@ -6,7 +6,7 @@
 	"type": "MINION",
 	"heroClass": "WARRIOR",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Destroy all damaged minions.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -14,7 +14,7 @@
 			"class": "DestroySpell",
 			"target": "ALL_MINIONS",
 			"filter": {
-			"class": "DamagedFilter"
+				"class": "DamagedFilter"
 			}
 		}
 	},

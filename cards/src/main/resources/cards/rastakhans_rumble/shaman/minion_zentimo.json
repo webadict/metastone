@@ -1,0 +1,29 @@
+{
+	"name": "Zentimo",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Whenever you target a minion with a spell, it also targets adjacent ones.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "TargetAcquisitionTrigger",
+			"actionType": "SPELL",
+			"sourcePlayer": "SELF",
+			"targetEntityType": "MINION"
+		},
+		"spell": {
+			"class": "AdjacentEffectSpell",
+			"target": "EVENT_TARGET",
+			"spell2": {
+				"class": "RecastSpell",
+				"target": "PENDING_CARD"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

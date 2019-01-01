@@ -1,0 +1,26 @@
+{
+	"name": "Linecracker",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 10,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"description": "Overkill: Double this minion's Attack.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "DoubleAttackSpell",
+			"target": "SELF"
+		}
+	},
+	"attributes": {
+		"OVERKILL": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

@@ -1,0 +1,27 @@
+{
+	"name": "Sandbinder",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"rarity": "EPIC",
+	"description": "Battlecry: Draw an Elemental from your deck.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "FromDeckToHandSpell",
+			"value": 1,
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "ELEMENTAL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

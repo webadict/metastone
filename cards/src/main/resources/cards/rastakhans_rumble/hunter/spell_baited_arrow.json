@@ -1,0 +1,29 @@
+{
+	"name": "Baited Arrow",
+	"baseManaCost": 5,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Deal $3 damage. Overkill: Summon a 5/5 Devilsaur.",
+	"targetSelection": "ANY",
+	"spell": {
+		"class": "ConditionalEffectSpell",
+		"spell1": {
+			"class": "DamageSpell",
+			"value": 3
+		},
+		"spell2": {
+			"class": "SummonSpell",
+			"card": "token_devilsaur"
+		},
+		"condition": {
+			"class": "OverkillCondition"
+		}
+	},
+	"attributes": {
+		"OVERKILL": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

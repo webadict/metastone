@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Has Charge while you have a weapon equipped.",
 	"trigger": {
 		"eventTrigger": {

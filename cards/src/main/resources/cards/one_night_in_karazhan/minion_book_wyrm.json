@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, destroy an enemy minion with 3 or less Attack.",
 	"battlecry": {
 		"targetSelection": "ENEMY_MINIONS",
@@ -23,7 +23,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

@@ -1,0 +1,14 @@
+{
+	"name": "Robosaur",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 8,
+	"baseHp": 8,
+	"rarity": "FREE",
+	"tribe": "MECH",
+	"description": "",
+	"collectible": false,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

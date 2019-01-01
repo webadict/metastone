@@ -1,0 +1,29 @@
+{
+	"name": "Golden Kobold",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 6,
+	"baseHp": 6,
+	"rarity": "FREE",
+	"description": "Taunt. Battlecry: Replace your hand with Legendary minions.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReplaceCardsSpell",
+			"target": "FRIENDLY_HAND",
+			"cardFilter": {
+				"class": "CardFilter",
+				"rarity": "LEGENDARY",
+				"cardType": "MINION"
+			},
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

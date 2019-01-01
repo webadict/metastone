@@ -26,8 +26,8 @@
 		"condition": {
 			"class": "MinionOnBoardCondition",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

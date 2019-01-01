@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.desc.MinionCardDesc;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.desc.BattlecryDesc;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
@@ -17,7 +17,7 @@ import net.demilich.metastone.game.targeting.TargetSelection;
 class MinionCardPanel extends CardEditor {
 
 	@FXML
-	private ComboBox<Race> raceBox;
+	private ComboBox<Tribe> tribeBox;
 
 	@FXML
 	private TextField attackField;
@@ -38,8 +38,8 @@ class MinionCardPanel extends CardEditor {
 	public MinionCardPanel() {
 		super("MinionCardPanel.fxml");
 
-		raceBox.setItems(FXCollections.observableArrayList(Race.values()));
-		raceBox.valueProperty().addListener(this::onRaceChanged);
+		tribeBox.setItems(FXCollections.observableArrayList(Tribe.values()));
+		tribeBox.valueProperty().addListener(this::onTribeChanged);
 
 		battlecryTargetSelectionBox.setItems(FXCollections.observableArrayList(TargetSelection.values()));
 		battlecryTargetSelectionBox.getSelectionModel().selectFirst();
@@ -78,8 +78,8 @@ class MinionCardPanel extends CardEditor {
 		card.deathrattle = new SpellDesc(SpellDesc.build(newSpell));
 	}
 
-	private void onRaceChanged(ObservableValue<? extends Race> ov, Race oldRace, Race newRace) {
-		card.race = newRace != Race.NONE ? newRace : null;
+	private void onTribeChanged(ObservableValue<? extends Tribe> ov, Tribe oldTribe, Tribe newTribe) {
+		card.tribe = newTribe != Tribe.NONE ? newTribe : null;
 	}
 
 	private void onTargetSelectionChanged(ObservableValue<? extends TargetSelection> ov, TargetSelection oldValue,

@@ -1,0 +1,19 @@
+{
+	"name": "Annoy-o-Module",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"rarity": "RARE",
+	"tribe": "MECH",
+	"description": "Magnetic. Divine Shield. Taunt.",
+	"attributes": {
+		"DIVINE_SHIELD": true,
+		"MAGNETIC": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

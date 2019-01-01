@@ -1,0 +1,18 @@
+{
+	"name": "Druid of the Scythe",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"baseAttack": 4,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Rush, Taunt",
+	"attributes": {
+		"RUSH": true,
+		"TAUNT": true
+	},
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

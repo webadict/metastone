@@ -1,0 +1,64 @@
+{
+	"name": "Griftah",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"baseAttack": 4,
+	"baseHp": 5,
+	"heroClass": "NEUTRAL",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Discover two cards. Give one to your opponent at random.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "EitherOrSpell",
+			"spell1": {
+				"class": "MetaSpell",
+				"spells": [
+					{
+						"class": "DiscoverRandomCardSpell",
+						"spell": {
+							"class": "ReceiveCardSpell",
+							"targetPlayer": "SELF"
+						}
+					},
+					{
+						"class": "DiscoverRandomCardSpell",
+						"spell": {
+							"class": "ReceiveCardSpell",
+							"targetPlayer": "OPPONENT"
+						}
+					}
+				]
+			},
+			"spell2": {
+				"class": "MetaSpell",
+				"spells": [
+					{
+						"class": "DiscoverRandomCardSpell",
+						"spell": {
+							"class": "ReceiveCardSpell",
+							"targetPlayer": "OPPONENT"
+						}
+					},
+					{
+						"class": "DiscoverRandomCardSpell",
+						"spell": {
+							"class": "ReceiveCardSpell",
+							"targetPlayer": "SELF"
+						}
+					}
+				]
+			},
+			"condition": {
+				"class": "RandomCondition"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"DISCOVER": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

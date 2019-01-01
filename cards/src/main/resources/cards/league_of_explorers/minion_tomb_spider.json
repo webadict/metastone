@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "NEUTRAL",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Discover a Beast.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -18,7 +18,7 @@
 			},
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "BEAST"
+				"tribe": "BEAST"
 			}
 		}
 	},

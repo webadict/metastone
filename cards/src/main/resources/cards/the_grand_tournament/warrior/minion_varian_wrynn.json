@@ -9,25 +9,30 @@
 	"description": "Battlecry: Draw 3 cards. Put any minions you drew directly into the battlefield.",
 	"battlecry": {
 		"spell": {
-			"class": "DrawCardAndDoSomethingSpell",
+			"class": "DrawCardSpell",
 			"value": 3,
-			"spell": {
+			"subSpell": {
 				"class": "ConditionalSpell",
 				"spell": {
-					"class": "PutMinionOnBoardSpell"
+					"class": "PutMinionOnBoardSpell",
+					"target": "SPELL_OUTPUT"
 				},
 				"condition": {
 					"class": "AndCondition",
 					"conditions": [
 						{
 							"class": "CardPropertyCondition",
+							"target": "SPELL_OUTPUT",
 							"cardType": "MINION"
 						},
 						{
 							"class": "MinionCountCondition",
 							"targetPlayer": "SELF",
 							"operation": "LESS",
-							"value": 7
+							"value": {
+								"class": "GameValueProvider",
+								"gameValue": "MAX_MINION_COUNT"
+							}
 						}
 					]
 				}

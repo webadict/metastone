@@ -1,0 +1,25 @@
+{
+	"name": "Eternium Rover",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "WARRIOR",
+	"baseAttack": 1,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "Whenever this minion takes damage, gain 2 Armor.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "DamageReceivedTrigger",
+			"hostTargetType": "IGNORE_OTHER_TARGETS"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_HERO",
+			"armorBonus": 2
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

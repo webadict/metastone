@@ -1,0 +1,27 @@
+{
+	"name": "Spirit of the Dragonhawk",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Stealth for 1 turn. Your Hero Power also targets adjacent minions.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "SpellCastedTrigger",
+			"sourcePlayer": "SELF"
+		},
+		"spell": {
+			"class": "HealSpell",
+			"target": "FRIENDLY_HERO",
+			"value": 3
+		}
+	},
+	"attributes": {
+		"STEALTH_FOR_ONE_TURN": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

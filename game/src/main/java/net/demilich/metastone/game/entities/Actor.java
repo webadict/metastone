@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 
-import net.demilich.metastone.game.Attribute;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
-import net.demilich.metastone.game.entities.minions.Race;
-import net.demilich.metastone.game.logic.GameLogic;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 
@@ -42,7 +39,7 @@ public abstract class Actor extends Entity {
 	@Override
 	public Actor clone() {
 		Actor clone = (Actor) super.clone();
-		clone.attributes = new EnumMap<>(getAttributes());
+		clone.attributes = getAttributes().clone();
 		clone.clearSpellTriggers();
 		for (SpellTrigger trigger : getSpellTriggers()) {
 			clone.spellTriggers.add(trigger.clone());
@@ -59,7 +56,7 @@ public abstract class Actor extends Entity {
 
 	protected boolean displayGameTag(Attribute tag) {
 		return tag == Attribute.CHARGE || tag == Attribute.ENRAGED || tag == Attribute.FROZEN || tag == Attribute.DIVINE_SHIELD
-				|| tag == Attribute.WINDFURY || tag == Attribute.SPELL_DAMAGE || tag == Attribute.STEALTH || tag == Attribute.TAUNT
+				|| tag == Attribute.WINDFURY || tag == Attribute.SPELL_DAMAGE || tag.isAttribute(Attribute.STEALTH) || tag == Attribute.TAUNT
 				|| tag == Attribute.CANNOT_ATTACK || tag == Attribute.UNTARGETABLE_BY_SPELLS || tag == Attribute.AURA_UNTARGETABLE_BY_SPELLS
 				|| tag == Attribute.MEGA_WINDFURY;
 	}

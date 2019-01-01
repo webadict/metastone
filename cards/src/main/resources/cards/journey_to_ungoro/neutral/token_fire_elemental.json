@@ -1,0 +1,14 @@
+{
+	"name": "Fire Elemental",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 1,
+	"baseHp": 2,
+	"rarity": "COMMON",
+	"tribe": "ELEMENTAL",
+	"description": "",
+	"collectible": false,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

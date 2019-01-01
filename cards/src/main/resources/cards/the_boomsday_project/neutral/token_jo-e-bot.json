@@ -1,0 +1,14 @@
+{
+	"name": "Jo-E-Bot",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"rarity": "FREE",
+	"tribe": "MECH",
+	"description": "",
+	"collectible": false,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

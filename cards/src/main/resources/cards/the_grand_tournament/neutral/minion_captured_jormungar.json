@@ -6,7 +6,7 @@
 	"baseHp": 9,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": true,
 	"set": "THE_GRAND_TOURNAMENT",

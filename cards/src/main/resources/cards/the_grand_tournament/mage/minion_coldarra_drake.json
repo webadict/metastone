@@ -7,7 +7,7 @@
 	"heroClass": "MAGE",
 	"rarity": "EPIC",
 	"description": "You can use your Hero Power any number of times.",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"attributes": {
 		"HERO_POWER_USAGES": -1
 	},

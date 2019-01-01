@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "You are out of demons! At least there are always imps...",
 	"collectible": false,
 	"set": "CLASSIC",

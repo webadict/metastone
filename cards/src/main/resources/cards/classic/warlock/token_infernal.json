@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "WARLOCK",
 	"rarity": "COMMON",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",

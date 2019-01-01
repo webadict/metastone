@@ -1,0 +1,22 @@
+{
+	"name": "Baleful Banker",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "EPIC",
+	"description": "Battlecry: Choose a friendly minion. Shuffle a copy of it into your deck.",
+	"battlecry": {
+		"targetSelection": "FRIENDLY_MINIONS",
+		"spell": {
+			"class": "ShuffleToDeckSpell"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

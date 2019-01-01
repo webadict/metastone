@@ -14,8 +14,8 @@
 			"target": "FRIENDLY_MINIONS",
 			"value": 1,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "DEMON"
+				"class": "TribeFilter",
+				"tribe": "DEMON"
 			}
 		}
 	},

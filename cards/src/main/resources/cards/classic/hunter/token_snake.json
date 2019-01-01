@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "HUNTER",
 	"rarity": "EPIC",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",

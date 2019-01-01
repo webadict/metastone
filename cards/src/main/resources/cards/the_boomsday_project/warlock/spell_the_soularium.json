@@ -1,0 +1,20 @@
+{
+	"name": "The Soularium",
+	"baseManaCost": 1,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "LEGENDARY",
+	"description": "Draw 3 cards. At the end of your turn, discard them.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 3,
+		"subSpell": {
+			"class": "AddAttributeSpell",
+			"attribute": "GHOSTLY"
+		}
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

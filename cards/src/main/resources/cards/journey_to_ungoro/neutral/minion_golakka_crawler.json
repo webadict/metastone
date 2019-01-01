@@ -6,7 +6,7 @@
 	"baseHp": 3,
 	"heroClass": "ANY",
 	"rarity": "RARE",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Battlecry: Destroy a Pirate and gain +1/+1.",
 	"battlecry": {
 		"targetSelection": "MINIONS",
@@ -24,8 +24,8 @@
 				}
 			],
 			"filter": {
-				"class": "RaceFilter",
-				"race": "PIRATE"
+				"class": "TribeFilter",
+				"tribe": "PIRATE"
 			}
 		}
 	},

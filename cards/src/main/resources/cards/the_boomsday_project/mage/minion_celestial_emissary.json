@@ -1,0 +1,32 @@
+{
+	"name": "Celestial Emissary",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "MAGE",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"rarity": "RARE",
+	"tribe": "ELEMENTAL",
+	"description": "Battlecry: Your next spell this turn has Spell Damage +2.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ModifyAttributeSpell",
+			"target": "FRIENDLY_PLAYER",
+			"value": 2,
+			"attribute": "SPELL_DAMAGE",
+			"revertTrigger": {
+				"class": "TurnEndTrigger"
+			},
+			"secondRevertTrigger": {
+				"class": "AfterSpellCastedTrigger"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

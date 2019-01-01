@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Deathrattle: Give each player a Spare Part.",
 	"deathrattle": {
 		"class": "ReceiveRandomCardSpell",

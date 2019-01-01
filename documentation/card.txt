@@ -59,13 +59,13 @@ This information is used only on minion cards.
 
 "baseAttack": Integer. The base amount of attack the minion has.
 "baseHp": Integer. The base amount of health the minion has.
-"race": Race Enum. The race of the minion. Currently, these are:
+"tribe": Tribe Enum. The tribe of the minion. Currently, these are:
 		"BEAST"
 		"DEMON"
 		"DRAGON"
 		"MECH"
 		"MURLOC"
-		"NONE" - This does not have to be set if the minion has no race.
+		"NONE" - This does not have to be set if the minion has no tribe.
 		"PIRATE"
 		"TOTEM"
 "battlecry": Battlecry. The battlecry that is cast when this minion is played.
@@ -120,8 +120,6 @@ This information is used only on weapon cards.
 "aura": Aura. The aura spell that is granted by this weapon.
 "trigger": Trigger. The spell that is casted when the appropriate trigger
 	occurs. See triggers.txt for a list of triggers.
-"onEquip": Spell. The spell that is cast when you equip the weapon.
-"onUnequip": Spell. The spell that is cast when you unequip the weapon.
 
 
 

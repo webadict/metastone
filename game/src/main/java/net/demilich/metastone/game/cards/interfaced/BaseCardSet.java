@@ -4,7 +4,6 @@ public enum BaseCardSet implements CardSetImplementation {
 	ANY,
 	BASIC,
 	CLASSIC,
-	REWARD,
 	PROMO,
 	HALL_OF_FAME,
 	NAXXRAMAS,

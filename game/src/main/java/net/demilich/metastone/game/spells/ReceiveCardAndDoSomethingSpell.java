@@ -11,6 +11,9 @@ import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
 import net.demilich.metastone.game.targeting.CardLocation;
 
+/**
+ * @deprecated As of v2.0.0, use ReceiveCardSpell instead.
+ */
 public class ReceiveCardAndDoSomethingSpell extends Spell {
 
 	private void castSomethingSpell(GameContext context, Player player, SpellDesc spell, Entity source, Card card) {

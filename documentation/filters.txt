@@ -18,8 +18,8 @@ Filters entities based on which entity has the highest value of the attribute gi
 InDeckFilter
 Filters based on whether it belongs to the player's deck.
 
-RaceFilter
-Filters based on the Race given.
+TribeFilter
+Filters based on the Tribe given.
 
 SpecificCardFilter
 Filters based on the specific card name provided.

@@ -1,0 +1,25 @@
+{
+	"name": "Da Undatakah",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 8,
+	"baseHp": 5,
+	"heroClass": "NEUTRAL",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Gain the Deathrattle effects of 3 friendly minions that died this game.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ModifyMaxManaSpell",
+			"operation": "SET",
+			"value": 5,
+			"fullManaCrystals": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

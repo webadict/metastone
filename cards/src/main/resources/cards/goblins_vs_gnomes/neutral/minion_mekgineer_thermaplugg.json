@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Whenever an enemy minion dies, summon a Leper Gnome.",
 	"trigger": {
 		"eventTrigger": {

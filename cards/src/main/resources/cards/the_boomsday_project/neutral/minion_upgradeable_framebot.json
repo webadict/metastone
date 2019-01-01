@@ -1,0 +1,14 @@
+{
+	"name": "Upgradeable Framebot",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 1,
+	"baseHp": 5,
+	"rarity": "COMMON",
+	"tribe": "MECH",
+	"description": "",
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

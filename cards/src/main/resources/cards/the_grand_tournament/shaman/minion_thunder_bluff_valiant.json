@@ -17,8 +17,8 @@
 			"target": "FRIENDLY_MINIONS",
 			"attackBonus": 2,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "TOTEM"
+				"class": "TribeFilter",
+				"tribe": "TOTEM"
 			}
 		}
 	},

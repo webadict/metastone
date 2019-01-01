@@ -6,7 +6,7 @@
 	"baseHp": 2,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Deathrattle: Summon two 1/1 Spectral Spiders.",
 	"deathrattle": {
 		"class": "SummonSpell",

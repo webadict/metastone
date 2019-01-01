@@ -1,0 +1,31 @@
+{
+	"name": "Wartbringer",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"heroClass": "SHAMAN",
+	"rarity": "COMMON",
+	"description": "Battlecry: If you played 2 spells this turn, deal 2 damage.",
+	"battlecry": {
+		"targetSelection": "ANY",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 2
+		},
+		"condition": {
+			"class": "PlayedThisTurnCondition",
+			"value": 2,
+			"filter": {
+				"class": "CardFilter",
+				"cardType": "SPELL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

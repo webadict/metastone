@@ -1,0 +1,24 @@
+{
+	"name": "Bone Drake",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 6,
+	"baseHp": 5,
+	"rarity": "RARE",
+	"tribe": "DRAGON",
+	"description": "Deathrattle: Add a random Dragon to your hand.",
+	"deathrattle": {
+		"class": "ReceiveCardSpell",
+		"cardFilter": {
+			"class": "CardFilter",
+			"tribe": "DRAGON"
+		}
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "KNIGHTS_OF_THE_FROZEN_THRONE",
+	"fileFormatVersion": 1
+}

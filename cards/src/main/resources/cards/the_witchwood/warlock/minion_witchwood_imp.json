@@ -1,0 +1,24 @@
+{
+	"name": "Witchwood Imp",
+	"baseManaCost": 1,
+	"type": "MINION",
+	"heroClass": "WARLOCK",
+	"baseAttack": 1,
+	"baseHp": 1,
+	"rarity": "COMMON",
+	"tribe": "DEMON",
+	"description": "Stealth. Deathrattle: Give a random friendly minion +2 Health.",
+	"deathrattle": {
+		"class": "BuffSpell",
+		"target": "FRIENDLY_MINIONS",
+		"hpBonus": 2,
+		"randomTarget": true
+	},
+	"attributes": {
+		"DEATHRATTLES": true,
+		"STEALTH": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

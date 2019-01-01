@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ROGUE",
 	"rarity": "EPIC",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Battlecry: If your weapon has at least 3 Attack, gain +4/+4.",
 	"battlecry": {
 		"targetSelection": "NONE",

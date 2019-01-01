@@ -1,0 +1,21 @@
+{
+	"name": "Mechanical Whelp",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "RARE",
+	"tribe": "MECH",
+	"description": "Deathrattle: Summon a 7/7 Mechanical Dragon.",
+	"deathrattle": {
+		"class": "SummonSpell",
+		"card": "token_mechanical_dragon"
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

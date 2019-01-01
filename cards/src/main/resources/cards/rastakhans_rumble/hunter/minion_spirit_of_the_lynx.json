@@ -1,0 +1,28 @@
+{
+	"name": "Spirit of the Lynx",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 0,
+	"baseHp": 3,
+	"heroClass": "MAGE",
+	"rarity": "RARE",
+	"description": "Stealth for 1 turn. Whenever you summon a Beast, give it +1/+1.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "MinionSummonedTrigger",
+			"targetPlayer": "SELF",
+			"tribe": "BEAST"
+		},
+		"spell": {
+			"class": "BuffSpell",
+			"target": "EVENT_TARGET",
+			"value": 1
+		}
+	},
+	"attributes": {
+		"STEALTH_FOR_ONE_TURN": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

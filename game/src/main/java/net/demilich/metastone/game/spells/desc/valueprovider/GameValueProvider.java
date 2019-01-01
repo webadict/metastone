@@ -5,6 +5,7 @@ import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.GameValue;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Entity;
+import net.demilich.metastone.game.logic.GameLogic;
 
 public class GameValueProvider extends ValueProvider {
 
@@ -20,6 +21,12 @@ public class GameValueProvider extends ValueProvider {
 			return (int) context.getEnvironment().get(Environment.LAST_MANA_COST);
 		case SPELL_VALUE:
 			return (int) context.getEnvironment().get(Environment.SPELL_VALUE);
+        case MAX_HAND_COUNT:
+            return GameLogic.MAX_HAND_CARDS;
+        case MAX_MANA_COUNT:
+            return GameLogic.MAX_MANA;
+        case MAX_MINION_COUNT:
+            return GameLogic.MAX_MINIONS;
 		default:
 			break;
 		}

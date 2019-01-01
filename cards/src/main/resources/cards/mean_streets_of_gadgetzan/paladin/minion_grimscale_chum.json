@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "PALADIN",
 	"rarity": "COMMON",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Battlecry: Give a random Murloc in your hand +1/+1.",
 	"battlecry": {
 		"spell": {
@@ -17,7 +17,7 @@
 			"filter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
-				"race": "MURLOC"
+				"tribe": "MURLOC"
 			},
 			"randomTarget": true
 		}

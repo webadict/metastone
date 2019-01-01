@@ -1,0 +1,17 @@
+{
+	"name": "Mark of the Loa",
+	"baseManaCost": 4,
+	"type": "CHOOSE_ONE",
+	"heroClass": "DRUID",
+	"rarity": "RARE",
+	"description": "Choose One - Give a minion +2/+4 and Taunt; or Summon two 3/2 Raptors.",
+	"targetSelection": "NONE",
+	"options": [
+		"spell_mark_of_the_loa_1",
+		"spell_mark_of_the_loa_2"
+	],
+	"bothOptions": "spell_mark_of_the_loa_3",
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

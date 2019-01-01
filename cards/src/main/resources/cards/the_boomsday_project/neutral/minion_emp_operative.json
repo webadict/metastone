@@ -1,0 +1,26 @@
+{
+	"name": "E.M.P. Operative",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "EPIC",
+	"description": "Battlecry: Destroy a Mech.",
+	"battlecry": {
+		"targetSelection": "MINIONS",
+		"spell": {
+			"class": "DestroySpell",
+			"filter": {
+				"class": "TribeFilter",
+				"tribe": "MECH"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

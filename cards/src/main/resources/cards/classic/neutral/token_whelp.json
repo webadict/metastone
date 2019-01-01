@@ -6,7 +6,7 @@
 	"baseHp": 1,
 	"heroClass": "ANY",
 	"rarity": "FREE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "",
 	"collectible": false,
 	"set": "CLASSIC",

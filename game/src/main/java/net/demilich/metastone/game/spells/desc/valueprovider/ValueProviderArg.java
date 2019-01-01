@@ -15,7 +15,7 @@ public enum ValueProviderArg {
 	OFFSET,
 	OPERATION,
 	PLAYER_ATTRIBUTE,
-	RACE,
+	TRIBE,
 	TARGET,
 	TARGET_PLAYER,
 	VALUE,

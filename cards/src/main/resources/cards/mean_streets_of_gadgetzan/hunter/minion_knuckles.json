@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "After this attacks a minion, it also hits the enemy Hero.",
 	"trigger": {
 		"eventTrigger": {

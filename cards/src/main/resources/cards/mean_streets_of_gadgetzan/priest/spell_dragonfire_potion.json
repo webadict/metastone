@@ -11,8 +11,8 @@
 		"target": "ALL_MINIONS",
 		"value": 5,
 		"filter": {
-			"class": "RaceFilter",
-			"race": "DRAGON",
+			"class": "TribeFilter",
+			"tribe": "DRAGON",
 			"invert": true
 		}
 	},

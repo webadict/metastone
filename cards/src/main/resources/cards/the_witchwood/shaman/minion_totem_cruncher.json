@@ -1,0 +1,47 @@
+{
+	"name": "Totem Cruncher",
+	"baseManaCost": 4,
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"baseAttack": 2,
+	"baseHp": 3,
+	"rarity": "EPIC",
+	"tribe": "BEAST",
+	"description": "Taunt. Battlecry: Destroy your Totems. Gain +2/+2 for each destroyed.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "MetaSpell",
+			"spells": [
+				{
+					"class": "DestroySpell",
+					"target": "FRIENDLY_MINIONS",
+					"filter": {
+						"class": "TribeFilter",
+						"tribe": "TOTEM"
+					}
+				},
+				{
+					"class": "BuffSpell",
+					"target": "SELF",
+					"value": {
+						"class": "EntityCounter",
+						"target": "FRIENDLY_MINIONS",
+						"filter": {
+							"class": "TribeFilter",
+							"tribe": "TOTEM"
+						},
+						"multiplier": 2
+					}
+				}
+			]
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -24,8 +24,8 @@
 		"spell": {
 			"class": "ReceiveCardSpell",
 			"cardFilter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

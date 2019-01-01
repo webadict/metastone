@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "NEUTRAL",
 	"rarity": "LEGENDARY",
-	"race": "PIRATE",
+	"tribe": "PIRATE",
 	"description": "Battlecry: Give your weapon +1/+1.",
 	"battlecry": {
 		"spell": {

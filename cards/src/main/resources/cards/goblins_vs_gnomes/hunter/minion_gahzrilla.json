@@ -6,7 +6,7 @@
 	"baseHp": 9,
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
-	"race": "BEAST",
+	"tribe": "BEAST",
 	"description": "Whenever this minion takes damage, double its Attack.",
 	"trigger": {
 		"eventTrigger": {

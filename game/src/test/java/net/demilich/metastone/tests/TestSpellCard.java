@@ -1,11 +1,12 @@
 package net.demilich.metastone.tests;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.SpellCard;
 import net.demilich.metastone.game.cards.desc.SpellCardDesc;
 import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.entities.AttributeMap;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.TargetSelection;
 
@@ -19,7 +20,7 @@ public class TestSpellCard extends SpellCard {
 		desc.rarity = Rarity.FREE;
 		desc.type = CardType.SPELL;
 		desc.heroClass = NonHeroClass.NEUTRAL;
-		desc.attributes = new EnumMap<>(Attribute.class);
+		desc.attributes = new AttributeMap();
 		return desc;
 	}
 

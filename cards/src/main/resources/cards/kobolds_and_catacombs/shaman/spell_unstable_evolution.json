@@ -23,10 +23,11 @@
 				}
 			},
 			{
-				"class": "ReceiveCardAndDoSomethingSpell",
+				"class": "ReceiveCardSpell",
 				"card": "spell_unstable_evolution",
-				"spell": {
+				"subSpell": {
 					"class": "AddAttributeSpell",
+					"target": "SPELL_OUTPUT",
 					"attribute": "GHOSTLY"
 				}
 			}

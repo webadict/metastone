@@ -9,7 +9,23 @@
 	"description": "Battlecry: Summon a 1/1 copy of each of your other minions.",
 	"battlecry": {
 		"spell": {
-			"class": "custom.HeraldVolajzSpell"
+			"class": "SummonSpell",
+			"target": "OTHER_FRIENDLY_MINIONS",
+			"bardPositionRelative": true,
+			"spell": {
+				"class": "MetaSpell",
+				"target": "SPELL_OUTPUT",
+				"spells": [
+					{
+						"class": "SetAttackSpell",
+						"value": 1
+					},
+					{
+						"class": "SetHpSpell",
+						"value": 1
+					}
+				]
+			}
 		}
 	},
 	"attributes": {

@@ -1,0 +1,21 @@
+{
+	"name": "Ectomancy",
+	"baseManaCost": 6,
+	"type": "SPELL",
+	"heroClass": "WARLOCK",
+	"rarity": "EPIC",
+	"description": "Summon copies of all Demons you control.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "SummonSpell",
+		"target": "FRIENDLY_MINIONS",
+		"filter": {
+			"class": "TribeFilter",
+			"tribe": "DEMON"
+		},
+		"boardPositionRelative": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

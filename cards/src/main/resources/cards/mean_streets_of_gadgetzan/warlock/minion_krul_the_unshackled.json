@@ -12,12 +12,15 @@
 		"spell": {
 			"class": "PutRandomMinionOnBoardSpell",
 			"targetPlayer": "SELF",
-			"value": 7,
+			"value": {
+				"class": "GameValueProvider",
+				"gameValue": "MAX_MINION_COUNT"
+			},
 			"cardLocation": "HAND",
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
-				"race": "DEMON"
+				"tribe": "DEMON"
 			}
 		},
 		"condition": {

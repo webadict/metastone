@@ -20,8 +20,8 @@
 			"value": 1
 		},
 		"condition": {
-			"class": "RaceCondition",
-			"race": "BEAST"
+			"class": "TribeCondition",
+			"tribe": "BEAST"
 		}
 	},
 	"collectible": true,

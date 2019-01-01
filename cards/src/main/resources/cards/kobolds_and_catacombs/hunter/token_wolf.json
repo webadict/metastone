@@ -1,0 +1,14 @@
+{
+	"name": "Wolf",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "FREE",
+	"tribe": "BEAST",
+	"description": "",
+	"collectible": false,
+	"set": "KOBOLDS_AND_CATACOMBS",
+	"fileFormatVersion": 1
+}

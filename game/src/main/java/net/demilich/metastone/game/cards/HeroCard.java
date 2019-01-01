@@ -1,6 +1,6 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayHeroCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
@@ -31,7 +31,7 @@ public class HeroCard extends Card {
 				hero.setAttribute(gameTag, getAttribute(gameTag));
 			}
 		}
-		hero.setRace(desc.race);
+		hero.setTribe(desc.tribe);
 		return hero;
 	}
 

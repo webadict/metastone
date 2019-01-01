@@ -17,7 +17,7 @@ public enum CardDescType {
 	OPTIONS,
 	PASSIVE_TRIGGER,
 	RARITY,
-	RACE,
+	TRIBE,
 	SPELL,
 	TRIGGER,
 }

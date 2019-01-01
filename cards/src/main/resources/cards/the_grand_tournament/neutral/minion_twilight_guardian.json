@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "ANY",
 	"rarity": "EPIC",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, gain +1 Attack and Taunt.",
 	"battlecry": {
 		"spell": {
@@ -27,7 +27,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

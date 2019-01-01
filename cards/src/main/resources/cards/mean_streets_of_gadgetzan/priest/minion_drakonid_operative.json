@@ -6,7 +6,7 @@
 	"baseHp": 6,
 	"heroClass": "PRIEST",
 	"rarity": "RARE",
-	"race": "DRAGON",
+	"tribe": "DRAGON",
 	"description": "Battlecry: If you're holding a Dragon, Discover a card from your opponent's deck.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -25,7 +25,7 @@
 			"class": "HoldsCardCondition",
 			"cardFilter": {
 				"class": "CardFilter",
-				"race": "DRAGON"
+				"tribe": "DRAGON"
 			}
 		}
 	},

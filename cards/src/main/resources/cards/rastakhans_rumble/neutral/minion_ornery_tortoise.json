@@ -1,0 +1,25 @@
+{
+	"name": "Ornery Tortoise",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"baseAttack": 3,
+	"baseHp": 5,
+	"heroClass": "NEUTRAL",
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Battlecry: Deal 5 damage to your hero.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"value": 5,
+			"target": "FRIENDLY_HERO"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

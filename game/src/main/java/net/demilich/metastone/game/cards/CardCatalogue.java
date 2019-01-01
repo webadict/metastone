@@ -1,7 +1,7 @@
 package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.desc.CardDesc;
 import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
@@ -147,6 +147,9 @@ public class CardCatalogue {
 	}
 	
 	public static void loadLocalCards() throws IOException, URISyntaxException, CardParseException {
+        // Update Interfaced card items!
+        CardSetImplementation.initializeImplementations();
+        HeroClassImplementation.initializeImplementations();
 		// load cards from ~/metastone/cards on the file system
 		Collection<ResourceInputStream> inputStreams = ResourceLoader.loadJsonInputStreams(CARDS_FOLDER, false);
 		loadCards(inputStreams);

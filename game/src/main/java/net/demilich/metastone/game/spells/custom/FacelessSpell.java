@@ -2,7 +2,7 @@ package net.demilich.metastone.game.spells.custom;
 
 import java.util.Map;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;

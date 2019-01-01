@@ -16,7 +16,10 @@
 	"condition": {
 		"class": "MinionCountCondition",
 		"operation": "LESS",
-		"value": 7
+		"value": {
+			"class": "GameValueProvider",
+			"gameValue": "MAX_MINION_COUNT"
+		}
 	},
 	"collectible": false,
 	"set": "THE_GRAND_TOURNAMENT",

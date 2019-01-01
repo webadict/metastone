@@ -20,7 +20,7 @@
 					"class": "AttributeValueProvider",
 					"target": "TARGET",
 					"attribute": "ATTACK"
-				}			
+				}
 			}
 		]
 	},

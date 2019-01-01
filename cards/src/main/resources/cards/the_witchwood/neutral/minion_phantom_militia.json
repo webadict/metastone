@@ -1,0 +1,17 @@
+{
+	"name": "Phantom Militia",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"rarity": "RARE",
+	"description": "Echo. Taunt.",
+	"attributes": {
+		"ECHO": true,
+		"TAUNT": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

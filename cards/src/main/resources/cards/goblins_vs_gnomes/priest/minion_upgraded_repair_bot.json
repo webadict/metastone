@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "PRIEST",
 	"rarity": "RARE",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "Battlecry: Give a friendly Mech +4 Health",
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
@@ -14,8 +14,8 @@
 			"class": "BuffSpell",
 			"hpBonus": 4,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "MECH"
+				"class": "TribeFilter",
+				"tribe": "MECH"
 			}
 		}
 	},

@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameValue;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
@@ -14,8 +14,7 @@ import net.demilich.metastone.game.cards.Rarity;
 import net.demilich.metastone.game.cards.group.GroupDesc;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.cards.interfaced.HeroClass;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.TargetPlayer;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
@@ -69,8 +68,8 @@ public class ParseUtils {
 			return parseEntityReference(entry.getAsString());
 		case TARGET_PLAYER:
 			return Enum.valueOf(TargetPlayer.class, entry.getAsString());
-		case RACE:
-			return Enum.valueOf(Race.class, entry.getAsString());
+		case TRIBE:
+			return Enum.valueOf(Tribe.class, entry.getAsString());
 		case SPELL:
 			return spellParser.deserialize(entry, SpellDesc.class, null);
 		case SPELL_ARRAY: {
@@ -106,8 +105,16 @@ public class ParseUtils {
 			return Enum.valueOf(CardLocation.class, entry.getAsString());
 		case OPERATION:
 			return Enum.valueOf(Operation.class, entry.getAsString());
-		case CARD_TYPE:
-			return Enum.valueOf(CardType.class, entry.getAsString());
+        case CARD_TYPE:
+            return Enum.valueOf(CardType.class, entry.getAsString());
+        case CARD_TYPE_ARRAY: {
+            JsonArray jsonArray = entry.getAsJsonArray();
+            CardType[] array = new CardType[jsonArray.size()];
+            for (int i = 0; i < array.length; i++) {
+                array[i] = CardType.valueOf(jsonArray.get(i).getAsString());
+            }
+            return array;
+        }
 		case ENTITY_TYPE:
 			return Enum.valueOf(EntityType.class, entry.getAsString());
 		case ACTION_TYPE:
@@ -199,6 +206,10 @@ public class ParseUtils {
 			return EntityReference.ADJACENT_MINIONS;
 		case "opposite_minions":
 			return EntityReference.OPPOSITE_MINIONS;
+        case "friendly_graveyard":
+            return EntityReference.FRIENDLY_GRAVEYARD;
+        case "enemy_graveyard":
+            return EntityReference.ENEMY_GRAVEYARD;
 		case "friendly_hero":
 			return EntityReference.FRIENDLY_HERO;
 		case "friendly_weapon":

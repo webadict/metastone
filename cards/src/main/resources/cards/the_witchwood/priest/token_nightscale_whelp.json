@@ -1,0 +1,14 @@
+{
+	"name": "Nightscale Whelp",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "FREE",
+	"tribe": "DRAGON",
+	"description": "",
+	"collectible": false,
+	"set": "WITCHWOOD",
+	"fileFormatVersion": 1
+}

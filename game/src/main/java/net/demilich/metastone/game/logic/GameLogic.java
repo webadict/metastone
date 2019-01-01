@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.enchantment.Enchantment;
 import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
+import net.demilich.metastone.game.events.*;
 import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
 import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
 import net.demilich.metastone.game.utils.GameTagUtils;
@@ -13,7 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.Attribute;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -29,41 +30,9 @@ import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Permanent;
-import net.demilich.metastone.game.entities.minions.Race;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.entities.weapons.Weapon;
-import net.demilich.metastone.game.events.AfterPhysicalAttackEvent;
-import net.demilich.metastone.game.events.AfterSpellCastedEvent;
-import net.demilich.metastone.game.events.AfterSummonEvent;
-import net.demilich.metastone.game.events.ArmorGainedEvent;
-import net.demilich.metastone.game.events.BeforeSummonEvent;
-import net.demilich.metastone.game.events.BoardChangedEvent;
-import net.demilich.metastone.game.events.CardPlayedEvent;
-import net.demilich.metastone.game.events.DamageEvent;
-import net.demilich.metastone.game.events.DiscardEvent;
-import net.demilich.metastone.game.events.DrawCardEvent;
-import net.demilich.metastone.game.events.EnrageChangedEvent;
-import net.demilich.metastone.game.events.GameEvent;
-import net.demilich.metastone.game.events.GameStartEvent;
-import net.demilich.metastone.game.events.HealEvent;
-import net.demilich.metastone.game.events.HeroPowerUsedEvent;
-import net.demilich.metastone.game.events.JoustEvent;
-import net.demilich.metastone.game.events.KillEvent;
-import net.demilich.metastone.game.events.OverloadEvent;
-import net.demilich.metastone.game.events.PhysicalAttackEvent;
-import net.demilich.metastone.game.events.PreDamageEvent;
-import net.demilich.metastone.game.events.QuestPlayedEvent;
-import net.demilich.metastone.game.events.QuestSuccessfulEvent;
-import net.demilich.metastone.game.events.SecretPlayedEvent;
-import net.demilich.metastone.game.events.SecretRevealedEvent;
-import net.demilich.metastone.game.events.SilenceEvent;
-import net.demilich.metastone.game.events.SpellCastedEvent;
-import net.demilich.metastone.game.events.SummonEvent;
-import net.demilich.metastone.game.events.TargetAcquisitionEvent;
-import net.demilich.metastone.game.events.TurnEndEvent;
-import net.demilich.metastone.game.events.TurnStartEvent;
-import net.demilich.metastone.game.events.WeaponDestroyedEvent;
-import net.demilich.metastone.game.events.WeaponEquippedEvent;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -285,14 +254,14 @@ public class GameLogic implements Cloneable {
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (card.getCardType().isCardType(CardType.MINION)
-				&& card.getRace() == Race.MURLOC
+				&& card.getTribe() == Tribe.MURLOC
 				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (player.getMana() < manaCost && manaCost != 0
 				&& !((card.getCardType().isCardType(CardType.SPELL)
 				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH))
-				|| (card.getRace() == Race.MURLOC
+				|| (card.getTribe() == Tribe.MURLOC
 				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)))) {
 			return false;
 		}
@@ -565,6 +534,7 @@ public class GameLogic implements Cloneable {
 		damage = context.getDamageStack().pop();
 		if (damage > 0) {
 			source.removeAttribute(Attribute.STEALTH);
+            source.removeAttribute(Attribute.STEALTH_FOR_ONE_TURN);
 		}
 		switch (target.getEntityType()) {
 		case MINION:
@@ -589,6 +559,8 @@ public class GameLogic implements Cloneable {
 			if (source != null && hasEntityAttribute(source, Attribute.LIFESTEAL)) {
 				heal(player, context.getPlayer(source.getOwner()).getHero(), damageDealt, source);
             }
+
+            target.modifyAttribute(Attribute.DAMAGE_THIS_TURN, damageDealt);
 		}
 
 		return damageDealt;
@@ -694,7 +666,6 @@ public class GameLogic implements Cloneable {
 		if (owner.getHero().getWeapon() != null && owner.getHero().getWeapon().getId() == weapon.getId()) {
 			owner.getHero().setWeapon(null);
 		}
-		weapon.onUnequip(context, owner);
 		context.fireGameEvent(new WeaponDestroyedEvent(context, weapon));
 	}
 
@@ -751,36 +722,61 @@ public class GameLogic implements Cloneable {
 	    card.clone();
     }
 
-	public void endTurn(int playerId) {
-		Player player = context.getPlayer(playerId);
+	public void endTurnForEntity(Entity entity) {
+        entity.removeAttribute(Attribute.DAMAGE_THIS_TURN);
+        entity.removeAttribute(Attribute.EXTRA_ATTACKS);
+        entity.removeAttribute(Attribute.HERO_POWER_USAGES);
+        entity.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
+    }
 
-		Hero hero = player.getHero();
-		hero.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-		hero.removeAttribute(Attribute.HERO_POWER_USAGES);
-		handleFrozen(hero);
-		for (Summon summon : player.getSummons()) {
-			summon.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
-			handleFrozen(summon);
-		}
-		player.removeAttribute(Attribute.COMBO);
-		hero.activateWeapon(false);
-		log("{} ends his turn.", player.getName());
-		context.fireGameEvent(new TurnEndEvent(context, playerId));
-		for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
-			CardCostModifier cardCostModifier = iterator.next();
-			if (cardCostModifier.isExpired()) {
-				iterator.remove();
-			}
-		}
-		for (Iterator<Enchantment> iterator = context.getEnchantments().iterator(); iterator.hasNext();) {
-			Enchantment enchantment = iterator.next();
-			if (enchantment.isExpired()) {
-				iterator.remove();
-			}
-		}
-		checkForDeadEntities();
-		removeGhosts(playerId);
-	}
+    public int endTurn(int playerId) {
+        for (Player player : context.getPlayers()) {
+            player.removeAttribute(Attribute.COMBO);
+
+            Hero hero = player.getHero();
+            endTurnForEntity(hero);
+            if (context.getActivePlayer() == player) {
+                handleFrozen(hero);
+                hero.activateWeapon(false);
+
+                log("{} ends their turn.", player.getName());
+            }
+
+            for (Summon summon : player.getSummons()) {
+                endTurnForEntity(summon);
+                if (context.getActivePlayer() == player) {
+                    handleFrozen(summon);
+                }
+            }
+        }
+
+        context.fireGameEvent(new TurnEndEvent(context, playerId));
+        for (Iterator<CardCostModifier> iterator = context.getCardCostModifiers().iterator(); iterator.hasNext();) {
+            CardCostModifier cardCostModifier = iterator.next();
+            if (cardCostModifier.isExpired()) {
+                iterator.remove();
+            }
+        }
+        for (Iterator<Enchantment> iterator = context.getEnchantments().iterator(); iterator.hasNext();) {
+            Enchantment enchantment = iterator.next();
+            if (enchantment.isExpired()) {
+                iterator.remove();
+            }
+        }
+        checkForDeadEntities();
+        removeGhosts(playerId);
+
+        Player currentPlayer = context.getPlayer(playerId);
+
+        if (currentPlayer.hasAttribute(Attribute.EXTRA_TURNS)
+                && !currentPlayer.hasAttribute(Attribute.FORCE_END_TURN)) {
+            currentPlayer.modifyAttribute(Attribute.EXTRA_TURNS, -1);
+            return playerId;
+        }
+
+        currentPlayer.removeAttribute(Attribute.FORCE_END_TURN);
+        return context.getOpponent(context.getPlayer(playerId)).getId();
+    }
 
 	public void equipWeapon(int playerId, Weapon weapon) {
 		equipWeapon(playerId, weapon, false);
@@ -810,7 +806,6 @@ public class GameLogic implements Cloneable {
 		}
 		
 		player.getStatistics().equipWeapon(weapon);
-		weapon.onEquip(context, player);
 		weapon.setActive(context.getActivePlayerId() == playerId);
 		if (weapon.hasSpellTrigger()) {
 			for (SpellTrigger spellTrigger : weapon.getSpellTriggers()) {
@@ -854,6 +849,7 @@ public class GameLogic implements Cloneable {
 		}
 
 		removeAttribute(attacker, Attribute.STEALTH);
+        removeAttribute(attacker, Attribute.STEALTH_FOR_ONE_TURN);
 
 		int attackerDamage = getEntityAttack(attacker);
 		int defenderDamage = getEntityAttack(target);
@@ -1339,34 +1335,38 @@ public class GameLogic implements Cloneable {
 		return getEntityMaxHp(actor) > actor.getHp();
 	}
 
-	public JoustEvent joust(Player player) {
-		Card ownCard = player.getDeck().getRandomOfType(CardType.MINION);
-		Card opponentCard = null;
-		boolean won = false;
-		// no minions left in deck - automatically loose joust
-		if (ownCard == null) {
-			won = false;
-			log("Jousting LOST - no minion card left");
-		} else {
-			Player opponent = context.getOpponent(player);
-			opponentCard = opponent.getDeck().getRandomOfType(CardType.MINION);
-			// opponent has no minions left in deck - automatically win joust
-			if (opponentCard == null) {
-				won = true;
-				log("Jousting WON - opponent has no minion card left");
-			} else {
-				// both players have minion cards left, the initiator needs to
-				// have the one with
-				// higher mana cost to win the joust
-				won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
+    public JoustEvent joust(Player player) {
+        return joust(player, CardType.MINION, true);
+    }
 
-				log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
-			}
-		}
-		JoustEvent joustEvent = new JoustEvent(context, player.getId(), won, ownCard, opponentCard);
-		context.fireGameEvent(joustEvent);
-		return joustEvent;
-	}
+    public JoustEvent joust(Player player, CardType cardType, boolean bothPlayers) {
+        Card ownCard = player.getDeck().getRandomOfType(cardType);
+        Card opponentCard = null;
+        boolean won = false;
+        // no minions left in deck - automatically loose joust
+        if (ownCard == null) {
+            won = false;
+            log("Jousting LOST - no card of type {} left", cardType.toString());
+        } else if (bothPlayers) {
+            Player opponent = context.getOpponent(player);
+            opponentCard = opponent.getDeck().getRandomOfType(cardType);
+            // opponent has no minions left in deck - automatically win joust
+            if (opponentCard == null) {
+                won = true;
+                log("Jousting WON - opponent has no card of type {} left", cardType.toString());
+            } else {
+                // both players have minion cards left, the initiator needs to
+                // have the one with
+                // higher mana cost to win the joust
+                won = ownCard.getBaseManaCost() > opponentCard.getBaseManaCost();
+
+                log("Jousting {} - {} vs. {}", won ? "WON" : "LOST", ownCard, opponentCard);
+            }
+        }
+        JoustEvent joustEvent = new JoustEvent(context, player.getId(), won, ownCard, opponentCard);
+        context.fireGameEvent(joustEvent);
+        return joustEvent;
+    }
 
 	private void log(String message) {
 		logToDebugHistory(message);
@@ -1588,7 +1588,7 @@ public class GameLogic implements Cloneable {
 				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
-		} else if (card.getRace() == Race.MURLOC
+		} else if (card.getTribe() == Tribe.MURLOC
 				&& hasEntityAttribute(player.getHero(), Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
@@ -2006,7 +2006,7 @@ public class GameLogic implements Cloneable {
 		immuneToSilence.add(Attribute.AURA_ATTACK_BONUS);
 		immuneToSilence.add(Attribute.AURA_HP_BONUS);
 		immuneToSilence.add(Attribute.AURA_UNTARGETABLE_BY_SPELLS);
-		immuneToSilence.add(Attribute.RACE);
+		immuneToSilence.add(Attribute.TRIBE);
 		immuneToSilence.add(Attribute.NUMBER_OF_ATTACKS);
 
 		List<Attribute> tags = new ArrayList<Attribute>();
@@ -2081,7 +2081,7 @@ public class GameLogic implements Cloneable {
 				&& (index >= 0 &&  index < summonList.size())) {
 			Summon rightSummon = summonList.get(index);
 			if (rightSummon instanceof Minion
-					&& summon.getRace() == rightSummon.getRace()) {
+					&& summon.getTribe() == rightSummon.getTribe()) {
 				mergeSummons(rightSummon, summon);
 				return false;
 			}
@@ -2183,7 +2183,7 @@ public class GameLogic implements Cloneable {
 				&& (index >= 0 &&  index < summonList.size())) {
 			Summon rightSummon = summonList.get(index);
 			if (rightSummon instanceof Minion
-					&& summon.getRace() == rightSummon.getRace()) {
+					&& summon.getTribe() == rightSummon.getTribe()) {
 				mergeSummons(rightSummon, summon);
 				return null;
 			}

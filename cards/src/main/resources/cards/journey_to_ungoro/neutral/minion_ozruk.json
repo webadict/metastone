@@ -6,7 +6,7 @@
 	"baseHp": 5,
 	"heroClass": "ANY",
 	"rarity": "COMMON",
-	"race": "ELEMENTAL",
+	"tribe": "ELEMENTAL",
 	"description": "Taunt. Battlecry: Gain +5 Health for each Elemental you played last turn.",
 	"battlecry": {
 		"targetSelection": "NONE",
@@ -17,7 +17,7 @@
 				"class": "PlayedLastTurnValueProvider",
 				"filter": {
 					"class": "CardFilter",
-					"race": "ELEMENTAL"
+					"tribe": "ELEMENTAL"
 				},
 				"multiplier": 5
 			}

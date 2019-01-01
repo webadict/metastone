@@ -8,24 +8,24 @@
 	"rarity": "RARE",
 	"description": "Taunt. Battlecry: Discover a Taunt minion.",
 	"battlecry": {
-	"targetSelection": "NONE",
-	"spell": {
-		"class": "DiscoverRandomCardSpell",
+		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReceiveCardSpell",
-			"targetPlayer": "SELF"
-		},
-		"cardFilter": {
-			"class": "CardFilter",
-			"cardType": "MINION",
-			"attribute": "TAUNT",
-			"operation": "HAS"
+			"class": "DiscoverRandomCardSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"cardType": "MINION",
+				"attribute": "TAUNT",
+				"operation": "HAS"
 			}
 		}
 	},
 	"attributes": {
-	"BATTLECRY": true,
-	"TAUNT": true
+		"BATTLECRY": true,
+		"TAUNT": true
 	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",

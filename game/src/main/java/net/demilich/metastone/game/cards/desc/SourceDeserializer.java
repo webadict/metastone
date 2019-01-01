@@ -34,7 +34,7 @@ public class SourceDeserializer implements JsonDeserializer<SourceDesc> {
 //		parseArgument(SourceArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
 		parseArgument(SourceArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 //		parseArgument(SourceArg.ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
-//		parseArgument(SourceArg.RACE, jsonData, arguments, ParseValueType.RACE);
+//		parseArgument(SourceArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
 //		parseArgument(SourceArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
 		parseArgument(SourceArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
 //		parseArgument(SourceArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);

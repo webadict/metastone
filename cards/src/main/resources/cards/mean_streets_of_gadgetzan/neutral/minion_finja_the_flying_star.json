@@ -6,7 +6,7 @@
 	"baseHp": 4,
 	"heroClass": "ANY",
 	"rarity": "LEGENDARY",
-	"race": "MURLOC",
+	"tribe": "MURLOC",
 	"description": "Stealth. Whenever this attacks and kills a minion, summon 2 Murlocs from your deck.",
 	"trigger": {
 		"eventTrigger": {
@@ -25,7 +25,7 @@
 			"cardFilter": {
 				"class": "CardFilter",
 				"cardType": "MINION",
-				"race": "MURLOC"
+				"tribe": "MURLOC"
 			}
 		}
 	},

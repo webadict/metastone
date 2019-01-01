@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "WARLOCK",
 	"rarity": "RARE",
-	"race": "DEMON",
+	"tribe": "DEMON",
 	"description": "Charge. Battlecry: Discard two random cards.",
 	"battlecry": {
 		"targetSelection": "NONE",

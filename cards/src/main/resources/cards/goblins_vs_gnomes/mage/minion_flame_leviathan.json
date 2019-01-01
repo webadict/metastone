@@ -6,7 +6,7 @@
 	"baseHp": 7,
 	"heroClass": "MAGE",
 	"rarity": "LEGENDARY",
-	"race": "MECH",
+	"tribe": "MECH",
 	"description": "When you draw this, deal 2 damage to all characters.",
 	"passiveTrigger": {
 		"eventTrigger": {

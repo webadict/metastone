@@ -1,0 +1,24 @@
+{
+	"name": "Spark Engine",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 1,
+	"rarity": "RARE",
+	"tribe": "MECH",
+	"description": "Battlecry: Add a 1/1 Spark with Rush to your hand.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"card": "token_spark"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

@@ -13,8 +13,8 @@
 			"class": "BuffSpell",
 			"value": 2,
 			"filter": {
-				"class": "RaceFilter",
-				"race": "BEAST"
+				"class": "TribeFilter",
+				"tribe": "BEAST"
 			}
 		}
 	},

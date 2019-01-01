@@ -1,0 +1,35 @@
+{
+	"name": "Akali, the Rhino",
+	"baseManaCost": 8,
+	"type": "MINION",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"heroClass": "WARRIOR",
+	"rarity": "LEGENDARY",
+	"description": "Rush. Overkill: Draw a Rush minion from your Deck. Give it +5/+5.",
+	"trigger": {
+		"eventTrigger": {
+			"class": "OverkillTrigger",
+			"hostTargetType": "IGNORE_OTHER_SOURCES"
+		},
+		"spell": {
+			"class": "DrawCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"attribute": "RUSH"
+			},
+			"subSpell": {
+				"class": "BuffSpell",
+				"target": "SPELL_OUTPUT",
+				"value": 5
+			}
+		}
+	},
+	"attributes": {
+		"OVERKILL": true,
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}

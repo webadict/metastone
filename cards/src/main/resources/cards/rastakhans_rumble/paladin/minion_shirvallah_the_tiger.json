@@ -1,0 +1,22 @@
+{
+	"name": "Shirvallah, the Tiger",
+	"baseManaCost": 25,
+	"type": "MINION",
+	"baseAttack": 7,
+	"baseHp": 5,
+	"heroClass": "PALADIN",
+	"rarity": "LEGENDARY",
+	"description": "Divine Shield, Rush, Lifesteal. Costs (1) less for each Mana you've spent on spells.",
+	"manaCostModifier": {
+		"class": "PlayerAttributeValueProvider",
+		"playerAttribute": "SPELLS_CAST"
+	},
+	"attributes": {
+		"DIVINE_SHIELD": true,
+		"LIFESTEAL": true,
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "RASTAKHANS_RUMBLE",
+	"fileFormatVersion": 1
+}
