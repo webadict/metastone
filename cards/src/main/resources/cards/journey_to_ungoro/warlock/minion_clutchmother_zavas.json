@@ -14,7 +14,7 @@
 			"target": "SELF"
 		},
 		"spell": {
-			"class": "ReturnTargetToHandSpell",
+			"class": "ReturnToHandSpell",
 			"target": "EVENT_TARGET",
 			"spell": {
 				"class": "BuffSpell",

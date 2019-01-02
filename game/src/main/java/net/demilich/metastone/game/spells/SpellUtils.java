@@ -1,6 +1,5 @@
 package net.demilich.metastone.game.spells;
 
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.actions.DiscoverAction;
@@ -9,10 +8,11 @@ import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.group.Group;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
-import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.entities.minions.Summon;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.filter.EntityFilter;
@@ -91,9 +91,7 @@ public class SpellUtils {
 		String cardName = (String) spell.get(SpellArg.CARD);
 		card = CardCatalogue.getCardById(cardName);
 		if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("PENDING_CARD")) {
-			card = (Card) context.getPendingCard();
-		} else if (spell.get(SpellArg.CARD).toString().toUpperCase().equals("EVENT_CARD")) {
-			card = (Card) context.getEventCard();
+			card = context.getPendingCard();
 		}
 		return card;
 	}
@@ -154,7 +152,7 @@ public class SpellUtils {
 		Card card = context.getCardById(groupCardId);
 		if (card instanceof GroupCard) {
 			GroupCard groupCard = (GroupCard) card;
-			return groupCard.getGroup().create();
+			return groupCard.getGroup();
 		}
 		return null;
 	}

@@ -7,7 +7,7 @@
 	"description": "Return a minion to its owner's hand.",
 	"targetSelection": "MINIONS",
 	"spell": {
-		"class": "ReturnMinionToHandSpell"
+		"class": "ReturnToHandSpell"
 	},
 	"collectible": false,
 	"set": "CLASSIC",

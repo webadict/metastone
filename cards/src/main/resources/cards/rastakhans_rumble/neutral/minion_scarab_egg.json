@@ -10,7 +10,7 @@
 	"deathrattle": {
 		"class": "SummonSpell",
 		"value": 3,
-		"card": "token_scarab"
+		"card": "token_scarab_rastakhan"
 	},
 	"attributes": {
 		"DEATHRATTLES": true

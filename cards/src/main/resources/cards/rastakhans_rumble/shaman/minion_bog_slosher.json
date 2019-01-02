@@ -11,7 +11,7 @@
 	"battlecry": {
 		"targetSelection": "FRIENDLY_MINIONS",
 		"spell": {
-			"class": "ReturnMinionToHandSpell",
+			"class": "ReturnToHandSpell",
 			"subSpell": {
 				"class": "BuffSpell",
 				"target": "SPELL_OUTPUT",

@@ -10,7 +10,7 @@
 	"battlecry": {
 		"targetSelection": "MINIONS",
 		"spell": {
-			"class": "ReturnMinionToHandSpell"
+			"class": "ReturnToHandSpell"
 		},
 		"condition": {
 			"class": "ComboCondition"

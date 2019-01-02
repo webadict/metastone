@@ -9,7 +9,7 @@
 	"spell": {
 		"class": "EitherOrSpell",
 		"spell1": {
-			"class": "RestoreSpell",
+			"class": "HealSpell",
 			"value": 5
 		},
 		"spell2": {

@@ -1,20 +1,12 @@
 package net.demilich.metastone.game;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
-import net.demilich.metastone.game.cards.enchantment.Enchantment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.cards.CardCatalogue;
 import net.demilich.metastone.game.cards.CardCollection;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
 import net.demilich.metastone.game.decks.DeckFormat;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.minions.Summon;
@@ -27,6 +19,13 @@ import net.demilich.metastone.game.spells.trigger.TriggerManager;
 import net.demilich.metastone.game.targeting.CardReference;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Stack;
 
 public class GameContext implements Cloneable, IDisposable {
 	public static final int PLAYER_1 = 0;
@@ -292,10 +291,6 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public HashMap<Environment, Object> getEnvironment() {
 		return environment;
-	}
-	
-	public Card getEventCard() {
-		return (Card) resolveSingleTarget((EntityReference) getEnvironment().get(Environment.EVENT_CARD));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -588,14 +583,6 @@ public class GameContext implements Cloneable, IDisposable {
 
 	public List<Entity> resolveTarget(Player player, Entity source, EntityReference targetKey) {
 		return targetLogic.resolveTargetKey(this, player, source, targetKey);
-	}
-	
-	public void setEventCard(Card eventCard) {
-		if (eventCard != null) {
-			getEnvironment().put(Environment.EVENT_CARD, eventCard.getReference());
-		} else {
-			getEnvironment().put(Environment.EVENT_CARD, null);
-		}
 	}
 
 	public void setIgnoreEvents(boolean ignoreEvents) {

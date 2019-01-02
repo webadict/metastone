@@ -7,13 +7,13 @@
 	"description": "Return a friendly minion to your hand. It costs (2) less.",
 	"targetSelection": "FRIENDLY_MINIONS",
 	"spell": {
-		"class": "ReturnMinionToHandSpell",
+		"class": "ReturnToHandSpell",
 		"spell": {
 			"class": "CardCostModifierSpell",
 			"target": "FRIENDLY_PLAYER",
 			"cardCostModifier": {
 				"class": "CardCostModifier",
-				"target": "EVENT_CARD",
+				"target": "SPELL_OUTPUT",
 				"operation": "SUBTRACT",
 				"value": 2
 			}

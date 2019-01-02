@@ -29,7 +29,12 @@ public class GameTagEntry {
 	}
 
 	public boolean getValueBool() {
-		return (int) value >= 1;
+		if (value instanceof Boolean) {
+			return (boolean) value;
+		} else if (value instanceof Integer) {
+			return (int) value >= 1;
+		}
+		return false;
 	}
 
 	public int getValueInt() {

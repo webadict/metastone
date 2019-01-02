@@ -49,6 +49,12 @@ public class AttributeMap extends BaseMap<Attribute, Object> implements Serializ
 		if (value == null) {
 			return null;
 		}
+		if (key == Attribute.HEAL_AMPLIFY_MULTIPLIER) {
+			return null;
+		}
+		if (value instanceof Double) {
+			value = (int) Math.round((double) value);
+		}
 		return super.put(key, value);
 	}
 

@@ -3,6 +3,7 @@ package net.demilich.metastone.game.events;
 public enum GameEventType {
 	ALL,
 
+	AFTER_CARD_PLAYED,
 	AFTER_PHYSICAL_ATTACK,
 	AFTER_SPELL_CASTED,
 	AFTER_SUMMON,

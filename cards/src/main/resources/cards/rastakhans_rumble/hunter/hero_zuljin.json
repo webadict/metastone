@@ -1,12 +1,12 @@
 {
 	"name": "Zul'jin",
 	"heroPower": "hero_power_big_red_button",
-	"baseManaCost": 7,
+	"baseManaCost": 10,
 	"type": "HERO",
 	"heroClass": "HUNTER",
 	"rarity": "LEGENDARY",
 	"description": "Battlecry: Cast all spells you've played this game (targets chosen randomly).",
-	"battlecry": {/
+	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
 			"class": "MetaSpell",

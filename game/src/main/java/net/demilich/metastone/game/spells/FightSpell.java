@@ -51,7 +51,7 @@ public class FightSpell extends Spell {
 		}
 
 		// Only attack sources that aren't destroyed
-		if (!target.isInPlay() || target.isDestroyed()) {
+		if (target.isDestroyed()) {
 			logger.warn("onCast {}: Target {} is not in play or is destroyed and thus cannot defend itself anymore", source, target);
 			return;
 		}
@@ -67,7 +67,7 @@ public class FightSpell extends Spell {
 				continue;
 			}
 
-			if (!resolvedSource.isInPlay() || resolvedSource.isDestroyed()) {
+			if (resolvedSource.isDestroyed()) {
 				logger.warn("onCast {}: Source {} is no longer in play or is destroyed and will not initiate a fight.", source, resolvedSource);
 				continue;
 			}
@@ -83,9 +83,10 @@ public class FightSpell extends Spell {
 			}
 
 			context.getLogic().fight(player, (Actor) resolvedSource, (Actor) target);
-			for (SpellDesc subSpell : desc.subSpells(0)) {
-				SpellUtils.castChildSpell(context, player, subSpell, source, target, resolvedSource);
-			}
+            SpellDesc spell = desc.getSubSpell();
+			if (spell != null) {
+                SpellUtils.castChildSpell(context, player, spell, source, target, resolvedSource);
+            }
 
 			if (resolvedSource instanceof Hero) {
 				// Deactivate the weapon when we're done.

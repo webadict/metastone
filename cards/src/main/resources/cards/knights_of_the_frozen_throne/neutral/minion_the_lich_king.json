@@ -9,7 +9,7 @@
 	"description": "Taunt. At the end of your turn, add a random Death Knight card to your hand.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "EndTurnTrigger",
+			"class": "TurnEndTrigger",
 			"targetPlayer": "SELF"
 		},
 		"spell": {

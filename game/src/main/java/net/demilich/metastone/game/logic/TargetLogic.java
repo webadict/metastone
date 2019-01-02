@@ -1,12 +1,5 @@
 package net.demilich.metastone.game.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -14,12 +7,18 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.cards.Card;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Summon;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.game.targeting.TargetSelection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TargetLogic {
 
@@ -273,8 +272,6 @@ public class TargetLogic {
 			return singleTargetAsList(context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.ATTACKER_REFERENCE)));
 		} else if (targetKey == EntityReference.PENDING_CARD) {
 			return singleTargetAsList((Entity) context.getPendingCard());
-		} else if (targetKey == EntityReference.EVENT_CARD) {
-			return singleTargetAsList((Entity) context.getEventCard());
 		} else if (targetKey == EntityReference.FRIENDLY_WEAPON) {
 			if (player.getHero().getWeapon() != null) {
 				return singleTargetAsList(player.getHero().getWeapon());

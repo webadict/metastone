@@ -10,9 +10,9 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReturnMinionToHandSpell",
+			"class": "ReturnToHandSpell",
 			"target": "ALL_MINIONS"
-		}/
+		}
 	},
 	"collectible": true,
 	"set": "RASTAKHANS_RUMBLE",

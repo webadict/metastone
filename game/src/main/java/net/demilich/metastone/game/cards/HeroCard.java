@@ -1,9 +1,9 @@
 package net.demilich.metastone.game.cards;
 
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.actions.PlayHeroCardAction;
 import net.demilich.metastone.game.cards.desc.HeroCardDesc;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.heroes.Hero;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class HeroCard extends Card {
 
-	private static final Set<Attribute> inheritedAttributes = new HashSet<Attribute>(
+	private static final Set<Attribute> inheritedAttributes = new HashSet<>(
 			Arrays.asList(new Attribute[] { Attribute.HP, Attribute.MAX_HP, Attribute.ARMOR }));
 
 	private final HeroCardDesc desc;

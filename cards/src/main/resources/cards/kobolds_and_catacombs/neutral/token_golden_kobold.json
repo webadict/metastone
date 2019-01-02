@@ -10,13 +10,13 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"class": "ReplaceCardsSpell",
-			"target": "FRIENDLY_HAND",
+			"class": "ReplaceCardLocationSpell",
+			"cardLocation": "HAND",
 			"cardFilter": {
 				"class": "CardFilter",
-				"rarity": "LEGENDARY",
-				"cardType": "MINION"
-			},
+				"cardType": "MINION",
+				"rarity": "LEGENDARY"
+			}
 		}
 	},
 	"attributes": {

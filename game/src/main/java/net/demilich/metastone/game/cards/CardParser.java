@@ -4,11 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.cards.desc.*;
 import net.demilich.metastone.game.cards.group.GroupDesc;
 import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.aura.AuraDesc;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
@@ -84,10 +84,10 @@ public class CardParser {
 			if (!jsonData.getAsJsonObject().has("spell")) {
 				throw new RuntimeException(resourceInputStream.fileName + " is missing 'spell' attribute!");
 			}
-			if (jsonData.getAsJsonObject().has("trigger")) {
-				return gson.fromJson(jsonData, SecretCardDesc.class);
-			} else if (jsonData.getAsJsonObject().has("quest")) {
+			if (jsonData.getAsJsonObject().has("quest")) {
 				return gson.fromJson(jsonData, QuestCardDesc.class);
+			} else if (jsonData.getAsJsonObject().has("secret")) {
+				return gson.fromJson(jsonData, SecretCardDesc.class);
 			} else {
 				if (!jsonData.getAsJsonObject().has("targetSelection")) {
 					throw new RuntimeException(resourceInputStream.fileName + " is missing 'targetSelection' attribute!");

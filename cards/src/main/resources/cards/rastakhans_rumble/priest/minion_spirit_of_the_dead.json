@@ -9,7 +9,7 @@
 	"description": "Stealth for 1 turn. After a friendly minion dies, shuffle a 1-Cost copy of it into your deck.",
 	"trigger": {
 		"eventTrigger": {
-			"class": "MinionDiedTrigger",
+			"class": "MinionDeathTrigger",
 			"sourcePlayer": "SELF"
 		},
 		"spell": {

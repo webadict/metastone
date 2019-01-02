@@ -10,14 +10,12 @@
 	"battlecry": {
 		"targetSelection": "NONE",
 		"spell": {
-			"spell": {
-				"class": "SummonSpell",
-				"value": {
-					"class": "GameValueProvider",
-					"gameValue": "MAX_MINION_COUNT"
-				},
-				"target": "SELF"
-			}
+			"class": "SummonSpell",
+			"value": {
+				"class": "GameValueProvider",
+				"gameValue": "MAX_MINION_COUNT"
+			},
+			"target": "SELF"
 		}
 	},
 	"attributes": {

@@ -10,7 +10,7 @@
 		"class": "AddDeathrattleSpell",
 		"target": "FRIENDLY_MINIONS",
 		"spell": {
-			"class": "ReturnMinionToHandSpell",
+			"class": "ReturnToHandSpell",
 			"target": "SELF"
 		}
 	},

@@ -3,16 +3,17 @@ package net.demilich.metastone.game.cards.desc;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameValue;
 import net.demilich.metastone.game.PlayerAttribute;
 import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.cards.CardDescType;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.desc.multiplier.MultiplierDesc;
+import net.demilich.metastone.game.cards.desc.multiplier.MultiplierDeserializer;
 import net.demilich.metastone.game.cards.group.GroupDesc;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.spells.TargetPlayer;
@@ -36,14 +37,15 @@ import net.demilich.metastone.game.targeting.TargetType;
 
 public class ParseUtils {
 
-	private static SpellDeserializer spellParser = new SpellDeserializer();
-	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
-	private static FilterDeserializer filterParser = new FilterDeserializer();
-	private static SourceDeserializer sourceParser = new SourceDeserializer();
+	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
 	private static ConditionDeserializer conditionParser = new ConditionDeserializer();
 	private static EventTriggerDeserializer triggerParser = new EventTriggerDeserializer();
-	private static CardCostModifierDeserializer manaModifierParser = new CardCostModifierDeserializer();
+	private static FilterDeserializer filterParser = new FilterDeserializer();
 	private static GroupDeserializer groupDeserializer = new GroupDeserializer();
+	private static MultiplierDeserializer multiplierParser = new MultiplierDeserializer();
+	private static SourceDeserializer sourceParser = new SourceDeserializer();
+	private static SpellDeserializer spellParser = new SpellDeserializer();
+	private static ValueProviderDeserializer valueProviderParser = new ValueProviderDeserializer();
 
 	public static Object parse(String argName, JsonObject jsonData, ParseValueType valueType) {
 		JsonElement entry = jsonData.get(argName);
@@ -175,6 +177,9 @@ public class ParseUtils {
 			return triggerDesc;
 		case EVENT_TRIGGER:
 			return triggerParser.deserialize(entry, EventTriggerDesc.class, null);
+		case MULTIPLIER:
+			MultiplierDesc multiplierDesc = multiplierParser.deserialize(entry, MultiplierDeserializer.class, null);
+			return multiplierDesc.create();
 		case CARD_COST_MODIFIER:
 			return manaModifierParser.deserialize(entry, CardCostModifierDesc.class, null);
 		default:
@@ -230,8 +235,6 @@ public class ParseUtils {
 			return EntityReference.SPELL_TARGET;
 		case "pending_card":
 			return EntityReference.PENDING_CARD;
-		case "event_card":
-			return EntityReference.EVENT_CARD;
 		case "self":
 			return EntityReference.SELF;
 		case "attacker":

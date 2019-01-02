@@ -2,6 +2,7 @@ package net.demilich.metastone.game.cards;
 
 import net.demilich.metastone.game.actions.PlayCardAction;
 import net.demilich.metastone.game.cards.desc.GroupCardDesc;
+import net.demilich.metastone.game.cards.group.Group;
 import net.demilich.metastone.game.cards.group.GroupDesc;
 
 public class GroupCard extends Card {
@@ -19,8 +20,8 @@ public class GroupCard extends Card {
 		return clone;
 	}
 
-	public GroupDesc getGroup() {
-		return group;
+	public Group getGroup() {
+		return group.create();
 	}
 
 	public void setGroup(GroupDesc group) {

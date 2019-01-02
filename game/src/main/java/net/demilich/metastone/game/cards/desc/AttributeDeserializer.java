@@ -1,16 +1,11 @@
 package net.demilich.metastone.game.cards.desc;
 
+import com.google.gson.*;
+import net.demilich.metastone.game.entities.Attribute;
+
 import java.lang.reflect.Type;
 import java.util.EnumMap;
 import java.util.Map;
-
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
-import net.demilich.metastone.game.entities.Attribute;
 
 public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Object>> {
 
@@ -37,6 +32,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.ECHO, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.ENRAGABLE, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.GHOSTLY, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.HEAL_AMPLIFY, jsonData, map, ParseValueType.MULTIPLIER);
 		parseAttribute(Attribute.HEAL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.HERO_POWER_CAN_TARGET_MINIONS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.HERO_POWER_DAMAGE, jsonData, map, ParseValueType.INTEGER);
@@ -50,6 +46,7 @@ public class AttributeDeserializer implements JsonDeserializer<Map<Attribute, Ob
 		parseAttribute(Attribute.OVERLOAD, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.POISONOUS, jsonData, map, ParseValueType.BOOLEAN);
 		parseAttribute(Attribute.RUSH, jsonData, map, ParseValueType.BOOLEAN);
+		parseAttribute(Attribute.SPELL_DAMAGE_AMPLIFY, jsonData, map, ParseValueType.MULTIPLIER);
 		parseAttribute(Attribute.SPELL_AMPLIFY_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE, jsonData, map, ParseValueType.INTEGER);
 		parseAttribute(Attribute.SPELL_DAMAGE_MULTIPLIER, jsonData, map, ParseValueType.INTEGER);

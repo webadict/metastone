@@ -1,17 +1,12 @@
 package net.demilich.metastone.game.cards.desc;
 
-import java.lang.reflect.Type;
-import java.util.Map;
-
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
+import com.google.gson.*;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProvider;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderArg;
 import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
+
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class ValueProviderDeserializer implements JsonDeserializer<ValueProviderDesc> {
 
@@ -47,7 +42,7 @@ public class ValueProviderDeserializer implements JsonDeserializer<ValueProvider
 		parseArgument(ValueProviderArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
 		parseArgument(ValueProviderArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(ValueProviderArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ValueProviderArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ValueProviderArg.VALUE_1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ValueProviderArg.VALUE_2, jsonData, arguments, ParseValueType.VALUE);
 

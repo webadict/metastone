@@ -10,6 +10,7 @@
 			"value": 2
 		}
 	},
+	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1
 }

@@ -7,6 +7,7 @@
 		"attribute": "HP",
 		"value": 3
 	},
+	"collectible": false,
 	"set": "JOURNEY_TO_UNGORO",
 	"fileFormatVersion": 1
 }

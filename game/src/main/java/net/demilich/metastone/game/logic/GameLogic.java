@@ -1,20 +1,6 @@
 package net.demilich.metastone.game.logic;
 
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-
-import net.demilich.metastone.game.cards.*;
-import net.demilich.metastone.game.cards.enchantment.Enchantment;
-import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
-import net.demilich.metastone.game.events.*;
-import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
-import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
-import net.demilich.metastone.game.utils.GameTagUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.BuildConfig;
-import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.Environment;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -22,17 +8,22 @@ import net.demilich.metastone.game.actions.ActionType;
 import net.demilich.metastone.game.actions.BattlecryAction;
 import net.demilich.metastone.game.actions.GameAction;
 import net.demilich.metastone.game.actions.PlaySpellCardAction;
+import net.demilich.metastone.game.cards.*;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
+import net.demilich.metastone.game.cards.enchantment.Enchantment;
+import net.demilich.metastone.game.cards.interfaced.HeroClass;
+import net.demilich.metastone.game.cards.interfaced.NonHeroClass;
 import net.demilich.metastone.game.entities.Actor;
+import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.entities.EntityType;
 import net.demilich.metastone.game.entities.heroes.Hero;
-import net.demilich.metastone.game.cards.interfaced.HeroClass;
 import net.demilich.metastone.game.entities.minions.Minion;
 import net.demilich.metastone.game.entities.minions.Permanent;
-import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.entities.minions.Summon;
+import net.demilich.metastone.game.entities.minions.Tribe;
 import net.demilich.metastone.game.entities.weapons.Weapon;
+import net.demilich.metastone.game.events.*;
 import net.demilich.metastone.game.heroes.powers.HeroPower;
 import net.demilich.metastone.game.spells.Spell;
 import net.demilich.metastone.game.spells.SpellUtils;
@@ -40,17 +31,21 @@ import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.spells.desc.SpellArg;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.spells.desc.SpellFactory;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentArg;
+import net.demilich.metastone.game.spells.desc.enchantment.EnchantmentDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
 import net.demilich.metastone.game.spells.trigger.IGameEventListener;
 import net.demilich.metastone.game.spells.trigger.SpellTrigger;
 import net.demilich.metastone.game.spells.trigger.types.Quest;
 import net.demilich.metastone.game.spells.trigger.types.Secret;
-import net.demilich.metastone.game.targeting.CardLocation;
-import net.demilich.metastone.game.targeting.CardReference;
-import net.demilich.metastone.game.targeting.EntityReference;
-import net.demilich.metastone.game.targeting.IdFactory;
-import net.demilich.metastone.game.targeting.TargetSelection;
+import net.demilich.metastone.game.targeting.*;
+import net.demilich.metastone.game.utils.GameTagUtils;
 import net.demilich.metastone.utils.MathUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GameLogic implements Cloneable {
 
@@ -126,6 +121,8 @@ public class GameLogic implements Cloneable {
 
 		player.modifyAttribute(Attribute.COMBO, +1);
 		Card card = context.resolveCardReference(cardReference);
+
+		context.fireGameEvent(new AfterCardPlayedEvent(context, playerId, card));
 		
 		card.removeAttribute(Attribute.MANA_COST_MODIFIER);
 

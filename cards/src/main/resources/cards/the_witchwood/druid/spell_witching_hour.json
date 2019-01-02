@@ -5,6 +5,7 @@
 	"heroClass": "DRUID",
 	"rarity": "RARE",
 	"description": "Summon a random friendly Beast that died this game.",
+	"targetSelection": "NONE",
 	"spell": {
 		"class": "ResurrectSpell",
 		"cardFilter": {

@@ -8,14 +8,14 @@
 	"rarity": "LEGENDARY",
 	"description": "Double the damage and healing of your spells and Hero Power.",
 	"attributes": {
-		"HEAL_MULTIPLIER": {
+		"HEAL_AMPLIFY": {
 			"cardTypes": [
 				"HERO_POWER",
 				"SPELL"
 			],
 			"multiplier": 2
 		},
-		"DAMAGE_MULTIPLIER": {
+		"SPELL_DAMAGE_AMPLIFY": {
 			"cardTypes": [
 				"HERO_POWER",
 				"SPELL"

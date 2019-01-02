@@ -15,19 +15,12 @@
 		"spell": {
 			"class": "DrawCardSpell",
 			"cardFilter": {
-				"class": "AndFilter",
-				"filters": [
-					{
-						"class": "ManaCostFilter",
-						"value": 5,
-						"cardType": "SPELL",
-						"operation": "GREATER_OR_EQUAL"
-					},
-					{
-						"class": "CardFilter",
-						"cardType": "SPELL"
-					}
-				]
+				"class": "CardFilter",
+				"cardType": "SPELL",
+				"attribute": "BASE_MANA_COST",
+				"value": 5,
+				"cardType": "SPELL",
+				"operation": "GREATER_OR_EQUAL"
 			}
 		}
 	},

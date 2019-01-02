@@ -1,17 +1,12 @@
 package net.demilich.metastone.game.cards.desc;
 
-import java.lang.reflect.Type;
-import java.util.Map;
-
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
+import com.google.gson.*;
 import net.demilich.metastone.game.spells.desc.condition.Condition;
 import net.demilich.metastone.game.spells.desc.condition.ConditionArg;
 import net.demilich.metastone.game.spells.desc.condition.ConditionDesc;
+
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
 
@@ -39,11 +34,11 @@ public class ConditionDeserializer implements JsonDeserializer<ConditionDesc> {
         parseArgument(ConditionArg.CONDITION, jsonData, arguments, ParseValueType.CONDITION);
         parseArgument(ConditionArg.CONDITIONS, jsonData, arguments, ParseValueType.CONDITION_ARRAY);
 		parseArgument(ConditionArg.FILTER, jsonData, arguments, ParseValueType.ENTITY_FILTER);
-		parseArgument(ConditionArg.GROUP, jsonData, arguments, ParseValueType.GROUP);
+		parseArgument(ConditionArg.GROUP, jsonData, arguments, ParseValueType.STRING);
 		parseArgument(ConditionArg.INVERT, jsonData, arguments, ParseValueType.BOOLEAN);
 		parseArgument(ConditionArg.OPERATION, jsonData, arguments, ParseValueType.OPERATION);
 		parseArgument(ConditionArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
-		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(ConditionArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.VALUE1, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.VALUE2, jsonData, arguments, ParseValueType.VALUE);
 		parseArgument(ConditionArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
