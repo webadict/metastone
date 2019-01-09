@@ -8,8 +8,12 @@
 	"rarity": "EPIC",
 	"description": "Costs (1) less for each spell you've cast this game.",
 	"manaCostModifier": {
-		"class": "PlayerAttributeValueProvider",
-		"playerAttribute": "SPELLS_CAST"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "PlayerAttributeValueProvider",
+			"playerAttribute": "SPELLS_CAST"
+		}
 	},
 	"collectible": true,
 	"set": "ONE_NIGHT_IN_KARAZHAN",

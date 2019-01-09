@@ -13,11 +13,15 @@
 		"hpBonus": 2
 	},
 	"manaCostModifier": {
-		"class": "EntityCounter",
-		"target": "FRIENDLY_MINIONS",
-		"filter": {
-			"class": "TribeFilter",
-			"tribe": "MURLOC"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "EntityCounter",
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "TribeFilter",
+				"tribe": "MURLOC"
+			}
 		}
 	},
 	"collectible": true,

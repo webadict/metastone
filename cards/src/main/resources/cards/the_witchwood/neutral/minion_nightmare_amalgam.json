@@ -1,0 +1,14 @@
+{
+	"name": "Nightmare Amalgam",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"rarity": "EPIC",
+	"tribe": "ALL",
+	"description": "This is an Elemental, Mech, Demon, Murloc, Dragon, Beast, Pirate and Totem",
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

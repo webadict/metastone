@@ -3,6 +3,7 @@ package net.demilich.metastone.game.cards.costmodifier;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.demilich.metastone.game.Player;
 import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.cards.Card;
@@ -51,7 +52,7 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 			return false;
 		}
 
-		if (getRequiredTribe() != null && card.getTribe() != getRequiredTribe()) {
+		if (getRequiredTribe() != null && !card.isTribe(getRequiredTribe())) {
 			return false;
 		}
 
@@ -170,13 +171,13 @@ public class CardCostModifier extends CustomCloneable implements IGameEventListe
 		expired = true;
 	}
 
-	public int process(Card card, int currentManaCost) {
+	public int process(GameContext context, Player player, Card card, int currentManaCost) {
 		AlgebraicOperation operation = (AlgebraicOperation) desc.get(CardCostModifierArg.OPERATION);
-		int value = desc.getInt(CardCostModifierArg.VALUE);
+		int value = desc.getValue(CardCostModifierArg.VALUE, context, player, card, card, 0);
 		if (operation != null) {
 			return operation.performOperation(currentManaCost, value);
 		}
-		int modifiedManaCost = currentManaCost + desc.getInt(CardCostModifierArg.VALUE);
+		int modifiedManaCost = currentManaCost + desc.getValue(CardCostModifierArg.VALUE, context, player, card, card, 0);
 		return modifiedManaCost;
 	}
 

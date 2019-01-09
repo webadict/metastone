@@ -51,7 +51,7 @@ public class Multiplier extends CustomCloneable implements IGameEventListener {
 			return false;
 		}
 
-		if (getRequiredTribe() != null && card.getTribe() != getRequiredTribe()) {
+		if (getRequiredTribe() != null && card.isTribe(getRequiredTribe())) {
 			return false;
 		}
 

@@ -1,0 +1,28 @@
+{
+	"name": "Cutthroat Buccaneer",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"baseAttack": 2,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"tribe": "PIRATE",
+	"description": "Combo: Give your weapon +1 Attack.",
+	"battlecry": {
+		"condition": {
+			"class": "ComboCondition"
+		},
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "BuffSpell",
+			"target": "FRIENDLY_WEAPON",
+			"attackBonus": 1
+		}
+	},
+	"attributes": {
+		"COMBO": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

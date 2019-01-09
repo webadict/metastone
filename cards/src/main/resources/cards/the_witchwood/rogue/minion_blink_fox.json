@@ -1,0 +1,27 @@
+{
+	"name": "Blink Fox",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "ROGUE",
+	"baseAttack": 3,
+	"baseHp": 3,
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Battlecry: Add a random card to your hand (from your opponent's class).",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"heroClass": "OPPONENT"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

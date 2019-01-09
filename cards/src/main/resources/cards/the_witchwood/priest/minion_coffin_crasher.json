@@ -1,0 +1,26 @@
+{
+	"name": "Coffin Crasher",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "PRIEST",
+	"baseAttack": 6,
+	"baseHp": 5,
+	"rarity": "RARE",
+	"description": "Deathrattle: Summon a Deathrattle minion from your hand.",
+	"deathrattle": {
+		"class": "RecruitSpell",
+		"target": "FRIENDLY_HAND",
+		"filter": {
+			"class": "CardFilter",
+			"attribute": "DEATHRATTLES",
+			"cardType": "MINION"
+		},
+		"randomTarget": true
+	},
+	"attributes": {
+		"DEATHRATTLES": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

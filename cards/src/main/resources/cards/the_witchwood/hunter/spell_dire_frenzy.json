@@ -1,0 +1,36 @@
+{
+	"name": "Dire Frenzy",
+	"baseManaCost": 4,
+	"type": "SPELL",
+	"heroClass": "HUNTER",
+	"rarity": "COMMON",
+	"description": "Give a Beast +3/+3. Shuffle 3 copies into your deck with +3/+3.",
+	"targetSelection": "MINIONS",
+	"spell": {
+		"class": "MetaSpell",
+		"filter": {
+			"class": "TribeFilter",
+			"tribe": "BEAST"
+		},
+		"spells": [
+			{
+				"class": "BuffSpell",
+				"attackBonus": 3,
+				"hpBonus": 3
+			},
+			{
+				"class": "ShuffleToDeckSpell",
+				"value": 3,
+				"spell": {
+					"class": "BuffSpell",
+					"target": "SPELL_OUTPUT",
+					"attackBonus": 3,
+					"hpBonus": 3
+				}
+			}
+		]
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

@@ -7,18 +7,22 @@
 	"durability": 3,
 	"rarity": "RARE",
 	"description": "Costs (1) less for each card you've played from another class.",
+	"manaCostModifier": {
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "CardsPlayedValueProvider",
+			"filter": {
+				"class": "CardFilter",
+				"heroClasses": [
+					"SELF",
+					"NEUTRAL"
+				],
+				"invert": true
+			}
+		}
+	},
 	"collectible": true,
 	"set": "JOURNEY_TO_UNGORO",
-	"fileFormatVersion": 1,
-	"manaCostModifier": {
-		"class": "CardsPlayedValueProvider",
-		"filter": {
-			"class": "CardFilter",
-			"heroClasses": [
-				"SELF",
-				"NEUTRAL"
-			],
-			"invert": true
-		}
-	}
+	"fileFormatVersion": 1
 }

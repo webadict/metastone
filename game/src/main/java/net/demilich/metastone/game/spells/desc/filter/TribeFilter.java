@@ -14,7 +14,7 @@ public class TribeFilter extends EntityFilter {
 	@Override
 	protected boolean test(GameContext context, Player player, Entity entity) {
 		Tribe tribe = (Tribe) desc.get(FilterArg.TRIBE);
-		return entity.getTribe() == tribe;
+		return entity.isTribe(tribe);
 	}
 
 }

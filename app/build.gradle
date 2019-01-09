@@ -40,6 +40,10 @@ jfx {
     vendor = ''
 }
 
+run {
+	jvmArgs '-Dprism.cover=sw'
+}
+
 test {
 	// enable TestNG support (default is JUnit)
 	useTestNG()

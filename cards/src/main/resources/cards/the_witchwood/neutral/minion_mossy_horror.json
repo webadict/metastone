@@ -1,0 +1,29 @@
+{
+	"name": "Mossy Horror",
+	"baseManaCost": 6,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 2,
+	"baseHp": 7,
+	"rarity": "EPIC",
+	"description": "Battlecry: Destroy all other minions with 2 or less Attack.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DestroySpell",
+			"target": "ALL_OTHER_MINIONS",
+			"filter": {
+				"class": "AttributeFilter",
+				"value": 2,
+				"attribute": "ATTACK",
+				"operation": "LESS_OR_EQUAL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

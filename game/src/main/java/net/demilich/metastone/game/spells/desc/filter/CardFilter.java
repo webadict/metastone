@@ -50,7 +50,7 @@ public class CardFilter extends EntityFilter {
 			return false;
 		}
 		Tribe tribe = (Tribe) desc.get(FilterArg.TRIBE);
-		if (tribe != null && tribe != card.getTribe()) {
+		if (tribe != null && !card.isTribe(tribe)) {
 			return false;
 		}
 		

@@ -26,7 +26,7 @@ public class MinionDeathTrigger extends GameEventTrigger {
 		Minion minion = (Minion) killEvent.getVictim();
 
 		Tribe tribe = (Tribe) desc.get(EventTriggerArg.TRIBE);
-		if (tribe != null && minion.getTribe() != tribe) {
+		if (tribe != null && minion.isTribe(tribe)) {
 			return false;
 		}
 		

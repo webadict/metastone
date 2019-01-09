@@ -251,14 +251,14 @@ public class GameLogic implements Cloneable {
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (card.getCardType().isCardType(CardType.MINION)
-				&& card.getTribe() == Tribe.MURLOC
+				&& card.isTribe(Tribe.MURLOC)
 				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)
 				&& player.getHero().getEffectiveHp() < manaCost) {
 			return false;
 		} else if (player.getMana() < manaCost && manaCost != 0
 				&& !((card.getCardType().isCardType(CardType.SPELL)
 				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH))
-				|| (card.getTribe() == Tribe.MURLOC
+				|| (card.isTribe(Tribe.MURLOC)
 				&& hasEntityAttribute(player, Attribute.MURLOCS_COST_HEALTH)))) {
 			return false;
 		}
@@ -723,6 +723,7 @@ public class GameLogic implements Cloneable {
         entity.removeAttribute(Attribute.DAMAGE_THIS_TURN);
         entity.removeAttribute(Attribute.EXTRA_ATTACKS);
         entity.removeAttribute(Attribute.HERO_POWER_USAGES);
+        entity.removeAttribute(Attribute.SUMMONING_SICKNESS);
         entity.removeAttribute(Attribute.TEMPORARY_ATTACK_BONUS);
     }
 
@@ -1049,7 +1050,7 @@ public class GameLogic implements Cloneable {
 			if (!costModifier.appliesTo(card)) {
 				continue;
 			}
-			manaCost = costModifier.process(card, manaCost);
+			manaCost = costModifier.process(context, player, card, manaCost);
 			if (costModifier.getMinValue() > minValue) {
 				minValue = costModifier.getMinValue();
 			}
@@ -1585,7 +1586,7 @@ public class GameLogic implements Cloneable {
 				&& hasEntityAttribute(player, Attribute.SPELLS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
-		} else if (card.getTribe() == Tribe.MURLOC
+		} else if (card.isTribe(Tribe.MURLOC)
 				&& hasEntityAttribute(player.getHero(), Attribute.MURLOCS_COST_HEALTH)) {
 			context.getEnvironment().put(Environment.LAST_MANA_COST, 0);
 			damage(player, player.getHero(), modifiedManaCost, card, true);
@@ -2078,7 +2079,8 @@ public class GameLogic implements Cloneable {
 				&& (index >= 0 &&  index < summonList.size())) {
 			Summon rightSummon = summonList.get(index);
 			if (rightSummon instanceof Minion
-					&& summon.getTribe() == rightSummon.getTribe()) {
+					&& (summon.isTribe(rightSummon.getTribe())
+                    || rightSummon.isTribe(summon.getTribe()))) {
 				mergeSummons(rightSummon, summon);
 				return false;
 			}
@@ -2180,7 +2182,8 @@ public class GameLogic implements Cloneable {
 				&& (index >= 0 &&  index < summonList.size())) {
 			Summon rightSummon = summonList.get(index);
 			if (rightSummon instanceof Minion
-					&& summon.getTribe() == rightSummon.getTribe()) {
+					&& (summon.isTribe(rightSummon.getTribe())
+                    || rightSummon.isTribe(summon.getTribe()))) {
 				mergeSummons(rightSummon, summon);
 				return null;
 			}

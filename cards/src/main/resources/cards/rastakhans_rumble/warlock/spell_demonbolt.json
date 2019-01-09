@@ -10,8 +10,12 @@
 		"class": "DestroySpell"
 	},
 	"manaCostModifier": {
-		"class": "EntityCounter",
-		"target": "FRIENDLY_MINIONS"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "EntityCounter",
+			"target": "FRIENDLY_MINIONS"
+		}
 	},
 	"collectible": true,
 	"set": "RASTAKHANS_RUMBLE",

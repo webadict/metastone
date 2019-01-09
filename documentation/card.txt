@@ -38,8 +38,7 @@ This information is used on all card types.
 		"EPIC"
 		"LEGENDARY"
 "description": String. The card text that is displayed on the card.
-"manaCostModifier": Integer. The mana cost modifier that changes how much the
-	card costs to play.
+"manaCostModifier": CardCostModifierDesc. Changes the cost of the card.
 "collectible": Boolean. Whether the card is collectible or not.
 "set": CardSet Enum. Which card set the card belongs to. Currently, these are:
 		"CLASSIC"

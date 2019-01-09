@@ -31,17 +31,18 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
 			throw new JsonParseException("ManaModifier parser encountered an invalid class: " + cardCostModifierClassName);
 		}
 		Map<CardCostModifierArg, Object> arguments = CardCostModifierDesc.build(cardCostModifierClass);
+        parseArgument(CardCostModifierArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
+        parseArgument(CardCostModifierArg.CONDITION, jsonData, arguments, ParseValueType.CONDITION);
+        parseArgument(CardCostModifierArg.EXPIRATION_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
+        parseArgument(CardCostModifierArg.MIN_VALUE, jsonData, arguments, ParseValueType.INTEGER);
+        parseArgument(CardCostModifierArg.OPERATION, jsonData, arguments, ParseValueType.ALGEBRAIC_OPERATION);
+        parseArgument(CardCostModifierArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
+        parseArgument(CardCostModifierArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(CardCostModifierArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
 		parseArgument(CardCostModifierArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
+        parseArgument(CardCostModifierArg.TOGGLE_OFF_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
+        parseArgument(CardCostModifierArg.TOGGLE_ON_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
 		parseArgument(CardCostModifierArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(CardCostModifierArg.MIN_VALUE, jsonData, arguments, ParseValueType.INTEGER);
-		parseArgument(CardCostModifierArg.CARD_TYPE, jsonData, arguments, ParseValueType.CARD_TYPE);
-		parseArgument(CardCostModifierArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
-		parseArgument(CardCostModifierArg.EXPIRATION_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
-		parseArgument(CardCostModifierArg.TOGGLE_ON_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
-		parseArgument(CardCostModifierArg.TOGGLE_OFF_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
-		parseArgument(CardCostModifierArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
-		parseArgument(CardCostModifierArg.OPERATION, jsonData, arguments, ParseValueType.ALGEBRAIC_OPERATION);
 
 		return new CardCostModifierDesc(arguments);
 	}

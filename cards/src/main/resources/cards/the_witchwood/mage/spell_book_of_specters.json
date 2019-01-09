@@ -1,0 +1,28 @@
+{
+	"name": "Book of Specters",
+	"baseManaCost": 2,
+	"type": "SPELL",
+	"heroClass": "MAGE",
+	"rarity": "EPIC",
+	"description": "Draw 3 cards. Discard any spells drawn.",
+	"targetSelection": "NONE",
+	"spell": {
+		"class": "DrawCardSpell",
+		"value": 3,
+		"spell": {
+			"class": "ConditionalSpell",
+			"condition": {
+				"class": "CardPropertyCondition",
+				"target": "SPELL_OUTPUT",
+				"cardType": "SPELL"
+			},
+			"spell": {
+				"class": "DiscardSpell",
+				"target": "SPELL_OUTPUT"
+			}
+		}
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

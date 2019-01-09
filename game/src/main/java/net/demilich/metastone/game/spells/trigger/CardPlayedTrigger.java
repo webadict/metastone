@@ -24,7 +24,7 @@ public class CardPlayedTrigger extends GameEventTrigger {
 		}
 		
 		Tribe tribe = (Tribe) desc.get(EventTriggerArg.TRIBE);
-		if (tribe != null && cardPlayedEvent.getCard().getTribe() != tribe) {
+		if (tribe != null && cardPlayedEvent.getCard().isTribe(tribe)) {
 			return false;
 		}
 		

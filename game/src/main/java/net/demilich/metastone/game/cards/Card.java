@@ -1,5 +1,6 @@
 package net.demilich.metastone.game.cards;
 
+import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.Player;
@@ -29,7 +30,11 @@ public abstract class Card extends Entity {
 	private boolean collectible = true;
 	private CardLocation location;
 	private BattlecryDesc battlecry;
-	private ValueProvider manaCostModifier;
+
+	// New type of mana cost reducer
+    private CardCostModifier manaCostModifier;
+
+	//private ValueProvider manaCostModifier;
 	private final String cardId;
 
 	public Card(CardDesc desc) {
@@ -146,7 +151,7 @@ public abstract class Card extends Entity {
 	public int getManaCost(GameContext context, Player player) {
 		int actualManaCost = getBaseManaCost();
 		if (manaCostModifier != null) {
-			actualManaCost -= manaCostModifier.getValue(context, player, null, this);
+		    actualManaCost = manaCostModifier.process(context, player,this, actualManaCost);
 		}
 		return actualManaCost;
 	}

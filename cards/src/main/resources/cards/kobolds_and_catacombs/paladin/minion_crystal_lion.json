@@ -8,11 +8,15 @@
 	"rarity": "RARE",
 	"description": "Divine Shield. Costs (1) less for each Silver Hand Recruit you control.",
 	"manaCostModifier": {
-		"class": "EntityCounter",
-		"target": "FRIENDLY_MINIONS",
-		"filter": {
-			"class": "SpecificCardFilter",
-			"card": "token_silver_hand_recruit"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "EntityCounter",
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "SpecificCardFilter",
+				"card": "token_silver_hand_recruit"
+			}
 		}
 	},
 	"attributes": {

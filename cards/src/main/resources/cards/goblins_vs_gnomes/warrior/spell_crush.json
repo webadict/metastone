@@ -10,14 +10,18 @@
 		"class": "DestroySpell"
 	},
 	"manaCostModifier": {
-		"class": "ConditionalValueProvider",
-		"ifTrue": 4,
-		"ifFalse": 0,
-		"condition": {
-			"class": "HasEntityCondition",
-			"target": "FRIENDLY_MINIONS",
-			"filter": {
-				"class": "DamagedFilter"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "ConditionalValueProvider",
+			"ifTrue": 4,
+			"ifFalse": 0,
+			"condition": {
+				"class": "HasEntityCondition",
+				"target": "FRIENDLY_MINIONS",
+				"filter": {
+					"class": "DamagedFilter"
+				}
 			}
 		}
 	},

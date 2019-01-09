@@ -1,0 +1,17 @@
+{
+	"name": "Ghostly Charger",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "PALADIN",
+	"baseAttack": 3,
+	"baseHp": 4,
+	"rarity": "COMMON",
+	"description": "Divine Shield, Rush",
+	"attributes": {
+		"DIVINE_SHIELD": true,
+		"RUSH": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

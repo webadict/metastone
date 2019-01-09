@@ -9,7 +9,11 @@
 	"tribe": "DRAGON",
 	"description": "Costs (1) less for each minion that died this turn.",
 	"manaCostModifier": {
-		"class": "DeadMinionsThisTurn"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "DeadMinionsThisTurn"
+		}
 	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",

@@ -19,7 +19,7 @@ public class BeforeMinionSummonedTrigger extends GameEventTrigger {
 	protected boolean fire(GameEvent event, Entity host) {
 		BeforeSummonEvent summonEvent = (BeforeSummonEvent) event;
 		Tribe tribe = (Tribe) desc.get(EventTriggerArg.TRIBE);
-		if (tribe != null && summonEvent.getMinion().getTribe() != tribe) {
+		if (tribe != null && !summonEvent.getMinion().isTribe(tribe)) {
 			return false;
 		}
 

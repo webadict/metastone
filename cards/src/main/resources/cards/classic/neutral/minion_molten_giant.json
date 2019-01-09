@@ -8,17 +8,21 @@
 	"rarity": "EPIC",
 	"description": "Costs (1) less for each damage your hero has taken.",
 	"manaCostModifier": {
-		"class": "AlgebraicValueProvider",
+		"class": "CardCostModifier",
 		"operation": "SUBTRACT",
-		"value1": {
-			"class": "AttributeValueProvider",
-			"target": "FRIENDLY_HERO",
-			"attribute": "MAX_HP"
-		},
-		"value2": {
-			"class": "AttributeValueProvider",
-			"target": "FRIENDLY_HERO",
-			"attribute": "HP"
+		"value": {
+			"class": "AlgebraicValueProvider",
+			"operation": "SUBTRACT",
+			"value1": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "MAX_HP"
+			},
+			"value2": {
+				"class": "AttributeValueProvider",
+				"target": "FRIENDLY_HERO",
+				"attribute": "HP"
+			}
 		}
 	},
 	"collectible": true,

@@ -20,28 +20,28 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 		super(arguments);
 	}
 	
-	public CardCostModifierDesc addArg(CardCostModifierArg cardCostModififerArg, Object value) {
+	public CardCostModifierDesc addArg(CardCostModifierArg cardCostModifierArg, Object value) {
 		CardCostModifierDesc clone = clone();
-		clone.arguments.put(cardCostModififerArg, value);
+		clone.arguments.put(cardCostModifierArg, value);
 		return clone;
 	}
 	
-	public CardCostModifierDesc removeArg(CardCostModifierArg cardCostModififerArg) {
+	public CardCostModifierDesc removeArg(CardCostModifierArg cardCostModifierArg) {
 		CardCostModifierDesc clone = clone();
-		clone.arguments.remove(cardCostModififerArg);
+		clone.arguments.remove(cardCostModifierArg);
 		return clone;
 	}
 	
 	@Override
 	public CardCostModifierDesc clone() {
 		CardCostModifierDesc clone = new CardCostModifierDesc(build(getManaModifierClass()));
-		for (CardCostModifierArg cardCostModififerArg : arguments.keySet()) {
-			Object value = arguments.get(cardCostModififerArg);
+		for (CardCostModifierArg cardCostModifierArg : arguments.keySet()) {
+			Object value = arguments.get(cardCostModifierArg);
 			if (value instanceof CustomCloneable) {
 				CustomCloneable cloneable = (CustomCloneable) value;
-				clone.arguments.put(cardCostModififerArg, cloneable.clone());
+				clone.arguments.put(cardCostModifierArg, cloneable.clone());
 			} else {
-				clone.arguments.put(cardCostModififerArg, value);
+				clone.arguments.put(cardCostModifierArg, value);
 			}
 		}
 		return clone;
@@ -66,8 +66,8 @@ public class CardCostModifierDesc extends Desc<CardCostModifierArg> {
 	@Override
 	public String toString() {
 		String result = "[CardCostModifierDesc arguments= {\n";
-		for (CardCostModifierArg cardCostModififerArg : arguments.keySet()) {
-			result += "\t" + cardCostModififerArg + ": " + arguments.get(cardCostModififerArg) + "\n";
+		for (CardCostModifierArg cardCostModifierArg : arguments.keySet()) {
+			result += "\t" + cardCostModifierArg + ": " + arguments.get(cardCostModifierArg) + "\n";
 		}
 		result += "}";
 		return result;

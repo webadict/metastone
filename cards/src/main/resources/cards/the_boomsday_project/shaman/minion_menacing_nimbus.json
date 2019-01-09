@@ -1,0 +1,27 @@
+{
+	"name": "Menacing Nimbus",
+	"baseManaCost": 2,
+	"type": "MINION",
+	"heroClass": "SHAMAN",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "COMMON",
+	"tribe": "ELEMENTAL",
+	"description": "Battlecry: Add a random Elemental to your hand",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "ReceiveCardSpell",
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "ELEMENTAL"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

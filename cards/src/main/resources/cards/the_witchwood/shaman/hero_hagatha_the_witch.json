@@ -1,0 +1,24 @@
+{
+	"name": "Hagatha the Witch",
+	"heroPower": "hero_power_bewitch",
+	"baseManaCost": 8,
+	"type": "HERO",
+	"heroClass": "SHAMAN",
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Deal 3 damage to all minions.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DamageSpell",
+			"target": "ALL_MINIONS",
+			"value": 3
+		}
+	},
+	"attributes": {
+		"ARMOR": 5,
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

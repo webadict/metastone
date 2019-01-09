@@ -1,0 +1,25 @@
+{
+	"name": "Boommaster Flark",
+	"baseManaCost": 7,
+	"type": "MINION",
+	"heroClass": "HUNTER",
+	"baseAttack": 5,
+	"baseHp": 5,
+	"rarity": "LEGENDARY",
+	"description": "Battlecry: Summon 4 0/2 Goblin Bombs.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "SummonSpell",
+			"value": 4,
+			"card": "minion_goblin_bomb",
+			"boardPositionRelative": true
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "THE_BOOMSDAY_PROJECT",
+	"fileFormatVersion": 1
+}

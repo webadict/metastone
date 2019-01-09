@@ -1,0 +1,36 @@
+{
+	"name": "Druid of the Scythe",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "DRUID",
+	"baseAttack": 2,
+	"baseHp": 2,
+	"rarity": "COMMON",
+	"description": "Choose One - Transform into a 4/2 with Rush; or a 2/4 with Taunt.",
+	"chooseOneBattlecries": [
+		{
+			"spell": {
+				"class": "TransformMinionSpell",
+				"target": "SELF",
+				"card": "token_druid_of_the_scythe1"
+			}
+		},
+		{
+			"spell": {
+				"class": "TransformMinionSpell",
+				"target": "SELF",
+				"card": "token_druid_of_the_scythe2"
+			}
+		}
+	],
+	"chooseBothBattlecry": {
+		"spell": {
+			"class": "TransformMinionSpell",
+			"target": "SELF",
+			"card": "token_druid_of_the_scythe3"
+		}
+	},
+	"collectible": true,
+	"set": "THE_WITCHWOOD",
+	"fileFormatVersion": 1
+}

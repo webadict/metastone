@@ -9,9 +9,13 @@
 	"tribe": "MECH",
 	"description": "Costs (1) less Mana for each card in your opponent's hand.",
 	"manaCostModifier": {
-		"class": "PlayerAttributeValueProvider",
-		"targetPlayer": "OPPONENT",
-		"playerAttribute": "HAND_COUNT"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "PlayerAttributeValueProvider",
+			"targetPlayer": "OPPONENT",
+			"playerAttribute": "HAND_COUNT"
+		}
 	},
 	"collectible": true,
 	"set": "GOBLINS_VS_GNOMES",

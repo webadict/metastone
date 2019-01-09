@@ -9,11 +9,15 @@
 	"tribe": "PIRATE",
 	"description": "Charrrrrge. Costs (1) less for each friendly Pirate.",
 	"manaCostModifier": {
-		"class": "EntityCounter",
-		"target": "FRIENDLY_MINIONS",
-		"filter": {
-			"class": "TribeFilter",
-			"tribe": "PIRATE"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "EntityCounter",
+			"target": "FRIENDLY_MINIONS",
+			"filter": {
+				"class": "TribeFilter",
+				"tribe": "PIRATE"
+			}
 		}
 	},
 	"attributes": {

@@ -8,13 +8,17 @@
 	"rarity": "RARE",
 	"description": "Costs (2) less for each Secret you've played this game.",
 	"manaCostModifier": {
-		"class": "CardsPlayedValueProvider",
-		"filter": {
-			"class": "CardFilter",
-			"operation": "HAS",
-			"attribute": "SECRET"
-		},
-		"multiplier": 2
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "CardsPlayedValueProvider",
+			"filter": {
+				"class": "CardFilter",
+				"operation": "HAS",
+				"attribute": "SECRET"
+			},
+			"multiplier": 2
+		}
 	},
 	"collectible": true,
 	"set": "MEAN_STREETS_OF_GADGETZAN",

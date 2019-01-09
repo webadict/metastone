@@ -1,0 +1,31 @@
+{
+	"name": "Nesting Roc",
+	"baseManaCost": 5,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 4,
+	"baseHp": 7,
+	"rarity": "COMMON",
+	"tribe": "BEAST",
+	"description": "Battlecry: If you control at least 2 other minions, gain Taunt.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "AddAttributeSpell",
+			"target": "SELF",
+			"attribute": "TAUNT"
+		},
+		"condition": {
+			"class": "MinionCountCondition",
+			"value": 2,
+			"operation": "GREATER",
+			"targetPlayer": "SELF"
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

@@ -70,6 +70,10 @@ public abstract class Entity extends CustomCloneable {
 		return hasAttribute(Attribute.TRIBE) ? (Tribe) getAttribute(Attribute.TRIBE) : Tribe.NONE;
 	}
 
+    public boolean isTribe(Tribe tribe) {
+        return getTribe().isTribe(tribe);
+    }
+
 	public EntityReference getReference() {
 		return EntityReference.pointTo(this);
 	}

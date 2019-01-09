@@ -11,7 +11,11 @@
 		"value": 2
 	},
 	"manaCostModifier": {
-		"class": "DeadMinionsThisTurn"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "DeadMinionsThisTurn"
+		}
 	},
 	"collectible": true,
 	"set": "BLACKROCK_MOUNTAIN",

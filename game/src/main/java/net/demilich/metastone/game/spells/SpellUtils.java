@@ -238,16 +238,6 @@ public class SpellUtils {
 		}
 		return validTargets;
 	}
-
-	public static int hasHowManyOfTribe(Player player, Tribe tribe) {
-		int count = 0;
-		for (Summon summon : player.getSummons()) {
-			if (summon.getTribe() == tribe) {
-				count++;
-			}
-		}
-		return count;
-	}
 	
 	public static boolean highlanderDeck(Player player) {
 		List<String> cards = new ArrayList<String>();
@@ -263,15 +253,6 @@ public class SpellUtils {
 	public static boolean holdsCardOfType(Player player, CardType cardType) {
 		for (Card card : player.getHand()) {
 			if (card.getCardType().isCardType(cardType)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean holdsMinionOfTribe(Player player, Tribe tribe) {
-		for (Card card : player.getHand()) {
-			if (card.getTribe() == tribe) {
 				return true;
 			}
 		}

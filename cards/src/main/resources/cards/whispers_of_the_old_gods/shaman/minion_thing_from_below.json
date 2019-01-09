@@ -8,10 +8,14 @@
 	"rarity": "RARE",
 	"description": "Taunt. Costs (1) less for each Totem you've summoned this game.",
 	"manaCostModifier": {
-		"class": "MinionSummonValueProvider",
-		"filter": {
-			"class": "CardFilter",
-			"tribe": "TOTEM"
+		"class": "CardCostModifier",
+		"operation": "SUBTRACT",
+		"value": {
+			"class": "MinionSummonValueProvider",
+			"filter": {
+				"class": "CardFilter",
+				"tribe": "TOTEM"
+			}
 		}
 	},
 	"attributes": {

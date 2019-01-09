@@ -1,0 +1,39 @@
+{
+	"name": "Primalfin Lookout",
+	"baseManaCost": 3,
+	"type": "MINION",
+	"heroClass": "NEUTRAL",
+	"baseAttack": 3,
+	"baseHp": 2,
+	"rarity": "COMMON",
+	"tribe": "MURLOC",
+	"description": "Battlecry: If you control another Murloc, Discover a Murloc.",
+	"battlecry": {
+		"targetSelection": "NONE",
+		"spell": {
+			"class": "DiscoverSpell",
+			"spell": {
+				"class": "ReceiveCardSpell",
+				"targetPlayer": "SELF"
+			},
+			"cardFilter": {
+				"class": "CardFilter",
+				"tribe": "MURLOC",
+				"cardType": "MINION"
+			}
+		},
+		"condition": {
+			"class": "MinionOnBoardCondition",
+			"cardFilter": {
+				"class": "TribeFilter",
+				"tribe": "MURLOC"
+			}
+		}
+	},
+	"attributes": {
+		"BATTLECRY": true
+	},
+	"collectible": true,
+	"set": "JOURNEY_TO_UNGORO",
+	"fileFormatVersion": 1
+}

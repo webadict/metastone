@@ -14,7 +14,7 @@ public class TribeCondition extends Condition {
 	@Override
 	protected boolean isFulfilled(GameContext context, Player player, ConditionDesc desc, Entity source, Entity target) {
 		Tribe tribe = (Tribe) desc.get(ConditionArg.TRIBE);
-		return target.getTribe() == tribe;
+		return target.isTribe(tribe);
 	}
 
 }

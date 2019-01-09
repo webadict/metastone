@@ -1,14 +1,14 @@
 package net.demilich.metastone.game.cards.desc;
 
 import net.demilich.metastone.game.cards.Card;
-import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.CardType;
 import net.demilich.metastone.game.cards.Rarity;
+import net.demilich.metastone.game.cards.interfaced.CardSetImplementation;
 import net.demilich.metastone.game.cards.interfaced.HeroClassImplementation;
 import net.demilich.metastone.game.entities.Attribute;
 import net.demilich.metastone.game.entities.AttributeMap;
+import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
 import net.demilich.metastone.game.spells.desc.trigger.TriggerDesc;
-import net.demilich.metastone.game.spells.desc.valueprovider.ValueProviderDesc;
 
 public abstract class CardDesc {
 
@@ -24,7 +24,10 @@ public abstract class CardDesc {
 	public boolean collectible = true;
 	public AttributeMap attributes;
 	public int fileFormatVersion = 1;
-	public ValueProviderDesc manaCostModifier;
+
+	public CardCostModifierDesc manaCostModifier;
+
+	//public ValueProviderDesc manaCostModifier;
 	public TriggerDesc passiveTrigger;
 	public TriggerDesc deckTrigger;
 
