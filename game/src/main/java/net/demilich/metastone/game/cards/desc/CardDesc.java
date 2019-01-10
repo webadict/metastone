@@ -26,8 +26,6 @@ public abstract class CardDesc {
 	public int fileFormatVersion = 1;
 
 	public CardCostModifierDesc manaCostModifier;
-
-	//public ValueProviderDesc manaCostModifier;
 	public TriggerDesc passiveTrigger;
 	public TriggerDesc deckTrigger;
 

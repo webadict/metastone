@@ -2125,11 +2125,11 @@ public class GameLogic implements Cloneable {
 			if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
 				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
-				SummonEvent summonEvent = new SummonEvent(context, actor, source);
-				context.fireGameEvent(summonEvent);
+				DuringSummonEvent duringSummonEvent = new DuringSummonEvent(context, actor, source);
+				context.fireGameEvent(duringSummonEvent);
 			} else {
-				SummonEvent summonEvent = new SummonEvent(context, minion, source);
-				context.fireGameEvent(summonEvent);
+				DuringSummonEvent duringSummonEvent = new DuringSummonEvent(context, minion, source);
+				context.fireGameEvent(duringSummonEvent);
 			}
 
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);
@@ -2228,11 +2228,11 @@ public class GameLogic implements Cloneable {
 			if (context.getEnvironment().get(Environment.TARGET_OVERRIDE) != null) {
 				Actor actor = (Actor) context.resolveSingleTarget((EntityReference) context.getEnvironment().get(Environment.TARGET_OVERRIDE));
 				context.getEnvironment().remove(Environment.TARGET_OVERRIDE);
-				SummonEvent summonEvent = new SummonEvent(context, actor, source);
-				context.fireGameEvent(summonEvent);
+				DuringSummonEvent duringSummonEvent = new DuringSummonEvent(context, actor, source);
+				context.fireGameEvent(duringSummonEvent);
 			} else {
-				SummonEvent summonEvent = new SummonEvent(context, minion, source);
-				context.fireGameEvent(summonEvent);
+				DuringSummonEvent duringSummonEvent = new DuringSummonEvent(context, minion, source);
+				context.fireGameEvent(duringSummonEvent);
 			}
 
 			applyAttribute(minion, Attribute.SUMMONING_SICKNESS);

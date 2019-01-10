@@ -1,17 +1,12 @@
 package net.demilich.metastone.game.cards.desc;
 
-import java.lang.reflect.Type;
-import java.util.Map;
-
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-
+import com.google.gson.*;
 import net.demilich.metastone.game.cards.costmodifier.CardCostModifier;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierArg;
 import net.demilich.metastone.game.spells.desc.manamodifier.CardCostModifierDesc;
+
+import java.lang.reflect.Type;
+import java.util.Map;
 
 public class CardCostModifierDeserializer implements JsonDeserializer<CardCostModifierDesc> {
 
@@ -39,10 +34,10 @@ public class CardCostModifierDeserializer implements JsonDeserializer<CardCostMo
         parseArgument(CardCostModifierArg.REQUIRED_ATTRIBUTE, jsonData, arguments, ParseValueType.ATTRIBUTE);
         parseArgument(CardCostModifierArg.TARGET, jsonData, arguments, ParseValueType.TARGET_REFERENCE);
 		parseArgument(CardCostModifierArg.TARGET_PLAYER, jsonData, arguments, ParseValueType.TARGET_PLAYER);
-		parseArgument(CardCostModifierArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
         parseArgument(CardCostModifierArg.TOGGLE_OFF_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
         parseArgument(CardCostModifierArg.TOGGLE_ON_TRIGGER, jsonData, arguments, ParseValueType.EVENT_TRIGGER);
-		parseArgument(CardCostModifierArg.VALUE, jsonData, arguments, ParseValueType.INTEGER);
+		parseArgument(CardCostModifierArg.TRIBE, jsonData, arguments, ParseValueType.TRIBE);
+		parseArgument(CardCostModifierArg.VALUE, jsonData, arguments, ParseValueType.VALUE);
 
 		return new CardCostModifierDesc(arguments);
 	}
