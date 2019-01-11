@@ -44,7 +44,7 @@ public class EventTriggerDesc extends Desc<EventTriggerArg> {
 	}
 
 	public int getTriggerCount() {
-		return getInt(EventTriggerArg.VALUE);
+		return getInt(EventTriggerArg.COUNT);
 	}
 
 	public boolean hasCountByValue() {

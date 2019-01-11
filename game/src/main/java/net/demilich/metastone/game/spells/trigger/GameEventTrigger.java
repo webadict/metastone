@@ -95,18 +95,11 @@ public abstract class GameEventTrigger extends CustomCloneable {
     }
 
 	public void countDown() {
-		triggerCount--;
-		if (triggerCount < 0) {
-			triggerCount = 0;
-		}
-	}
-
-	public void countDown(int num) {
-		triggerCount -= num;
-		if (triggerCount < 0) {
-			triggerCount = 0;
-		}
-	}
+        triggerCount--;
+        if (triggerCount < 0) {
+            triggerCount = 0;
+        }
+    }
 
 	public abstract GameEventType interestedIn();
 
