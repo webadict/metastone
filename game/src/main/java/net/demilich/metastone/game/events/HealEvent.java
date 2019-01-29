@@ -3,7 +3,7 @@ package net.demilich.metastone.game.events;
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 
-public class HealEvent extends GameEvent {
+public class HealEvent extends GameEvent implements IHasValueEvent {
 
 	private final Entity target;
 	private final int healing;
@@ -32,4 +32,8 @@ public class HealEvent extends GameEvent {
 		return target;
 	}
 
+	@Override
+	public int getValue() {
+		return healing;
+	}
 }

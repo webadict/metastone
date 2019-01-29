@@ -1,16 +1,15 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.game.events.GameEvent;
 import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.spells.aura.Aura;
 import net.demilich.metastone.game.targeting.EntityReference;
 import net.demilich.metastone.utils.IDisposable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TriggerManager implements Cloneable, IDisposable {
 
@@ -72,7 +71,7 @@ public class TriggerManager implements Cloneable, IDisposable {
 
 		for (IGameEventListener trigger : eventTriggers) {
 			if (trigger.canFireCondition(event) && triggers.contains(trigger)) {
-				trigger.countDown();
+				trigger.countDown(event);
 				if (!trigger.hasCounter()) {
 					trigger.onGameEvent(event);
 				}

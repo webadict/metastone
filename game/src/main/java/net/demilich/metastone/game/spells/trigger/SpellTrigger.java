@@ -1,8 +1,5 @@
 package net.demilich.metastone.game.spells.trigger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import net.demilich.metastone.game.GameContext;
 import net.demilich.metastone.game.entities.Entity;
 import net.demilich.metastone.game.events.GameEvent;
@@ -10,6 +7,8 @@ import net.demilich.metastone.game.events.GameEventType;
 import net.demilich.metastone.game.logic.CustomCloneable;
 import net.demilich.metastone.game.spells.desc.SpellDesc;
 import net.demilich.metastone.game.targeting.EntityReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SpellTrigger extends CustomCloneable implements IGameEventListener {
 	private final static Logger logger = LoggerFactory.getLogger(SpellTrigger.class);
@@ -188,10 +187,10 @@ public class SpellTrigger extends CustomCloneable implements IGameEventListener 
 		return turnDelay > 0 ? true : false;
 	}
 	
-	public void countDown() {
-		primaryTrigger.countDown();
+	public void countDown(GameEvent event) {
+		primaryTrigger.countDown(event);
 		if (secondaryTrigger != null) {
-			secondaryTrigger.countDown();
+			secondaryTrigger.countDown(event);
 		}
 	}
 	

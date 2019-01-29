@@ -890,7 +890,7 @@ public class GameLogic implements Cloneable {
 		player.getHero().modifyArmor(armor);
 		player.getStatistics().armorGained(armor);
 		if (armor > 0) {
-			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero()));
+			context.fireGameEvent(new ArmorGainedEvent(context, player.getHero(), armor));
 		}
 	}
 
